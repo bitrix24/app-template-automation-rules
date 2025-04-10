@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Pasang",
+        "main": "2. Halaman utama"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Gelap",
+        "light": "Cerah"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Pasang aplikasi"
+      },
+      "ui": {
+        "title": "Memasang aplikasi"
+      },
+      "step": {
+        "init": {
+          "caption": "Anda perlu menunggu sebentar..."
+        },
+        "placement": {
+          "caption": "Penempatan..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Selesai"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Senarai aktiviti"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Berjaya!",
+            "description": "Aktiviti {title} dipasang. Sekarang anda boleh menggunakannya dalam proses perniagaan anda."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Berjaya!",
+            "description": "Aktiviti {title} dipadamkan. Anda perlu memastikan proses perniagaan berjalan dengan baik."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Cari..."
+        },
+        "make": {
+          "install": "Pasang",
+          "uninstall": "Padam"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Semua",
+        "category_1": "Jualan dan Pemasaran",
+        "category_2": "Komunikasi",
+        "category_3": "Kategori3"
+      },
+      "badge": {
+        "install": "Dipasang",
+        "not-install": "Tidak dipasang",
+        "badge_1": "Lencana 1",
+        "badge_2": "Lencana 2",
+        "badge_3": "Lencana 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Memuat...",
+        "description": "Tunggu data dimuat"
+      },
+      "confirm": {
+        "title": "Sahkan pemadaman {title}?",
+        "description": "Aktiviti ini tidak akan tersedia dalam semua proses perniagaan.",
+        "confirm": "Saya mengesahkan",
+        "cancel": "Batal"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Tiada aktiviti ditemui",
+          "action": "Kosongkan carian anda dan cuba lagi"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Ralat telah dikenal pasti dalam menjana data aktiviti.",
+            "p2": "Sila hubungi pasukan sokongan teknikal aplikasi — pakar kami akan menyelesaikan isu ini dengan segera.",
+            "action": "Hantar soalan kepada sokongan"
+          },
+          "close": "Tutup",
+          "installed": "Dipasang"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Nama Syarikat",
+        "caption": "pembangun"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Tetapan",
+        "integrators": "Untuk pengamir",
+        "help": "Bantuan",
+        "support": "Sokongan",
+        "dark": "Gelap",
+        "light": "Cerah"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Masalah dalam aplikasi"
+  }
+}

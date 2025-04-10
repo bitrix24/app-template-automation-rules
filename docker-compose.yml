@@ -1,0 +1,64 @@
+services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    expose:
+      - '3000'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      # - ./logs:/tmp
+    env_file: .env.dev
+    networks:
+      - app-network
+    restart: always
+
+  server:
+    container_name: server
+    labels:
+      app__bp_activity: '@bitrix24/b24ui-playground-nuxt-starter-bp-activity'
+    depends_on:
+      - frontend
+    build: ./nginx
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - /tmp/letsencrypt/www:/tmp/letsencrypt/www
+    env_file: .env.dev
+    links:
+      - frontend:frontend
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  letsencrypt:
+    container_name: server-letsencrypt
+    depends_on:
+      - server
+      - frontend
+    build: ./letsencrypt
+    links:
+     - server
+    volumes:
+      - /var/log/letsencrypt/:/var/log/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - /tmp/letsencrypt/www:/tmp/letsencrypt/www
+      - ./certs:/etc/nginx/certs
+    env_file: .env.dev
+    environment:
+      # - DRY_RUN=Y
+      - SERVER_CONTAINER_LABEL=app__bp_activity
+      - WEBROOT_PATH=/tmp/letsencrypt/www
+      - CERTS_PATH=/etc/nginx/certs
+      - CHECK_FREQ=7
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

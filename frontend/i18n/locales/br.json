@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Instalar",
+        "main": "2. Página principal"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Escuro",
+        "light": "Claro"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Instalar aplicativo"
+      },
+      "ui": {
+        "title": "Instalando o aplicativo"
+      },
+      "step": {
+        "init": {
+          "caption": "Você precisa esperar um pouco..."
+        },
+        "placement": {
+          "caption": "Posicionamento..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Concluir"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Lista de atividades"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Sucesso!",
+            "description": "Atividade {title} instalada. Agora você pode usá-la em seus processos de negócios."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Sucesso!",
+            "description": "Atividade {title} desinstalada. Você deve garantir que os processos de negócios estejam funcionando corretamente."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Pesquisar..."
+        },
+        "make": {
+          "install": "Instalar",
+          "uninstall": "Desinstalar"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Tudo",
+        "category_1": "Vendas e Marketing",
+        "category_2": "Comunicação",
+        "category_3": "Categoria3"
+      },
+      "badge": {
+        "install": "Instalado",
+        "not-install": "Não instalado",
+        "badge_1": "Badge 1",
+        "badge_2": "Badge 2",
+        "badge_3": "Badge 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Carregando...",
+        "description": "Aguarde o carregamento dos dados"
+      },
+      "confirm": {
+        "title": "Confirmar desinstalação de {title}?",
+        "description": "A atividade ficará indisponível em todos os processos de negócios.",
+        "confirm": "Confirmo",
+        "cancel": "Cancelar"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Nenhuma atividade encontrada",
+          "action": "Limpe sua pesquisa e tente novamente"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Um erro foi identificado na geração dos dados da atividade.",
+            "p2": "Entre em contato com a equipe de suporte técnico do aplicativo — nossos especialistas resolverão o problema rapidamente.",
+            "action": "Enviar uma pergunta para o suporte"
+          },
+          "close": "Fechar",
+          "installed": "Instalado"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Nome da Empresa",
+        "caption": "desenvolvedor"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Configurações",
+        "integrators": "Para integradores",
+        "help": "Ajuda",
+        "support": "Suporte",
+        "dark": "Escuro",
+        "light": "Claro"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Problema no aplicativo"
+  }
+}

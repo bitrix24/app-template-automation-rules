@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Cài đặt",
+        "main": "2. Trang chính"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Tối",
+        "light": "Sáng"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Cài đặt ứng dụng"
+      },
+      "ui": {
+        "title": "Đang cài đặt ứng dụng"
+      },
+      "step": {
+        "init": {
+          "caption": "Bạn cần đợi một chút..."
+        },
+        "placement": {
+          "caption": "Đang đặt..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Hoàn thành"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Danh sách hoạt động"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Thành công!",
+            "description": "Đã cài đặt hoạt động {title}. Bây giờ bạn có thể sử dụng nó trong các quy trình kinh doanh của mình."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Thành công!",
+            "description": "Đã gỡ cài đặt hoạt động {title}. Bạn phải đảm bảo rằng các quy trình kinh doanh đang hoạt động bình thường."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Tìm kiếm..."
+        },
+        "make": {
+          "install": "Cài đặt",
+          "uninstall": "Gỡ cài đặt"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Tất cả",
+        "category_1": "Bán hàng và Marketing",
+        "category_2": "Giao tiếp",
+        "category_3": "Category3"
+      },
+      "badge": {
+        "install": "Đã cài đặt",
+        "not-install": "Chưa cài đặt",
+        "badge_1": "Badge 1",
+        "badge_2": "Badge 2",
+        "badge_3": "Badge 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Đang tải...",
+        "description": "Đợi tải dữ liệu"
+      },
+      "confirm": {
+        "title": "Xác nhận gỡ cài đặt {title}?",
+        "description": "Hoạt động sẽ không khả dụng trong tất cả các quy trình kinh doanh.",
+        "confirm": "Tôi xác nhận",
+        "cancel": "Hủy"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Không tìm thấy hoạt động",
+          "action": "Xóa tìm kiếm của bạn và thử lại"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Đã xác định lỗi trong việc tạo dữ liệu hoạt động.",
+            "p2": "Vui lòng liên hệ với đội hỗ trợ kỹ thuật của ứng dụng — các chuyên gia của chúng tôi sẽ giải quyết vấn đề nhanh chóng.",
+            "action": "Gửi câu hỏi đến hỗ trợ"
+          },
+          "close": "Đóng",
+          "installed": "Đã cài đặt"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Tên công ty",
+        "caption": "nhà phát triển"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Cài đặt",
+        "integrators": "Dành cho tích hợp",
+        "help": "Trợ giúp",
+        "support": "Hỗ trợ",
+        "dark": "Tối",
+        "light": "Sáng"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Lỗi trong ứng dụng"
+  }
+}

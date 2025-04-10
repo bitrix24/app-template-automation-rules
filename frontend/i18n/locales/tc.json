@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. 安裝",
+        "main": "2. 主頁"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "深色",
+        "light": "淺色"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "安裝應用程式"
+      },
+      "ui": {
+        "title": "正在安裝應用程式"
+      },
+      "step": {
+        "init": {
+          "caption": "您需要稍等片刻..."
+        },
+        "placement": {
+          "caption": "放置中..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "完成"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "活動列表"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "成功！",
+            "description": "已安裝活動 {title}。現在您可以在業務流程中使用它。"
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "成功！",
+            "description": "已卸載活動 {title}。您必須確保業務流程正常運作。"
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "搜索..."
+        },
+        "make": {
+          "install": "安裝",
+          "uninstall": "卸載"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "全部",
+        "category_1": "銷售與營銷",
+        "category_2": "通訊",
+        "category_3": "類別3"
+      },
+      "badge": {
+        "install": "已安裝",
+        "not-install": "未安裝",
+        "badge_1": "徽章1",
+        "badge_2": "徽章2",
+        "badge_3": "徽章3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "加載中...",
+        "description": "請等待數據加載"
+      },
+      "confirm": {
+        "title": "確認卸載 {title}？",
+        "description": "該活動將在所有業務流程中不可用。",
+        "confirm": "我確認",
+        "cancel": "取消"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "未找到活動",
+          "action": "清除搜索並重試"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "生成活動數據時發現錯誤。",
+            "p2": "請聯繫應用程式的技術支援團隊 — 我們的專家將迅速解決問題。",
+            "action": "提交問題至支援"
+          },
+          "close": "關閉",
+          "installed": "已安裝"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "公司名稱",
+        "caption": "開發者"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "設定",
+        "integrators": "整合者",
+        "help": "幫助",
+        "support": "支援",
+        "dark": "深色",
+        "light": "淺色"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "應用程式出現問題"
+  }
+}

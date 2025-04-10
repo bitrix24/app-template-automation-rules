@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Instalacja",
+        "main": "2. Strona główna"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Ciemny",
+        "light": "Jasny"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Instalacja aplikacji"
+      },
+      "ui": {
+        "title": "Instalowanie aplikacji"
+      },
+      "step": {
+        "init": {
+          "caption": "Musisz chwilę poczekać..."
+        },
+        "placement": {
+          "caption": "Umieszczenie..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Zakończ"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Lista aktywności"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Sukces!",
+            "description": "Zainstalowano aktywność {title}. Teraz możesz jej używać w swoich procesach biznesowych."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Sukces!",
+            "description": "Odinstalowano aktywność {title}. Musisz upewnić się, że procesy biznesowe działają poprawnie."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Szukaj..."
+        },
+        "make": {
+          "install": "Zainstaluj",
+          "uninstall": "Odinstaluj"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Wszystko",
+        "category_1": "Sprzedaż i marketing",
+        "category_2": "Komunikacja",
+        "category_3": "Kategoria3"
+      },
+      "badge": {
+        "install": "Zainstalowane",
+        "not-install": "Nie zainstalowane",
+        "badge_1": "Odznaka 1",
+        "badge_2": "Odznaka 2",
+        "badge_3": "Odznaka 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Ładowanie...",
+        "description": "Poczekaj na załadowanie danych"
+      },
+      "confirm": {
+        "title": "Potwierdź odinstalowanie {title}?",
+        "description": "Aktywność stanie się niedostępna we wszystkich procesach biznesowych.",
+        "confirm": "Potwierdzam",
+        "cancel": "Anuluj"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Nie znaleziono aktywności",
+          "action": "Wyczyść wyszukiwanie i spróbuj ponownie"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Wykryto błąd podczas generowania danych aktywności.",
+            "p2": "Skontaktuj się z zespołem wsparcia technicznego aplikacji — nasi specjaliści szybko rozwiążą problem.",
+            "action": "Zadaj pytanie do wsparcia"
+          },
+          "close": "Zamknij",
+          "installed": "Zainstalowane"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Nazwa firmy",
+        "caption": "developer"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Ustawienia",
+        "integrators": "Dla integratorów",
+        "help": "Pomoc",
+        "support": "Wsparcie",
+        "dark": "Ciemny",
+        "light": "Jasny"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Problem w aplikacji"
+  }
+}

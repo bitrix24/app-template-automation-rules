@@ -1,0 +1,165 @@
+{
+  "app": {
+    "title": "bpActivity"
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Install",
+        "main": "2. Main page"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Dark",
+        "light": "Light"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Install the application"
+      },
+      "ui": {
+        "title": "Application Installation"
+      },
+      "step": {
+        "init": {
+          "caption": "You need to wait a bit..."
+        },
+        "placement": {
+          "caption": "Placement..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Completion"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "List of activities"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Success!",
+            "description": "Activity {title} has been installed. Now you can use it in your business processes."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Success!",
+            "description": "Activity {title} has been removed. Make sure your business processes are working correctly."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Search..."
+        },
+        "make": {
+          "install": "Install",
+          "uninstall": "Uninstall"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "categories": {
+        "all": "All",
+        "category_1": "Sales and Marketing",
+        "category_2": "Communications",
+        "category_3": "Category3"
+      },
+      "badge": {
+        "install": "Installed",
+        "not-install": "Not installed",
+        "badge_1": "Badge 1",
+        "badge_2": "Badge 2",
+        "badge_3": "Badge 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Loading...",
+        "description": "Please wait while data is loading"
+      },
+      "confirm": {
+        "title": "Confirm deletion of {title}?",
+        "description": "The activity will become unavailable in all business processes.",
+        "confirm": "I confirm",
+        "cancel": "Cancel"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "No activities found",
+          "action": "Clear the search and try again"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "An error was detected in the activity data generation.",
+            "p2": "Please contact the application support team — our specialists will promptly resolve the issue.",
+            "action": "Send a question to support"
+          },
+          "close": "Close",
+          "installed": "Installed"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Company name",
+        "caption": "developer"
+      }
+    },
+    "integrator": {
+      "info": {
+        "empty": "YourCompanyName",
+        "caption": "integrator"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Settings",
+        "integrators": "For integrators",
+        "help": "Help",
+        "support": "Support",
+        "dark": "Dark",
+        "light": "Light"
+      }
+    },
+    "settings": {
+      "slider": {
+        "title": "Settings",
+        "description": "Important application options",
+        "history": {
+          "title": "History",
+          "alert": "Login history will help you investigate security breaches. You will see all devices and IP addresses a user used to log on to their account. You can also log out the offending user on all devices.",
+          "property": "Days to keep login history:",
+          "action": "View employees"
+        },
+        "log": {
+          "title": "Event log",
+          "alert": "The event log shows important events (usually user log-ons). You can always quickly check every log on: who, when and the user's IP address.",
+          "action": "View event log"
+        },
+        "save": "Save",
+        "cancel": "Cancel"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Application issue"
+  }
+}

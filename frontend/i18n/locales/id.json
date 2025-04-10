@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Instal",
+        "main": "2. Halaman utama"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Gelap",
+        "light": "Terang"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Instal aplikasi"
+      },
+      "ui": {
+        "title": "Menginstal aplikasi"
+      },
+      "step": {
+        "init": {
+          "caption": "Anda perlu menunggu sebentar..."
+        },
+        "placement": {
+          "caption": "Penempatan..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Selesai"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Daftar aktivitas"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Berhasil!",
+            "description": "Aktivitas {title} telah diinstal. Sekarang Anda dapat menggunakannya dalam proses bisnis Anda."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Berhasil!",
+            "description": "Aktivitas {title} telah dihapus. Anda harus memastikan bahwa proses bisnis berjalan dengan baik."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Cari..."
+        },
+        "make": {
+          "install": "Instal",
+          "uninstall": "Hapus Instalasi"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Semua",
+        "category_1": "Penjualan dan Pemasaran",
+        "category_2": "Komunikasi",
+        "category_3": "Kategori3"
+      },
+      "badge": {
+        "install": "Terinstal",
+        "not-install": "Belum terinstal",
+        "badge_1": "Lencana 1",
+        "badge_2": "Lencana 2",
+        "badge_3": "Lencana 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Memuat...",
+        "description": "Tunggu data dimuat"
+      },
+      "confirm": {
+        "title": "Konfirmasi penghapusan instalasi {title}?",
+        "description": "Aktivitas akan menjadi tidak tersedia di semua proses bisnis.",
+        "confirm": "Saya konfirmasi",
+        "cancel": "Batal"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Tidak ada aktivitas ditemukan",
+          "action": "Hapus pencarian Anda dan coba lagi"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Terjadi kesalahan dalam menghasilkan data aktivitas.",
+            "p2": "Silakan hubungi tim dukungan teknis aplikasi — spesialis kami akan menyelesaikan masalah dengan cepat.",
+            "action": "Ajukan pertanyaan ke dukungan"
+          },
+          "close": "Tutup",
+          "installed": "Terinstal"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Nama Perusahaan",
+        "caption": "pengembang"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Pengaturan",
+        "integrators": "Untuk integrator",
+        "help": "Bantuan",
+        "support": "Dukungan",
+        "dark": "Gelap",
+        "light": "Terang"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Masalah dalam aplikasi"
+  }
+}

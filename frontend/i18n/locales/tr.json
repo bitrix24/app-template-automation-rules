@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Kur",
+        "main": "2. Ana sayfa"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Koyu",
+        "light": "Açık"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Uygulamayı Kur"
+      },
+      "ui": {
+        "title": "Uygulama Kurulumu"
+      },
+      "step": {
+        "init": {
+          "caption": "Biraz beklemelisiniz..."
+        },
+        "placement": {
+          "caption": "Yerleştirme..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "Bitir"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "Aktivite Listesi"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "Başarılı!",
+            "description": "{title} aktivitesi kuruldu. Artık iş süreçlerinizde kullanabilirsiniz."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "Başarılı!",
+            "description": "{title} aktivitesi kaldırıldı. İş süreçlerinin düzgün çalıştığından emin olmalısınız."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "Ara..."
+        },
+        "make": {
+          "install": "Kur",
+          "uninstall": "Kaldır"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "Tümü",
+        "category_1": "Satış ve Pazarlama",
+        "category_2": "İletişim",
+        "category_3": "Kategori3"
+      },
+      "badge": {
+        "install": "Kurulu",
+        "not-install": "Kurulu Değil",
+        "badge_1": "Rozet 1",
+        "badge_2": "Rozet 2",
+        "badge_3": "Rozet 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "Yükleniyor...",
+        "description": "Veri yüklenmesini bekleyin"
+      },
+      "confirm": {
+        "title": "{title} kaldırmayı onaylıyor musunuz?",
+        "description": "Aktivite tüm iş süreçlerinde kullanılamaz hale gelecek.",
+        "confirm": "Onaylıyorum",
+        "cancel": "İptal"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "Aktivite bulunamadı",
+          "action": "Aramanızı temizleyip tekrar deneyin"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "Aktivite verileri oluşturulurken bir hata tespit edildi.",
+            "p2": "Lütfen uygulamanın teknik destek ekibiyle iletişime geçin — uzmanlarımız sorunu hızla çözecektir.",
+            "action": "Destek için soru gönder"
+          },
+          "close": "Kapat",
+          "installed": "Kurulu"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Şirket Adı",
+        "caption": "geliştirici"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Ayarlar",
+        "integrators": "Entegratörler için",
+        "help": "Yardım",
+        "support": "Destek",
+        "dark": "Koyu",
+        "light": "Açık"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "Uygulamada sorun"
+  }
+}

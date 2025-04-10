@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. التثبيت",
+        "main": "2. الصفحة الرئيسية"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "داكن",
+        "light": "فاتح"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "تثبيت التطبيق"
+      },
+      "ui": {
+        "title": "تثبيت التطبيق"
+      },
+      "step": {
+        "init": {
+          "caption": "تحتاج إلى الانتظار قليلاً..."
+        },
+        "placement": {
+          "caption": "التنسيق..."
+        },
+        "crm": {
+          "caption": "Crm..."
+        },
+        "finish": {
+          "caption": "إنهاء"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "قائمة الأنشطة"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "نجاح!",
+            "description": "تم تثبيت النشاط {title}. يمكنك الآن استخدامه في عملياتك التجارية."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "نجاح!",
+            "description": "تم إلغاء تثبيت النشاط {title}. يجب التأكد من أن العمليات التجارية تعمل بشكل صحيح."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "بحث..."
+        },
+        "make": {
+          "install": "تثبيت",
+          "uninstall": "إلغاء التثبيت"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "الكل",
+        "category_1": "المبيعات والتسويق",
+        "category_2": "الاتصالات",
+        "category_3": "الفئة 3"
+      },
+      "badge": {
+        "install": "مثبت",
+        "not-install": "غير مثبت",
+        "badge_1": "شارة 1",
+        "badge_2": "شارة 2",
+        "badge_3": "شارة 3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "جار التحميل...",
+        "description": "انتظر تحميل البيانات"
+      },
+      "confirm": {
+        "title": "تأكيد إلغاء تثبيت {title}؟",
+        "description": "سيصبح النشاط غير متاح في جميع العمليات التجارية.",
+        "confirm": "أؤكد",
+        "cancel": "إلغاء"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "لم يتم العثور على نشاط",
+          "action": "امسح بحثك وحاول مرة أخرى"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "تم تحديد خطأ في إنشاء بيانات النشاط.",
+            "p2": "يرجى الاتصال بفريق الدعم الفني للتطبيق - سيقوم المتخصصون لدينا بحل المشكلة على الفور.",
+            "action": "إرسال سؤال إلى الدعم"
+          },
+          "close": "إغلاق",
+          "installed": "مثبت"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "اسم الشركة",
+        "caption": "المطور"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "الإعدادات",
+        "integrators": "للمكاملين",
+        "help": "مساعدة",
+        "support": "الدعم",
+        "dark": "داكن",
+        "light": "فاتح"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "مشكلة في التطبيق"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. インストール",
+        "main": "2. メインページ"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "ダーク",
+        "light": "ライト"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "アプリをインストール"
+      },
+      "ui": {
+        "title": "アプリケーションのインストール"
+      },
+      "step": {
+        "init": {
+          "caption": "少しお待ちください..."
+        },
+        "placement": {
+          "caption": "配置中..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "完了"
+        }
+      }
+    },
+    "list": {
+      "seo": {
+        "title": "アクティビティリスト"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "成功！",
+            "description": "アクティビティ {title} をインストールしました。ビジネスプロセスで使用できます。"
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "成功！",
+            "description": "アクティビティ {title} をアンインストールしました。ビジネスプロセスが正常に動作することを確認してください。"
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "検索..."
+        },
+        "make": {
+          "install": "インストール",
+          "uninstall": "アンインストール"
+        }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "すべて",
+        "category_1": "セールスとマーケティング",
+        "category_2": "コミュニケーション",
+        "category_3": "カテゴリー3"
+      },
+      "badge": {
+        "install": "インストール済み",
+        "not-install": "未インストール",
+        "badge_1": "バッジ1",
+        "badge_2": "バッジ2",
+        "badge_3": "バッジ3"
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "読み込み中...",
+        "description": "データの読み込みをお待ちください"
+      },
+      "confirm": {
+        "title": "{title} のアンインストールを確認しますか？",
+        "description": "このアクティビティはすべてのビジネスプロセスで利用できなくなります。",
+        "confirm": "確認",
+        "cancel": "キャンセル"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "アクティビティが見つかりません",
+          "action": "検索をクリアして再度お試しください"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "アクティビティデータの生成中にエラーが発生しました。",
+            "p2": "アプリのテクニカルサポートチームにお問い合わせください。専門家が迅速に対応します。",
+            "action": "サポートに質問を送信"
+          },
+          "close": "閉じる",
+          "installed": "インストール済み"
+        }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "会社名",
+        "caption": "開発者"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "設定",
+        "integrators": "インテグレーター向け",
+        "help": "ヘルプ",
+        "support": "サポート",
+        "dark": "ダーク",
+        "light": "ライト"
+      }
+    }
+  },
+  "error": {
+    "onMounted": "アプリに問題が発生しました"
+  }
+}
