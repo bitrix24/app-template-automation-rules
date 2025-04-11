@@ -1,5 +1,9 @@
 import puppeteer from 'puppeteer-core'
 import type { Browser } from 'puppeteer-core'
+import { createSSRApp } from 'vue'
+import { createMemoryHistory } from 'vue-router'
+// import { defineAsyncComponent } from '#imports'
+import { renderToString } from 'vue/server-renderer'
 
 /**
  * Generates PDF relative to page
@@ -19,6 +23,13 @@ const connectToBrowser = async () => {
       browserWSEndpoint: debugInfo.webSocketDebuggerUrl,
       defaultViewport: null
     })
+
+    /**
+     * @memo ??
+     */
+    const warmupPage = await browser.newPage()
+    await warmupPage.goto('about:blank')
+    await warmupPage.close()
   }
   return browser
 }
@@ -27,18 +38,55 @@ export async function generatePDF(
   url: string,
   params: { token: string, taskId: string }
 ) {
-  try {
-    const browser = await connectToBrowser()
+  const metrics = {
+    startTotal: Date.now(),
+    appRender: 0,
+    browserInit: 0,
+    pdfGen: 0
+  }
 
+  try {
+    const connectStart = Date.now();
+    const browser = await connectToBrowser()
+    const connectTime = Date.now() - connectStart;
+
+    const pageStart = Date.now();
     const page = await browser.newPage()
+    /**
+     * @memo some custom for page
+     * @todo remove this
+     */
+
+    await page.emulateMediaFeatures([
+      { name: 'prefers-reduced-motion', value: 'reduce' }
+    ])
+    await page.emulateMediaType('screen')
+    // await page.setJavaScriptEnabled(false)
+
+    /**
+     * @todo remove this
+     */
+    //
+    // await page.addStyleTag({
+    //   content: `
+    //     @page { size: A4 landscape; }
+    //     body { font-family: Arial; }
+    //   `
+    // })
+
+    const pageTime = Date.now() - pageStart;
 
     const { token, taskId } = params
 
-    console.log(' >> 2.1', url)
-    url = `http://127.0.0.1:3000${url}`
-    console.log(' >> 2.2', url)
+    const contentStart = Date.now();
 
-    const finalUrl = new URL(url)
+    console.log(' >> 2.1', url)
+    let urlFix = `http://0.0.0.0:3000${url}`
+    urlFix = `http://127.0.0.1:3000${url}`
+    // urlFix = `http://172.21.0.2:3000${url}`
+    console.log(' >> 2.2', urlFix)
+
+    const finalUrl = new URL(urlFix)
     finalUrl.searchParams.set('taskId', taskId)
 
     await page.setExtraHTTPHeaders({
@@ -46,24 +94,21 @@ export async function generatePDF(
       'X-Forwarded-For': '127.0.0.1'
     })
 
-    console.log(' >> 2', finalUrl.toString())
+    console.log(' >> 2.f', finalUrl.toString())
+
     await page.goto(finalUrl.toString(), {
+      // waitUntil: 'domcontentloaded',
+      // timeout: 15000
       waitUntil: 'networkidle0',
       timeout: 60000
+      // timeout: 3000
+      // timeout: 60000
     })
 
-    /**
-     * @memo some custom for page
-     * @todo remove this
-     */
-    await page.emulateMediaType('screen')
-    await page.addStyleTag({
-      content: `
-        @page { size: A4 landscape; }
-        body { font-family: Arial; }
-      `
-    })
 
+    const contentTime = Date.now() - contentStart;
+
+    const pdfStart = Date.now();
     /**
      * @todo make config for margin
      */
@@ -77,8 +122,20 @@ export async function generatePDF(
         left: '20mm'
       }
     })
+    const pdfTime = Date.now() - pdfStart;
 
+    const pageClose = Date.now();
     await page.close()
+    const pageCloseTime = Date.now() - pageClose;
+
+    console.log(JSON.stringify({
+      connectTime,
+      pageTime,
+      contentTime,
+      pdfTime,
+      pageCloseTime,
+      total: Date.now() - metrics.startTotal
+    }));
 
     return pdfBuffer
   } catch (error) {

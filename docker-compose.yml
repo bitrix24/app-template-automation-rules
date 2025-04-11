@@ -7,8 +7,11 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-      # - ./logs:/tmp
+      - ./logs:/tmp
     env_file: .env.dev
+    environment:
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=3000
     networks:
       - app-network
     restart: always
@@ -42,12 +45,13 @@ services:
     links:
      - server
     volumes:
+      - ./certs:/etc/nginx/certs
+      # - ./logs/letsencrypt:/var/log/letsencrypt
       - /var/log/letsencrypt/:/var/log/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
       - /tmp/letsencrypt/www:/tmp/letsencrypt/www
-      - ./certs:/etc/nginx/certs
     env_file: .env.dev
     environment:
       # - DRY_RUN=Y

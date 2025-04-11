@@ -13,13 +13,12 @@ test
 **/.env
 **/.env*
 
+**/data
 **/.nuxt
 **/.output
-**/data
 **/.nitro
 **/.cache
 **/dist
-
 **/node_modules
 
 

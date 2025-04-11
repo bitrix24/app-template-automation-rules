@@ -8,6 +8,19 @@ defineProps({
     default: 'processing'
   }
 })
+
+const currentDateTime = ref(new Date().toLocaleString(
+  'en-US',
+  {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }))
 </script>
 
 <template>
@@ -20,7 +33,7 @@ defineProps({
         Status: <span class="font-medium">{{ status }}</span>
       </p>
       <p class="text-base-600">
-        Created: {{ new Date().toLocaleDateString() }}
+        Created: {{ currentDateTime }}
       </p>
     </div>
   </div>

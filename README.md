@@ -13,8 +13,44 @@ Look at docs to learn more:
 - [Nuxt](https://nuxt.com/docs/getting-started/introduction)
 - SSL Server Test [Qualys](https://www.ssllabs.com/ssltest/index.html)
 
-# App config
-## scopes
+## Folder Structure
+
+```plaintext
+/certs
+/frontend
+  /app
+  /content
+  /i18n
+  /public
+  /server
+  /template
+  /tools
+  package.json
+  nuxt.config.ts
+  i18n.options.ts
+  i18n.map.ts
+  content.config.ts
+  eslint.config.mjs
+  tsconfig.json
+  Dockerfile
+  entrypoint.sh
+/nginx
+  default.conf
+  Dockerfile
+  entrypoint.sh
+/letsencrypt
+  Dockerfile
+  entrypoint.sh
+/log
+.gitignore
+.dockerignore
+.env.dev
+.env.prod
+docker-compose.yml
+```
+
+## App config
+### scopes
 
 - crm
 - bizproc
@@ -27,7 +63,7 @@ Look at docs to learn more:
 
 [ngrok.com](https://ngrok.com/)
 
-```bash
+```shell
 ngrok http 3000
 ```
 
@@ -35,7 +71,7 @@ ngrok http 3000
 
 [Tuna](https://tuna.am/en/docs/)
 
-```bash
+```shell
 tuna http 3000
 ```
 
@@ -44,34 +80,109 @@ tuna http 3000
 ## Docker
 
 @todo -> add all info to example
-```bash
+```shell
 cp .env.dev.example .env.dev
+```
+
+### Status
+
+```shell
+sudo systemctl status docker
+sudo ss -tuln | grep 2376
+
+
+docker ps
+docker-compose --env-file .env.dev top
+```
+
+### Stop
+
+```shell
+# All
+docker-compose --env-file .env.dev stop
+# frontend
+docker stop frontend
+docker-compose --env-file .env.dev stop frontend
+# server
+docker-compose --env-file .env.dev stop server
+# letsencrypt
+docker-compose --env-file .env.dev stop letsencrypt
+```
+
+### Restart
+
+****
+```shell
+# All
+docker-compose down && docker-compose --env-file .env.dev up -d --build
+# frontend
+docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
+
+# no-cache
+docker-compose down && docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up
+# no-cache frontend
+docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
+docker-compose down frontend && docker-compose --env-file .env.dev up -d --build --force-recreate frontend
+docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up frontend
+```
+
+### Start
+
+```shell
+# all
+docker-compose --env-file .env.dev up -d --build
+# frontend
+docker-compose --env-file .env.dev up -d --build frontend
+# server
+docker-compose --env-file .env.dev up -d --build server
+# letsencrypt
+docker-compose --env-file .env.dev up -d --build letsencrypt
+
+# check user at container
+docker exec -it frontend sh -c "whoami && id"
+
+```
+
+### Connect
+
+```shell
+# frontend
+docker exec -it frontend /bin/bash
+# server
+docker exec -it server /bin/bash
+# letsencrypt
+docker exec -it letsencrypt /bin/bash
+```
+
+### Log
+
+```shell
+# frontend
+docker-compose logs -f frontend
+# server
+docker-compose logs -f server
+# letsencrypt
+docker-compose logs -f letsencrypt
 ```
 
 ### Clear
 
 > Delete all data in volumes (including DB)
-> 
+>
 > Require rebuilding images on next startup
-> 
+>
 > Irreversibly delete information
 > Should not be used in **production** **without understanding** the consequences
 
-```bash
+Disc size
+```shell
 df -h
 du -sh /var/lib/docker
 ```
 
-```bash
+```shell
+# @todo add info
 docker-compose down --volumes --rmi all --remove-orphans
-```
-
-```bash
-# Delete all stopped containers
-docker container prune
-
-# Delete EVERYTHING unused (including volumes and images)
-docker system prune -a --volumes
 
 # Delete all stopped containers
 docker container prune
@@ -81,70 +192,9 @@ docker image prune -a
 
 # Delete unused volumes
 docker volume prune
+
+# Delete EVERYTHING unused (including volumes and images)
+docker system prune -a --volumes
 ```
 
 @todo add clear docker log
-
-### Status
-```bash
-docker ps
-docker-compose --env-file .env.dev top
-```
-
-### Stop
-
-**All**
-```bash
-docker-compose --env-file .env.dev stop
-```
-
-**frontend**
-```bash
-docker-compose --env-file .env.dev stop frontend
-```
-
-### Restart
-**All**
-```bash
-docker-compose down && docker-compose --env-file .env.dev up -d --build
-```
-
-**no-cache**
-```bash
-docker-compose down && docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up
-```
-
-### Start
-
-**All**
-```bash
-docker-compose --env-file .env.dev up -d --build
-```
-
-**frontend**
-```bash
-docker-compose --env-file .env.dev up -d --build frontend
-```
-
-```bash
-docker-compose --env-file .env.dev up --build frontend
-```
-
-```bash
-docker-compose --env-file .env.dev up --build server
-docker-compose --env-file .env.dev up --build letsencrypt
-```
-
-### Connect
-
-```bash
-docker exec -it frontend /bin/bash
-```
-
-### Log
-
-```bash
-docker-compose logs -f frontend
-docker-compose logs -f server
-docker-compose logs -f letsencrypt
-```

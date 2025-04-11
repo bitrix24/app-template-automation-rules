@@ -25,3 +25,4 @@ logs
 !.env.example
 !.env.dev.example
 !.env.prod.example
+/.run/

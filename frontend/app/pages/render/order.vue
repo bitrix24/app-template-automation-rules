@@ -5,6 +5,7 @@ definePageMeta({
 
 const route = useRoute()
 
+
 /**
  * @todo add some test query
  */
@@ -24,7 +25,7 @@ if (!taskId.value) {
 <template>
   <div class="flex flex-col items-center justify-center gap-16 h-screen">
     <RenderOrder
-      :task-id="taskId"
+      :task-id="taskId || '??'"
       :status="'status'"
     />
   </div>

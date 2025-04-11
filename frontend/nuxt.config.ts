@@ -12,7 +12,11 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@bitrix24/b24jssdk-nuxt'
   ],
-  ssr: false,
+  /**
+   * @memo; on - speed render pages
+   */
+  ssr: true,
+  // ssr: false,
   /**
    * @memo App work under frame
    * Nuxt DevTools: Failed to check parent window
@@ -58,17 +62,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-27',
 
   vite: {
-    server: {
-      /**
-       * @todo off for prod
-       */
-    //   allowedHosts: [
-    //     'all',
-    //     'xx7qw9-93-170-237-202.ru.tuna.am',
-    //     'zml87e-93-170-237-202.ru.tuna.am',
-    //     'a8o07q-93-170-237-202.ru.tuna.am'
-    //   ]
-    },
     plugins: [
       tailwindcss()
     ]

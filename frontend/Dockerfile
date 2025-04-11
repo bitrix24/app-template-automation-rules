@@ -11,16 +11,20 @@
 # - Set up log rotation for Chromium
 # - Add error monitoring
 
-FROM node:lts-slim
-
+FROM node:20-slim
 LABEL maintainer="B24Sdk <github.com/bitrix24>"
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
 
 # Installing Chromium and dependencies
 RUN apt-get update && apt-get install -y \
     chromium \
     curl \
-    dbus \
-    dbus-user-session \
+    # dbus \
+    # dbus-user-session \
     fonts-liberation \
     libasound2 \
     libatk-bridge2.0-0 \
@@ -56,22 +60,20 @@ ENV CHROME_PATH=/usr/bin/chromium
 ENV PUPPETEER_EXECUTABLE_PATH=$CHROME_PATH
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
 RUN mkdir -p /tmp/chromium && \
-    chmod 1777 /tmp /tmp/chromium && \
-    chown -R node:node /tmp/chromium
+    chmod 1777 /tmp /tmp/chromium
 
-# USER node
+COPY . /app
+COPY entrypoint.sh ./
+RUN chmod +x /entrypoint.sh
+
+WORKDIR /app
+
+#COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
+
+RUN pnpm install --frozen-lockfile
 
 EXPOSE 3000
 
 # Launching Chromium and Nuxt via Script
-ENTRYPOINT [ "/app/entrypoint.sh" ]
-# CMD ["npm", "run", "dev"]
+CMD ["pnpm", "run", "docker:dev"]
