@@ -15,8 +15,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2(magicast@0.3.5)
       '@bitrix24/b24ui-nuxt':
-        specifier: ^0.6.0
-        version: 0.6.0(@babel/parser@7.27.0)(axios@1.8.4)(embla-carousel@8.6.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.2.6(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(zod@3.24.2)
+        specifier: ^0.6.1
+        version: 0.6.1(@babel/parser@7.27.0)(axios@1.8.4)(embla-carousel@8.6.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.2.6(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(zod@3.24.2)
       '@nuxt/content':
         specifier: ^3.4.0
         version: 3.4.0(magicast@0.3.5)(typescript@5.8.3)
@@ -46,7 +46,7 @@ importers:
         specifier: ^9.0.9
         version: 9.0.9
       dotenv:
-        specifier: ^16.4.7
+        specifier: ^16.5.0
         version: 16.5.0
       eslint:
         specifier: ^9.24.0
@@ -205,8 +205,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@bitrix24/b24ui-nuxt@0.6.0':
-    resolution: {integrity: sha512-VfuY1Z3yMxMoWDQ/XnBFlFHq2gt3LMR99qHc8kPbeTUiHakAarHGSTukernNrXhKwcQAvIvJjvc2kvZWsA0J9w==}
+  '@bitrix24/b24ui-nuxt@0.6.1':
+    resolution: {integrity: sha512-M0XBLkGSaDyVlCkpG6Xei/sRPSeRpOEhrFK3cpMnz6nLb58u1Y060JEY0yFMF5/n6FapJKsprYEk1m+V29Flmw==}
     hasBin: true
     peerDependencies:
       joi: ^17.13.0
@@ -5624,7 +5624,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  '@bitrix24/b24ui-nuxt@0.6.0(@babel/parser@7.27.0)(axios@1.8.4)(embla-carousel@8.6.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.2.6(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(zod@3.24.2)':
+  '@bitrix24/b24ui-nuxt@0.6.1(@babel/parser@7.27.0)(axios@1.8.4)(embla-carousel@8.6.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.2.6(@types/node@22.14.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(zod@3.24.2)':
     dependencies:
       '@bitrix24/b24icons-vue': 1.0.5(vue@3.5.13(typescript@5.8.3))
       '@bitrix24/b24style': 1.0.1

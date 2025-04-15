@@ -93,6 +93,45 @@ sudo ss -tuln | grep 2376
 
 docker ps
 docker-compose --env-file .env.dev top
+
+# check user at container
+docker exec -it frontend sh -c "whoami && id"
+
+docker network inspect inner
+docker network inspect inner | grep -A 10 Containers
+
+docker exec -it chrome wget -qO- http://localhost:9222/json/version
+docker inspect chrome
+
+docker exec -it chrome netstat -tulpn | grep 9222
+
+
+docker inspect frontend
+
+docker exec -it frontend ping -c 4 chrome
+docker exec -it frontend nslookup chrome
+docker exec -it frontend nc -zv chrome 9222
+docker exec -it frontend wget -qO- http://chrome:9222/json/version
+
+
+docker exec -it frontend curl  v- http://chrome:9222/json/version
+
+
+```
+
+### Start
+
+```shell
+# all
+docker-compose --env-file .env.dev up -d --build
+# chrome
+docker-compose --env-file .env.dev up -d --build chrome
+# frontend
+docker-compose --env-file .env.dev up -d --build frontend
+# server
+docker-compose --env-file .env.dev up -d --build server
+# letsencrypt
+docker-compose --env-file .env.dev up -d --build letsencrypt
 ```
 
 ### Stop
@@ -111,12 +150,14 @@ docker-compose --env-file .env.dev stop letsencrypt
 
 ### Restart
 
-****
 ```shell
 # All
 docker-compose down && docker-compose --env-file .env.dev up -d --build
+# chrome
+docker-compose down chrome && docker-compose --env-file .env.dev up -d --build chrome
 # frontend
 docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
+docker-compose down frontend && docker-compose --env-file .env.dev up --build frontend
 
 # no-cache
 docker-compose down && docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up
@@ -126,43 +167,36 @@ docker-compose down frontend && docker-compose --env-file .env.dev up -d --build
 docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up frontend
 ```
 
-### Start
-
-```shell
-# all
-docker-compose --env-file .env.dev up -d --build
-# frontend
-docker-compose --env-file .env.dev up -d --build frontend
-# server
-docker-compose --env-file .env.dev up -d --build server
-# letsencrypt
-docker-compose --env-file .env.dev up -d --build letsencrypt
-
-# check user at container
-docker exec -it frontend sh -c "whoami && id"
-
-```
-
-### Connect
-
-```shell
-# frontend
-docker exec -it frontend /bin/bash
-# server
-docker exec -it server /bin/bash
-# letsencrypt
-docker exec -it letsencrypt /bin/bash
-```
-
 ### Log
 
 ```shell
+# chrome
+docker-compose logs -f chrome
+docker logs chrome
+
 # frontend
 docker-compose logs -f frontend
 # server
 docker-compose logs -f server
 # letsencrypt
 docker-compose logs -f letsencrypt
+```
+
+### Connect
+
+```shell
+# chrome
+docker exec -it chrome /bin/bash
+
+docker exec -it chrome netstat -tulpn
+
+# frontend
+docker exec -it frontend /bin/bash
+
+# server
+docker exec -it server /bin/bash
+# letsencrypt
+docker exec -it letsencrypt /bin/bash
 ```
 
 ### Clear

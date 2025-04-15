@@ -3,7 +3,7 @@
   "description": "Example of Bitrix24 application for working with Business Process actions",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.8.0",
+  "packageManager": "pnpm@10.8.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bitrix24/app-template-automation-rules.git"
@@ -14,7 +14,6 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "docker:dev": "./../entrypoint.sh && nuxt dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
     "postinstall": "nuxt prepare",
@@ -24,7 +23,7 @@
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
     "@bitrix24/b24jssdk-nuxt": "^0.1.2",
-    "@bitrix24/b24ui-nuxt": "^0.6.0",
+    "@bitrix24/b24ui-nuxt": "^0.6.1",
     "@nuxt/content": "^3.4.0",
     "@nuxtjs/i18n": "^9.5.3",
     "@pinia/nuxt": "^0.11.0",
@@ -36,7 +35,7 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.9",
     "@nuxt/eslint": "^1.3.0",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "eslint": "^9.24.0",
     "openai": "^4.93.0",
     "typescript": "^5.8.3"

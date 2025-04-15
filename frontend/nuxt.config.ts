@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    chromeWsUrl: process.env.VITE_CHROME_WS_URL || 'ws://chrome:9222',
     jwtSecret: process.env.VITE_NUXT_JWT_SECRET || 'super-secret-key',
     allowedIPs: process.env.VITE_ALLOWED_IPS?.split(',') || ['127.0.0.1', '::1'],
     public: {
