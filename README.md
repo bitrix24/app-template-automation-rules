@@ -79,6 +79,85 @@ tuna http 3000
 
 ## Docker
 
+**DEV**
+```shell
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build server
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build letsencrypt
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop server
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop letsencrypt
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down && \
+ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down chrome && \
+ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
+ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down server && \
+ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build server
+ 
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down letsencrypt && \
+ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build letsencrypt
+ 
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rule logs -f chrome
+docker logs chrome
+ 
+docker-compose logs -f docker-compose.dev.yml
+docker logs frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
+docker logs server
+docker logs letsencrypt
+```
+
+**PROD**
+```shell
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build server
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build letsencrypt
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop frontend
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop server
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop letsencrypt
+
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
+
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down chrome && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build chrome
+
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
+
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down server && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build server
+ 
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down letsencrypt && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build letsencrypt
+ 
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f chrome
+docker logs chrome
+```
+
 @todo -> add all info to example
 ```shell
 cp .env.dev.example .env.dev
@@ -92,35 +171,38 @@ sudo ss -tuln | grep 2376
 
 
 docker ps
-docker-compose --env-file .env.dev top
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
 
-# check user at container
-docker exec -it frontend sh -c "whoami && id"
-
+# network
 docker network inspect inner
 docker network inspect inner | grep -A 10 Containers
 
-docker exec -it chrome wget -qO- http://localhost:9222/json/version
+# chrome
 docker inspect chrome
-
+docker exec -it chrome wget -qO- http://localhost:9222/json/version
 docker exec -it chrome netstat -tulpn | grep 9222
+docker exec -it chrome ping -c 4 frontend
 
+docker exec -it chrome sh -c "
+  dbus-send --system \
+  --dest=org.freedesktop.DBus \
+  --type=method_call \
+  --print-reply \
+  /org/freedesktop/DBus \
+  org.freedesktop.DBus.ListNames
+"
 
+# frontend
 docker inspect frontend
-
+docker exec -it frontend wget -qO- http://chrome:9222/json/version
+docker exec -it frontend nc -zv chrome 9222
 docker exec -it frontend ping -c 4 chrome
 docker exec -it frontend nslookup chrome
-docker exec -it frontend nc -zv chrome 9222
-docker exec -it frontend wget -qO- http://chrome:9222/json/version
-
-
-docker exec -it frontend curl  v- http://chrome:9222/json/version
-
-
+docker exec -it frontend sh -c "whoami && id" # check user at container
 ```
 
 ### Start
-
 ```shell
 # all
 docker-compose --env-file .env.dev up -d --build
@@ -165,6 +247,9 @@ docker-compose down && docker-compose --env-file .env.dev build --no-cache && do
 docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
 docker-compose down frontend && docker-compose --env-file .env.dev up -d --build --force-recreate frontend
 docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up frontend
+
+# server
+docker-compose down server && docker-compose --env-file .env.dev up -d --build server
 ```
 
 ### Log
@@ -195,6 +280,7 @@ docker exec -it frontend /bin/bash
 
 # server
 docker exec -it server /bin/bash
+
 # letsencrypt
 docker exec -it letsencrypt /bin/bash
 ```

@@ -1,0 +1,52 @@
+# For Nuxt app
+# @memo: copy everything to /usr/src/app
+
+FROM node:20-alpine AS builder
+LABEL maintainer="B24Sdk <github.com/bitrix24>"
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+
+
+
+
+
+
+
+
+
+WORKDIR /usr/src/app
+
+RUN corepack enable
+
+COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# @todo test this
+RUN pnpm install --prod
+# @todo this work? but now use test
+#RUN pnpm install
+
+COPY . ./
+
+RUN pnpm run build
+
+FROM node:20-alpine
+
+ENV NODE_ENV=production
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+WORKDIR /usr/src/app
+
+COPY --from=builder /usr/src/app/.output ./
+
+# @todo remove this
+RUN ls -la ./
+# RUN ls -la /usr/src/app/.output
+# RUN ls -la /usr/src/app/.output/server
+
+ENV PORT 80
+ENV HOST 0.0.0.0
+
+EXPOSE 80
+
+CMD ["node", "/usr/src/app/server/index.mjs"]
