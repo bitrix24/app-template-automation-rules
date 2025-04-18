@@ -86,8 +86,10 @@ docker network create proxy-net
 docker-compose -f docker-compose.server.yml -p server__global top
 
 docker-compose -f docker-compose.server.yml -p server__global build
-docker-compose -f docker-compose.server.yml -p server__global up -d
+
 docker-compose -f docker-compose.server.yml -p server__global up -d --build
+docker-compose -f docker-compose.server.yml -p server__global up -d
+
 docker-compose -f docker-compose.server.yml -p server__global down
 docker-compose -f docker-compose.server.yml -p server__global stop
 
@@ -102,8 +104,10 @@ docker logs -f letsencrypt
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
 
@@ -111,7 +115,7 @@ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules d
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop dev-chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start dev-chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
@@ -132,8 +136,8 @@ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules l
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
 
-docker logs -f chrome
-docker logs -f frontend
+docker logs -f dev-chrome
+docker logs -f dev-frontend
 
 ```
 
@@ -179,9 +183,13 @@ cp .env.dev.example .env.dev
 sudo systemctl status docker
 sudo ss -tuln | grep 2376
 
+docker stats
+
 
 docker ps
 docker ps -a | grep chrome
+watch -n 2 docker ps
+
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
 
@@ -190,10 +198,12 @@ docker network inspect inner
 docker network inspect inner | grep -A 10 Containers
 
 # chrome
-docker inspect chrome
-docker exec -it chrome wget -qO- http://localhost:9222/json/version
-docker exec -it chrome netstat -tulpn | grep 9222
-docker exec -it chrome ping -c 4 frontend
+docker inspect dev-chrome
+docker exec -it dev-chrome wget -qO- http://localhost:9222/json/version
+docker exec -it dev-chrome wget -qO- http://frontend:3000/
+docker exec -it dev-chrome wget -qO- http://frontend:3000/render/order?taskId=156
+docker exec -it dev-chrome netstat -tulpn | grep 9222
+docker exec -it dev-chrome ping -c 4 frontend
 
 docker exec -it chrome sh -c "
   dbus-send --system \
@@ -205,12 +215,13 @@ docker exec -it chrome sh -c "
 "
 
 # frontend
-docker inspect frontend
-docker exec -it frontend wget -qO- http://chrome:9222/json/version
-docker exec -it frontend nc -zv chrome 9222
-docker exec -it frontend ping -c 4 chrome
-docker exec -it frontend nslookup chrome
-docker exec -it frontend sh -c "whoami && id" # check user at container
+docker inspect dev-frontend
+docker exec -it dev-frontend wget -qO- http://dev-chrome:9223/json/version
+docker exec -it dev-frontend wget -qO- http://chrome:9223/json/version
+docker exec -it dev-frontend nc -zv chrome 9223
+docker exec -it dev-frontend ping -c 4 chrome
+docker exec -it dev-frontend nslookup chrome
+docker exec -it dev-frontend sh -c "whoami && id" # check user at container
 ```
 
 ### Start

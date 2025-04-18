@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    chromeWsUrl: process.env.VITE_CHROME_WS_URL || 'ws://chrome:9222',
+    chromeUrl: process.env.CHROME_URL || 'http://chrome:9222/json/version',
     jwtSecret: process.env.VITE_NUXT_JWT_SECRET || 'super-secret-key',
     allowedIPs: process.env.VITE_ALLOWED_IPS?.split(',') || ['127.0.0.1', '::1'],
     public: {
@@ -47,11 +47,6 @@ export default defineNuxtConfig({
     ]
   },
   devServer: {
-    port: 3000,
-    // @todo use env for docker
-    host: '0.0.0.0',
-    // @todo use for tuna
-    // host: '127.0.0.1',
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }

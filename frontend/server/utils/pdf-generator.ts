@@ -25,29 +25,39 @@ frontend  |
 
  */
 import puppeteer from 'puppeteer-core'
-import type { Browser, Page } from 'puppeteer-core'
+import { sleepAction } from '../../app/utils/sleep'
+import type { Browser } from 'puppeteer-core'
+
+function transformWsUrl(
+  httpUrl: string,
+  wsUrl: string
+): string {
+  const firstUrl = new URL(httpUrl)
+  const secondUrl = new URL(wsUrl)
+
+  secondUrl.host = firstUrl.host
+
+  return secondUrl.toString()
+}
 
 const connectToBrowser = async () => {
   const config = useRuntimeConfig()
-  let chromeWsUrl = config.chromeWsUrl
+  let chromeUrl = config.chromeUrl
 
-  // @todo get from  docker exec -it frontend wget -qO- http://chrome:9222/json/version
-  chromeWsUrl = 'ws://chrome:9222/devtools/browser/7dda554f-64fb-4d8e-938d-4f56bffd87d1'
-  console.log(chromeWsUrl)
+  console.log('Connected chromeUrl:', chromeUrl)
+
+  const chromeInfo = await fetch(chromeUrl)
+    .then(res => res.json())
+
   const browser = await puppeteer.connect({
-    browserWSEndpoint: chromeWsUrl,
-    defaultViewport: null,
-    // ignoreHTTPSErrors: true,
-    // protocolTimeout: 60000
+    browserWSEndpoint: transformWsUrl(chromeUrl, chromeInfo.webSocketDebuggerUrl),
+    defaultViewport: null
   })
 
   const version = await browser.version()
   console.log('Connected to browser:', version)
-  return browser
-}
 
-async function sleepAction2(timeout: number = 1000): Promise<void> {
-  return new Promise<void>(resolve => setTimeout(resolve, timeout))
+  return browser
 }
 
 export async function generatePDF(url: string, params: { token: string, taskId: string }) {
@@ -68,30 +78,102 @@ export async function generatePDF(url: string, params: { token: string, taskId: 
 
     //await page.setExtraHTTPHeaders({
     //  'Authorization': `Bearer ${params.token}`,
+	  //  'X-Forwarded-For': '127.0.0.1',
 	  //  'X-Forwarded-For': '172.18.0.3',
     //  'X-Forwarded-Proto': 'http',
-    //  'Host': 'local'
+    //  'Host': 'localhost'
     //})
 
+    /**
+     * @todo get from APP_INTERNAL_URL
+     */
     let internalUrl = new URL(`http://frontend:3000${url}`)
     internalUrl.searchParams.set('taskId', params.taskId)
 
 
-    // internalUrl = new URL(`https://bitrix24.com`)
+    //internalUrl = new URL(`https://bitrix24.com`)
 
     console.log('make PDF for: ', internalUrl.toString())
 
-    await page.goto(internalUrl.toString(), {
-      waitUntil: 'networkidle2',
-      timeout: 60000
+    await page.goto(
+      internalUrl.toString(),
+      {
+        waitUntil: 'networkidle2',
+        timeout: 120_000
+      }
+    )
+
+    await sleepAction(3_000)
+
+    /**
+     * @memo some custom for page
+     * @todo remove this
+     */
+    await page.emulateMediaType('screen')
+    await page.addStyleTag({
+      content: `
+        @page { size: A4 landscape; }
+        body { font-family: Arial; }
+      `
     })
 
-    await sleepAction2(3_000)
-
-    return await page.pdf({
+    /**
+     * @todo make config for margin
+     */
+    const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
       margin: { top: '20mm', right: '20mm', bottom: '20mm', left: '20mm' }
+    })
+
+    await page.close()
+
+    return pdfBuffer
+  } catch (error) {
+    console.error('PDF generation error:', error)
+
+    // Handling Puppeteer Specific Errors
+    if (error instanceof Error) {
+      // Page load timeout
+      if (error.message.includes('Navigation timeout')) {
+        throw createError({
+          statusCode: 504,
+          statusMessage: 'Page loading timeout'
+        })
+      }
+
+      // Connection problems
+      if (error.message.includes('net::ERR_CONNECTION_REFUSED')) {
+        throw createError({
+          statusCode: 502,
+          statusMessage: 'Connection refused'
+        })
+      }
+
+      // Invalid URL
+      if (error.message.includes('net::ERR_NAME_NOT_RESOLVED')) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Invalid URL'
+        })
+      }
+
+      // Page not found
+      if (error.message.includes('404')) {
+        throw createError({
+          statusCode: 404,
+          statusMessage: 'Page not found'
+        })
+      }
+    }
+
+    // General default error
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'PDF generation failed',
+      data: {
+        originalError: error instanceof Error ? error.message : 'Unknown error'
+      }
     })
   } finally {
     await browser?.disconnect()
