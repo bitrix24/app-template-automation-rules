@@ -6,6 +6,10 @@
 .cache
 dist
 
+
+certs
+acme
+
 # Node dependencies
 node_modules
 
