@@ -21,10 +21,7 @@ RUN corepack enable
 
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# @todo test this
-RUN pnpm install --prod
-# @todo this work? but now use test
-#RUN pnpm install
+RUN pnpm install
 
 COPY . ./
 
@@ -38,11 +35,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 WORKDIR /usr/src/app
 
 COPY --from=builder /usr/src/app/.output ./
-
-# @todo remove this
-RUN ls -la ./
-# RUN ls -la /usr/src/app/.output
-# RUN ls -la /usr/src/app/.output/server
 
 ENV PORT 80
 ENV HOST 0.0.0.0

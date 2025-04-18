@@ -79,23 +79,42 @@ tuna http 3000
 
 ## Docker
 
+**SERVER**
+```shell
+docker network create proxy-net
+
+docker-compose -f docker-compose.server.yml -p server__global top
+
+docker-compose -f docker-compose.server.yml -p server__global build
+docker-compose -f docker-compose.server.yml -p server__global up -d
+docker-compose -f docker-compose.server.yml -p server__global up -d --build
+docker-compose -f docker-compose.server.yml -p server__global down
+docker-compose -f docker-compose.server.yml -p server__global stop
+
+docker-compose -f docker-compose.server.yml -p server__global logs -f server
+docker-compose -f docker-compose.server.yml -p server__global logs -f letsencrypt
+docker logs -f server
+docker logs -f letsencrypt
+```
+
 **DEV**
 ```shell
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build server
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build letsencrypt
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
+
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start dev-chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop server
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop letsencrypt
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down && \
  docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
@@ -105,22 +124,17 @@ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules d
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
  docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
-
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down server && \
- docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build server
  
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down letsencrypt && \
- docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build letsencrypt
  
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rule logs -f chrome
-docker logs chrome
- 
-docker-compose logs -f docker-compose.dev.yml
-docker logs frontend
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
-docker logs server
-docker logs letsencrypt
+
+docker logs -f chrome
+docker logs -f frontend
+
 ```
 
 **PROD**
@@ -128,34 +142,30 @@ docker logs letsencrypt
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build chrome
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build server
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build letsencrypt
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
+
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down --volumes --rmi all --remove-orphans
+
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop chrome
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop frontend
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop server
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop letsencrypt
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-frontend
 
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down && \
  docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down chrome && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-chrome && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-frontend && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
+ 
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
+docker logs -f prod-chrome
+docker logs -f prod-frontend
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down server && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build server
- 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down letsencrypt && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build letsencrypt
- 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f chrome
-docker logs chrome
 ```
 
 @todo -> add all info to example
@@ -171,6 +181,7 @@ sudo ss -tuln | grep 2376
 
 
 docker ps
+docker ps -a | grep chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
 
@@ -272,6 +283,8 @@ docker-compose logs -f letsencrypt
 ```shell
 # chrome
 docker exec -it chrome /bin/bash
+docker exec -it chrome /bin/bash
+docker exec -it chrome /bin/sh
 
 docker exec -it chrome netstat -tulpn
 
@@ -301,9 +314,6 @@ du -sh /var/lib/docker
 ```
 
 ```shell
-# @todo add info
-docker-compose down --volumes --rmi all --remove-orphans
-
 # Delete all stopped containers
 docker container prune
 

@@ -1,18 +1,15 @@
 services:
   frontend:
-    container_name: frontend
+    container_name: prod-frontend
     depends_on:
       - chrome
-      - server
     build:
       context: ./frontend
       dockerfile: Dockerfile_prod
     expose:
       - '80'
     volumes:
-      - ./frontend:/usr/src/app
       - ./logs:/tmp
-      - /usr/src/app/node_modules
     env_file: .env.prod
     networks:
       - internal-net
@@ -20,10 +17,10 @@ services:
     restart: always
 
   chrome:
-    container_name: chrome
+    container_name: prod-chrome
     build:
       context: ./chrome
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_prod
     ports:
       - '9222:9222'
     healthcheck:
@@ -41,35 +38,9 @@ services:
           memory: 1G
           cpus: '1.0'
 
-  server:
-    container_name: server
-    image: nginxproxy/nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certs:/etc/nginx/certs:ro
-      - ./html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - proxy-net
-
-  letsencrypt:
-    container_name: letsencrypt
-    image: nginxproxy/acme-companion
-    volumes_from:
-      - server
-    volumes:
-      - ./certs:/etc/nginx/certs:rw
-      - ./acme:/etc/acme.sh
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - server
-    networks:
-      - proxy-net
-
 networks:
   proxy-net:
     driver: bridge
+    external: true
   internal-net:
     driver: bridge

@@ -1,9 +1,8 @@
 services:
   frontend:
-    container_name: frontend
+    container_name: dev-frontend
     depends_on:
       - chrome
-      - server
     build:
       context: ./frontend
       dockerfile: Dockerfile_dev
@@ -20,14 +19,14 @@ services:
     restart: always
 
   chrome:
-    container_name: chrome
+    container_name: dev-chrome
     build:
       context: ./chrome
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_dev
     ports:
-      - '9222:9222'
+      - '9223:9223'
     healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9222/json/version || exit 1" ]
+      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9223/json/version || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -41,35 +40,9 @@ services:
           memory: 1G
           cpus: '1.0'
 
-  server:
-    container_name: server
-    image: nginxproxy/nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certs:/etc/nginx/certs:ro
-      - ./html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - proxy-net
-
-  letsencrypt:
-    container_name: letsencrypt
-    image: nginxproxy/acme-companion
-    volumes_from:
-      - server
-    volumes:
-      - ./certs:/etc/nginx/certs:rw
-      - ./acme:/etc/acme.sh
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - server
-    networks:
-      - proxy-net
-
 networks:
   proxy-net:
     driver: bridge
+    external: true
   internal-net:
     driver: bridge
