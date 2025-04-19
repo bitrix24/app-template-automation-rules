@@ -26,6 +26,9 @@ importers:
       '@pinia/nuxt':
         specifier: ^0.11.0
         version: 0.11.0(magicast@0.3.5)(pinia@3.0.2(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
       fuse.js:
         specifier: ^7.1.0
         version: 7.1.0
@@ -45,9 +48,6 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.9
         version: 9.0.9
-      dotenv:
-        specifier: ^16.5.0
-        version: 16.5.0
       eslint:
         specifier: ^9.24.0
         version: 9.24.0(jiti@2.4.2)

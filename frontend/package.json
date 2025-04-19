@@ -30,7 +30,8 @@
     "fuse.js": "^7.1.0",
     "nuxt": "^3.16.2",
     "jsonwebtoken": "^9.0.2",
-    "puppeteer-core": "^24.6.1"
+    "puppeteer-core": "^24.6.1",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.9",
