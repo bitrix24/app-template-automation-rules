@@ -12,11 +12,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@bitrix24/b24jssdk-nuxt'
   ],
-  /**
-   * @memo; on - speed render pages
-   */
   ssr: true,
-  // ssr: false,
   /**
    * @memo App work under frame
    * Nuxt DevTools: Failed to check parent window
@@ -34,9 +30,19 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    chromeUrl: process.env.CHROME_URL || 'http://chrome:9222/json/version',
-    jwtSecret: process.env.VITE_NUXT_JWT_SECRET || 'super-secret-key',
-    allowedIPs: process.env.VITE_ALLOWED_IPS?.split(',') || ['127.0.0.1', '::1'],
+    /**
+     * @memo this will be overwritten from .env or Docker_*
+     *
+     * @see https://nuxt.com/docs/guide/going-further/runtime-config#example
+     */
+    chromeUrl: '',
+    appInternalUrl: '',
+    jwtSecret: '',
+    allowedIps: '',
+    // @todo remove this
+    b24HookUrl: '',
+    b24HookUserId: 0,
+    b24HookSecret: '',
     public: {
       contentLocales: contentLocales
     }

@@ -11,7 +11,10 @@ import { generatePDF } from './../utils/pdf-generator'
  * @todo add validate b24 hook
  */
 export default defineEventHandler(async (event) => {
-  const startTotal = Date.now();
+  /**
+   * @todo remove this
+   */
+  const startTotal = Date.now()
 
   // Getting query parameters
   const query = getQuery(event)
@@ -32,7 +35,7 @@ export default defineEventHandler(async (event) => {
   )
 
   const pdfBuffer = await generatePDF(
-    '/render/order',
+    `/render/invoice-by-deal/${taskId}/`,
     { token, taskId }
   )
 
@@ -42,7 +45,7 @@ export default defineEventHandler(async (event) => {
    */
   console.log(JSON.stringify({
     total: Date.now() - startTotal
-  }));
+  }))
   event.node.res.setHeader('Content-Type', 'application/pdf')
   event.node.res.setHeader('Content-Disposition', 'attachment; filename="generated.pdf"')
   event.node.res.end(pdfBuffer)

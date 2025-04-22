@@ -79,7 +79,23 @@ tuna http 3000
 
 ## Docker
 
-**SERVER**
+### Status
+
+```shell
+docker ps
+docker ps -a | grep chrome
+watch -n 2 docker ps
+
+docker stats
+
+sudo systemctl status docker
+sudo ss -tuln | grep 2376
+
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
+```
+
+### Server
 ```shell
 docker network create proxy-net
 
@@ -87,8 +103,8 @@ docker-compose -f docker-compose.server.yml -p server__global top
 
 docker-compose -f docker-compose.server.yml -p server__global build
 
-docker-compose -f docker-compose.server.yml -p server__global up -d --build
 docker-compose -f docker-compose.server.yml -p server__global up -d
+docker-compose -f docker-compose.server.yml -p server__global up -d --build
 
 docker-compose -f docker-compose.server.yml -p server__global down
 docker-compose -f docker-compose.server.yml -p server__global stop
@@ -99,7 +115,7 @@ docker logs -f server
 docker logs -f letsencrypt
 ```
 
-**DEV**
+### Dev
 ```shell
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 
@@ -115,8 +131,8 @@ docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules d
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
 
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop dev-chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start dev-chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
+docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start chrome
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
 docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
 
@@ -141,7 +157,7 @@ docker logs -f dev-frontend
 
 ```
 
-**PROD**
+### Prod
 ```shell
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
@@ -162,8 +178,8 @@ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-chrome && \
  docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-frontend && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
+docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
+ docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
  
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
 docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
@@ -177,22 +193,9 @@ docker logs -f prod-frontend
 cp .env.dev.example .env.dev
 ```
 
-### Status
+### Check
 
 ```shell
-sudo systemctl status docker
-sudo ss -tuln | grep 2376
-
-docker stats
-
-
-docker ps
-docker ps -a | grep chrome
-watch -n 2 docker ps
-
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
-docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
-
 # network
 docker network inspect inner
 docker network inspect inner | grep -A 10 Containers
@@ -200,8 +203,10 @@ docker network inspect inner | grep -A 10 Containers
 # chrome
 docker inspect dev-chrome
 docker exec -it dev-chrome wget -qO- http://localhost:9222/json/version
-docker exec -it dev-chrome wget -qO- http://frontend:3000/
-docker exec -it dev-chrome wget -qO- http://frontend:3000/render/order?taskId=156
+docker exec -it dev-chrome wget -qO- http://dev-frontend:3000/
+
+docker exec -it prod-chrome wget -qO- http://prod-frontend:80/render/invoice-by-deal/1058/
+
 docker exec -it dev-chrome netstat -tulpn | grep 9222
 docker exec -it dev-chrome ping -c 4 frontend
 
@@ -217,25 +222,13 @@ docker exec -it chrome sh -c "
 # frontend
 docker inspect dev-frontend
 docker exec -it dev-frontend wget -qO- http://dev-chrome:9223/json/version
-docker exec -it dev-frontend wget -qO- http://chrome:9223/json/version
+
+docker exec -it prod-frontend wget -qO- http://prod-chrome:9223/json/version
+
 docker exec -it dev-frontend nc -zv chrome 9223
 docker exec -it dev-frontend ping -c 4 chrome
 docker exec -it dev-frontend nslookup chrome
 docker exec -it dev-frontend sh -c "whoami && id" # check user at container
-```
-
-### Start
-```shell
-# all
-docker-compose --env-file .env.dev up -d --build
-# chrome
-docker-compose --env-file .env.dev up -d --build chrome
-# frontend
-docker-compose --env-file .env.dev up -d --build frontend
-# server
-docker-compose --env-file .env.dev up -d --build server
-# letsencrypt
-docker-compose --env-file .env.dev up -d --build letsencrypt
 ```
 
 ### Stop
