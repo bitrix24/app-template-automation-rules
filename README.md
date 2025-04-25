@@ -53,6 +53,7 @@ docker-compose.yml
 ### scopes
 
 - crm
+- catalog
 - bizproc
 - placement
 - user_brief
