@@ -1,5 +1,5 @@
 import { LoggerBrowser, B24Hook, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
-import type { Deal, ProductRow } from '~/types/bitrix'
+import type { Deal, ProductImage, ProductInfo, ProductRow } from '~/types/bitrix'
 
 export const $logger = LoggerBrowser.build(
   'useB24 ',
@@ -35,6 +35,8 @@ export const useFetchDeal = (dealId: number) => {
         companyId: 0,
         contactId: 0
       }
+
+      let catalogId: number[] = []
 
       const response = await useB24().callBatch({
         entityItem: {
@@ -77,6 +79,20 @@ export const useFetchDeal = (dealId: number) => {
               'secondName'
             ]
           }
+        },
+        catalogCatalogList: {
+          method: 'catalog.catalog.list',
+          params: {
+            select: [
+              'iblockId',
+              'iblockTypeId',
+              'id',
+              'lid',
+              'name',
+              'productIblockId',
+              'skuPropertyId'
+            ]
+          }
         }
       })
 
@@ -108,6 +124,18 @@ export const useFetchDeal = (dealId: number) => {
         }
       }
 
+      if (
+        data?.catalogCatalogList?.catalogs
+        && data.catalogCatalogList.catalogs.length > 0
+      ) {
+        catalogId = data.catalogCatalogList.catalogs.map((row: { iblockId: number }) => {
+          return row.iblockId
+        })
+      }
+
+      /**
+       * @todo make sort
+       */
       entity.products = []
       const generator = useB24().fetchListMethod(
         'crm.item.productrow.list',
@@ -124,9 +152,88 @@ export const useFetchDeal = (dealId: number) => {
         'productRows'
       )
 
+      const listProductsId: number[] = []
       for await (const rows of generator) {
-        for (const row of rows) {
-          entity.products.push(row as ProductRow)
+        for (const row of rows as ProductRow[]) {
+          entity.products.push(row)
+          listProductsId.push(row.productId)
+        }
+      }
+
+      if (listProductsId.length < 1) {
+        return entity
+      }
+
+      const generatorProducts = useB24().fetchListMethod(
+        'catalog.product.list',
+        {
+          filter: {
+            '@id': listProductsId,
+            'iblockId': catalogId
+          },
+          select: [
+            'id', 'iblockId',
+            'name', 'active',
+            'previewText', 'detailText',
+            'weight', 'height', 'length', 'width'
+          ]
+        },
+        'id',
+        'products'
+      )
+
+      const commandList = []
+
+      for await (const rows of generatorProducts) {
+        for (const row of rows as ProductInfo[]) {
+          commandList.push({
+            method: 'catalog.productImage.list',
+            params: {
+              productId: row.id,
+              select: [
+                'id',
+                'name',
+                'productId',
+                'type',
+                'detailUrl'
+              ]
+            }
+          })
+          /**
+           * @memo we can get some eq productId in different productRow
+           */
+          entity.products.forEach((product) => {
+            if (product.productId !== row.id) {
+              return
+            }
+
+            product.productInfo = row
+          })
+        }
+      }
+
+      if (commandList.length < 1) {
+        return entity
+      }
+
+      const responseCatalogImages = await useB24().callBatchByChunk(
+        commandList,
+        false
+      )
+
+      for (const chunk of responseCatalogImages.getData()) {
+        for (const row of chunk?.productImages as ProductImage[]) {
+          /**
+           * @memo we can get some eq productId in different productRow
+           */
+          entity.products.forEach((product) => {
+            if (product.productId !== row.productId) {
+              return
+            }
+
+            product.productImage = product.productImage || []
+            product.productImage.push(row)
+          })
         }
       }
 
