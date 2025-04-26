@@ -54,6 +54,7 @@ docker-compose.yml
 
 - crm
 - catalog
+- currency
 - bizproc
 - placement
 - user_brief

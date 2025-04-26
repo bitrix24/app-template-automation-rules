@@ -1,5 +1,6 @@
-import { LoggerBrowser, B24Hook, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
-import type { Deal, ProductImage, ProductInfo, ProductRow } from '~/types/bitrix'
+import { LoggerBrowser, B24Hook, useB24Helper, B24LangList, LoadDataType, EnumCrmEntityTypeId, EnumCrmEntityTypeShort, useFormatter } from '@bitrix24/b24jssdk'
+import type { Deal, ProductInfo, ProductRow } from '~/types/bitrix'
+import type { CatalogProductImage } from '@bitrix24/b24jssdk'
 
 export const $logger = LoggerBrowser.build(
   'useB24 ',
@@ -7,6 +8,12 @@ export const $logger = LoggerBrowser.build(
 )
 
 let $b24: null | B24Hook = null
+
+const {
+  getB24Helper,
+  isInitB24Helper,
+  initB24Helper
+} = useB24Helper()
 
 export const useB24 = (): B24Hook => {
   if ($b24) {
@@ -19,12 +26,45 @@ export const useB24 = (): B24Hook => {
     userId: config.b24HookUserId,
     secret: config.b24HookSecret
   })
-
   $b24.setLogger(LoggerBrowser.build('Core', false))
 
   return $b24
 }
 
+/**
+ * @todo get from app
+ */
+export const useCurrentLang = (): typeof B24LangList[keyof typeof B24LangList] => {
+  return B24LangList.en
+}
+
+const { formatterNumber } = useFormatter()
+formatterNumber.setDefLocale(useCurrentLang())
+
+export const useFormatterNumber = (): typeof formatterNumber => {
+  return formatterNumber
+}
+
+export const useB24HelperManager = async () => {
+  if (isInitB24Helper()) {
+    return getB24Helper()
+  }
+  const $b24 = useB24()
+  await initB24Helper(
+    $b24,
+    [
+      LoadDataType.Profile,
+      LoadDataType.Currency
+    ]
+  )
+
+  return getB24Helper()
+}
+
+/**
+ * @todo test under not admin use !!
+ * @param dealId
+ */
 export const useFetchDeal = (dealId: number) => {
   return useAsyncData(
     `deal-${dealId}`,
@@ -52,32 +92,32 @@ export const useFetchDeal = (dealId: number) => {
             ]
           }
         },
+        entityItemPaymentList: {
+          method: 'crm.item.payment.list',
+          params: {
+            entityTypeId: EnumCrmEntityTypeId.deal,
+            entityId: dealId
+          }
+        },
+        entityItemDeliveryList: {
+          method: 'crm.item.delivery.list',
+          params: {
+            entityTypeId: EnumCrmEntityTypeId.deal,
+            entityId: dealId
+          }
+        },
         entityCompanyItem: {
-          method: 'crm.item.list',
+          method: 'crm.item.get',
           params: {
             entityTypeId: EnumCrmEntityTypeId.company,
-            filter: {
-              id: '$result[entityItem][item][companyId]'
-            },
-            select: [
-              'id',
-              'title'
-            ]
+            id: '$result[entityItem][item][companyId]'
           }
         },
         entityContactItem: {
-          method: 'crm.item.list',
+          method: 'crm.item.get',
           params: {
             entityTypeId: EnumCrmEntityTypeId.contact,
-            filter: {
-              id: '$result[entityItem][item][contactId]'
-            },
-            select: [
-              'id',
-              'lastName',
-              'name',
-              'secondName'
-            ]
+            id: '$result[entityItem][item][contactId]'
           }
         },
         catalogCatalogList: {
@@ -94,7 +134,7 @@ export const useFetchDeal = (dealId: number) => {
             ]
           }
         }
-      })
+      }, false)
 
       const data = response.getData()
 
@@ -104,17 +144,17 @@ export const useFetchDeal = (dealId: number) => {
       )
 
       if (
-        data?.entityCompanyItem?.items
-        && data.entityCompanyItem.items.length > 0
+        data?.entityCompanyItem?.item
+        && data.entityCompanyItem.item?.id
       ) {
-        entity.company = data.entityCompanyItem.items[0]
+        entity.company = data.entityCompanyItem.item
       }
 
       if (
-        data?.entityContactItem?.items
-        && data.entityContactItem.items.length > 0
+        data?.entityContactItem?.item
+        && data.entityContactItem.item?.id
       ) {
-        entity.contact = data.entityContactItem.items[0]
+        entity.contact = data.entityContactItem.item
         if (entity.contact) {
           entity.contact.title = [
             entity.contact?.lastName,
@@ -133,18 +173,29 @@ export const useFetchDeal = (dealId: number) => {
         })
       }
 
+      if (
+        data?.entityItemPaymentList
+        && data.entityItemPaymentList.length > 0
+      ) {
+        entity.paymentList = data.entityItemPaymentList
+      }
+
+      if (
+        data?.entityItemDeliveryList
+        && data.entityItemDeliveryList.length > 0
+      ) {
+        entity.deliveryList = data.entityItemDeliveryList
+      }
+
       /**
-       * @todo make sort
+       * @todo not move to batch -> may be more > 50
        */
       entity.products = []
       const generator = useB24().fetchListMethod(
         'crm.item.productrow.list',
         {
           filter: {
-            /**
-             * @todo use const from EnumCrmEntityTypeId
-             */
-            '=ownerType': 'D',
+            '=ownerType': EnumCrmEntityTypeShort.deal,
             '=ownerId': entity.id
           }
         },
@@ -159,6 +210,8 @@ export const useFetchDeal = (dealId: number) => {
           listProductsId.push(row.productId)
         }
       }
+
+      entity.products.sort((a, b) => a.sort - b.sort)
 
       if (listProductsId.length < 1) {
         return entity
@@ -222,7 +275,7 @@ export const useFetchDeal = (dealId: number) => {
       )
 
       for (const chunk of responseCatalogImages.getData()) {
-        for (const row of chunk?.productImages as ProductImage[]) {
+        for (const row of chunk?.productImages as CatalogProductImage[]) {
           /**
            * @memo we can get some eq productId in different productRow
            */

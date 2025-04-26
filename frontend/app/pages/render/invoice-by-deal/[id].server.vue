@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import QRCode from 'qrcode'
-import { useFetchDeal } from '~/composables/useBitrix24'
+import { CatalogProductType } from '@bitrix24/b24jssdk'
+import { useCurrentLang, useFetchDeal, useFormatterNumber } from '~/composables/useBitrix24'
 import { chunkProductsList } from '~/utils/chunkArray'
 import type { ProductRow } from '~/types/bitrix'
+import QRCode from 'qrcode'
 import CompanyIcon from '@bitrix24/b24icons-vue/crm/CompanyIcon'
 import TelephonyHandset1Icon from '@bitrix24/b24icons-vue/main/TelephonyHandset1Icon'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
@@ -73,6 +74,11 @@ const {
   error: processError
 } = await useFetchDeal(taskId.value)
 
+const $b24Helper = await useB24HelperManager()
+
+const currentLang = useCurrentLang()
+const formatterNumber = useFormatterNumber()
+
 const getTitle = computed(() => {
   return `Invoice No. ${dealData.value?.id} from ${currentDateTime.value}`
 })
@@ -84,14 +90,44 @@ const getClientTitle = computed(() => {
   ) || '-'
 })
 
+const getClientPhone = computed(() => {
+  return (
+    dealData.value?.company
+      ? dealData.value.company?.phone
+      : dealData.value?.company?.phone
+  ) || '-'
+})
+
+const getPaymentList = computed(() => {
+  return (
+    dealData.value?.paymentList
+      ? dealData.value.paymentList.map(row => row.paySystemName).join('; ')
+      : '-'
+  ) || '-'
+})
+const getDeliveryList = computed(() => {
+  return (
+    dealData.value?.deliveryList
+      ? dealData.value.deliveryList.map(row => row.deliveryName).join('; ')
+      : '-'
+  ) || '-'
+})
+const getDeliveryPrice = computed(() => {
+  return (
+    dealData.value?.deliveryList
+      ? dealData.value.deliveryList.reduce((sum, item) => sum + item.priceDelivery, 0)
+      : 0.0
+  ) || 0.0
+})
+
 const productsChunkPage = computed<ProductRow[][]>(() => {
-  // return chunkProductsList<ProductRow>(dealData.value?.products || [])
+  return chunkProductsList<ProductRow>(dealData.value?.products || [])
   /**
    * @todo remove this
    */
-  return chunkProductsList<ProductRow>(
-    [...dealData.value?.products || [], ...dealData.value?.products || [], ...dealData.value?.products || []] // .slice(0, 9)
-  )
+  // return chunkProductsList<ProductRow>(
+  //   [...dealData.value?.products || [], ...dealData.value?.products || [], ...dealData.value?.products || []] // .slice(0, 9)
+  // )
 })
 const globalIndexes = computed(() => {
   let counter = 1
@@ -105,6 +141,12 @@ const globalWeight = computed(() => {
   const list: ProductRow[] = dealData.value?.products || []
 
   list.forEach((product: ProductRow) => {
+    /**
+     * Skip service
+     */
+    if (product.type === CatalogProductType.service) {
+      return
+    }
     weight = weight + ((product.productInfo?.weight || 0.0) * product.quantity)
   })
 
@@ -116,6 +158,13 @@ const globalIsSomeEmptyWeight = computed(() => {
   const list: ProductRow[] = dealData.value?.products || []
 
   list.forEach((product: ProductRow) => {
+    /**
+     * Skip service
+     */
+    if (product.type === CatalogProductType.service) {
+      return
+    }
+
     if ((product.productInfo?.weight || 0.0) === 0.0) {
       isHasEmpty = true
       // $logger.warn(`Product id:${product.productId} has empty Weight`)
@@ -124,6 +173,31 @@ const globalIsSomeEmptyWeight = computed(() => {
 
   return isHasEmpty
 })
+
+const globalDiscount = computed(() => {
+  let ttlDiscount = 0.0
+  const list: ProductRow[] = dealData.value?.products || []
+
+  list.forEach((product: ProductRow) => {
+    if (product.discountSum) {
+      ttlDiscount = ttlDiscount + (product.discountSum * product.quantity)
+    }
+  })
+
+  return ttlDiscount
+})
+
+function formatPrice(price: number, currency?: string): string {
+  if (!currency) {
+    return `${price} ?`
+  }
+
+  return $b24Helper?.currency.format(
+    price,
+    currency,
+    currentLang
+  )
+}
 </script>
 
 <template>
@@ -138,7 +212,6 @@ const globalIsSomeEmptyWeight = computed(() => {
     :description="processError?.stack "
   />
   <main v-else-if="processStatus === 'success' && dealData">
-    <!-- ProsePre>{{ productsChunkPage }}</ProsePre -->
     <template v-for="(page, pageKey) in productsChunkPage" :key="pageKey">
       <div class="page p-[1cm] border border-base-200 rounded-xs w-[210mm] min-h-[297mm] mx-auto my-[10mm] print:m-0 print:border-0 print:w-auto print:min-h-auto print:bg-inherit print:rounded-none">
         <div class="subpage h-[276mm] p-[0cm] mx-auto">
@@ -205,15 +278,29 @@ const globalIsSomeEmptyWeight = computed(() => {
                     Phone:
                   </div>
                   <div class="col-start-2 font-semibold">
-                    @todo +49 111 111-11-11
+                    {{ getClientPhone }}
                   </div>
                 </li>
-                <li class="grid justify-start">
+                <li
+                  v-if="dealData.paymentList?.length"
+                  class="grid justify-start"
+                >
                   <div class="w-32 text-base-500">
-                    E-mail:
+                    Payment:
                   </div>
                   <div class="col-start-2 font-semibold">
-                    @todo John.Smith@example.com
+                    {{ getPaymentList }}
+                  </div>
+                </li>
+                <li
+                  v-if="dealData.deliveryList?.length"
+                  class="grid justify-start"
+                >
+                  <div class="w-32 text-base-500">
+                    Delivery:
+                  </div>
+                  <div class="col-start-2 font-semibold">
+                    {{ getDeliveryList }}
                   </div>
                 </li>
               </ul>
@@ -264,16 +351,27 @@ const globalIsSomeEmptyWeight = computed(() => {
                     {{ globalIndexes![pageKey]![productKey] }}.
                   </td>
                   <td>
-                    <ProseImg
-                      v-if="product.productImage && product.productImage[0] && product.productImage[0].detailUrl"
-                      :src="product.productImage[0].detailUrl"
-                      :alt="product.productName"
-                      class="mx-auto aspect-square w-full max-w-[50px] rounded-lg object-cover border border-base-100"
-                    />
-                    <IncertImageIcon
-                      v-else
-                      class="size-[50px] text-base-100 rounded-lg object-cover border border-base-100"
-                    />
+                    <div class="relative">
+                      <ProseImg
+                        v-if="product.productImage && product.productImage[0] && product.productImage[0].detailUrl"
+                        :src="product.productImage[0].detailUrl"
+                        :alt="product.productName"
+                        class="mx-auto aspect-square w-full max-w-[50px] rounded-lg object-cover border border-base-100"
+                      />
+                      <IncertImageIcon
+                        v-else
+                        class="size-[50px] text-base-100 rounded-lg object-cover border border-base-100"
+                      />
+                      <B24Badge
+                        v-if="product.type === CatalogProductType.service"
+                        label="service"
+                        size="xs"
+                        color="primary"
+                        depth="normal"
+                        use-fill
+                        class="absolute -top-0.5 -left-1.5"
+                      />
+                    </div>
                   </td>
                   <td>
                     <div class="text-left leading-4 w-full flex flex-col flex-nowrap">
@@ -286,13 +384,19 @@ const globalIsSomeEmptyWeight = computed(() => {
                     </div>
                   </td>
                   <td>
-                    {{ product.price }}
+                    {{ formatPrice(product.price, dealData.currencyId) }}
+                    <div
+                      v-if="product.discountSum > 0.0"
+                      class="text-[10px] text-base-500 line-through"
+                    >
+                      {{ formatPrice(product.priceBrutto, dealData.currencyId) }}
+                    </div>
                   </td>
                   <td>
-                    {{ product.quantity }} <span class="text-base-500">{{ product.measureName }}</span>
+                    {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-500">{{ product.measureName }}</span>
                   </td>
                   <td>
-                    {{ (product.price * product.quantity) }}
+                    {{ formatPrice((product.price * product.quantity), dealData.currencyId) }}
                   </td>
                 </tr>
               </tbody>
@@ -302,28 +406,34 @@ const globalIsSomeEmptyWeight = computed(() => {
           <template v-if="pageKey === productsChunkPage.length - 1">
             <div class="mt-lg text-lg flex flex-row items-start flex-nowrap justify-between">
               <div
-                class="flex-1"
+                class="flex-initial"
                 :class="[
                   globalIsSomeEmptyWeight ? 'text-red-500' : ''
                 ]"
               >
-                Order weight: <span class="font-bold">@todo {{ globalWeight / 1000 }} kg.</span>
+                Order weight: <span class="font-bold">{{ formatterNumber.format(globalWeight / 1000) }} kg</span>
               </div>
-              <div class="flex-1 max-w-[250px] flex flex-col items-end gap-2">
-                <div class="w-full flex flex-row items-center justify-between gap-2">
-                  <div>
-                    Total:
-                  </div>
-                  <div class="font-bold">
-                    @todo 0.00
-                  </div>
-                </div>
-                <div class="w-full flex flex-row items-center justify-between gap-2">
+              <div class="flex-1 max-w-[350px] flex flex-col items-end gap-2">
+                <div
+                  v-if="globalDiscount > 0.0"
+                  class="w-full flex flex-row items-center justify-between gap-2"
+                >
                   <div>
                     Discount:
                   </div>
                   <div class="font-bold">
-                    @todo 0.00
+                    {{ formatPrice(globalDiscount || 0.0, dealData.currencyId) }}
+                  </div>
+                </div>
+                <div
+                  v-if="dealData.deliveryList?.length"
+                  class="w-full flex flex-row items-center justify-between gap-2"
+                >
+                  <div>
+                    Delivery price:
+                  </div>
+                  <div class="font-bold">
+                    {{ formatPrice(getDeliveryPrice || 0.0, dealData.currencyId) }}
                   </div>
                 </div>
                 <div class="w-full flex flex-row items-center justify-between gap-2 text-3xl border-t-2 border-t-base-300 pt-1">
@@ -331,7 +441,7 @@ const globalIsSomeEmptyWeight = computed(() => {
                     To be paid:
                   </div>
                   <div class="font-bold">
-                    @todo 0.00
+                    {{ formatPrice(dealData?.opportunity || 0.0, dealData.currencyId) }}
                   </div>
                 </div>
                 <div class="w-full -mt-1 text-xs text-base-500">

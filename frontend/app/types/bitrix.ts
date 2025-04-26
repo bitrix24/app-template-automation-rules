@@ -1,4 +1,4 @@
-import type { BoolString } from '@bitrix24/b24jssdk'
+import type { CrmItemProductRow, CatalogProduct, CatalogProductSku, CatalogProductOffer, CatalogProductService, CatalogProductImage, CrmItemDelivery, CrmItemPayment } from '@bitrix24/b24jssdk'
 
 export type BatchCommands = {
   [key: string]: string | {
@@ -17,61 +17,40 @@ export type BitrixBatchResponse<T extends Record<string, any>> = {
   }
 }
 
-export type ProductImage = {
-  id: number
-  name: string
-  productId: number
-  type: 'DETAIL_PICTURE' | 'PREVIEW_PICTURE' | 'MORE_PHOTO'
-  downloadUrl?: string
-  detailUrl?: string
-}
+export type ProductInfo = CatalogProduct | CatalogProductSku | CatalogProductOffer | CatalogProductService
 
-export type ProductInfo = {
-  id: number
-  active: BoolString
-  iblockId: number
-  name: string
-  previewText?: string
-  previewTextType?: 'text' | 'html'
-  detailText?: string
-  detailTextType?: 'text' | 'html'
-  weight?: number
-  height?: number
-  length?: number
-  width?: number
-}
-
-export type ProductRow = {
-  id: number
-  xmlId: string
-  productId: number
-  productName: string
-  type: number
-  price: number
-  quantity: number
-  measureName: string
-  storeId: number
+export type ProductRow = CrmItemProductRow & {
   productInfo?: ProductInfo
-  productImage?: ProductImage[]
+  productImage?: CatalogProductImage[]
 }
 
 export type Entity = {
   id: number
   title: string
+  [key: string]: any
 }
 
-export type Company = Entity & {}
+export type Company = Entity & {
+  phone?: string
+  email?: string
+}
 
 export type Contact = Entity & {
   lastName?: string
   name?: string
   secondName?: string
+  phone?: string
+  email?: string
 }
 
 export type Deal = Entity & {
+  opportunity?: number
+  currencyId?: string
   companyId: number
   company?: Company
   contactId: number
   contact?: Contact
   products?: ProductRow[]
+  paymentList?: CrmItemPayment[]
+  deliveryList?: CrmItemDelivery[]
 }
