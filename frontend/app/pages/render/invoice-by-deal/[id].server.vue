@@ -384,19 +384,19 @@ function formatPrice(price: number, currency?: string): string {
                     </div>
                   </td>
                   <td>
-                    {{ formatPrice(product.price, dealData.currencyId) }}
+                    <span v-html="formatPrice(product.price, dealData.currencyId)"></span>
                     <div
                       v-if="product.discountSum > 0.0"
                       class="text-[10px] text-base-500 line-through"
+                      v-html="formatPrice(product.priceBrutto, dealData.currencyId)"
                     >
-                      {{ formatPrice(product.priceBrutto, dealData.currencyId) }}
                     </div>
                   </td>
                   <td>
                     {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-500">{{ product.measureName }}</span>
                   </td>
                   <td>
-                    {{ formatPrice((product.price * product.quantity), dealData.currencyId) }}
+                    <span v-html="formatPrice((product.price * product.quantity), dealData.currencyId)"></span>
                   </td>
                 </tr>
               </tbody>
@@ -421,9 +421,7 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     Discount:
                   </div>
-                  <div class="font-bold">
-                    {{ formatPrice(globalDiscount || 0.0, dealData.currencyId) }}
-                  </div>
+                  <div class="font-bold" v-html="formatPrice(globalDiscount || 0.0, dealData.currencyId)"></div>
                 </div>
                 <div
                   v-if="dealData.deliveryList?.length"
@@ -432,17 +430,13 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     Delivery price:
                   </div>
-                  <div class="font-bold">
-                    {{ formatPrice(getDeliveryPrice || 0.0, dealData.currencyId) }}
-                  </div>
+                  <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, dealData.currencyId)"></div>
                 </div>
                 <div class="w-full flex flex-row items-center justify-between gap-2 text-3xl border-t-2 border-t-base-300 pt-1">
                   <div>
                     To be paid:
                   </div>
-                  <div class="font-bold">
-                    {{ formatPrice(dealData?.opportunity || 0.0, dealData.currencyId) }}
-                  </div>
+                  <div class="font-bold" v-html="formatPrice(dealData?.opportunity || 0.0, dealData.currencyId)"></div>
                 </div>
                 <div class="w-full -mt-1 text-xs text-base-500">
                   The invoice is valid for 3 calendar days
