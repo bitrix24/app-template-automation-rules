@@ -44,7 +44,13 @@ export default defineNuxtConfig({
     b24HookUserId: 0,
     b24HookSecret: '',
     public: {
-      contentLocales: contentLocales
+      contentLocales: contentLocales,
+      // @todo remove this
+      appUrl: 'https://demo.bx-shef.by',
+      // @todo remove this
+      b24HookUrl: '',
+      b24HookUserId: 0,
+      b24HookSecret: ''
     }
   },
   build: {

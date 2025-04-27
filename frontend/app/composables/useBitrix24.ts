@@ -21,6 +21,7 @@ export const useB24 = (): B24Hook => {
   }
 
   const config = useRuntimeConfig()
+
   $b24 = new B24Hook({
     b24Url: config.b24HookUrl,
     userId: config.b24HookUserId,

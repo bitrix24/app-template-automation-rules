@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import type { IActivity } from '~/types'
+import { storeToRefs } from 'pinia'
+import { B24Hook, LoggerBrowser } from '@bitrix24/b24jssdk'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
-import type { Collections } from '@nuxt/content'
 import { useUserSettingsStore } from '~/stores/userSettings'
 import { useAppSettingsStore } from '~/stores/appSettings'
-import { storeToRefs } from 'pinia'
+import { activitiesConfig } from '~/activity.config'
 import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
+import type { IActivity } from '~/types'
+import type { Collections } from '@nuxt/content'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
@@ -25,6 +27,11 @@ useHead({
   title: t('page.list.seo.title')
 })
 
+const $logger = LoggerBrowser.build(
+  'Activity-List',
+  import.meta.env?.DEV === true
+)
+
 const { initApp } = useAppInit()
 
 // region Init ////
@@ -36,6 +43,19 @@ const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ActivityItemModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
 const activities = ref<IActivity[]>([])
+
+const config = useRuntimeConfig()
+const appUrl = config.public.appUrl
+
+/**
+ * @todo remove this
+ */
+const $b24 = new B24Hook({
+  b24Url: config.public.b24HookUrl,
+  userId: config.public.b24HookUserId,
+  secret: config.public.b24HookSecret
+})
+$b24.setLogger(LoggerBrowser.build('Core', false))
 // endregion ////
 
 // region Locale ////
@@ -77,13 +97,62 @@ async function loadData(): Promise<void> {
 
 // region Actions ////
 async function showSlider(activity: IActivity): Promise<void> {
-  await activitySliderDetail.open({
+  activitySliderDetail.open({
     activity
   })
 }
 
+const getActivityCodeFromPath = (path: string) => {
+  const parts = path.split('/').filter(part => part !== '')
+  return parts.length > 0 ? parts[parts.length - 1] : null
+}
+
+const mapProperties = (properties: ActivityConfig['properties']) => {
+  return Object.entries(properties).reduce((acc, [key, config]) => ({
+    ...acc,
+    [key]: {
+      Name: config.name,
+      Type: config.type === 'select' ? 'string' : 'text',
+      Required: config.required ? 'Y' : 'N'
+    }
+  }), {})
+}
+
 async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.open()
+
+  const activityCode = getActivityCodeFromPath(activity.path)
+  if (!activityCode) {
+    throw new Error(`No activity code in path: ${activity.path}`)
+  }
+
+  const activityConfig = activitiesConfig.find(a => a.code.toLowerCase() === activityCode.toLowerCase())
+  if (!activityConfig) {
+    throw new Error(`No activity config by code: ${activityCode}`)
+  }
+
+  const params = {
+    CODE: activityConfig.code,
+    NAME: activityConfig.name || activity.title || activityConfig.code,
+    HANDLER: `${appUrl}${activityConfig.handler}`,
+    PROPERTIES: mapProperties(activityConfig.properties)
+  }
+
+  $logger.info(
+    params,
+    activityCode,
+    activityConfig
+  )
+
+  const response = await $b24.callMethod(
+    'server.time',
+    {}
+  )
+
+  $logger.warn(
+    response.toString()
+  )
+
   /**
    * @todo move to store
    */
