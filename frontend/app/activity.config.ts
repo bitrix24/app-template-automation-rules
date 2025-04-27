@@ -3,6 +3,7 @@ export interface ActivityConfig {
   type: 'activity' | 'robot'
   name?: string
   handler?: string
+  placementHandler?: string
   properties: Record<string, {
     name: string
     type: 'select' | 'input' | 'input-date' | 'checkbox'
@@ -19,6 +20,7 @@ export const activitiesConfig: ActivityConfig[] = [
     code: 'AIandMachineLearning',
     type: 'robot',
     handler: '/api/activities/AIandMachineLearning',
+    placementHandler: '/setting/AIandMachineLearning',
     properties: {
       typeV1: {
         name: 'Type 1',

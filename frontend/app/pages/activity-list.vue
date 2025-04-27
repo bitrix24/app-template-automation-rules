@@ -11,6 +11,7 @@ import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import type { IActivity } from '~/types'
+import type { ActivityConfig } from '~/activity.config'
 import type { Collections } from '@nuxt/content'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
@@ -134,7 +135,13 @@ async function makeInstall(activity: IActivity): Promise<void> {
   const params = {
     CODE: activityConfig.code,
     NAME: activityConfig.name || activity.title || activityConfig.code,
-    HANDLER: `${appUrl}${activityConfig.handler}`,
+    DESCRIPTION: activity.description || activityConfig.code,
+    AUTH_USER_ID: 1,
+    // @todo fix this
+    USE_SUBSCRIPTION: 'N',
+    USE_PLACEMENT: 'Y',
+    HANDLER: `${appUrl}${activityConfig.handler || ('/api/activities/' + activityConfig.code)}`,
+    PLACEMENT_HANDLER: `${appUrl}${activityConfig.placementHandler || ('/setting/' + activityConfig.code)}`,
     PROPERTIES: mapProperties(activityConfig.properties)
   }
 
