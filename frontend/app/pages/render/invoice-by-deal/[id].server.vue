@@ -17,7 +17,8 @@ useHead({
     class: ''
   },
   bodyAttrs: {
-    class: 'bg-white'
+    // font-b24-system || font-b24-system-mono || font-b24-helvetica ////
+    class: 'bg-white text-base-ebony font-b24-system-mono antialiased'
   }
 })
 
@@ -121,13 +122,15 @@ const getDeliveryPrice = computed(() => {
 })
 
 const productsChunkPage = computed<ProductRow[][]>(() => {
-  return chunkProductsList<ProductRow>(dealData.value?.products || [])
-  /**
-   * @todo remove this
-   */
-  // return chunkProductsList<ProductRow>(
+  const list = chunkProductsList<ProductRow>(dealData.value?.products || [])
+  // const list = chunkProductsList<ProductRow>(
   //   [...dealData.value?.products || [], ...dealData.value?.products || [], ...dealData.value?.products || []] // .slice(0, 9)
   // )
+  if (list.length < 1) {
+    list.push([])
+  }
+
+  return list
 })
 const globalIndexes = computed(() => {
   let counter = 1
@@ -260,13 +263,13 @@ function formatPrice(price: number, currency?: string): string {
               {{ getTitle }}
             </ProseH3>
 
-            <div class="border border-base-300 px-4 py-4">
+            <div class="border border-base-ebony px-4 py-4">
               <ProseH6 class="mb-2xs font-semibold">
                 Contact details:
               </ProseH6>
               <ul class="text-xs space-y-3xs">
                 <li class="grid justify-start">
-                  <div class="w-32 text-base-500">
+                  <div class="w-32 text-base-900">
                     Name:
                   </div>
                   <div class="col-start-2 font-semibold">
@@ -274,7 +277,7 @@ function formatPrice(price: number, currency?: string): string {
                   </div>
                 </li>
                 <li class="grid justify-start">
-                  <div class="w-32 text-base-500">
+                  <div class="w-32 text-base-900">
                     Phone:
                   </div>
                   <div class="col-start-2 font-semibold">
@@ -285,7 +288,7 @@ function formatPrice(price: number, currency?: string): string {
                   v-if="dealData.paymentList?.length"
                   class="grid justify-start"
                 >
-                  <div class="w-32 text-base-500">
+                  <div class="w-32 text-base-900">
                     Payment:
                   </div>
                   <div class="col-start-2 font-semibold">
@@ -296,7 +299,7 @@ function formatPrice(price: number, currency?: string): string {
                   v-if="dealData.deliveryList?.length"
                   class="grid justify-start"
                 >
-                  <div class="w-32 text-base-500">
+                  <div class="w-32 text-base-900">
                     Delivery:
                   </div>
                   <div class="col-start-2 font-semibold">
@@ -316,7 +319,7 @@ function formatPrice(price: number, currency?: string): string {
               pageKey === 0 ? 'mt-lg' : 'mt-0'
             ]"
             :b24ui="{
-              base: '[&>table>thead>tr>th]:text-center [&>table>thead>tr>th]:font-semibold [&>table>tbody>tr>td]:text-center'
+              base: 'font-b24-not-use border-y-base-ebony [&>table]:text-base-ebony [&>table>thead>tr]:border-base-ebony [&>table>tbody>tr]:border-base-ebony [&>table>tfoot]:border-base-ebony [&>table>thead>tr>th]:text-center [&>table>thead>tr>th]:font-semibold [&>table>tbody>tr>td]:text-center'
             }"
           >
             <table>
@@ -328,7 +331,7 @@ function formatPrice(price: number, currency?: string): string {
                   <th class="w-[64px]">
                     Photo
                   </th>
-                  <th class="w-[320px]">
+                  <th class="w-[310px]">
                     Name
                   </th>
                   <th>
@@ -378,7 +381,7 @@ function formatPrice(price: number, currency?: string): string {
                       <div>
                         {{ product.productName }}
                       </div>
-                      <div class="text-[10px] text-base-500">
+                      <div class="text-[10px] text-base-900">
                         Code: {{ product.productId }}
                       </div>
                     </div>
@@ -387,13 +390,13 @@ function formatPrice(price: number, currency?: string): string {
                     <span v-html="formatPrice(product.price, dealData.currencyId)"></span>
                     <div
                       v-if="product.discountSum > 0.0"
-                      class="text-[10px] text-base-500 line-through"
+                      class="text-[10px] text-base-900 line-through"
                       v-html="formatPrice(product.priceBrutto, dealData.currencyId)"
                     >
                     </div>
                   </td>
                   <td>
-                    {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-500">{{ product.measureName }}</span>
+                    {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-900">{{ product.measureName }}</span>
                   </td>
                   <td>
                     <span v-html="formatPrice((product.price * product.quantity), dealData.currencyId)"></span>
@@ -413,7 +416,7 @@ function formatPrice(price: number, currency?: string): string {
               >
                 Order weight: <span class="font-bold">{{ formatterNumber.format(globalWeight / 1000) }} kg</span>
               </div>
-              <div class="flex-1 max-w-[350px] flex flex-col items-end gap-2">
+              <div class="flex-1 max-w-[350px] flex flex-col items-end gap-0.5">
                 <div
                   v-if="globalDiscount > 0.0"
                   class="w-full flex flex-row items-center justify-between gap-2"
@@ -432,13 +435,18 @@ function formatPrice(price: number, currency?: string): string {
                   </div>
                   <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, dealData.currencyId)"></div>
                 </div>
-                <div class="w-full flex flex-row items-center justify-between gap-2 text-3xl border-t-2 border-t-base-300 pt-1">
+                <div
+                  class="w-full flex flex-row items-center justify-between gap-2 text-2xl"
+                  :class="[
+                    (globalDiscount > 0.0 || dealData.deliveryList?.length) ? 'border-t-2 border-t-base-ebony pt-1.5' : ''
+                  ]"
+                >
                   <div>
                     To be paid:
                   </div>
                   <div class="font-bold" v-html="formatPrice(dealData?.opportunity || 0.0, dealData.currencyId)"></div>
                 </div>
-                <div class="w-full -mt-1 text-xs text-base-500">
+                <div class="w-full -mt-1 text-xs text-base-900">
                   The invoice is valid for 3 calendar days
                 </div>
               </div>

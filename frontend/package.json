@@ -25,6 +25,7 @@
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
     "@bitrix24/b24jssdk-nuxt": "^0.1.4",
+    "@bitrix24/b24jssdk": "^0.2.2",
     "@bitrix24/b24ui-nuxt": "^0.6.7",
     "@nuxt/content": "^3.4.0",
     "@nuxtjs/i18n": "^9.5.3",
@@ -46,7 +47,7 @@
     "typescript": "^5.8.3"
   },
   "resolutions": {
-    "@bitrix24/b24jssdk": "file:../../b24jssdk/packages/jssdk"
+    "@bitrix24/b24jssdk": "^0.2.2"
   },
   "keywords": [
     "bitrix24-ui",

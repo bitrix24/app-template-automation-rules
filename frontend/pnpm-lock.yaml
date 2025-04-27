@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@bitrix24/b24jssdk': file:../../b24jssdk/packages/jssdk
+  '@bitrix24/b24jssdk': ^0.2.2
 
 importers:
 
@@ -14,6 +14,9 @@ importers:
       '@bitrix24/b24icons-vue':
         specifier: ^1.0.5
         version: 1.0.5(vue@3.5.13(typescript@5.8.3))
+      '@bitrix24/b24jssdk':
+        specifier: ^0.2.2
+        version: 0.2.2
       '@bitrix24/b24jssdk-nuxt':
         specifier: ^0.1.4
         version: 0.1.4(magicast@0.3.5)
@@ -208,8 +211,8 @@ packages:
   '@bitrix24/b24jssdk-nuxt@0.1.4':
     resolution: {integrity: sha512-zjFiKlLt7l+wVhZmRprkSQx4FsrDYJhJ44Low0KZiHCaFiprMKmMozK8amwzCrtlj6SBI24Ds1oP4h8TJggq4A==}
 
-  '@bitrix24/b24jssdk@file:../../b24jssdk/packages/jssdk':
-    resolution: {directory: ../../b24jssdk/packages/jssdk, type: directory}
+  '@bitrix24/b24jssdk@0.2.2':
+    resolution: {integrity: sha512-GtDMFZ2wv4soTg6SpinKT+Yh1x39SZrBLqjcraoLUWaJeqBTaR4ycDoVFmZQwGjXe+XEVVPtIhJTOelZVrlpmQ==}
     engines: {node: '>=18.0.0'}
 
   '@bitrix24/b24style@1.0.1':
@@ -5728,7 +5731,7 @@ snapshots:
 
   '@bitrix24/b24jssdk-nuxt@0.1.4(magicast@0.3.5)':
     dependencies:
-      '@bitrix24/b24jssdk': file:../../b24jssdk/packages/jssdk
+      '@bitrix24/b24jssdk': 0.2.2
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
       '@nuxt/schema': 3.16.2
       axios: 1.8.4
@@ -5738,7 +5741,7 @@ snapshots:
       - debug
       - magicast
 
-  '@bitrix24/b24jssdk@file:../../b24jssdk/packages/jssdk':
+  '@bitrix24/b24jssdk@0.2.2':
     dependencies:
       '@types/luxon': 3.6.2
       axios: 1.8.4
