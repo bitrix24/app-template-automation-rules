@@ -57,16 +57,17 @@ export const useAppInit = () => {
         }
       })
       appSettings.initFromBatchByActivityInstalled([
-        '/activities/en/appmarketplace',
-        '/activities/en/emailmarketing',
-        '/activities/en/sustainabilityinitiatives'
+        'AppMarketplace',
+        'BlockchainTechnology'
       ])
 
       userSettings.initFromBatch({
         searchQuery: '',
         filterParams: {
           category: 'all',
-          badge: ['badge_2' as EActivityBadge]
+          badge: [
+            'badge_3'
+          ] as EActivityBadge[]
         }
       })
 

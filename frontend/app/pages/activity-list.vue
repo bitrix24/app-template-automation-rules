@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { B24Hook, LoggerBrowser } from '@bitrix24/b24jssdk'
+import { B24Hook, LoggerBrowser, AjaxError } from '@bitrix24/b24jssdk'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import { useUserSettingsStore } from '~/stores/userSettings'
 import { useAppSettingsStore } from '~/stores/appSettings'
@@ -11,12 +11,13 @@ import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import type { IActivity } from '~/types'
-import type { ActivityConfig } from '~/activity.config'
+import type { ActivityConfig, ActivityProperty } from '~/activity.config'
 import type { Collections } from '@nuxt/content'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
+import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 
 const { locale, t, defaultLocale } = useI18n()
 
@@ -75,6 +76,11 @@ const {
 // endregion ////
 
 // region Data ////
+const getActivityCodeFromPath = (path: string) => {
+  const parts = path.split('/').filter(part => part !== '')
+  return parts.length > 0 ? parts[parts.length - 1] : null
+}
+
 async function loadData(): Promise<void> {
   const data = await queryCollection(contentCollection.value)
     .select(
@@ -87,12 +93,18 @@ async function loadData(): Promise<void> {
     )
     .all()
 
-  activities.value = data.map(
-    activity => ({
+  activities.value = data.map((activity) => {
+    const activityCode = getActivityCodeFromPath(activity.path)
+    if (!activityCode) {
+      throw new Error(`No activity code in path: ${activity.path}`)
+    }
+
+    return ({
       ...activity,
-      isInstall: appSettings.activityInstalled.includes(activity.path)
+      code: activityCode,
+      isInstall: appSettings.isActivityInstalled(activityCode)
     } as IActivity)
-  )
+  })
 }
 // endregion ////
 
@@ -103,127 +115,174 @@ async function showSlider(activity: IActivity): Promise<void> {
   })
 }
 
-const getActivityCodeFromPath = (path: string) => {
-  const parts = path.split('/').filter(part => part !== '')
-  return parts.length > 0 ? parts[parts.length - 1] : null
-}
-
-const mapProperties = (properties: ActivityConfig['properties']) => {
+const mapProperties = (properties: Record<string, ActivityProperty>) => {
   return Object.entries(properties).reduce((acc, [key, config]) => ({
     ...acc,
     [key]: {
-      Name: config.name,
-      Type: config.type === 'select' ? 'string' : 'text',
-      Required: config.required ? 'Y' : 'N'
+      Name: config.Name,
+      Description: config.Description,
+      Type: config.Type,
+      Options: config.Options,
+      Required: config.Required,
+      Multiple: config.Multiple,
+      Default: config.Default
     }
   }), {})
 }
 
 async function makeInstall(activity: IActivity): Promise<void> {
-  modalLoader.open()
+  try {
+    modalLoader.open()
+    const activityCode = activity.code
+    if (!activityCode) {
+      throw new Error(`No activity code in path: ${activity.path}`)
+    }
 
-  const activityCode = getActivityCodeFromPath(activity.path)
-  if (!activityCode) {
-    throw new Error(`No activity code in path: ${activity.path}`)
+    const activityConfig = activitiesConfig.find(a => a.CODE.toLowerCase() === activityCode.toLowerCase())
+    if (!activityConfig) {
+      throw new Error(`No activity config by code: ${activityCode}`)
+    }
+
+    const params: ActivityConfig = {
+      CODE: activityConfig.CODE,
+      HANDLER: `${appUrl}${activityConfig?.HANDLER || ('/api/activities/' + activityConfig.CODE)}`,
+      NAME: activityConfig.NAME || activity.title || activityConfig.CODE,
+      DESCRIPTION: activityConfig.DESCRIPTION || activity.description || activityConfig.CODE,
+      PROPERTIES: activityConfig.PROPERTIES
+        ? mapProperties(activityConfig.PROPERTIES)
+        : undefined,
+      RETURN_PROPERTIES: activityConfig.RETURN_PROPERTIES
+        ? mapProperties(activityConfig.RETURN_PROPERTIES)
+        : undefined,
+      FILTER: activityConfig.FILTER,
+      USE_PLACEMENT: activityConfig.USE_PLACEMENT || 'N',
+      PLACEMENT_HANDLER: `${appUrl}${activityConfig?.PLACEMENT_HANDLER || ('/setting/' + activityConfig.CODE)}`,
+      USE_SUBSCRIPTION: activityConfig.USE_SUBSCRIPTION || 'N',
+      AUTH_USER_ID: activityConfig.AUTH_USER_ID || 1
+    }
+
+    const response = await $b24.callMethod(
+      activityConfig.type === 'robot' ? 'bizproc.robot.add' : 'bizproc.activity.add',
+      params
+    )
+
+    $logger.warn(
+      response.toString()
+    )
+
+    /**
+     * @todo move to store
+     */
+    if (!appSettings.isActivityInstalled(activityConfig.CODE)) {
+      appSettings.activityInstalled.push(activityConfig.CODE)
+      await appSettings.saveSettings()
+    }
+    activity.isInstall = true
+
+    toast.add({
+      title: t('page.list.make.install.success.title'),
+      description: t(
+        'page.list.make.install.success.description', {
+          title: activity.title
+        }
+      ),
+      avatar: activity.avatar
+        ? { src: activity.avatar }
+        : undefined,
+      icon: activity?.avatar ? undefined : FileCheckIcon,
+      color: 'success'
+    })
+  } catch (error) {
+    processError(error)
+  } finally {
+    modalLoader.close()
   }
-
-  const activityConfig = activitiesConfig.find(a => a.code.toLowerCase() === activityCode.toLowerCase())
-  if (!activityConfig) {
-    throw new Error(`No activity config by code: ${activityCode}`)
-  }
-
-  const params = {
-    CODE: activityConfig.code,
-    NAME: activityConfig.name || activity.title || activityConfig.code,
-    DESCRIPTION: activity.description || activityConfig.code,
-    AUTH_USER_ID: 1,
-    // @todo fix this
-    USE_SUBSCRIPTION: 'N',
-    USE_PLACEMENT: 'Y',
-    HANDLER: `${appUrl}${activityConfig.handler || ('/api/activities/' + activityConfig.code)}`,
-    PLACEMENT_HANDLER: `${appUrl}${activityConfig.placementHandler || ('/setting/' + activityConfig.code)}`,
-    PROPERTIES: mapProperties(activityConfig.properties)
-  }
-
-  $logger.info(
-    params,
-    activityCode,
-    activityConfig
-  )
-
-  const response = await $b24.callMethod(
-    'server.time',
-    {}
-  )
-
-  $logger.warn(
-    response.toString()
-  )
-
-  /**
-   * @todo move to store
-   */
-  if (!appSettings.activityInstalled.includes(activity.path)) {
-    appSettings.activityInstalled.push(activity.path)
-    await appSettings.saveSettings()
-  }
-
-  activity.isInstall = true
-
-  modalLoader.close()
-
-  toast.add({
-    title: t('page.list.make.install.success.title'),
-    description: t(
-      'page.list.make.install.success.description', {
-        title: activity.title
-      }
-    ),
-    avatar: activity.avatar
-      ? { src: activity.avatar }
-      : undefined,
-    icon: activity?.avatar ? undefined : FileCheckIcon,
-    color: 'success'
-  })
 }
 
 async function makeUnInstall(activity: IActivity): Promise<void> {
-  const isConfirm = await modalConfirm.open({
-    activity
-  })
+  try {
+    const activityCode = activity.code
+    if (!activityCode) {
+      throw new Error(`No activity code in path: ${activity.path}`)
+    }
 
-  if (!isConfirm) {
-    return
+    const activityConfig = activitiesConfig.find(a => a.CODE.toLowerCase() === activityCode.toLowerCase())
+    if (!activityConfig) {
+      throw new Error(`No activity config by code: ${activityCode}`)
+    }
+
+    const isConfirm = await modalConfirm.open({
+      activity
+    })
+
+    if (!isConfirm) {
+      return
+    }
+
+    modalLoader.open()
+    const response = await $b24.callMethod(
+      activityConfig.type === 'robot' ? 'bizproc.robot.delete' : 'bizproc.activity.delete',
+      {
+        CODE: activityConfig.CODE
+      }
+    )
+
+    $logger.warn(
+      response.toString()
+    )
+
+    /**
+     * @todo move to store
+     */
+    const index = appSettings.activityInstalled.findIndex(
+      item => item.toLowerCase() === activityCode.toLowerCase()
+    )
+    if (index !== -1) {
+      appSettings.activityInstalled.splice(index, 1)
+      await appSettings.saveSettings()
+    }
+
+    activity.isInstall = false
+
+    toast.add({
+      title: t('page.list.make.uninstall.success.title'),
+      description: t(
+        'page.list.make.uninstall.success.description', {
+          title: activity.title
+        }
+      ),
+      avatar: activity.avatar
+        ? { src: activity.avatar }
+        : undefined,
+      icon: activity?.avatar ? undefined : FileCheckIcon,
+      color: 'success'
+    })
+  } catch (error) {
+    processError(error)
+  } finally {
+    modalLoader.close()
   }
+}
 
-  modalLoader.open()
-  activity.isInstall = false
-
-  /**
-   * @todo move to store
-   */
-  const index = appSettings.activityInstalled.indexOf(activity.path)
-
-  if (index !== -1) {
-    appSettings.activityInstalled.splice(index, 1)
-    await appSettings.saveSettings()
+function processError(error: unknown | string | Error) {
+  let title = 'Error'
+  let description = ''
+  $logger.error(error)
+  if (error instanceof AjaxError) {
+    title = `[${error.name}] ${error.code} (${error.status})`
+    description = `${error.message}`
+  } else if (error instanceof Error) {
+    description = error.message
+  } else {
+    description = error as string
   }
 
   toast.add({
-    title: t('page.list.make.uninstall.success.title'),
-    description: t(
-      'page.list.make.uninstall.success.description', {
-        title: activity.title
-      }
-    ),
-    avatar: activity.avatar
-      ? { src: activity.avatar }
-      : undefined,
-    icon: activity?.avatar ? undefined : FileCheckIcon,
-    color: 'success'
+    title: title,
+    description,
+    color: 'danger',
+    icon: CloudErrorIcon
   })
-
-  modalLoader.close()
 }
 // endregion ////
 

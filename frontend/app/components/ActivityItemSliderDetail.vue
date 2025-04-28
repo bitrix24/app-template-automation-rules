@@ -20,9 +20,12 @@ const contentCollection = computed<keyof Collections>(() => `contentActivities_$
 // endregion ////
 
 // region Data ////
-const { data: content } = await useAsyncData(props.activity.path, () => {
-  return queryCollection(contentCollection.value).path(props.activity.path).first()
-})
+const { data: content } = await useAsyncData(
+  props.activity.path,
+  () => {
+    return queryCollection(contentCollection.value).path(props.activity.path).first()
+  }
+)
 // endregion ////
 </script>
 

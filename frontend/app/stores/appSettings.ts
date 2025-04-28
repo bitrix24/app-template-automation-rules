@@ -55,6 +55,13 @@ export const useAppSettingsStore = defineStore(
       Object.assign(activityInstalled, activityList)
     }
 
+    function isActivityInstalled(code: string): boolean {
+      const codeLowCase = code.toLowerCase()
+      return activityInstalled.some(
+        item => item.toLowerCase() === codeLowCase
+      )
+    }
+
     /**
      * Save settings to Bitrix24
      */
@@ -133,7 +140,8 @@ export const useAppSettingsStore = defineStore(
       integrator,
       updateIntegrator,
       integratorPreview,
-      activityInstalled
+      activityInstalled,
+      isActivityInstalled
     }
   }
 )

@@ -31,6 +31,7 @@ export interface IActivityContent {
 }
 
 export interface IActivity extends IActivityContent {
+  code: string
   isInstall?: boolean
 }
 
