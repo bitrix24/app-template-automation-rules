@@ -16,7 +16,10 @@ Look at docs to learn more:
 ## Folder Structure
 
 ```plaintext
+/acme
 /certs
+/html
+/logs
 /frontend
   /app
   /content
@@ -34,19 +37,20 @@ Look at docs to learn more:
   tsconfig.json
   Dockerfile
   entrypoint.sh
-/nginx
-  default.conf
-  Dockerfile
+/chrome
   entrypoint.sh
-/letsencrypt
-  Dockerfile
-  entrypoint.sh
-/log
+  Dockerfile_dev
+  nginx_dev.conf
+  Dockerfile_prod
+  nginx_prod.conf
 .gitignore
 .dockerignore
+.editorconfig
 .env.dev
 .env.prod
-docker-compose.yml
+docker-compose.dev.yml
+docker-compose.prod.yml
+docker-compose.server.yml
 ```
 
 ## App config

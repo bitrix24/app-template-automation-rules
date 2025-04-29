@@ -387,19 +387,18 @@ function formatPrice(price: number, currency?: string): string {
                     </div>
                   </td>
                   <td>
-                    <span v-html="formatPrice(product.price, dealData.currencyId)"></span>
+                    <span v-html="formatPrice(product.price, dealData.currencyId)" />
                     <div
                       v-if="product.discountSum > 0.0"
                       class="text-[10px] text-base-900 line-through"
                       v-html="formatPrice(product.priceBrutto, dealData.currencyId)"
-                    >
-                    </div>
+                    />
                   </td>
                   <td>
                     {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-900">{{ product.measureName }}</span>
                   </td>
                   <td>
-                    <span v-html="formatPrice((product.price * product.quantity), dealData.currencyId)"></span>
+                    <span v-html="formatPrice((product.price * product.quantity), dealData.currencyId)" />
                   </td>
                 </tr>
               </tbody>
@@ -411,7 +410,7 @@ function formatPrice(price: number, currency?: string): string {
               <div
                 class="flex-initial"
                 :class="[
-                  globalIsSomeEmptyWeight ? 'text-red-500' : ''
+                  globalIsSomeEmptyWeight ? 'text-red-600' : ''
                 ]"
               >
                 Order weight: <span class="font-bold">{{ formatterNumber.format(globalWeight / 1000) }} kg</span>
@@ -424,7 +423,7 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     Discount:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(globalDiscount || 0.0, dealData.currencyId)"></div>
+                  <div class="font-bold" v-html="formatPrice(-1 * (globalDiscount || 0.0), dealData.currencyId)" />
                 </div>
                 <div
                   v-if="dealData.deliveryList?.length"
@@ -433,7 +432,7 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     Delivery price:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, dealData.currencyId)"></div>
+                  <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, dealData.currencyId)" />
                 </div>
                 <div
                   class="w-full flex flex-row items-center justify-between gap-2 text-2xl"
@@ -444,7 +443,7 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     To be paid:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(dealData?.opportunity || 0.0, dealData.currencyId)"></div>
+                  <div class="font-bold" v-html="formatPrice(dealData?.opportunity || 0.0, dealData.currencyId)" />
                 </div>
                 <div class="w-full -mt-1 text-xs text-base-900">
                   The invoice is valid for 3 calendar days

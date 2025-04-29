@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 // import { useRequestURL } from 'nuxt/app'
-// import { LoggerBrowser, B24Frame } from '@bitrix24/b24jssdk'
+import { LoggerBrowser } from '@bitrix24/b24jssdk'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import type { IStep } from '~/types'
 import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
 
-const { t } = useI18n()
+const { t, locales: localesI18n, setLocale } = useI18n()
 
 definePageMeta({
   layout: 'clear'
@@ -20,14 +21,14 @@ const confetti = useConfetti()
 const router = useRouter()
 
 // const url = useRequestURL()
-/* /
-const $logger = LoggerBrowser.build(
-  'App Install',
-  import.meta.env?.DEV === true
-)
 
 let $b24: B24Frame
-// */
+const $logger = LoggerBrowser.build(
+  'install',
+  import.meta.env?.DEV === true
+)
+const { processErrorGlobal } = useAppInit($logger)
+
 const isInit = ref(false)
 const isShowDebug = ref(false)
 
@@ -82,17 +83,24 @@ const stepCode = ref<string>('init' as const)
 
 // region Actions ////
 async function makeInit(): Promise<void> {
-  // const { $initializeB24Frame } = useNuxtApp()
-  // $b24 = await $initializeB24Frame()
-  // $b24.setLogger(LoggerBrowser.build('Core'))
+  const { $initializeB24Frame } = useNuxtApp()
+  $b24 = await $initializeB24Frame()
+  $b24.setLogger(LoggerBrowser.build('Core'))
+
+  const b24CurrentLang = $b24.getLang()
+  if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
+    setLocale(b24CurrentLang)
+    $logger.log('setLocale >>>', b24CurrentLang)
+  } else {
+    $logger.warn('not support locale >>>', b24CurrentLang)
+  }
 
   isInit.value = true
 
   /**
    * @todo add lang
    */
-
-  // await $b24.parent.setTitle('App: install')
+  await $b24.parent.setTitle('App: install')
 
   if (steps.value.init) {
     steps.value.init.data = {
@@ -125,7 +133,7 @@ const stepsData = computed(() => {
 })
 // endregion ////
 
-// region Mounted / Unmounted ////
+// region Lifecycle Hooks ////
 onMounted(async () => {
   try {
     for (const [key, step] of Object.entries(steps.value)) {
@@ -133,27 +141,15 @@ onMounted(async () => {
       await step.action()
     }
   } catch (error: any) {
-    /**
-     * @todo fix error
-     */
-    // $logger.error(error)
-    showError({
-      statusCode: 404,
-      statusMessage: error?.message || error,
-      data: {
-        description: t('error.onMounted'),
-        homePageIsHide: true,
-        isShowClearError: true,
-        clearErrorHref: '/'
-      },
-      cause: error,
-      fatal: true
+    processErrorGlobal(error, {
+      homePageIsHide: true,
+      isShowClearError: false
     })
   }
 })
 
 onUnmounted(() => {
-  // $b24?.destroy()
+  $b24?.destroy()
 })
 // endregion ////
 </script>

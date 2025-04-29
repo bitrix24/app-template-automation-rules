@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { B24Hook, LoggerBrowser, AjaxError } from '@bitrix24/b24jssdk'
+import { AjaxError, LoggerBrowser } from '@bitrix24/b24jssdk'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import { useUserSettingsStore } from '~/stores/userSettings'
 import { useAppSettingsStore } from '~/stores/appSettings'
@@ -10,16 +10,17 @@ import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
+import type { B24Frame } from '@bitrix24/b24jssdk'
+import type { Collections } from '@nuxt/content'
 import type { IActivity } from '~/types'
 import type { ActivityConfig, ActivityProperty } from '~/activity.config'
-import type { Collections } from '@nuxt/content'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 
-const { locale, t, defaultLocale } = useI18n()
+const { locale, t, defaultLocale, locales: localesI18n, setLocale } = useI18n()
 
 definePageMeta({
   layout: false
@@ -29,35 +30,25 @@ useHead({
   title: t('page.list.seo.title')
 })
 
+// region Init ////
+let $b24: B24Frame
 const $logger = LoggerBrowser.build(
-  'Activity-List',
+  'activity-list',
   import.meta.env?.DEV === true
 )
+const { initApp, processErrorGlobal } = useAppInit($logger)
 
-const { initApp } = useAppInit()
-
-// region Init ////
-const isShowDebug = ref(false)
 const isLoading = ref(true)
+const isShowDebug = ref(false)
+
 const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ActivityItemModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
-const activities = ref<IActivity[]>([])
 
 const config = useRuntimeConfig()
 const appUrl = config.public.appUrl
-
-/**
- * @todo remove this
- */
-const $b24 = new B24Hook({
-  b24Url: config.public.b24HookUrl,
-  userId: config.public.b24HookUserId,
-  secret: config.public.b24HookSecret
-})
-$b24.setLogger(LoggerBrowser.build('Core', false))
 // endregion ////
 
 // region Locale ////
@@ -65,7 +56,9 @@ const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value.length > 0 ? locale.value : defaultLocale}`)
 // endregion ////
 
-// region Search ////
+// region Activities ////
+const activities = ref<IActivity[]>([])
+
 const appSettings = useAppSettingsStore()
 const userSettings = useUserSettingsStore()
 const { searchQuery } = storeToRefs(userSettings)
@@ -73,15 +66,8 @@ const {
   filterBadges,
   activitiesList
 } = useSearch(activities)
-// endregion ////
 
-// region Data ////
-const getActivityCodeFromPath = (path: string) => {
-  const parts = path.split('/').filter(part => part !== '')
-  return parts.length > 0 ? parts[parts.length - 1] : null
-}
-
-async function loadData(): Promise<void> {
+async function loadActivities(): Promise<void> {
   const data = await queryCollection(contentCollection.value)
     .select(
       'path',
@@ -113,21 +99,6 @@ async function showSlider(activity: IActivity): Promise<void> {
   activitySliderDetail.open({
     activity
   })
-}
-
-const mapProperties = (properties: Record<string, ActivityProperty>) => {
-  return Object.entries(properties).reduce((acc, [key, config]) => ({
-    ...acc,
-    [key]: {
-      Name: config.Name,
-      Description: config.Description,
-      Type: config.Type,
-      Options: config.Options,
-      Required: config.Required,
-      Multiple: config.Multiple,
-      Default: config.Default
-    }
-  }), {})
 }
 
 async function makeInstall(activity: IActivity): Promise<void> {
@@ -263,11 +234,46 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
     modalLoader.close()
   }
 }
+// endregion ////
+
+// region Filter ////
+const searchResults = useDynamicFilter<IActivity>(
+  searchQuery,
+  activitiesList,
+  ['title', 'description', 'categories', 'badges'],
+  {
+    includeScore: true
+  }
+)
+// endregion ////
+
+// region Tools ////
+const getActivityCodeFromPath = (path: string) => {
+  const parts = path.split('/').filter(part => part !== '')
+  return parts.length > 0 ? parts[parts.length - 1] : null
+}
+
+const mapProperties = (properties: Record<string, ActivityProperty>) => {
+  return Object.entries(properties).reduce((acc, [key, config]) => ({
+    ...acc,
+    [key]: {
+      Name: config.Name,
+      Description: config.Description,
+      Type: config.Type,
+      Options: config.Options,
+      Required: config.Required,
+      Multiple: config.Multiple,
+      Default: config.Default
+    }
+  }), {})
+}
 
 function processError(error: unknown | string | Error) {
+  $logger.error(error)
+
   let title = 'Error'
   let description = ''
-  $logger.error(error)
+
   if (error instanceof AjaxError) {
     title = `[${error.name}] ${error.code} (${error.status})`
     description = `${error.message}`
@@ -286,51 +292,38 @@ function processError(error: unknown | string | Error) {
 }
 // endregion ////
 
-// region Filter ////
-const searchResults = useDynamicFilter<IActivity>(
-  searchQuery,
-  activitiesList,
-  ['title', 'description', 'categories', 'badges'],
-  {
-    includeScore: true
-  }
-)
-// endregion ////
-
 // region Lifecycle Hooks ////
 onMounted(async () => {
   try {
     isLoading.value = true
 
-    await initApp()
-    await loadData()
+    const { $initializeB24Frame } = useNuxtApp()
+    $b24 = await $initializeB24Frame()
+    $b24.setLogger(LoggerBrowser.build('Core'))
 
-    /**
-     * @todo get from b24 info about install
-     */
+    const b24CurrentLang = $b24.getLang()
+    if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
+      setLocale(b24CurrentLang)
+      $logger.log('setLocale >>>', b24CurrentLang)
+    } else {
+      $logger.warn('not support locale >>>', b24CurrentLang)
+    }
+
+    await initApp($b24)
+    await loadActivities()
+
     isLoading.value = false
-  } catch (error: any) {
-    /**
-     * @todo fix error
-     */
-    // $logger.error(error)
-    showError({
-      statusCode: 404,
-      statusMessage: error?.message || error,
-      data: {
-        description: t('error.onMounted'),
-        homePageIsHide: true,
-        isShowClearError: true,
-        clearErrorHref: '/'
-      },
-      cause: error,
-      fatal: true
+  } catch (error) {
+    processErrorGlobal(error, {
+      homePageIsHide: true,
+      isShowClearError: false,
+      clearErrorHref: '/activity-list'
     })
   }
 })
 
 onUnmounted(() => {
-  // $b24?.destroy()
+  $b24?.destroy()
 })
 // endregion ////
 </script>
