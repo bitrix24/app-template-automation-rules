@@ -18,9 +18,6 @@ useHead({
 
 // region Init ////
 const confetti = useConfetti()
-const router = useRouter()
-
-// const url = useRequestURL()
 
 let $b24: B24Frame
 const $logger = LoggerBrowser.build(
@@ -119,8 +116,7 @@ async function makeFinish(): Promise<void> {
   confetti.fire()
   await sleepAction(2000)
 
-  // await $b24.installFinish()
-  await router.push('/')
+  await $b24.installFinish()
 }
 
 const stepsData = computed(() => {

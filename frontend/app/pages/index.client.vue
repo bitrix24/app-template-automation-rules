@@ -21,6 +21,8 @@ const $logger = LoggerBrowser.build(
 )
 
 const { processErrorGlobal } = useAppInit($logger)
+
+const isMaikeAutoOpenActivityList = ref(false)
 // endregion ////
 
 // region Lifecycle Hooks ////
@@ -37,6 +39,15 @@ onMounted(async () => {
     } else {
       $logger.warn('not support locale >>>', b24CurrentLang)
     }
+
+    /**
+     * @todo add lang
+     */
+    await $b24.parent.setTitle('App: index')
+    if (!isMaikeAutoOpenActivityList.value) {
+      await openActivityList()
+      isMaikeAutoOpenActivityList.value = true
+    }
   } catch (error) {
     processErrorGlobal(error, {
       homePageIsHide: true,
@@ -50,12 +61,30 @@ onUnmounted(() => {
   $b24?.destroy()
 })
 // endregion ////
+
+// region Action ////
+async function openActivityList() {
+  /**
+   * @todo add lang
+   */
+  await $b24.slider.openSliderAppPage({
+    place: 'activity-list',
+    bx24_width: 1650,
+    bx24_label: {
+      bgColor: 'violet',
+      text: '🛠️',
+      color: '#ffffff'
+    },
+    bx24_title: t('page.list.seo.title')
+  })
+}
+// endregion ////
 /**
  * @todo remove this
  */
 const generatePDF = async () => {
   try {
-    const response = await fetch('/api/render-order?taskId=1058')
+    const response = await fetch('/render/invoice-by-deal/1188/')
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
@@ -90,7 +119,7 @@ const generatePDF = async () => {
         rounded
         :label="$t('page.index.page.main')"
         color="primary"
-        to="/activity-list"
+        @click.stop="openActivityList"
       />
       <B24Button
         rounded

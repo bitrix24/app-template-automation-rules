@@ -13,11 +13,6 @@ export default defineNuxtConfig({
     '@bitrix24/b24jssdk-nuxt'
   ],
   ssr: true,
-  /**
-   * @memo App work under frame
-   * Nuxt DevTools: Failed to check parent window
-   * SecurityError: Failed to read a named property '__NUXT_DEVTOOLS_DISABLE__' from 'Window'
-   */
   devtools: { enabled: false },
 
   css: ['~/assets/css/main.css'],
@@ -58,6 +53,11 @@ export default defineNuxtConfig({
       'jsonwebtoken'
     ]
   },
+  routeRules: {
+    '/install': { ssr: false },
+    '/index': { ssr: false },
+    '/activity-list': { ssr: false }
+  },
   devServer: {
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
@@ -83,5 +83,5 @@ export default defineNuxtConfig({
     lazy: true,
     defaultLocale: 'en',
     locales: contentLocales
-  }
+  },
 })
