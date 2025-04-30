@@ -21,8 +21,12 @@ const $logger = LoggerBrowser.build(
 )
 
 const { processErrorGlobal } = useAppInit($logger)
-
-const isMaikeAutoOpenActivityList = ref(false)
+const isAutoOpenActivityList = ref(true)
+const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false
+if (!import.meta.hot && import.meta.client) {
+  $logger.info('Update -> clear hmrUpdateFlag')
+  sessionStorage.removeItem('hmrUpdateFlag')
+}
 // endregion ////
 
 // region Lifecycle Hooks ////
@@ -44,9 +48,17 @@ onMounted(async () => {
      * @todo add lang
      */
     await $b24.parent.setTitle('App: index')
-    if (!isMaikeAutoOpenActivityList.value) {
-      await openActivityList()
-      isMaikeAutoOpenActivityList.value = true
+
+    if (import.meta.hot && isHmrUpdate) {
+      $logger.info('HMR update -> skip openActivityList')
+    } else {
+      if (isAutoOpenActivityList.value) {
+        openActivityList()
+      }
+
+      if (import.meta.hot) {
+        import.meta.hot.data.isHmrUpdate = true
+      }
     }
   } catch (error) {
     processErrorGlobal(error, {
@@ -63,20 +75,26 @@ onUnmounted(() => {
 // endregion ////
 
 // region Action ////
-async function openActivityList() {
-  /**
-   * @todo add lang
-   */
-  await $b24.slider.openSliderAppPage({
-    place: 'activity-list',
-    bx24_width: 1650,
-    bx24_label: {
-      bgColor: 'violet',
-      text: '🛠️',
-      color: '#ffffff'
-    },
-    bx24_title: t('page.list.seo.title')
-  })
+function openActivityList() {
+  if ($b24.placement.isSliderMode) {
+      $b24.slider.closeSliderAppPage()
+  }
+
+  window.setTimeout(() => {
+      /**
+       * @todo add lang
+       */
+      $b24.slider.openSliderAppPage({
+        place: 'activity-list',
+        bx24_width: 1650,
+        bx24_label: {
+          bgColor: 'violet',
+          text: '🛠️',
+          color: '#ffffff'
+        },
+        bx24_title: t('page.list.seo.title')
+      })
+  }, 10)
 }
 // endregion ////
 /**

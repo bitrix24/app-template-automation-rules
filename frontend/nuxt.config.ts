@@ -14,7 +14,6 @@ export default defineNuxtConfig({
   ],
   ssr: true,
   devtools: { enabled: false },
-
   css: ['~/assets/css/main.css'],
   content: {
     /**
@@ -40,8 +39,7 @@ export default defineNuxtConfig({
     b24HookSecret: '',
     public: {
       contentLocales: contentLocales,
-      // @todo remove this
-      appUrl: 'https://demo.bx-shef.by',
+      appUrl: '',
       // @todo remove this
       b24HookUrl: '',
       b24HookUserId: 0,

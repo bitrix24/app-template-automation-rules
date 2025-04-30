@@ -74,7 +74,10 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
         ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\Order']
       ]
     },
-    USE_SUBSCRIPTION: 'Y',
+    /**
+     * @todo fix this
+     */
+    USE_SUBSCRIPTION: 'N',
     AUTH_USER_ID: 1,
     HANDLER: '/api/activities/AIandMachineLearning',
     USE_PLACEMENT: 'Y',

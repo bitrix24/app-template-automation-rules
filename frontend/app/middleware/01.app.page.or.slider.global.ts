@@ -2,8 +2,8 @@ import { LoggerBrowser } from '@bitrix24/b24jssdk'
 import type { RouteLocationNormalized } from 'vue-router'
 
 const $logger = LoggerBrowser.build(
-  'middleware:app.page.or.slider.global',
-  import.meta.env?.DEV === true
+  'middleware:app.page.or.slider.global'
+  // import.meta.env?.DEV === true
 )
 
 const baseDir = '/'
@@ -11,6 +11,7 @@ const baseDir = '/'
 function isSkipB24(fullPath: string): boolean {
   return !fullPath.includes(`${baseDir}`)
     || fullPath.includes(`${baseDir}eula`)
+    || fullPath.includes(`${baseDir}render`)
 }
 
 export default defineNuxtRouteMiddleware(async (

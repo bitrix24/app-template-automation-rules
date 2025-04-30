@@ -46,7 +46,7 @@ const connectToBrowser = async () => {
 
 export async function generatePDF(
   url: string,
-  params: { token: string, taskId: string }
+  params: { token: string, entityId: string }
 ) {
   let browser: Browser | null = null
   try {
@@ -83,7 +83,7 @@ export async function generatePDF(
     )
 
     // await sleepAction(3_000)
-
+    console.log('PDF generation >>>')
     /**
      * @memo some custom for page
      * @todo remove this
