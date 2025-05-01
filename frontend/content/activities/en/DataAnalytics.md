@@ -6,7 +6,7 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/DataAnalytics.webp'
 ---
 # Instruction for Using and Configuring the "Data Analytics" Action
