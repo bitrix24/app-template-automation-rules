@@ -96,66 +96,69 @@ docker stats
 sudo systemctl status docker
 sudo ss -tuln | grep 2376
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
-docker-compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
 ```
 
 ### Server
 ```shell
 docker network create proxy-net
 
-docker-compose -f docker-compose.server.yml -p server__global top
+docker compose -f docker-compose.server.yml -p server__global top
 
-docker-compose -f docker-compose.server.yml -p server__global build
+docker compose -f docker-compose.server.yml -p server__global build
 
-docker-compose -f docker-compose.server.yml -p server__global up -d
-docker-compose -f docker-compose.server.yml -p server__global up -d --build
+docker compose -f docker-compose.server.yml -p server__global up -d
+docker compose -f docker-compose.server.yml -p server__global up -d --build
 
-docker-compose -f docker-compose.server.yml -p server__global down
-docker-compose -f docker-compose.server.yml -p server__global stop
+docker compose -f docker-compose.server.yml -p server__global down
+docker compose -f docker-compose.server.yml -p server__global stop
 
-docker-compose -f docker-compose.server.yml -p server__global logs -f server
-docker-compose -f docker-compose.server.yml -p server__global logs -f letsencrypt
+docker compose -f docker-compose.server.yml -p server__global logs -f server
+docker compose -f docker-compose.server.yml -p server__global logs -f letsencrypt
 docker logs -f server
 docker logs -f letsencrypt
 ```
 
 ### Dev
 ```shell
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down && \
- docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down && \
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down chrome && \
- docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down chrome && \
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
- docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+ 
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d frontend
  
  
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f chrome
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
-docker-compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f chrome
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
 
 docker logs -f dev-chrome
 docker logs -f dev-frontend
@@ -164,30 +167,30 @@ docker logs -f dev-frontend
 
 ### Prod
 ```shell
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down --volumes --rmi all --remove-orphans
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down --volumes --rmi all --remove-orphans
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-chrome
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-frontend
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-chrome
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-frontend
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down && \
+ docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-chrome && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-chrome && \
+ docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
 
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
- docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
+ docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
  
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
-docker-compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
 docker logs -f prod-chrome
 docker logs -f prod-frontend
 
@@ -240,51 +243,51 @@ docker exec -it dev-frontend sh -c "whoami && id" # check user at container
 
 ```shell
 # All
-docker-compose --env-file .env.dev stop
+docker compose --env-file .env.dev stop
 # frontend
 docker stop frontend
-docker-compose --env-file .env.dev stop frontend
+docker compose --env-file .env.dev stop frontend
 # server
-docker-compose --env-file .env.dev stop server
+docker compose --env-file .env.dev stop server
 # letsencrypt
-docker-compose --env-file .env.dev stop letsencrypt
+docker compose --env-file .env.dev stop letsencrypt
 ```
 
 ### Restart
 
 ```shell
 # All
-docker-compose down && docker-compose --env-file .env.dev up -d --build
+docker compose down && docker compose --env-file .env.dev up -d --build
 # chrome
-docker-compose down chrome && docker-compose --env-file .env.dev up -d --build chrome
+docker compose down chrome && docker compose --env-file .env.dev up -d --build chrome
 # frontend
-docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
-docker-compose down frontend && docker-compose --env-file .env.dev up --build frontend
+docker compose down frontend && docker compose --env-file .env.dev up -d --build frontend
+docker compose down frontend && docker compose --env-file .env.dev up --build frontend
 
 # no-cache
-docker-compose down && docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up
+docker compose down && docker compose --env-file .env.dev build --no-cache && docker compose --env-file .env.dev up
 # no-cache frontend
-docker-compose down frontend && docker-compose --env-file .env.dev up -d --build frontend
-docker-compose down frontend && docker-compose --env-file .env.dev up -d --build --force-recreate frontend
-docker-compose --env-file .env.dev build --no-cache && docker-compose --env-file .env.dev up frontend
+docker compose down frontend && docker compose --env-file .env.dev up -d --build frontend
+docker compose down frontend && docker compose --env-file .env.dev up -d --build --force-recreate frontend
+docker compose --env-file .env.dev build --no-cache && docker compose --env-file .env.dev up frontend
 
 # server
-docker-compose down server && docker-compose --env-file .env.dev up -d --build server
+docker compose down server && docker compose --env-file .env.dev up -d --build server
 ```
 
 ### Log
 
 ```shell
 # chrome
-docker-compose logs -f chrome
+docker compose logs -f chrome
 docker logs chrome
 
 # frontend
-docker-compose logs -f frontend
+docker compose logs -f frontend
 # server
-docker-compose logs -f server
+docker compose logs -f server
 # letsencrypt
-docker-compose logs -f letsencrypt
+docker compose logs -f letsencrypt
 ```
 
 ### Connect
