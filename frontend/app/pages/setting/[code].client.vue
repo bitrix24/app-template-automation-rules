@@ -4,8 +4,8 @@
  *
  * @link https://apidocs.bitrix24.com/tutorials/bizproc/setting-robot.html
  */
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { type B24Frame, LoggerBrowser } from '@bitrix24/b24jssdk'
+import { ref, computed, onMounted, inject } from 'vue'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import { activitiesConfig } from '~/activity.config'
 import { ActivitySettings } from '#components'
 
@@ -13,8 +13,8 @@ definePageMeta({
   layout: 'clear'
 })
 
-const { locale, t, defaultLocale, locales: localesI18n, setLocale } = useI18n()
-const activityCode = ref(useRoute().params?.code || '')
+// const { t } = useI18n()
+const activityCode = ref<string>((useRoute().params?.code as string) || '')
 const activityConfig = computed(() =>
   activitiesConfig.find(a => a.CODE.toLowerCase() === activityCode.value.toLowerCase())
 )
@@ -27,12 +27,12 @@ useHead({
 })
 
 // region Init ////
-let $b24: B24Frame
-const $logger = LoggerBrowser.build(
-  `activity-settings::${activityCode.value}`,
-  import.meta.env?.DEV === true
-)
-const { processErrorGlobal } = useAppInit($logger)
+const { $logger, b24InjectionKey, processErrorGlobal } = useAppInit()
+const _b24: undefined | B24Frame = inject(b24InjectionKey)
+if (!_b24) {
+  throw new Error('B24 not init')
+}
+const $b24: B24Frame = _b24
 
 const isLoading = ref(true)
 const formValues = ref<Record<string, any>>({})
@@ -43,18 +43,6 @@ onMounted(async () => {
   try {
     isLoading.value = true
 
-    const { $initializeB24Frame } = useNuxtApp()
-    $b24 = await $initializeB24Frame()
-    $b24.setLogger(LoggerBrowser.build('Core'))
-
-    const b24CurrentLang = $b24.getLang()
-    if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
-      setLocale(b24CurrentLang)
-      $logger.log('setLocale >>>', b24CurrentLang)
-    } else {
-      $logger.warn('not support locale >>>', b24CurrentLang)
-    }
-
     activityCode.value = $b24.placement.options?.code || 'notSetInPlacementOptions'
     $logger.warn(
       $b24.placement.options
@@ -64,17 +52,17 @@ onMounted(async () => {
     if (activityConfig.value) {
       const initialValues: Record<string, any> = {}
 
-      for (const [key, prop] of Object.entries(activityConfig.value.PROPERTIES)) {
-        if (prop.Type === 'select' && prop.Options?.length < 1) {
-          /**
-           * @todo fix this
-           */
-          // const options = await bx.loadOptions(getMethodByKey(key))
-          const options = [
-            {value: '???', label: '???'}
-          ]
-          prop.Options = options
-        }
+      for (const [key, prop] of Object.entries(activityConfig.value.PROPERTIES || {})) {
+        // if (prop.Type === 'select' && prop.Options?.length < 1) {
+        //   /**
+        //    * @todo fix this
+        //    */
+        //   // const options = await bx.loadOptions(getMethodByKey(key))
+        //   const options = [
+        //     { value: '???', label: '???' }
+        //   ]
+        //   prop.Options = options
+        // }
 
         initialValues[key] = prop.Default || getEmptyValue(prop.Type)
         if (formValues.value[key] !== undefined) {
@@ -96,16 +84,11 @@ onMounted(async () => {
     })
   }
 })
-
-onUnmounted(() => {
-  $b24?.destroy()
-})
 // endregion ////
-
 
 // region Actions ////
 const getEmptyValue = (type: string) => {
-  switch(type) {
+  switch (type) {
     case 'select': return ''
     case 'bool': return false
     case 'datetime': return null
@@ -134,34 +117,35 @@ const handleValuesUpdate = (newValues: Record<string, any>) => {
 // endregion /////
 
 // region Tools ////
-const getMethodByKey = (key: string) => {
-  const methods: Record<string, string> = {
-    entityTypeId: 'crm.type.list',
-    users: 'user.get'
-  }
-  return methods[key] || 'crm.status.list'
-}
+// const getMethodByKey = (key: string) => {
+//   const methods: Record<string, string> = {
+//     entityTypeId: 'crm.type.list',
+//     users: 'user.get'
+//   }
+//   return methods[key] || 'crm.status.list'
+// }
+//
+// const loadOptions = async (propertyKey: string) => {
+//   const optionLoaders: Record<string, () => Promise<Record<string | number, string>>> = {
+//     categoryId: async () => {
+//       // const res = await bx.callMethod('crm.category.list', {
+//       //   entityTypeId: values.value.typeSP
+//       // });
+//       // return res.data?.categories.reduce((acc, cat) => ({
+//       //   ...acc,
+//       //   [cat.id]: cat.name
+//       // }), {});
+//       return {}
+//     }
+//   }
+//   if (optionLoaders[propertyKey]) {
+//     return await optionLoaders[propertyKey]()
+//   }
+//   return {}
+// }
 
-const loadOptions = async (propertyKey: string) => {
-  const optionLoaders = {
-    categoryID: async () => {
-      // const res = await bx.callMethod('crm.category.list', {
-      //   entityTypeId: values.value.typeSP
-      // });
-      // return res.data?.categories.reduce((acc, cat) => ({
-      //   ...acc,
-      //   [cat.id]: cat.name
-      // }), {});
-    }
-  };
-
-  return optionLoaders[propertyKey]?.() || {};
-}
-
-const makeFitWindow = async() =>
-{
-  window.setTimeout(() =>
-  {
+const makeFitWindow = async () => {
+  window.setTimeout(() => {
     // $b24.parent.fitWindow() ////
     $b24.parent.resizeWindowAuto()
   }, 200)

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import type { ActivityConfig, ActivityProperty } from '~/activity.config'
-
-const { locale } = useI18n()
+import type { ActivityOrRobotConfig, ActivityProperty } from '~/activity.config'
 
 const props = defineProps<{
-  activityConfig: ActivityConfig,
+  activityConfig: ActivityOrRobotConfig
   currentValues: Record<string, any>
 }>()
 
@@ -19,16 +17,14 @@ const inputTypeMap = {
   text: 'textarea'
 }
 
+const { $logger } = useAppInit()
 /**
  * @todo fix this
  */
 const localized = (obj: string | Record<string, string> = {}) => {
   return obj
-  console.log(
-    obj,
-    locale.value
-  )
-  return obj[locale.value || 'en'] || Object.values(obj)[0] || '?'
+  // $logger.log(obj, locale.value)
+  // return obj[locale.value || 'en'] || Object.values(obj)[0] || '?'
 }
 
 /**
@@ -41,11 +37,10 @@ watch(
   }, { deep: true })
 </script>
 
-
 <template>
   <div class="border border-base-200">
     <div
-      v-for="[key, prop] in Object.entries(activityConfig.PROPERTIES)"
+      v-for="[key, prop] in Object.entries(activityConfig?.PROPERTIES || {})"
       :key="key"
       class="flex flex-col items-stretch justify-between gap-2 pb-3"
     >
@@ -59,6 +54,7 @@ watch(
         >
           <option
             v-for="[value, label] in Object.entries(prop.Options || {})"
+            :key="value"
             :value="value"
           >
             {{ localized(label) }}
@@ -68,35 +64,40 @@ watch(
 
       <template v-else-if="prop.Type === 'datetime'">
         <input
-          type="datetime-local"
           v-model="currentValues[key]"
+          type="datetime-local"
           :required="prop.Required === 'Y'"
-        />
+        >
       </template>
 
       <template v-else-if="prop.Type === 'bool'">
         <input
-          type="checkbox"
           v-model="currentValues[key]"
+          type="checkbox"
           :required="prop.Required === 'Y'"
-        />
+        >
       </template>
 
       <template v-else>
         <B24Input
-          :type="inputTypeMap[prop.Type]"
           v-model="currentValues[key]"
+          :type="inputTypeMap[prop.Type]"
           :required="prop.Required === 'Y'"
         />
         <div>
-          <B24Button label="{{ID}}" size="xs" color="link" depth="dark" @click.stop="currentValues[key] = '{{ID}}'" />
+          <B24Button
+            label="{{ID}}"
+            size="xs"
+            color="link"
+            depth="dark"
+            @click.stop="currentValues[key] = '{{ID}}'"
+          />
         </div>
       </template>
 
       <div v-if="prop.Description" class="description">
         {{ localized(prop.Description) }}
       </div>
-
     </div>
   </div>
 </template>

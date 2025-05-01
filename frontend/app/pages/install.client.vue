@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-// import { useRequestURL } from 'nuxt/app'
-import { LoggerBrowser } from '@bitrix24/b24jssdk'
+import { ref, onMounted, inject } from 'vue'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import type { ProgressProps } from '@bitrix24/b24ui-nuxt'
 import type { IStep } from '~/types'
 import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
 
-const { t, locales: localesI18n, setLocale } = useI18n()
+const { t } = useI18n()
 
 definePageMeta({
   layout: 'clear'
@@ -17,19 +16,18 @@ useHead({
 })
 
 // region Init ////
+const { b24InjectionKey, processErrorGlobal } = useAppInit()
+const _b24: undefined | B24Frame = inject(b24InjectionKey)
+if (!_b24) {
+  throw new Error('B24 not init')
+}
+const $b24: B24Frame = _b24
+
 const confetti = useConfetti()
 
-let $b24: B24Frame
-const $logger = LoggerBrowser.build(
-  'install',
-  import.meta.env?.DEV === true
-)
-const { processErrorGlobal } = useAppInit($logger)
-
-const isInit = ref(false)
 const isShowDebug = ref(false)
 
-const progressColor = ref<string>('primary' as const)
+const progressColor = ref<ProgressProps['color']>('primary')
 const progressValue = ref<null | number>(null)
 // endregion ////
 
@@ -80,20 +78,6 @@ const stepCode = ref<string>('init' as const)
 
 // region Actions ////
 async function makeInit(): Promise<void> {
-  const { $initializeB24Frame } = useNuxtApp()
-  $b24 = await $initializeB24Frame()
-  $b24.setLogger(LoggerBrowser.build('Core'))
-
-  const b24CurrentLang = $b24.getLang()
-  if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
-    setLocale(b24CurrentLang)
-    $logger.log('setLocale >>>', b24CurrentLang)
-  } else {
-    $logger.warn('not support locale >>>', b24CurrentLang)
-  }
-
-  isInit.value = true
-
   /**
    * @todo add lang
    */
@@ -110,7 +94,7 @@ async function makeInit(): Promise<void> {
 }
 
 async function makeFinish(): Promise<void> {
-  progressColor.value = 'success' as const
+  progressColor.value = 'success'
   progressValue.value = 100
 
   confetti.fire()
@@ -142,10 +126,6 @@ onMounted(async () => {
       isShowClearError: false
     })
   }
-})
-
-onUnmounted(() => {
-  $b24?.destroy()
 })
 // endregion ////
 </script>

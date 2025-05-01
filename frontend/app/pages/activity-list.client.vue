@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, inject } from 'vue'
 import { storeToRefs } from 'pinia'
-import { AjaxError, LoggerBrowser } from '@bitrix24/b24jssdk'
+import { AjaxError } from '@bitrix24/b24jssdk'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import { useUserSettingsStore } from '~/stores/userSettings'
 import { useAppSettingsStore } from '~/stores/appSettings'
@@ -20,7 +20,7 @@ import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 
-const { locale, t, defaultLocale, locales: localesI18n, setLocale } = useI18n()
+const { locale, t, defaultLocale } = useI18n()
 
 definePageMeta({
   layout: false
@@ -31,12 +31,12 @@ useHead({
 })
 
 // region Init ////
-let $b24: B24Frame
-const $logger = LoggerBrowser.build(
-  'activity-list',
-  import.meta.env?.DEV === true
-)
-const { initApp, processErrorGlobal } = useAppInit($logger)
+const { $logger, initApp, b24InjectionKey, processErrorGlobal } = useAppInit()
+const _b24: undefined | B24Frame = inject(b24InjectionKey)
+if (!_b24) {
+  throw new Error('B24 not init')
+}
+const $b24: B24Frame = _b24
 
 const isLoading = ref(true)
 const isShowDebug = ref(false)
@@ -301,18 +301,6 @@ onMounted(async () => {
   try {
     isLoading.value = true
 
-    const { $initializeB24Frame } = useNuxtApp()
-    $b24 = await $initializeB24Frame()
-    $b24.setLogger(LoggerBrowser.build('Core'))
-
-    const b24CurrentLang = $b24.getLang()
-    if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
-      setLocale(b24CurrentLang)
-      $logger.log('setLocale >>>', b24CurrentLang)
-    } else {
-      $logger.warn('not support locale >>>', b24CurrentLang)
-    }
-
     await initApp($b24)
     await loadActivities()
 
@@ -324,10 +312,6 @@ onMounted(async () => {
       clearErrorHref: '/activity-list'
     })
   }
-})
-
-onUnmounted(() => {
-  $b24?.destroy()
 })
 // endregion ////
 </script>

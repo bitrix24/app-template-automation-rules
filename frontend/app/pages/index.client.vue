@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
-import { LoggerBrowser } from '@bitrix24/b24jssdk'
+import { inject, onMounted } from 'vue'
 import type { B24Frame } from '@bitrix24/b24jssdk'
 
-const { t, locales: localesI18n, setLocale } = useI18n()
+const { t } = useI18n()
 
 definePageMeta({
   layout: 'clear'
@@ -14,13 +13,14 @@ useHead({
 })
 
 // region Init ////
-let $b24: B24Frame
-const $logger = LoggerBrowser.build(
-  'index',
-  import.meta.env?.DEV === true
-)
 
-const { processErrorGlobal } = useAppInit($logger)
+const { $logger, b24InjectionKey, processErrorGlobal } = useAppInit()
+const _b24: undefined | B24Frame = inject(b24InjectionKey)
+if (!_b24) {
+  throw new Error('B24 not init')
+}
+const $b24: B24Frame = _b24
+
 const isAutoOpenActivityList = ref(true)
 const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false
 if (!import.meta.hot && import.meta.client) {
@@ -32,18 +32,6 @@ if (!import.meta.hot && import.meta.client) {
 // region Lifecycle Hooks ////
 onMounted(async () => {
   try {
-    const { $initializeB24Frame } = useNuxtApp()
-    $b24 = await $initializeB24Frame()
-    $b24.setLogger(LoggerBrowser.build('Core'))
-
-    const b24CurrentLang = $b24.getLang()
-    if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
-      setLocale(b24CurrentLang)
-      $logger.log('setLocale >>>', b24CurrentLang)
-    } else {
-      $logger.warn('not support locale >>>', b24CurrentLang)
-    }
-
     /**
      * @todo add lang
      */
@@ -67,10 +55,6 @@ onMounted(async () => {
       clearErrorHref: '/'
     })
   }
-})
-
-onUnmounted(() => {
-  $b24?.destroy()
 })
 // endregion ////
 

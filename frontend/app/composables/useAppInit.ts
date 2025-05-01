@@ -1,5 +1,5 @@
-import { AjaxError } from '@bitrix24/b24jssdk'
-import type { B24Frame, LoggerBrowser } from '@bitrix24/b24jssdk'
+import { LoggerBrowser, AjaxError } from '@bitrix24/b24jssdk'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import type { EActivityBadge } from '~/types'
 
 export interface ProcessErrorData {
@@ -16,9 +16,14 @@ export interface ProcessErrorData {
  * Composable handling application initialization
  * Coordinates data loading via batch request
  */
-export const useAppInit = (
-  $logger: LoggerBrowser
-) => {
+export const useAppInit = () => {
+  const $logger = LoggerBrowser.build(
+    'App',
+    import.meta.env?.DEV === true
+  )
+
+  const b24InjectionKey = Symbol.for('app.b24')
+
   // Stores
   const appSettings = useAppSettingsStore()
   const userSettings = useUserSettingsStore()
@@ -114,6 +119,8 @@ export const useAppInit = (
   }
 
   return {
+    $logger,
+    b24InjectionKey,
     initApp,
     processErrorGlobal
   }
