@@ -1,7 +1,6 @@
 /**
  * Some info about User
- * @memo not save this settings (persist: false)
- * @todo get all from b24
+ * @memo not save to settings
  */
 export const useUserStore = defineStore(
   'user',
@@ -16,14 +15,16 @@ export const useUserStore = defineStore(
      * Initialize store from batch response data
      * @param data - Raw data from Bitrix24 API
      * @param data.NAME
-     * @param data.IS_ADMIN
+     * @param data.LAST_NAME
+     * @param data.ADMIN
      */
     function initFromBatch(data: {
       NAME?: string
-      IS_ADMIN?: boolean
+      LAST_NAME?: string
+      ADMIN?: boolean
     }) {
-      login.value = data.NAME || ''
-      isAdmin.value = data.IS_ADMIN || false
+      login.value = [data?.NAME, data?.LAST_NAME].filter(Boolean).join(' ') || ' '
+      isAdmin.value = data.ADMIN || false
     }
     // endregion ////
 

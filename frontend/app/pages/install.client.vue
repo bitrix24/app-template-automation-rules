@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, inject } from 'vue'
-import type { B24Frame } from '@bitrix24/b24jssdk'
+import { ref, onMounted } from 'vue'
 import type { ProgressProps } from '@bitrix24/b24ui-nuxt'
 import type { IStep } from '~/types'
 import { sleepAction } from '~/utils/sleep'
@@ -16,12 +15,9 @@ useHead({
 })
 
 // region Init ////
-const { b24InjectionKey, processErrorGlobal } = useAppInit()
-const _b24: undefined | B24Frame = inject(b24InjectionKey)
-if (!_b24) {
-  throw new Error('B24 not init')
-}
-const $b24: B24Frame = _b24
+const { processErrorGlobal } = useAppInit()
+const { $initializeB24Frame } = useNuxtApp()
+const $b24 = await $initializeB24Frame()
 
 const confetti = useConfetti()
 

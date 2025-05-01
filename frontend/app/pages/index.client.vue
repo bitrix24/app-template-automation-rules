@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted } from 'vue'
-import type { B24Frame } from '@bitrix24/b24jssdk'
+import { onMounted } from 'vue'
 
 const { t } = useI18n()
 
@@ -14,12 +13,9 @@ useHead({
 
 // region Init ////
 
-const { $logger, b24InjectionKey, processErrorGlobal } = useAppInit()
-const _b24: undefined | B24Frame = inject(b24InjectionKey)
-if (!_b24) {
-  throw new Error('B24 not init')
-}
-const $b24: B24Frame = _b24
+const { $logger, processErrorGlobal } = useAppInit()
+const { $initializeB24Frame } = useNuxtApp()
+const $b24 = await $initializeB24Frame()
 
 const isAutoOpenActivityList = ref(true)
 const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false

@@ -79,7 +79,7 @@ export default defineNuxtRouteMiddleware(async (
       fatal: true
     })
 
-    $logger.error('', appError)
+    $logger.error(appError)
 
     showError(appError)
     return Promise.reject(appError)

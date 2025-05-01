@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { AjaxError } from '@bitrix24/b24jssdk'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
@@ -10,7 +10,6 @@ import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
-import type { B24Frame } from '@bitrix24/b24jssdk'
 import type { Collections } from '@nuxt/content'
 import type { IActivity } from '~/types'
 import type { ActivityConfig, ActivityProperty } from '~/activity.config'
@@ -31,12 +30,9 @@ useHead({
 })
 
 // region Init ////
-const { $logger, initApp, b24InjectionKey, processErrorGlobal } = useAppInit()
-const _b24: undefined | B24Frame = inject(b24InjectionKey)
-if (!_b24) {
-  throw new Error('B24 not init')
-}
-const $b24: B24Frame = _b24
+const { $logger, initApp, processErrorGlobal } = useAppInit()
+const { $initializeB24Frame } = useNuxtApp()
+const $b24 = await $initializeB24Frame()
 
 const isLoading = ref(true)
 const isShowDebug = ref(false)
@@ -135,13 +131,9 @@ async function makeInstall(activity: IActivity): Promise<void> {
       AUTH_USER_ID: activityConfig.AUTH_USER_ID || 1
     }
 
-    const response = await $b24.callMethod(
+    await $b24.callMethod(
       activityConfig.type === 'robot' ? 'bizproc.robot.add' : 'bizproc.activity.add',
       params
-    )
-
-    $logger.warn(
-      response.toString()
     )
 
     /**
@@ -149,7 +141,6 @@ async function makeInstall(activity: IActivity): Promise<void> {
      */
     if (!appSettings.isActivityInstalled(activityConfig.CODE)) {
       appSettings.activityInstalled.push(activityConfig.CODE)
-      await appSettings.saveSettings()
     }
     activity.isInstall = true
 
@@ -195,15 +186,11 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
     }
 
     modalLoader.open()
-    const response = await $b24.callMethod(
+    await $b24.callMethod(
       activityConfig.type === 'robot' ? 'bizproc.robot.delete' : 'bizproc.activity.delete',
       {
         CODE: activityConfig.CODE
       }
-    )
-
-    $logger.warn(
-      response.toString()
     )
 
     /**
@@ -214,7 +201,6 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
     )
     if (index !== -1) {
       appSettings.activityInstalled.splice(index, 1)
-      await appSettings.saveSettings()
     }
 
     activity.isInstall = false
@@ -317,12 +303,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <NuxtLayout name="dashboard">
-    <template #header-title>
+  <NuxtLayout name="default">
+    <!-- template #header-title>
       <ProseH1 class="mt-3 mb-0 max-lg:ps-3">
         {{ $t('page.list.seo.title') }}
       </ProseH1>
-    </template>
+    </template -->
 
     <ActivityListSkeleton v-if="isLoading" />
     <template v-else>

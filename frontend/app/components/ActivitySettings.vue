@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import type { ActivityOrRobotConfig, ActivityProperty } from '~/activity.config'
+import type { ActivityOrRobotConfig } from '~/activity.config'
 
 const props = defineProps<{
   activityConfig: ActivityOrRobotConfig
@@ -17,7 +16,12 @@ const inputTypeMap = {
   text: 'textarea'
 }
 
-const { $logger } = useAppInit()
+const updateField = (key: string, value: any) => {
+  const newValues = { ...props.currentValues, [key]: value }
+  emit('update:currentValues', newValues)
+}
+
+// const { $logger } = useAppInit()
 /**
  * @todo fix this
  */
@@ -26,15 +30,6 @@ const localized = (obj: string | Record<string, string> = {}) => {
   // $logger.log(obj, locale.value)
   // return obj[locale.value || 'en'] || Object.values(obj)[0] || '?'
 }
-
-/**
- * @todo fix this
- */
-watch(
-  () => props.currentValues,
-  (newVal) => {
-    emit('update:currentValues', newVal)
-  }, { deep: true })
 </script>
 
 <template>
@@ -47,42 +42,39 @@ watch(
       <label>{{ localized(prop.Name) }}</label>
 
       <template v-if="prop.Type === 'select'">
-        <select
-          v-model="currentValues[key]"
+        <B24Select
+          class="w-full"
+          :model-value="currentValues[key]"
           :multiple="prop.Multiple === 'Y'"
           :required="prop.Required === 'Y'"
-        >
-          <option
-            v-for="[value, label] in Object.entries(prop.Options || {})"
-            :key="value"
-            :value="value"
-          >
-            {{ localized(label) }}
-          </option>
-        </select>
+          :items="Object.entries(prop.Options || {}).map(([value, label]) => {
+            return {
+              label,
+              value
+            }
+          })"
+          @update:model-value="val => updateField(key, val)"
+        />
       </template>
 
       <template v-else-if="prop.Type === 'datetime'">
-        <input
-          v-model="currentValues[key]"
-          type="datetime-local"
-          :required="prop.Required === 'Y'"
-        >
+        @todo datetime
       </template>
 
       <template v-else-if="prop.Type === 'bool'">
-        <input
-          v-model="currentValues[key]"
-          type="checkbox"
-          :required="prop.Required === 'Y'"
-        >
+        @todo bool
+      </template>
+
+      <template v-else-if="prop.Type === 'user'">
+        @todo user
       </template>
 
       <template v-else>
         <B24Input
-          v-model="currentValues[key]"
-          :type="inputTypeMap[prop.Type]"
+          :model-value="currentValues[key]"
+          :type="inputTypeMap[prop.Type] as string"
           :required="prop.Required === 'Y'"
+          @update:model-value="val => updateField(key, val)"
         />
         <div>
           <B24Button
@@ -90,7 +82,7 @@ watch(
             size="xs"
             color="link"
             depth="dark"
-            @click.stop="currentValues[key] = '{{ID}}'"
+            @click.stop="updateField(key, '{{ID}}')"
           />
         </div>
       </template>

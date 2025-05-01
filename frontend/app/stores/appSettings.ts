@@ -1,16 +1,15 @@
-import { sleepAction } from '~/utils/sleep'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
 /**
  * Some info about App
- * @todo not save this settings (persist: false)
- * @todo get all from b24
- * @todo fix lang
  */
 export const useAppSettingsStore = defineStore(
   'appSettings',
   () => {
+    let $b24: null | B24Frame = null
+
     // region State ////
-    const version = ref('0.00')
+    const version = ref('0.0.0')
     const isTrial = ref(true)
     const integrator = reactive({
       logo: '',
@@ -26,6 +25,10 @@ export const useAppSettingsStore = defineStore(
     // endregion ////
 
     // region Actions ////
+    function setB24(b24: B24Frame) {
+      $b24 = b24
+    }
+
     /**
      * Initialize store from batch response data
      * @param data - Raw data from Bitrix24 API
@@ -38,7 +41,7 @@ export const useAppSettingsStore = defineStore(
       isTrial?: boolean
       integrator?: typeof integrator
     }) {
-      version.value = data.version || '1.0.0'
+      version.value = data.version || '0.0.1'
       isTrial.value = data.isTrial ?? true
       if (data.integrator) {
         Object.assign(integrator, data.integrator)
@@ -66,15 +69,17 @@ export const useAppSettingsStore = defineStore(
      * Save settings to Bitrix24
      */
     const saveSettings = async () => {
-      // Implementation for direct update
-      console.warn(
-        '>> b24.save:app.options',
+      if ($b24 === null) {
+        console.error('B24 non init. Use appSettings.setB24()')
+        return
+      }
+
+      return $b24.callMethod(
+        'app.option.set',
         {
-          integrator,
-          activityInstalled
+          integrator
         }
       )
-      await sleepAction(1000)
     }
 
     const updateIntegrator = (params: Partial<typeof integrator>) => {
@@ -82,6 +87,9 @@ export const useAppSettingsStore = defineStore(
       saveSettings()
     }
 
+    /**
+     * @todo fix lang
+     */
     const integratorPreview = computed(() => {
       const result = []
       if (integrator.phone.length) {
@@ -134,6 +142,7 @@ export const useAppSettingsStore = defineStore(
     return {
       version,
       isTrial,
+      setB24,
       initFromBatch,
       initFromBatchByActivityInstalled,
       saveSettings,

@@ -1,15 +1,15 @@
 import type { EActivityCategory, IFilterParams } from '~/types'
 import { EActivityBadge } from '~/types'
-import { sleepAction } from '~/utils/sleep'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
 /**
  * Some data for user
- * @memo save all at localStorage ( persist: true )
- * @todo save all to b24
  */
 export const useUserSettingsStore = defineStore(
   'userSettings',
   () => {
+    let $b24: null | B24Frame = null
+
     // region State ////
     const searchQuery = ref<string>('')
     const filterParams = reactive<IFilterParams>({
@@ -21,6 +21,10 @@ export const useUserSettingsStore = defineStore(
     // endregion ////
 
     // region Actions ////
+    function setB24(b24: B24Frame) {
+      $b24 = b24
+    }
+
     /**
      * Initialize store from batch response data
      * @param data - Raw data from Bitrix24 API
@@ -55,9 +59,13 @@ export const useUserSettingsStore = defineStore(
      * Save settings to Bitrix24
      */
     const saveSettings = async () => {
-      // Implementation for direct update
-      console.warn(
-        '>> b24.save:user.options',
+      if ($b24 === null) {
+        console.error('B24 non init. Use userSettings.setB24()')
+        return
+      }
+
+      return $b24.callMethod(
+        'user.option.set',
         {
           searchQuery: searchQuery.value,
           filterParams: {
@@ -66,8 +74,6 @@ export const useUserSettingsStore = defineStore(
           }
         }
       )
-
-      await sleepAction(1000)
     }
 
     /**
@@ -102,6 +108,7 @@ export const useUserSettingsStore = defineStore(
     return {
       searchQuery,
       filterParams,
+      setB24,
       initFromBatch,
       saveSettings,
       clearFilter,

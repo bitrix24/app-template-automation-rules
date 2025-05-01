@@ -4,8 +4,7 @@
  *
  * @link https://apidocs.bitrix24.com/tutorials/bizproc/setting-robot.html
  */
-import { ref, computed, onMounted, inject } from 'vue'
-import type { B24Frame } from '@bitrix24/b24jssdk'
+import { ref, computed, onMounted } from 'vue'
 import { activitiesConfig } from '~/activity.config'
 import { ActivitySettings } from '#components'
 
@@ -27,12 +26,9 @@ useHead({
 })
 
 // region Init ////
-const { $logger, b24InjectionKey, processErrorGlobal } = useAppInit()
-const _b24: undefined | B24Frame = inject(b24InjectionKey)
-if (!_b24) {
-  throw new Error('B24 not init')
-}
-const $b24: B24Frame = _b24
+const { $logger, processErrorGlobal } = useAppInit()
+const { $initializeB24Frame } = useNuxtApp()
+const $b24 = await $initializeB24Frame()
 
 const isLoading = ref(true)
 const formValues = ref<Record<string, any>>({})
@@ -44,9 +40,6 @@ onMounted(async () => {
     isLoading.value = true
 
     activityCode.value = $b24.placement.options?.code || 'notSetInPlacementOptions'
-    $logger.warn(
-      $b24.placement.options
-    )
     formValues.value = $b24.placement.options?.current_values || {}
 
     if (activityConfig.value) {
@@ -101,15 +94,12 @@ const getEmptyValue = (type: string) => {
 /**
  * @todo fix this
  */
-const handleValuesUpdate = (newValues: Record<string, any>) => {
+const handleValuesUpdate = async (newValues: Record<string, any>) => {
   formValues.value = { ...newValues }
 
-  $logger.warn(
-    'b24.placement.setPropertyValue >>',
-    formValues.value
-  )
+  $logger.warn('b24.placement.setPropertyValue >>', formValues.value)
 
-  $b24.placement.call(
+  await $b24.placement.call(
     'setPropertyValue',
     formValues.value
   )
@@ -154,7 +144,7 @@ const makeFitWindow = async () => {
 </script>
 
 <template>
-  <div class="px-1 min-h-[20px]">
+  <div class="px-1 min-h-[320px]">
     <template v-if="isLoading">
       <!-- @todo add skeleton -->
       <div class="relative p-sm2 rounded-md flex flex-row gap-sm border-2 border-base-master/10">
