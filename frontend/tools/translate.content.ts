@@ -49,7 +49,10 @@ async function translateText(
     if (null === completion) {
       return ''
     }
-    return (((completion.choices[0] || {})?.message || {}).content || '').replaceAll('```markdown', '').replaceAll('```', '').trim()
+    return (((completion.choices[0] || {})?.message || {}).content || '')
+      .replaceAll('```markdown', '')
+      .replaceAll('```', '')
+      .trim()
   } catch (error) {
     console.error('Translation error:', (error instanceof Error) ? error?.message : error)
     return text
