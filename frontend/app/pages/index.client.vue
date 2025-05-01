@@ -77,23 +77,23 @@ onUnmounted(() => {
 // region Action ////
 function openActivityList() {
   if ($b24.placement.isSliderMode) {
-      $b24.slider.closeSliderAppPage()
+    $b24.slider.closeSliderAppPage()
   }
 
   window.setTimeout(() => {
-      /**
-       * @todo add lang
-       */
-      $b24.slider.openSliderAppPage({
-        place: 'activity-list',
-        bx24_width: 1650,
-        bx24_label: {
-          bgColor: 'violet',
-          text: '🛠️',
-          color: '#ffffff'
-        },
-        bx24_title: t('page.list.seo.title')
-      })
+    /**
+     * @todo add lang
+     */
+    $b24.slider.openSliderAppPage({
+      place: 'activity-list',
+      bx24_width: 1650,
+      bx24_label: {
+        bgColor: 'violet',
+        text: '🛠️',
+        color: '#ffffff'
+      },
+      bx24_title: t('page.list.seo.title')
+    })
   }, 10)
 }
 // endregion ////
