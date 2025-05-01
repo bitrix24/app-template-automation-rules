@@ -5,7 +5,6 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
 avatar: '/activities/CustomerRelationshipManagement.webp'
 ---
 

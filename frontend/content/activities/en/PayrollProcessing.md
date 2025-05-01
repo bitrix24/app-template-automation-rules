@@ -4,7 +4,7 @@ description: Automate payroll calculations and ensure compliance.
 categories: 
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/PayrollProcessing.webp'
 
 ---

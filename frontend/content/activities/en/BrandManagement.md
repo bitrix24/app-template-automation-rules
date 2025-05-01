@@ -5,7 +5,6 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
 avatar: '/activities/BrandManagement.webp'
 ---
 # Instruction for Using and Configuring the "Brand Management" Action

@@ -4,7 +4,7 @@ description: Leverage cloud technology for scalable and flexible operations.
 categories: 
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/CloudSolutions.webp'
 ---
 # Instruction for Using and Configuring the "Cloud Solutions" Action

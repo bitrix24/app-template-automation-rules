@@ -4,7 +4,7 @@ description: Explore blockchain for secure and transparent transactions.
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_2'
+  - 'badge_3'
 avatar: '/activities/BlockchainTechnology.webp'
 ---
 # Instruction for Using and Configuring the "Blockchain Technology" Action

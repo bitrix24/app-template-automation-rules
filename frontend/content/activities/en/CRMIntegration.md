@@ -6,7 +6,6 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
 avatar: '/activities/CRMIntegration.webp'
 ---
 # Instruction for Using and Configuring the " CRM Integration" Action

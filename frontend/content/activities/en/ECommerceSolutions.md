@@ -5,7 +5,7 @@ categories:
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ECommerceSolutions.webp'
 ---
 # Instruction for Using and Configuring the " E-commerce Solutions" Action

@@ -6,7 +6,7 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/PublicRelations.webp'
 ---
 # Instruction for Using and Configuring the "Public Relations" Action

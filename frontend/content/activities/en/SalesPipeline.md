@@ -6,7 +6,7 @@ categories:
   - 'category_2'
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesPipeline.webp'
 ---
 ### Video Tutorial

@@ -5,7 +5,7 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ITInfrastructureManagement.webp'
 ---
 # Instruction for Using and Configuring the " IT Infrastructure Management" Action

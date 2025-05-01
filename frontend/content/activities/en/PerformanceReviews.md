@@ -5,7 +5,7 @@ categories:
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/PerformanceReviews.webp'
 ---
 

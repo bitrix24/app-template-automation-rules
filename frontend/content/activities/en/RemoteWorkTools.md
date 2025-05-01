@@ -5,7 +5,7 @@ categories:
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/RemoteWorkTools.webp'
 ---
 # Instruction for Using and Configuring the "Remote Work Tools" Action

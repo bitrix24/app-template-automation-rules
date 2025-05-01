@@ -4,7 +4,7 @@ description: Automate your marketing campaigns and track their performance.
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/MarketingAutomation.webp'
 ---
 # Instruction for Using and Configuring the "Marketing Automation" Action

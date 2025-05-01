@@ -4,7 +4,6 @@ description: Discover and integrate third-party apps to enhance your business.
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_1'
   - 'badge_3'
 avatar: '/activities/AIandMachineLearning.webp'
 ---

@@ -6,7 +6,7 @@ categories:
 
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/QualityAssurance.webp'
 ---
 # Instruction for Using and Configuring the "Quality Assurance" Action

@@ -5,7 +5,7 @@ categories:
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 

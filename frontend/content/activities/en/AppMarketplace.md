@@ -5,8 +5,7 @@ categories:
   - 'category_1'
   - 'category_2'
   - 'category_3'
-badges: 
-  - 'badge_2'
+badges:
   - 'badge_3'
 avatar: '/activities/AppMarketplace.webp'
 ---

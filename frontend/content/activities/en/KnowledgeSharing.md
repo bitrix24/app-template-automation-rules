@@ -4,7 +4,7 @@ description: Create a centralized knowledge base for your organization.
 categories: 
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/KnowledgeSharing.webp'
 ---
 # Instruction for Using and Configuring the "Knowledge Sharing" Action
