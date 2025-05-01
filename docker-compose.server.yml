@@ -11,6 +11,11 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - proxy-net
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: '1.0'
 
   letsencrypt:
     container_name: letsencrypt
@@ -25,6 +30,11 @@ services:
       - server
     networks:
       - proxy-net
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: '1.0'
 
 networks:
   proxy-net:

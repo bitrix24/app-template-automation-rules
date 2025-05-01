@@ -15,6 +15,12 @@ services:
       - internal-net
       - proxy-net
     restart: always
+    # @todo fix this
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
 
   chrome:
     container_name: prod-chrome
