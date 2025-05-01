@@ -185,9 +185,10 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
       throw new Error(`No activity config by code: ${activityCode}`)
     }
 
-    const isConfirm = await modalConfirm.open({
+    const modalConfirmInstance = modalConfirm.open({
       activity
     })
+    const isConfirm = await modalConfirmInstance.result
 
     if (!isConfirm) {
       return
