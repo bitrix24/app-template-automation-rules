@@ -10,8 +10,8 @@ import path from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import OpenAI from 'openai'
 import { config } from 'dotenv'
+import { contentLocales } from './../i18n.map'
 
-config({ path: '.env.development' })
 config({ path: '.env' })
 
 const rl = createInterface({
@@ -27,22 +27,11 @@ const openai = new OpenAI({
   apiKey: process.env.DEEPSEEK_API_KEY
 })
 
-const getLocalesInfo = () => {
-  try {
-    const rawLocales = process.env.NUXT_PUBLIC_CONTENT_LOCALES || '[]'
-    const locales = JSON.parse(rawLocales)
-
-    if (!Array.isArray(locales)) throw new Error('Invalid locales format')
-    return locales.filter(l =>
-      typeof l === 'object' && l !== null && 'code' in l && 'name' in l && 'file' in l
-    )
-  } catch (error) {
-    console.error('Error parsing locales:', error)
-    return []
-  }
-}
-
-async function translateText(text, sourceLang, targetLang) {
+async function translateText(
+  text: string,
+  sourceLang: string,
+  targetLang: string
+) {
   try {
     const completion = await openai.chat.completions.create({
       model: 'deepseek-chat',
@@ -58,9 +47,12 @@ async function translateText(text, sourceLang, targetLang) {
       temperature: 1.3
     })
 
-    return completion.choices[0].message.content.trim()
+    if (null === completion) {
+      return ''
+    }
+    return (((completion.choices[0] || {})?.message || {}).content || '').trim()
   } catch (error) {
-    console.error('Translation error:', error.message)
+    console.error('Translation error:', (error instanceof Error) ? error?.message : error)
     return text
   }
 }
@@ -79,7 +71,7 @@ async function main() {
 
     // Select source language
     console.log('Available locales:', locales.join(', '))
-    let sourceLang = await rl.question('Enter source locale: ')
+    const sourceLang = await rl.question('Enter source locale: ')
     if (!locales.includes(sourceLang)) {
       throw new Error(`Main locale ${sourceLang} not found`)
     }
@@ -88,8 +80,12 @@ async function main() {
     const mainPath = path.join(CONTENT_PATH, `${sourceLang}.json`)
     const mainData = JSON.parse(await fs.readFile(mainPath, 'utf-8'))
 
-    const localeInfo = {}
-    getLocalesInfo().forEach((row) => {
+    const localeInfo: Record<string, {
+      code: string
+      name: string
+      file: string
+    }> = {}
+    contentLocales.forEach((row) => {
       localeInfo[row.code] = row
     })
 
@@ -97,13 +93,13 @@ async function main() {
     for (const locale of locales.filter(l => l !== sourceLang)) {
       const localePath = path.join(CONTENT_PATH, `${locale}.json`)
 
-      console.log(`Translating [${localeInfo[sourceLang].name} (${localeInfo[sourceLang].code})] to [${localeInfo[locale].name} (${localeInfo[locale].code})] ...`)
+      console.log(`Translating [${localeInfo[sourceLang]?.name || '??'} (${localeInfo[sourceLang]?.code || sourceLang})] to [${localeInfo[locale]?.name || '??'} (${localeInfo[locale]?.code || locale})] ...`)
 
       // Translation and update
       const translated = await translateText(
         mainData,
-        `${localeInfo[sourceLang].name} (${localeInfo[sourceLang].code})`,
-        `${localeInfo[locale].name} (${localeInfo[locale].code})`
+        `${localeInfo[sourceLang]?.name || '??'} (${localeInfo[sourceLang]?.code || sourceLang})`,
+        `${localeInfo[locale]?.name || '??'} (${localeInfo[locale]?.code || locale})`
       )
       const saveData = JSON.parse(translated)
 
@@ -112,7 +108,7 @@ async function main() {
       console.log(`✅ Successfully updated ${locale}.json\n`)
     }
   } catch (error) {
-    console.error('Error:', error.message)
+    console.error('Error:', (error instanceof Error) ? error?.message : error)
   } finally {
     rl.close()
   }
