@@ -244,8 +244,8 @@ async function handleAIandMachineLearning(options: Options) {
   console.log('make send to b24 >> ')
 
   // region getEmpty docx ////
-  const fileDocxPath = resolve(process.cwd(), 'server/assets/empty.docx')
-  const fileDocxBuffer = await readFile(fileDocxPath)
+  // const fileDocxPath = resolve(process.cwd(), 'server/assets/empty.docx')
+  // const fileDocxBuffer = await readFile(fileDocxPath)
   // endregion ////
 
   try {
@@ -260,7 +260,7 @@ async function handleAIandMachineLearning(options: Options) {
         refresh_token: options.auth.refreshToken,
         auth: options.auth.accessToken,
         pdfContent: Buffer.from(pdfBuffer).toString('base64'),
-        fileContent: fileDocxBuffer.toString('base64')
+        fileContent: 'empty' // fileDocxBuffer.toString('base64')
       }
     )
     console.log('Document uploaded:', response.result)
