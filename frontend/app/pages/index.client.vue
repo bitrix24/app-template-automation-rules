@@ -3,10 +3,6 @@ import { onMounted } from 'vue'
 
 const { t } = useI18n()
 
-definePageMeta({
-  layout: 'clear'
-})
-
 useHead({
   title: t('page.index.seo.title')
 })

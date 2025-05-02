@@ -8,16 +8,17 @@ const $logger = LoggerBrowser.build(
 
 const baseDir = '/'
 
-function isSkipB24(fullPath: string): boolean {
-  return !fullPath.includes(`${baseDir}`)
-    || fullPath.includes(`${baseDir}eula`)
-    || fullPath.includes(`${baseDir}render`)
+function isSkipB24(toPath: string): boolean {
+  return !toPath.includes(`${baseDir}`)
+    || toPath.includes(`${baseDir}eula`)
+    || toPath.includes(`${baseDir}render`)
 }
 
 export default defineNuxtRouteMiddleware(async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized
 ) => {
+  const isUseB24Frame = useState('isUseB24Frame', () => true)
   /**
    * @memo skip middleware on server
    */
@@ -25,13 +26,13 @@ export default defineNuxtRouteMiddleware(async (
     return
   }
 
-  $logger.log('>> start')
-  $logger.info({
+  $logger.log('>> start', {
     to: to.path,
     from: from.path
   })
 
   if (isSkipB24(to.path)) {
+    isUseB24Frame.value = false
     $logger.log('middleware >> Skip')
     return Promise.resolve()
   }
@@ -49,11 +50,7 @@ export default defineNuxtRouteMiddleware(async (
       if (optionsPlace === 'activity-list') {
         goTo = `${baseDir}activity-list`
       }
-      // else if (optionsPlace === 'app.options') {
-      //   goTo = `${baseDir}app.options`
-      // } else if (optionsPlace === 'user.options') {
-      //   goTo = `${baseDir}user.options`
-      // } else if (optionsPlace === 'feedback') {
+      // else if (optionsPlace === 'feedback') {
       //   goTo = `${baseDir}feedback`
       // }
 

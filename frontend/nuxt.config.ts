@@ -51,6 +51,9 @@ export default defineNuxtConfig({
       'jsonwebtoken'
     ]
   },
+  /**
+   * @todo remove this
+   */
   routeRules: {
     '/install': { ssr: false },
     '/index': { ssr: false },

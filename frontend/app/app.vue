@@ -11,11 +11,14 @@ useHead({
   htmlAttrs: { lang, dir }
 })
 
-/**
- * @todo move to B24App
- */
+const isUseB24Frame = useState('isUseB24Frame')
+
 onMounted(async () => {
-  if (!import.meta.client) {
+  /**
+   * @memo Skip init $b24
+   * @see middleware/01.app.page.or.slider.global.ts
+   */
+  if (import.meta.server || !isUseB24Frame.value) {
     return
   }
 

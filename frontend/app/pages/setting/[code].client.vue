@@ -7,13 +7,11 @@
 import { ref, computed, onMounted } from 'vue'
 import { activitiesConfig } from '~/activity.config'
 import { ActivitySettings } from '#components'
-
-definePageMeta({
-  layout: 'clear'
-})
+import { Salt } from '~/services/salt'
 
 // const { t } = useI18n()
-const activityCode = ref<string>((useRoute().params?.code as string) || '')
+const { clearSalt } = Salt()
+const activityCode = ref<string>(clearSalt((useRoute().params?.code as string) || ''))
 const activityConfig = computed(() =>
   activitiesConfig.find(a => a.CODE.toLowerCase() === activityCode.value.toLowerCase())
 )
@@ -39,7 +37,7 @@ onMounted(async () => {
   try {
     isLoading.value = true
 
-    activityCode.value = $b24.placement.options?.code || 'notSetInPlacementOptions'
+    activityCode.value = clearSalt($b24.placement.options?.code || 'notSetInPlacementOptions')
     formValues.value = $b24.placement.options?.current_values || {}
 
     if (activityConfig.value) {

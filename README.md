@@ -162,7 +162,6 @@ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules l
 
 docker logs -f dev-chrome
 docker logs -f dev-frontend
-
 ```
 
 ### Prod
@@ -302,6 +301,7 @@ docker exec -it chrome netstat -tulpn
 
 # frontend
 docker exec -it frontend /bin/bash
+docker exec -it dev-frontend /bin/bash
 
 # server
 docker exec -it server /bin/bash

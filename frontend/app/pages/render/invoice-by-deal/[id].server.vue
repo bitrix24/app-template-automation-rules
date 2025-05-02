@@ -204,7 +204,7 @@ function formatPrice(price: number, currency?: string): string {
 </script>
 
 <template>
-  <div v-if="processStatus === 'pending'">
+  <div v-if="processStatus === 'pending'" class="app-loading-indicator">
     Loading ...
   </div>
   <B24Alert

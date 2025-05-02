@@ -7,9 +7,6 @@ import Logo from '~/components/Logo.vue'
 
 const { t } = useI18n()
 
-definePageMeta({
-  layout: 'clear'
-})
 useHead({
   title: t('page.install.seo.title')
 })

@@ -6,11 +6,84 @@
  */
 import jwt from 'jsonwebtoken'
 import { generatePDF } from './../../utils/pdf-generator'
-import { Text, EnumCrmEntityType, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { Text, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { Salt } from '~/services/salt'
+import { readFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
+
 /**
  * @todo remove this
  */
 import axios from 'axios'
+
+/**
+ * @todo move to jsSdk
+ */
+export interface UploadDocumentResponse {
+  result?: {
+    document: {
+      id: string
+      pdfUrl: string
+      downloadUrlMachine: string
+      downloadUrl: string
+      pdfUrlMachine: string
+      publicUrl?: string
+      emailDiskFile: string
+      number: string
+      title: string
+    }
+  }
+  error?: string
+}
+
+/**
+ * @todo move to jsSdk
+ */
+export interface UploadDocumentRequest {
+  entityTypeId: number
+  entityId: number
+  title: string
+  region: string
+  number: string
+  fileContent: string
+  pdfContent?: string
+  imageContent?: string
+  auth: string
+  refresh_token: string
+}
+
+/**
+ * @todo move to jsSdk
+ */
+export interface Auth {
+  applicationToken: string
+  userId: string
+  memberId: string
+  accessToken: string
+  refreshToken: string
+  expires: string
+  expiresIn: string
+  scope: string
+  domain: string
+  clientEndpoint: string
+  serverEndpoint: string
+  status: string
+}
+
+export interface Options {
+  entityTypeId: EnumCrmEntityTypeId
+  entityId: number
+  workflowId?: string
+  eventToken?: string
+  code: string
+  useSubscription: boolean
+  timeoutDuration: number
+  ts: number
+  documentId: string[]
+  documentType: string[]
+  properties: Record<string, any>
+  auth: Auth
+}
 
 /**
  * [Object: null prototype] {
@@ -45,88 +118,122 @@ import axios from 'axios'
  */
 
 export default defineEventHandler(async (event) => {
-  const { code } = event.context.params
-  const body = await readBody(event)
+  const { clearSalt } = Salt()
 
-  switch(code) {
+  const { code: codeWithSaltFromParams } = event.context.params
+  const body = await readBody(event)
+  const codeWithSalt = body?.code || 'notSetCodeOptions'
+
+  const options: Options = {
+    code: clearSalt(body?.code || 'notSetCodeOptions'),
+    entityTypeId: EnumCrmEntityTypeId.undefined,
+    entityId: 0,
+    workflowId: (body?.workflow_id || null),
+    eventToken: (body?.event_token || null),
+    useSubscription: body?.use_subscription === 'Y',
+    timeoutDuration: Number.parseInt(body?.timeout_duration || '0'),
+    ts: Number.parseInt(body?.ts || '0'),
+    documentId: [
+      body['document_id[0]'] || null,
+      body['document_id[1]'] || null,
+      body['document_id[2]'] || null
+    ].filter(Boolean),
+    documentType: [
+      body['document_type[0]'] || null,
+      body['document_type[1]'] || null,
+      body['document_type[2]'] || null
+    ].filter(Boolean),
+    properties: {},
+    auth: {
+      applicationToken: body['auth[application_token]'] || 'empty',
+      userId: body['auth[user_id]'] || 'empty',
+      memberId: body['auth[member_id]'] || 'empty',
+      accessToken: body['auth[access_token]'] || 'empty',
+      refreshToken: body['auth[access_token]'] || 'empty',
+      expires: body['auth[expires]'] || '0',
+      expiresIn: body['auth[expires_in]'] || '3600',
+      scope: body['auth[scope]'] || 'empty',
+      domain: body['auth[domain]'] || 'empty',
+      clientEndpoint: body['auth[client_endpoint]'] || 'empty',
+      serverEndpoint: body['auth[server_endpoint]'] || 'empty',
+      status: body['auth[status]'] || 'empty'
+    }
+  }
+
+  /**
+   * @todo move to jsSdk
+   */
+  if (options.documentType[1]) {
+    switch (options.documentType[1]) {
+      case 'CCrmDocumentLead':
+        options.entityTypeId = EnumCrmEntityTypeId.lead
+        break
+      case 'CCrmDocumentDeal':
+        options.entityTypeId = EnumCrmEntityTypeId.deal
+        break
+      case 'CCrmDocumentContact':
+        options.entityTypeId = EnumCrmEntityTypeId.contact
+        break
+      case 'CCrmDocumentCompany':
+        options.entityTypeId = EnumCrmEntityTypeId.company
+        break
+      /**
+       * @todo test this
+       */
+      case 'CCrmDocumentSmartInvoice':
+        options.entityTypeId = EnumCrmEntityTypeId.invoice
+        break
+      case 'CCrmDocumentSmartQuote':
+        options.entityTypeId = EnumCrmEntityTypeId.quote
+        break
+      case 'CCrmDocumentSmartOrder':
+        options.entityTypeId = EnumCrmEntityTypeId.order
+        break
+    }
+  }
+
+  if (options.documentId[2] && options.documentType[2]) {
+    options.entityId = Number.parseInt(options.documentId[2].replace(`${options.documentType[2]}_`, '') || '0')
+  }
+
+  console.log(
+    '>>>',
+    options
+  )
+
+  switch (options.code) {
     case 'AIandMachineLearning':
-      return handleAIandMachineLearning(body)
+      return handleAIandMachineLearning(options)
     default:
       throw createError({ statusCode: 404 })
   }
 })
 
-/**
- * @todo move to jsSdk
- */
-export interface UploadDocumentRequest {
-  entityTypeId: number
-  entityId: string
-  title: string
-  region: string
-  number: string
-  fileContent: string
-  pdfContent?: string
-  imageContent?: string
-  auth: string
-  refresh_token: string
-}
-
-/**
- * @todo move to jsSdk
- */
-export interface UploadDocumentResponse {
-  result?: {
-    document: {
-      id: string
-      pdfUrl: string
-      downloadUrlMachine: string
-      downloadUrl: string
-      pdfUrlMachine: string
-      publicUrl?: string
-      emailDiskFile: string
-      number: string
-      title: string
-    }
-  }
-  error?: string
-}
-
-async function handleAIandMachineLearning(body: any) {
-
-  /**
-   * @todo fix this
-   */
-  const {
-    workflow_id,
-    code,
-    event_token,
-    //'properties[entityTypeId]': entityTypeId,
-    'properties[entityId]': entityId,
-    use_subscription,
-    'auth[access_token]': access_token,
-    'auth[refresh_token]': refresh_token,
-    'auth[client_endpoint]': client_endpoint,
-    auth
-  } = body
-  const entityTypeId = EnumCrmEntityTypeId.deal
-  console.log('come >> ', code, body)
-  if (!workflow_id || !entityTypeId || !entityId) {
+async function handleAIandMachineLearning(options: Options) {
+  console.log('come >> ', options.code, options)
+  if (!options.workflowId
+    || options.entityTypeId === EnumCrmEntityTypeId.undefined
+    || options.entityId < 1
+  ) {
     throw createError({ statusCode: 400, message: 'Invalid request' })
   }
 
   const config = useRuntimeConfig()
   // Generate JWT token
   const token = jwt.sign(
-    { entityTypeId, entityId, timestamp: Date.now() },
+    {
+      entityTypeId: options.entityTypeId,
+      entityId: options.entityId,
+      timestamp: Date.now()
+    },
     config.jwtSecret,
     { expiresIn: '5m' }
   )
 
-  console.log('start gen >> ', `/render/invoice-by-deal/${entityId}/`)
+  console.log('start gen >> ', `/render/invoice-by-deal/${options.entityId}/`)
   const pdfBuffer = await generatePDF(
-    `/render/invoice-by-deal/${entityId}/`,
-    { token, entityId }
+    `/render/invoice-by-deal/${options.entityId}/`,
+    { token, entityId: options.entityId }
   )
   console.log('stop gen')
   /**
@@ -135,34 +242,39 @@ async function handleAIandMachineLearning(body: any) {
   let documentId = 0
 
   console.log('make send to b24 >> ')
+
+  // region getEmpty docx ////
+  const fileDocxPath = resolve(process.cwd(), 'server/assets/empty.docx')
+  const fileDocxBuffer = await readFile(fileDocxPath)
+  // endregion ////
+
   try {
     const response = await uploadDocument(
-      client_endpoint || '',
+      options.auth.clientEndpoint,
       {
-        entityTypeId: entityTypeId,
-        entityId: entityId,
-        title: "demoFile",
-        region: "ru",
+        entityTypeId: options.entityTypeId,
+        entityId: options.entityId,
+        title: [options.code, options.entityTypeId, options.entityId].join(':'),
+        region: 'ru',
         number: Text.getUuidRfc4122(),
-        auth: access_token || '',
-        refresh_token: refresh_token || '',
-        // fileContent: Buffer.from(pdfBuffer).toString('base64'),
+        refresh_token: options.auth.refreshToken,
+        auth: options.auth.accessToken,
         pdfContent: Buffer.from(pdfBuffer).toString('base64'),
-        fileContent: 'empty',
-        // pdfContent: '456'
-      })
-    console.log('Document uploaded:', response.result);
+        fileContent: fileDocxBuffer.toString('base64')
+      }
+    )
+    console.log('Document uploaded:', response.result)
 
     documentId = Number.parseInt(response.result?.document.id || '0')
-  } catch (e) {
-    console.error('Error:', e.message);
+  } catch (error) {
+    console.error('Error:', error instanceof Error ? error.message : error)
   }
   console.log('stop send to b24 >> ', documentId)
 
   return {
-    auth: access_token,
-    event_token,
-    log_message: 'AIandMachineLearning >> success',
+    auth: options.auth.accessToken,
+    event_token: options.eventToken,
+    log_message: `>> success >>> ${options.code}`,
     return_values: {
       documentId
     }
@@ -170,8 +282,8 @@ async function handleAIandMachineLearning(body: any) {
 }
 
 const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Promise<UploadDocumentResponse> => {
-  const client_id = 'local.zzz.yyyy'
-  const client_secret = 'zzDDxxx'
+  // const client_id = 'local.zzz.yyyy'
+  // const client_secret = 'zzDDxxx'
   try {
     const api = axios.create({
       // baseURL: b24Url,
@@ -234,11 +346,11 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
     )
 
     if (response.data?.error) {
-      //console.log('<< TEST ', response.data)
+      // console.log('<< TEST ', response.data)
       throw new Error(response.data.error)
     }
 
-    //console.log('<< ', response.data)
+    // console.log('<< ', response.data)
 
     return response.data as UploadDocumentResponse
   } catch (error) {

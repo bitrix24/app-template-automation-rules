@@ -9,8 +9,8 @@ frontend  |  ERROR  [unhandledRejection] write EPIPE
 frontend  |
  */
 import puppeteer from 'puppeteer-core'
-// import { sleepAction } from '../../app/utils/sleep'
-import type { Browser } from 'puppeteer-core'
+import { sleepAction } from '../../app/utils/sleep'
+import type { Browser, Page } from 'puppeteer-core'
 
 function transformWsUrl(
   httpUrl: string,
@@ -46,7 +46,7 @@ const connectToBrowser = async () => {
 
 export async function generatePDF(
   url: string,
-  params: { token: string, entityId: string }
+  params: { token: string, entityId: string | number }
 ) {
   let browser: Browser | null = null
   try {
@@ -77,12 +77,14 @@ export async function generatePDF(
     await page.goto(
       internalUrl.toString(),
       {
-        waitUntil: 'networkidle2',
+        waitUntil: ['domcontentloaded', 'networkidle2'],
         timeout: 120_000
       }
     )
 
-    // await sleepAction(3_000)
+    console.log('page wait >>>')
+    await checkSSRCompleteness(page)
+
     console.log('PDF generation >>>')
     /**
      * @memo some custom for page
@@ -156,4 +158,11 @@ export async function generatePDF(
   } finally {
     await browser?.disconnect()
   }
+}
+
+const checkSSRCompleteness = async (page: Page) => {
+  console.log('wait __nuxt >>>')
+  await page.waitForSelector('#__nuxt', { visible: true, timeout: 10_000 })
+  console.log('wait .app-loading-indicator >>>')
+  await page.waitForSelector('.app-loading-indicator', { hidden: true, timeout: 10_000 })
 }

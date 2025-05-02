@@ -10,6 +10,7 @@ import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
+import { Salt } from '~/services/salt'
 import type { Collections } from '@nuxt/content'
 import type { IActivity } from '~/types'
 import type { ActivityConfig, ActivityProperty } from '~/activity.config'
@@ -30,9 +31,12 @@ useHead({
 })
 
 // region Init ////
+const { addSalt } = Salt()
 const { $logger, initApp, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
+
+$logger.warn($b24)
 
 const isLoading = ref(true)
 const isShowDebug = ref(false)
@@ -114,7 +118,7 @@ async function makeInstall(activity: IActivity): Promise<void> {
      * @todo add lang
      */
     const params: ActivityConfig = {
-      CODE: activityConfig.CODE,
+      CODE: addSalt(activityConfig.CODE),
       HANDLER: `${appUrl}${activityConfig?.HANDLER || ('/api/activities/' + activityConfig.CODE)}`,
       NAME: activityConfig.NAME || activity.title || activityConfig.CODE,
       DESCRIPTION: activityConfig.DESCRIPTION || activity.description || activityConfig.CODE,
@@ -189,7 +193,7 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
     await $b24.callMethod(
       activityConfig.type === 'robot' ? 'bizproc.robot.delete' : 'bizproc.activity.delete',
       {
-        CODE: activityConfig.CODE
+        CODE: addSalt(activityConfig.CODE)
       }
     )
 
@@ -303,7 +307,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <NuxtLayout name="default">
+  <NuxtLayout name="dashboard">
     <!-- template #header-title>
       <ProseH1 class="mt-3 mb-0 max-lg:ps-3">
         {{ $t('page.list.seo.title') }}
