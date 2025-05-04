@@ -10,6 +10,7 @@ import { Text, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 import { Salt } from '~/services/salt'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { RabbitMQService } from '../../services/rabbitmq.service'
 
 /**
  * @todo remove this
@@ -117,12 +118,11 @@ export interface Options {
  * @param body
  */
 
-export default defineEventHandler(async (event) => {
-  const { clearSalt } = Salt()
+const { clearSalt, addSalt } = Salt()
 
+export default defineEventHandler(async (event) => {
   const { code: codeWithSaltFromParams } = event.context.params
   const body = await readBody(event)
-  const codeWithSalt = body?.code || 'notSetCodeOptions'
 
   const options: Options = {
     code: clearSalt(body?.code || 'notSetCodeOptions'),
@@ -196,10 +196,10 @@ export default defineEventHandler(async (event) => {
     options.entityId = Number.parseInt(options.documentId[2].replace(`${options.documentType[2]}_`, '') || '0')
   }
 
-  console.log(
-    '>>>',
-    options
-  )
+  // console.log(
+  //   '>>>',
+  //   options
+  // )
 
   switch (options.code) {
     case 'AIandMachineLearning':
@@ -209,8 +209,17 @@ export default defineEventHandler(async (event) => {
   }
 })
 
+export interface RabbitMqEvent {
+  eventDate: string
+  entityTypeId: number
+  entityId: number
+  authToken: string
+  eventType: string
+  additionalData?: Record<string, any>
+}
+
 async function handleAIandMachineLearning(options: Options) {
-  console.log('come >> ', options.code, options)
+  console.log('come >> ', options.code)
   if (!options.workflowId
     || options.entityTypeId === EnumCrmEntityTypeId.undefined
     || options.entityId < 1
@@ -230,46 +239,72 @@ async function handleAIandMachineLearning(options: Options) {
     { expiresIn: '5m' }
   )
 
-  console.log('start gen >> ', `/render/invoice-by-deal/${options.entityId}/`)
-  const pdfBuffer = await generatePDF(
-    `/render/invoice-by-deal/${options.entityId}/`,
-    { token, entityId: options.entityId }
-  )
-  console.log('stop gen')
-  /**
-   * @see https://apidocs.bitrix24.com/api-reference/crm/document-generator/documents/crm-document-generator-document-upload.html
-   */
-  let documentId = 0
-
-  console.log('make send to b24 >> ')
-
-  // region getEmpty docx ////
-  // const fileDocxPath = resolve(process.cwd(), 'server/assets/empty.docx')
-  // const fileDocxBuffer = await readFile(fileDocxPath)
-  // endregion ////
+  // region send RabbitMq ////
 
   try {
-    const response = await uploadDocument(
-      options.auth.clientEndpoint,
-      {
-        entityTypeId: options.entityTypeId,
-        entityId: options.entityId,
-        title: [options.code, options.entityTypeId, options.entityId].join(':'),
-        region: 'ru',
-        number: Text.getUuidRfc4122(),
-        refresh_token: options.auth.refreshToken,
-        auth: options.auth.accessToken,
-        pdfContent: Buffer.from(pdfBuffer).toString('base64'),
-        fileContent: 'empty' // fileDocxBuffer.toString('base64')
-      }
+    const message: RabbitMqEvent = {
+      eventDate: new Date().toISOString(),
+      entityTypeId: options.entityTypeId,
+      entityId: options.entityId,
+      authToken: options.auth.accessToken,
+      eventType: options.code,
+      additionalData: options
+    }
+    console.log('RabbitMq >> ', message)
+    const rabbitService = new RabbitMQService(addSalt('activity'))
+    await rabbitService.publishToQueue(
+      addSalt('activity'),
+      JSON.stringify(message)
     )
-    console.log('Document uploaded:', response.result)
-
-    documentId = Number.parseInt(response.result?.document.id || '0')
   } catch (error) {
-    console.error('Error:', error instanceof Error ? error.message : error)
+    console.error('RabbitMQ Error:', error instanceof Error ? error.message : error)
   }
-  console.log('stop send to b24 >> ', documentId)
+  console.log('RabbitMq << queued')
+  // endregion ////
+
+  let documentId = 0
+
+  // console.log('start gen >> ', `/render/invoice-by-deal/${options.entityId}/`)
+  // const pdfBuffer = await generatePDF(
+  //   `/render/invoice-by-deal/${options.entityId}/`,
+  //   { token, entityId: options.entityId }
+  // )
+  // console.log('stop gen')
+  // /**
+  //  * @see https://apidocs.bitrix24.com/api-reference/crm/document-generator/documents/crm-document-generator-document-upload.html
+  //  */
+  //
+  //
+  // console.log('make send to b24 >> ')
+  //
+  // // region getEmpty docx ////
+  // // const fileDocxPath = resolve(process.cwd(), 'server/assets/empty.docx')
+  // // const fileDocxBuffer = await readFile(fileDocxPath)
+  // // endregion ////
+  //
+  // try {
+  // //   const response = await uploadDocument(
+  // //     options.auth.clientEndpoint,
+  // //     {
+  // //       entityTypeId: options.entityTypeId,
+  // //       entityId: options.entityId,
+  // //       title: [options.code, options.entityTypeId, options.entityId].join(':'),
+  // //       region: 'ru',
+  // //       number: Text.getUuidRfc4122(),
+  // //       refresh_token: options.auth.refreshToken,
+  // //       auth: options.auth.accessToken,
+  // //       pdfContent: Buffer.from(pdfBuffer).toString('base64'),
+  // //       fileContent: 'empty' // fileDocxBuffer.toString('base64')
+  // //     }
+  // //   )
+  // // documentId = Number.parseInt(response.result?.document.id || '0')
+  //
+  //   // console.log('Document uploaded')
+  // } catch (error) {
+  //   console.error('Error:', error instanceof Error ? error.message : error)
+  // }
+
+  console.log('stop send to b24 >> documentId: ', documentId)
 
   return {
     auth: options.auth.accessToken,

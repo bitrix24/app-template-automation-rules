@@ -30,6 +30,7 @@ export default defineNuxtConfig({
      * @see https://nuxt.com/docs/guide/going-further/runtime-config#example
      */
     chromeUrl: '',
+    rabbitmqUrl: '',
     appInternalUrl: '',
     jwtSecret: '',
     allowedIps: '',
@@ -84,5 +85,5 @@ export default defineNuxtConfig({
     lazy: true,
     defaultLocale: 'en',
     locales: contentLocales
-  },
+  }
 })

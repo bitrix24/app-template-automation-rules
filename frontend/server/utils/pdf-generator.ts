@@ -9,7 +9,7 @@ frontend  |  ERROR  [unhandledRejection] write EPIPE
 frontend  |
  */
 import puppeteer from 'puppeteer-core'
-import { sleepAction } from '../../app/utils/sleep'
+// import { sleepAction } from '../../app/utils/sleep'
 import type { Browser, Page } from 'puppeteer-core'
 
 function transformWsUrl(
