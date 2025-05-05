@@ -3,7 +3,7 @@
   "description": "Example of Bitrix24 application for working with Business Process actions",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.10.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bitrix24/app-template-automation-rules.git"
@@ -17,12 +17,14 @@
     "preview": "nuxi preview",
     "build": "nuxt build",
     "run": "node .output/server/index.mjs",
+
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "dd-dev-link_b24jssdk": "pnpm update @bitrix24/b24jssdk",
     "translate-content": "tsx tools/translate.content.ts",
-    "translate-ui": "tsx tools/translate.ui.ts"
+    "translate-ui": "tsx tools/translate.ui.ts",
+    "consumer:run-AIandMachineLearning": "tsx server/consumers/activities/AIandMachineLearning.ts"
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
@@ -39,7 +41,8 @@
     "puppeteer-core": "^24.6.1",
     "qrcode": "^1.5.4",
     "zod": "^3.24.3",
-    "amqplib": "^0.10.7"
+    "amqplib": "^0.10.7",
+    "consola": "^3.4.2"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.3.0",

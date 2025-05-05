@@ -160,8 +160,13 @@ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules d
  docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
  
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d frontend
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d frontend 
+
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down consumer-ai-and-machine-learning && \
+ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
  
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build --scale consumer-ai-and-machine-learning=2
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --scale consumer-ai-and-machine-learning=2
  
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
@@ -171,6 +176,9 @@ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules l
 
 docker logs -f dev-chrome
 docker logs -f dev-frontend
+docker logs -f dev-consumer-AIandMachineLearning
+docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learning-1
+
 ```
 
 ### Prod
@@ -245,6 +253,9 @@ docker exec -it dev-frontend nc -zv chrome 9223
 docker exec -it dev-frontend ping -c 4 chrome
 docker exec -it dev-frontend nslookup chrome
 docker exec -it dev-frontend sh -c "whoami && id" # check user at container
+
+docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-chrome:9223/json/version
+docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-frontend:3000/render/invoice-by-deal/1058/
 ```
 
 ### Stop

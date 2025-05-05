@@ -19,6 +19,7 @@ services:
     networks:
       - internal-net
       - proxy-net
+    # @todo fix this
     restart: always
     deploy:
       resources:
@@ -78,6 +79,27 @@ services:
       resources:
         limits:
           memory: 1G
+          cpus: '1.0'
+
+  consumer-ai-and-machine-learning:
+    # container_name: dev-consumer-AIandMachineLearning
+    depends_on:
+      - chrome
+      - rabbitmq
+# @todo fix this
+#      - condition: service_healthy
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_consumer_AIandMachineLearning_dev
+    env_file: .env.dev
+    networks:
+      - internal-net
+# @todo fix this
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 500M
           cpus: '1.0'
 
 networks:

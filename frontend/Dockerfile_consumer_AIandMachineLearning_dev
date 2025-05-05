@@ -1,0 +1,19 @@
+# For Nuxt app
+# @memo: copy everything to /usr/src/app
+
+FROM node:20-alpine
+LABEL maintainer="B24Sdk <github.com/bitrix24>"
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+WORKDIR /usr/src/app-consumer
+
+RUN corepack enable
+
+COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+RUN pnpm install
+
+COPY . ./
+
+CMD ["pnpm", "run", "consumer:run-AIandMachineLearning"]

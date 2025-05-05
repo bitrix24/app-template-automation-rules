@@ -11,6 +11,9 @@ frontend  |
 import puppeteer from 'puppeteer-core'
 // import { sleepAction } from '../../app/utils/sleep'
 import type { Browser, Page } from 'puppeteer-core'
+import { config } from 'dotenv'
+
+config({ path: '.env' })
 
 function transformWsUrl(
   httpUrl: string,
@@ -25,8 +28,7 @@ function transformWsUrl(
 }
 
 const connectToBrowser = async () => {
-  const config = useRuntimeConfig()
-  const chromeUrl = config.chromeUrl
+  const chromeUrl = process.env?.NUXT_CHROME_URL || '?'
 
   console.log('Connected chromeUrl:', chromeUrl)
 
@@ -69,9 +71,7 @@ export async function generatePDF(
     //  'X-Forwarded-Proto': 'http',
     //  'Host': 'localhost'
     // })
-
-    const config = useRuntimeConfig()
-    const internalUrl = new URL(`${config.appInternalUrl}${url}`)
+    const internalUrl = new URL(`${process.env?.NUXT_APP_INTERNAL_URL || '?'}${url}`)
     console.log('make PDF for: ', internalUrl.toString())
 
     await page.goto(
@@ -148,13 +148,7 @@ export async function generatePDF(
     }
 
     // General default error
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'PDF generation failed',
-      data: {
-        originalError: error instanceof Error ? error.message : 'Unknown error'
-      }
-    })
+    throw new Error('PDF generation failed', { cause: error })
   } finally {
     await browser?.disconnect()
   }
