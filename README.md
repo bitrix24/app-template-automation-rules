@@ -104,11 +104,12 @@ docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules 
 ```shell
 docker network create proxy-net
 
+docker compose -f docker-compose.server.yml -p server__global up -d
+
 docker compose -f docker-compose.server.yml -p server__global top
 
 docker compose -f docker-compose.server.yml -p server__global build
 
-docker compose -f docker-compose.server.yml -p server__global up -d
 docker compose -f docker-compose.server.yml -p server__global up -d --build
 
 docker compose -f docker-compose.server.yml -p server__global down
@@ -121,6 +122,14 @@ docker logs -f letsencrypt
 ```
 
 ### Dev
+```shell
+docker logs -f dev-frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down -v
+```
+
 ```shell
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 
@@ -340,3 +349,15 @@ docker system prune -a --volumes
 ```
 
 @todo add clear docker log
+
+
+# Test Events
+
+@todo fix this
+
+```shell
+curl -X POST http://localhost:3000/api/bitrix-webhook \
+  -H "X-Bitrix-Auth-Token: your_secret_token" \
+  -H "Content-Type: application/json" \
+  -d '{"event":"ONCOMPANYADD","data":{"FIELDS":{"ID":123}}}'
+```

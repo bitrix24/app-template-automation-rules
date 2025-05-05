@@ -3,6 +3,9 @@ services:
     container_name: dev-frontend
     depends_on:
       - chrome
+      - rabbitmq
+# @todo fix this
+#      - condition: service_healthy
     build:
       context: ./frontend
       dockerfile: Dockerfile_dev
@@ -31,6 +34,7 @@ services:
     ports:
       - '9223:9223'
     healthcheck:
+      # @todo fix this
       test: [ "CMD-SHELL", "wget -q --spider http://localhost:9223/json/version || exit 1" ]
       interval: 10s
       timeout: 5s
@@ -44,9 +48,44 @@ services:
           memory: 1G
           cpus: '1.0'
 
+  rabbitmq:
+    container_name: dev-rabbitmq
+    image: rabbitmq:3.12-management-alpine
+#    build:
+#      context: ./rabbitmq
+#      dockerfile: Dockerfile_dev
+    ports:
+      - '5672:5672'
+      - '15672:15672' # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    env_file: .env.dev
+    environment:
+      # @todo fix this - self env ??
+      VIRTUAL_PORT: 15672
+      VIRTUAL_HOST: rabbitmq.dev-1.bx-shef.by
+      LETSENCRYPT_HOST: rabbitmq.dev-1.bx-shef.by
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - internal-net
+      - proxy-net
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+
 networks:
   proxy-net:
     driver: bridge
     external: true
   internal-net:
     driver: bridge
+
+volumes:
+  rabbitmq_data:
