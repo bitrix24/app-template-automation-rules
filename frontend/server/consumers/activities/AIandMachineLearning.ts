@@ -1,7 +1,7 @@
 import { consola } from 'consola'
 import jwt from 'jsonwebtoken'
 import { Salt } from './../../../app/services/salt'
-import { RabbitMQConsumer } from './../../../rabbitmq/consumer'
+import { RabbitMQConsumer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
 import type { MessageWithAuth, UploadDocumentRequest, UploadDocumentResponse } from './../../types'
 import { generatePDF } from './utils/pdf-generator'
@@ -86,7 +86,7 @@ const startConsumer = async () => {
         }
 
         ack()
-        console.log('stop send to b24 >> documentId: ', documentId)
+        consola.log('stop send to b24 >> documentId: ', documentId)
       } catch (error) {
         const problem = error instanceof Error ? error : new Error(`[RabbitMQ::${activityCode}] process error`, { cause: error })
         consola.error(problem)
@@ -128,32 +128,32 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
     //   }
     // })
     //
-    // console.log('Auth >>', '/oauth/token/', { grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token })
+    // consola.log('Auth >>', '/oauth/token/', { grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token })
     // const responseAuth = await apiAuth.get<UploadDocumentResponse>(
     //   'oauth/token/',
     //   { params: {grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token }}
     // )
     //
     // if (responseAuth.data?.error) {
-    //   console.error('<< Auth', responseAuth.data)
+    //   consola.error('<< Auth', responseAuth.data)
     //   throw new Error(responseAuth.data.error)
     // }
-    // // console.log('<< Auth', responseAuth.data)
+    // // consola.log('<< Auth', responseAuth.data)
     //
     // params.auth = responseAuth.data.access_token
-    // console.log('TEST >>', b24Url, 'crm.items.get', { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth })
+    // consola.log('TEST >>', b24Url, 'crm.items.get', { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth })
     // const response2 = await api.post<UploadDocumentResponse>(
     //   'crm.item.get.json',
     //   { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth }
     // )
     //
     // if (response2.data?.error) {
-    //   console.log('<< TEST ', response2.data)
+    //   consola.log('<< TEST ', response2.data)
     //   throw new Error(response2.data.error)
     // }
-    // console.log('<< TEST ', response2.data?.result?.item?.id)
+    // consola.log('<< TEST ', response2.data?.result?.item?.id)
 
-    // console.log('>>', b24Url, 'crm.documentgenerator.document.upload', params)
+    // consola.log('>>', b24Url, 'crm.documentgenerator.document.upload', params)
 
     const response = await api.post<UploadDocumentResponse>(
       `https://bel.bitrix24.ru/rest/crm.documentgenerator.document.upload.json`,
@@ -164,15 +164,15 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
     )
 
     if (response.data?.error) {
-      // console.log('<< TEST ', response.data)
+      // consola.log('<< TEST ', response.data)
       throw new Error(response.data.error)
     }
 
-    // console.log('<< ', response.data)
+    // consola.log('<< ', response.data)
 
     return response.data as UploadDocumentResponse
   } catch (error) {
-    console.error('<< ', error)
+    consola.error('<< ', error)
     if (axios.isAxiosError(error)) {
       throw new Error(`API Error: ${error.message}`)
     }

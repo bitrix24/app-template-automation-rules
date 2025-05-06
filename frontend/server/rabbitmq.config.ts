@@ -1,5 +1,5 @@
 import { config } from 'dotenv'
-import type { RabbitMQConfig } from '~~/rabbitmq/types'
+import type { RabbitMQConfig } from '@bitrix24/b24rabbitmq'
 import { Salt } from '~/services/salt'
 
 config({ path: '.env' })

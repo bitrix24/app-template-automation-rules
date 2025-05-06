@@ -1,4 +1,4 @@
-import type { Message } from '~~/rabbitmq/types'
+import type { Message } from '@bitrix24/b24rabbitmq'
 import type { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 
 /**

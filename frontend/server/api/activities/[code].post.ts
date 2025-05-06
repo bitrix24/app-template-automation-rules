@@ -6,7 +6,7 @@
  */
 import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 import { Salt } from '~/services/salt'
-import { RabbitMQProducer } from '~~/rabbitmq/producer'
+import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
 import type { Options, MessageWithAuth } from '~~/server/types'
 
