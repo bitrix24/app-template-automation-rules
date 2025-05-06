@@ -15,11 +15,13 @@ services:
       - ./frontend:/usr/src/app
       - ./logs:/tmp
       - /usr/src/app/node_modules
+# @todo remove this @bitrix24/b24rabbitmq
+      - ../../b24rabbitmq:/usr/src/app/node_modules/@bitrix24/b24rabbitmq
     env_file: .env.dev
     networks:
       - internal-net
       - proxy-net
-    # @todo fix this
+# @todo fix this
     restart: always
     deploy:
       resources:
@@ -91,6 +93,12 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile_consumer_AIandMachineLearning_dev
+    volumes:
+      - ./frontend:/usr/src/app-consumer
+      - ./logs-consumer:/tmp
+      - /usr/src/appconsumer/node_modules
+      # @todo remove this @bitrix24/b24rabbitmq
+      - ../../b24rabbitmq:/usr/src/appconsumer/node_modules/@bitrix24/b24rabbitmq
     env_file: .env.dev
     networks:
       - internal-net
