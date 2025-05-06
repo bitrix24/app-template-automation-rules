@@ -4,6 +4,11 @@
 > These are experimental
 > Still in early Alpha
 
+```
+cmd /c mklink /d E:\PhpstormProjects\bitrix24\app-template-automation-rules\consumers\activities\ai-and-machine-learning\b24rabbitmq E:\PhpstormProjects\bitrix24\b24rabbitmq
+cmd /c mklink /d E:\PhpstormProjects\bitrix24\app-template-automation-rules\frontend\b24rabbitmq E:\PhpstormProjects\bitrix24\b24rabbitmq
+```
+
 Look at docs to learn more:
 
 - [@bitrix24/b24ui-nuxt](https://bitrix24.github.io/b24ui/)
@@ -124,6 +129,7 @@ docker logs -f letsencrypt
 ### Dev
 ```shell
 docker logs -f dev-frontend
+docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learning-1
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
@@ -140,6 +146,7 @@ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules u
 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
@@ -167,6 +174,7 @@ docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules d
  
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build --scale consumer-ai-and-machine-learning=2
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --scale consumer-ai-and-machine-learning=2
+docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d consumer-ai-and-machine-learning
  
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
@@ -322,7 +330,9 @@ docker exec -it chrome netstat -tulpn
 # frontend
 docker exec -it frontend /bin/bash
 docker exec -it dev-frontend /bin/bash
-
+docker exec -it dev__app-template-automation-rules-consumer-ai-and-machine-learning-1 /bin/bash
+docker exec -it dev__app-template-automation-rules-consumer-ai-and-machine-learning-1 /bin/sh
+docker exec -it 
 # server
 docker exec -it server /bin/bash
 

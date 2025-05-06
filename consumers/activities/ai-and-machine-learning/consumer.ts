@@ -1,11 +1,9 @@
 import { consola } from 'consola'
-import jwt from 'jsonwebtoken'
-import { Salt } from './../../../app/services/salt'
 import { RabbitMQConsumer } from '@bitrix24/b24rabbitmq'
-import { rabbitMQConfig } from '../../rabbitmq.config'
-import type { MessageWithAuth, UploadDocumentRequest, UploadDocumentResponse } from './../../types'
-import { generatePDF } from './utils/pdf-generator'
 import { Text, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { rabbitMQConfig } from './rabbitmq.config'
+import type { MessageWithAuth, UploadDocumentRequest, UploadDocumentResponse } from './types'
+import { generatePDF } from './utils/pdf-generator'
 import { config } from 'dotenv'
 /**
  * @todo remove this
@@ -14,13 +12,12 @@ import axios from 'axios'
 
 config({ path: '.env' })
 
-const { addSalt } = Salt()
 const activityCode = 'AIandMachineLearning'
 
 const startConsumer = async () => {
   const consumer = new RabbitMQConsumer(rabbitMQConfig)
   await consumer.initialize()
-  const queueName = addSalt(`activity.${activityCode}`)
+  const queueName = `activity.${activityCode}`
 
   consola.log(`Consumer for ${activityCode} started`)
 
@@ -33,7 +30,7 @@ const startConsumer = async () => {
       try {
         consola.info(`[RabbitMQ::${activityCode}] >> `, msg.routingKey)
 
-        if (!msg?.additionalData?.options?.workflowId
+        if (!msg?.additionalData?.['workflowId']
           || msg?.entityTypeId === EnumCrmEntityTypeId.undefined
           || (msg?.entityId || 0) < 1
         ) {
@@ -43,15 +40,16 @@ const startConsumer = async () => {
         consola.log('start gen >> ', `/render/invoice-by-deal/${msg.entityId}/`)
 
         // Generate JWT token
-        const token = jwt.sign(
-          {
-            entityTypeId: msg.entityTypeId,
-            entityId: msg.entityId,
-            timestamp: Date.now()
-          },
-          process.env?.NUXT_JWT_SECRET || '?',
-          { expiresIn: '5m' }
-        )
+        const token = 'empty'
+        // const token = jwt.sign(
+        //   {
+        //     entityTypeId: msg.entityTypeId,
+        //     entityId: msg.entityId,
+        //     timestamp: Date.now()
+        //   },
+        //   process.env?.NUXT_JWT_SECRET || '?',
+        //   { expiresIn: '5m' }
+        // )
 
         const pdfBuffer = await generatePDF(
           `/render/invoice-by-deal/${msg.entityId}/`,
@@ -71,7 +69,7 @@ const startConsumer = async () => {
             {
               entityTypeId: msg?.entityTypeId || EnumCrmEntityTypeId.undefined,
               entityId: msg?.entityId || 0,
-              title: [msg?.additionalData?.options?.code, msg?.entityTypeId, msg?.entityId].join(':'),
+              title: [msg?.additionalData['code'], msg?.entityTypeId, msg?.entityId].join(':'),
               region: 'ru',
               number: Text.getUuidRfc4122(),
               refresh_token: msg.auth.refreshToken,
@@ -86,7 +84,7 @@ const startConsumer = async () => {
         }
 
         ack()
-        consola.log('stop send to b24 >> documentId: ', documentId)
+        console.log('stop send to b24 >> documentId:', documentId)
       } catch (error) {
         const problem = error instanceof Error ? error : new Error(`[RabbitMQ::${activityCode}] process error`, { cause: error })
         consola.error(problem)
@@ -99,7 +97,7 @@ const startConsumer = async () => {
   consumer.consume(queueName)
 }
 
-const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Promise<UploadDocumentResponse> => {
+const uploadDocument = async (_b24Url: string, params: UploadDocumentRequest): Promise<UploadDocumentResponse> => {
   // const client_id = 'local.zzz.yyyy'
   // const client_secret = 'zzDDxxx'
   try {
@@ -128,32 +126,32 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
     //   }
     // })
     //
-    // consola.log('Auth >>', '/oauth/token/', { grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token })
+    // console.log('Auth >>', '/oauth/token/', { grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token })
     // const responseAuth = await apiAuth.get<UploadDocumentResponse>(
     //   'oauth/token/',
     //   { params: {grant_type: 'refresh_token', client_id, client_secret, refresh_token: params.refresh_token }}
     // )
     //
     // if (responseAuth.data?.error) {
-    //   consola.error('<< Auth', responseAuth.data)
+    //   console.error('<< Auth', responseAuth.data)
     //   throw new Error(responseAuth.data.error)
     // }
-    // // consola.log('<< Auth', responseAuth.data)
+    // // console.log('<< Auth', responseAuth.data)
     //
     // params.auth = responseAuth.data.access_token
-    // consola.log('TEST >>', b24Url, 'crm.items.get', { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth })
+    // console.log('TEST >>', b24Url, 'crm.items.get', { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth })
     // const response2 = await api.post<UploadDocumentResponse>(
     //   'crm.item.get.json',
     //   { entityTypeId: params.entityTypeId, id: params.entityId, auth: params.auth }
     // )
     //
     // if (response2.data?.error) {
-    //   consola.log('<< TEST ', response2.data)
+    //   console.log('<< TEST ', response2.data)
     //   throw new Error(response2.data.error)
     // }
-    // consola.log('<< TEST ', response2.data?.result?.item?.id)
+    // console.log('<< TEST ', response2.data?.result?.item?.id)
 
-    // consola.log('>>', b24Url, 'crm.documentgenerator.document.upload', params)
+    // console.log('>>', b24Url, 'crm.documentgenerator.document.upload', params)
 
     const response = await api.post<UploadDocumentResponse>(
       `https://bel.bitrix24.ru/rest/crm.documentgenerator.document.upload.json`,
@@ -164,15 +162,15 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
     )
 
     if (response.data?.error) {
-      // consola.log('<< TEST ', response.data)
+      // console.log('<< TEST ', response.data)
       throw new Error(response.data.error)
     }
 
-    // consola.log('<< ', response.data)
+    // console.log('<< ', response.data)
 
     return response.data as UploadDocumentResponse
   } catch (error) {
-    consola.error('<< ', error)
+    console.error('<<', error)
     if (axios.isAxiosError(error)) {
       throw new Error(`API Error: ${error.message}`)
     }
@@ -180,7 +178,7 @@ const uploadDocument = async (b24Url: string, params: UploadDocumentRequest): Pr
   }
 }
 
-startConsumer().catch((e) => {
-  consola.error('Fatal error:', e)
+startConsumer().catch((error) => {
+  consola.error('Fatal error:', error)
   process.exit(1)
 })

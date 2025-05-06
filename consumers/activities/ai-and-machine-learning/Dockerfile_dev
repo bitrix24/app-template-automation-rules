@@ -1,0 +1,29 @@
+# For Nuxt app
+# @memo: copy everything to /usr/src/app
+
+FROM node:20-slim
+LABEL maintainer="B24Sdk <github.com/bitrix24>"
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+# @memo use for test - wget | nslookup | ping | nc
+RUN apt-get update && apt-get install -y \
+    wget \
+    dnsutils \
+    iputils-ping \
+    netcat-openbsd \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+RUN corepack enable
+
+COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install
+
+COPY . ./
+
+ENV DEV=true
+
+CMD ["pnpm", "run", "consumer:dev"]

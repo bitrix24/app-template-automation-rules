@@ -4,13 +4,12 @@ import type { RabbitMQConfig } from '@bitrix24/b24rabbitmq'
 config({ path: '.env' })
 /**
  * @todo fix this - test for Docker
- * @todo return to appConfig
  */
 console.warn('Config env', {
-  NUXT_RABBITMQ_URL: process.env?.NUXT_RABBITMQ_URL || '?'
+  NUXT_RABBITMQ_URL: process.env['NUXT_RABBITMQ_URL'] || '?'
 })
 
-const rabbitmqUrl = process.env?.NUXT_RABBITMQ_URL || '?'
+const rabbitmqUrl = process.env['NUXT_RABBITMQ_URL'] || '?'
 
 export const rabbitMQConfig: RabbitMQConfig = {
   connection: {
@@ -25,7 +24,18 @@ export const rabbitMQConfig: RabbitMQConfig = {
       options: { durable: true }
     }
   ],
-  queues: [],
+  queues: [
+    {
+      name: 'activity.AIandMachineLearning',
+      bindings: [
+        {
+          exchange: 'activities',
+          routingKey: 'activity.AIandMachineLearning'
+        }
+      ],
+      options: { durable: true }
+    }
+  ],
   channel: {
     prefetchCount: 1
   }

@@ -4,7 +4,7 @@
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-activity/bizproc-activity-log.html
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-robot/bizproc-event-send.html
  */
-import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { EnumCrmEntityTypeId, omit } from '@bitrix24/b24jssdk'
 import { Salt } from '~/services/salt'
 import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
@@ -88,7 +88,8 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    return handleActivity(options)
+    const response = await handleActivity(options)
+    return response
   } catch {
     throw createError({
       statusCode: 400,
@@ -109,16 +110,16 @@ async function handleActivity(options: Options) {
   }
 
   const producer = new RabbitMQProducer(rabbitMQConfig)
-  await producer.initialize()
-
   try {
+    await producer.initialize()
+
     const message: MessageWithAuth = {
       routingKey: addSalt(`activity.${activityCode}`),
       date: new Date().toISOString(),
       entityTypeId: options.entityTypeId,
       entityId: options.entityId,
       auth: options.auth,
-      additionalData: { options }
+      additionalData: { ...omit(options, ['auth', 'entityTypeId', 'entityId']) }
     }
 
     await producer.publish(
@@ -127,7 +128,7 @@ async function handleActivity(options: Options) {
       message
     )
 
-    console.log(`[RabbitMQ::${activityCode}] publish`, message)
+    console.log(`[RabbitMQ::${activityCode}] publish`, [message.routingKey, message.entityTypeId, message.entityId].join(' | '))
   } catch (error) {
     const problem = error instanceof Error ? error : new Error(`[RabbitMQ::${activityCode}] publish error`, { cause: error })
     console.error(problem)

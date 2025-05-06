@@ -28,7 +28,7 @@ function transformWsUrl(
 }
 
 const connectToBrowser = async () => {
-  const chromeUrl = process.env?.NUXT_CHROME_URL || '?'
+  const chromeUrl = process.env['NUXT_CHROME_URL'] || '?'
 
   console.log('Connected chromeUrl:', chromeUrl)
 
@@ -48,7 +48,7 @@ const connectToBrowser = async () => {
 
 export async function generatePDF(
   url: string,
-  params: { token: string, entityId: string | number }
+  _params: { token: string, entityId: string | number }
 ) {
   let browser: Browser | null = null
   try {
@@ -71,8 +71,8 @@ export async function generatePDF(
     //  'X-Forwarded-Proto': 'http',
     //  'Host': 'localhost'
     // })
-    const internalUrl = new URL(`${process.env?.NUXT_APP_INTERNAL_URL || '?'}${url}`)
-    console.log('make PDF for: ', internalUrl.toString())
+    const internalUrl = new URL(`${process.env['NUXT_APP_INTERNAL_URL'] || '?'}${url}`)
+    console.log('make PDF for:', internalUrl.toString())
 
     await page.goto(
       internalUrl.toString(),
@@ -116,34 +116,22 @@ export async function generatePDF(
     if (error instanceof Error) {
       // Page load timeout
       if (error.message.includes('Navigation timeout')) {
-        throw createError({
-          statusCode: 504,
-          statusMessage: 'Page loading timeout'
-        })
+        throw new Error('Page loading timeout')
       }
 
       // Connection problems
       if (error.message.includes('net::ERR_CONNECTION_REFUSED')) {
-        throw createError({
-          statusCode: 502,
-          statusMessage: 'Connection refused'
-        })
+        throw new Error('Connection refused')
       }
 
       // Invalid URL
       if (error.message.includes('net::ERR_NAME_NOT_RESOLVED')) {
-        throw createError({
-          statusCode: 400,
-          statusMessage: 'Invalid URL'
-        })
+        throw new Error('Invalid URL')
       }
 
       // Page not found
       if (error.message.includes('404')) {
-        throw createError({
-          statusCode: 404,
-          statusMessage: 'Page not found'
-        })
+        throw new Error('Page not found')
       }
     }
 

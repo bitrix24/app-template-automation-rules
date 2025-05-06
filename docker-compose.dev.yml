@@ -2,7 +2,6 @@ services:
   frontend:
     container_name: dev-frontend
     depends_on:
-      - chrome
       - rabbitmq
 # @todo fix this
 #      - condition: service_healthy
@@ -15,8 +14,6 @@ services:
       - ./frontend:/usr/src/app
       - ./logs:/tmp
       - /usr/src/app/node_modules
-# @todo remove this @bitrix24/b24rabbitmq
-      - ../../b24rabbitmq:/usr/src/app/node_modules/@bitrix24/b24rabbitmq
     env_file: .env.dev
     networks:
       - internal-net
@@ -84,21 +81,17 @@ services:
           cpus: '1.0'
 
   consumer-ai-and-machine-learning:
-    # container_name: dev-consumer-AIandMachineLearning
     depends_on:
       - chrome
       - rabbitmq
 # @todo fix this
 #      - condition: service_healthy
     build:
-      context: ./frontend
-      dockerfile: Dockerfile_consumer_AIandMachineLearning_dev
+      context: ./consumers/activities/ai-and-machine-learning
+      dockerfile: Dockerfile_dev
     volumes:
-      - ./frontend:/usr/src/app-consumer
-      - ./logs-consumer:/tmp
-      - /usr/src/appconsumer/node_modules
-      # @todo remove this @bitrix24/b24rabbitmq
-      - ../../b24rabbitmq:/usr/src/appconsumer/node_modules/@bitrix24/b24rabbitmq
+      - ./consumers/activities/ai-and-machine-learning:/usr/src/app
+      - /usr/src/app/node_modules
     env_file: .env.dev
     networks:
       - internal-net
