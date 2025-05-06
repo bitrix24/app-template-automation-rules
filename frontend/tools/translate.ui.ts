@@ -1,9 +1,6 @@
 /**
  * Translate i18n/locales
  * @see https://platform.deepseek.com/usage
- *
- * @use node ./tools/translate.ui.mjs
- * @use node ./tools/translate.ui.mjs
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'

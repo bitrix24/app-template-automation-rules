@@ -1,8 +1,6 @@
 /**
  * Translate content/activities/*\/*.md
  * @see https://platform.deepseek.com/usage
- *
- * @use node ./tools/translate.content.mjs
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'
