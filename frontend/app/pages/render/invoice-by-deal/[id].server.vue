@@ -60,7 +60,7 @@ function formatDate(date: Date): string {
 const { data: qrcode } = await useAsyncData(
   'page-qrCode',
   async () => await QRCode.toDataURL(
-    'http://localhost:3000/render/invoice-by-deal/1058/',
+    'https://dev-1.bx-shef.by/render/invoice-by-deal/1188/',
     {
       errorCorrectionLevel: 'H',
       margin: 0
@@ -80,9 +80,12 @@ const $b24Helper = await useB24HelperManager()
 const currentLang = useCurrentLang()
 const formatterNumber = useFormatterNumber()
 
+console.log(currentLang)
+
 const getTitle = computed(() => {
   return `Invoice No. ${dealData.value?.id} from ${currentDateTime.value}`
 })
+
 const getClientTitle = computed(() => {
   return (
     dealData.value?.company
@@ -106,6 +109,7 @@ const getPaymentList = computed(() => {
       : '-'
   ) || '-'
 })
+
 const getDeliveryList = computed(() => {
   return (
     dealData.value?.deliveryList
@@ -113,6 +117,7 @@ const getDeliveryList = computed(() => {
       : '-'
   ) || '-'
 })
+
 const getDeliveryPrice = computed(() => {
   return (
     dealData.value?.deliveryList
@@ -132,6 +137,7 @@ const productsChunkPage = computed<ProductRow[][]>(() => {
 
   return list
 })
+
 const globalIndexes = computed(() => {
   let counter = 1
   return productsChunkPage.value.map((page: ProductRow[]) =>
@@ -455,6 +461,9 @@ function formatPrice(price: number, currency?: string): string {
       </div>
     </template>
   </main>
+  <div v-else>
+    <h2>Empty dealData</h2>
+  </div>
 </template>
 
 <style>

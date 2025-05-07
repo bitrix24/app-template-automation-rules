@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@bitrix24/b24jssdk':
-        specifier: ^0.2.3
-        version: 0.2.3
+        specifier: ^0.4.1
+        version: 0.4.1
       '@bitrix24/b24rabbitmq':
-        specifier: ./b24rabbitmq
-        version: link:b24rabbitmq
+        specifier: ^0.0.2
+        version: 0.0.2(amqplib@0.10.8)
       amqplib:
         specifier: ^0.10.8
         version: 0.10.8
@@ -35,7 +35,7 @@ importers:
         version: 0.10.7
       '@types/node':
         specifier: ^22.15.11
-        version: 22.15.12
+        version: 22.15.14
       eslint:
         specifier: ^9.25.1
         version: 9.26.0
@@ -59,9 +59,15 @@ packages:
     resolution: {integrity: sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow==}
     engines: {node: '>=6.9.0'}
 
-  '@bitrix24/b24jssdk@0.2.3':
-    resolution: {integrity: sha512-66SYuvtu2pMVB5QBC/siMulawLoum8o+CIwzOA00Wso6Px2Lvtp73hkOd2r2cF32EM6mzNp3rvoJscYfSenFaw==}
-    engines: {node: '>=18.0.0'}
+  '@bitrix24/b24jssdk@0.4.1':
+    resolution: {integrity: sha512-fTpQivMEArDQJn67b+67dwcctD8TroePzlVI0OdnFu7Qlv5pnpzF8t+BN4Wx+KskDbFiRSRzT2uswXg0y6IHdw==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+
+  '@bitrix24/b24rabbitmq@0.0.2':
+    resolution: {integrity: sha512-xZF1x0r1WLtnaT8wyLF3rCvIhWNd3FUkpoN3JuQCT/2Wn5ifrkk8DeL3qqK4vaigLvyBa4OEtEFGl/qSWnCuvw==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      amqplib: ^0.10.8
 
   '@esbuild/aix-ppc64@0.25.4':
     resolution: {integrity: sha512-1VCICWypeQKhVbE9oW/sJaAmjLxhVqacdkvPLEjwlttjfwENRSClS8EjBz0KzRyFSCPDIkuXW34Je/vk7zdB7Q==}
@@ -310,8 +316,8 @@ packages:
   '@types/mdast@3.0.15':
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
 
-  '@types/node@22.15.12':
-    resolution: {integrity: sha512-K0fpC/ZVeb8G9rm7bH7vI0KAec4XHEhBam616nVJCV51bKzJ6oA3luG4WdKoaztxe70QaNjS/xBmcDLmr4PiGw==}
+  '@types/node@22.15.14':
+    resolution: {integrity: sha512-BL1eyu/XWsFGTtDWOYULQEs4KR0qdtYfCxYAUYRoB7JP7h9ETYLgQTww6kH8Sj2C0pFGgrpM0XKv6/kbIzYJ1g==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -1600,7 +1606,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.27.1': {}
 
-  '@bitrix24/b24jssdk@0.2.3':
+  '@bitrix24/b24jssdk@0.4.1':
     dependencies:
       '@types/luxon': 3.6.2
       axios: 1.9.0
@@ -1608,6 +1614,11 @@ snapshots:
       qs-esm: 7.0.2
     transitivePeerDependencies:
       - debug
+
+  '@bitrix24/b24rabbitmq@0.0.2(amqplib@0.10.8)':
+    dependencies:
+      amqplib: 0.10.8
+      consola: 3.4.2
 
   '@esbuild/aix-ppc64@0.25.4':
     optional: true
@@ -1785,7 +1796,7 @@ snapshots:
 
   '@types/amqplib@0.10.7':
     dependencies:
-      '@types/node': 22.15.12
+      '@types/node': 22.15.14
 
   '@types/estree@1.0.7': {}
 
@@ -1797,7 +1808,7 @@ snapshots:
     dependencies:
       '@types/unist': 2.0.11
 
-  '@types/node@22.15.12':
+  '@types/node@22.15.14':
     dependencies:
       undici-types: 6.21.0
 
@@ -1807,7 +1818,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 22.15.12
+      '@types/node': 22.15.14
     optional: true
 
   '@typescript-eslint/eslint-plugin@8.32.0(@typescript-eslint/parser@8.32.0(eslint@9.26.0)(typescript@5.8.3))(eslint@9.26.0)(typescript@5.8.3)':

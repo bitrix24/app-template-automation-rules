@@ -19,7 +19,7 @@ const startConsumer = async () => {
   await consumer.initialize()
   const queueName = `activity.${activityCode}`
 
-  consola.log(`Consumer for ${activityCode} started`)
+  consola.log(`Consumer for ${activityCode} started ...`)
 
   consumer.registerHandler(
     queueName,

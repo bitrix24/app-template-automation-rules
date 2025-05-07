@@ -31,9 +31,9 @@ const handleError = () => clearError({ redirect: errorData.value.clearErrorHref 
       <div class="mb-1 text-xs text-base-400 ">
         [code: {{ errorData.code }}]
       </div>
-      <h1 class="mb-4 text-h1 text-base-master font-normal">
+      <ProseH1 class="mb-4 text-h1 text-base-master font-normal">
         {{ errorData.title }}
-      </h1>
+      </ProseH1>
       <div
         v-show="errorData.description"
         class="text-h3 text-base-800"

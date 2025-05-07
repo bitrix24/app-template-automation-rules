@@ -18,8 +18,7 @@ services:
     networks:
       - internal-net
       - proxy-net
-# @todo fix this
-    restart: always
+    # restart: always
     deploy:
       resources:
         limits:
@@ -95,8 +94,7 @@ services:
     env_file: .env.dev
     networks:
       - internal-net
-# @todo fix this
-    restart: always
+    # restart: always
     deploy:
       resources:
         limits:

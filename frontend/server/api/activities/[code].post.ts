@@ -10,7 +10,7 @@ import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
 import type { Options, MessageWithAuth } from '~~/server/types'
 
-const { clearSalt, addSalt } = Salt()
+const { clearSalt } = Salt()
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -114,7 +114,7 @@ async function handleActivity(options: Options) {
     await producer.initialize()
 
     const message: MessageWithAuth = {
-      routingKey: addSalt(`activity.${activityCode}`),
+      routingKey: `activity.${activityCode}`,
       date: new Date().toISOString(),
       entityTypeId: options.entityTypeId,
       entityId: options.entityId,
@@ -123,7 +123,7 @@ async function handleActivity(options: Options) {
     }
 
     await producer.publish(
-      addSalt('activities'),
+      'activities',
       message.routingKey,
       message
     )

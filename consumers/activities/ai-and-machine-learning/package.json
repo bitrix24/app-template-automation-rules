@@ -10,18 +10,17 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
-    "dev-link_b24rabbitmq": "pnpm update @bitrix24/b24rabbitmq",
     "consumer:dev": "tsx watch consumer.ts",
     "consumer:run": "tsx consumer.ts"
   },
   "dependencies": {
-    "@bitrix24/b24jssdk": "^0.2.3",
-    "@bitrix24/b24rabbitmq": "./b24rabbitmq",
+    "@bitrix24/b24jssdk": "^0.4.1",
+    "@bitrix24/b24rabbitmq": "^0.0.2",
     "amqplib": "^0.10.8",
+    "axios": "^1.9.0",
     "consola": "^3.4.2",
     "dotenv": "^16.5.0",
-    "puppeteer-core": "^24.6.1",
-    "axios": "^1.9.0"
+    "puppeteer-core": "^24.6.1"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.7",

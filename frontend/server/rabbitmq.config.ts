@@ -6,9 +6,9 @@ config({ path: '.env' })
  * @todo fix this - test for Docker
  * @todo return to appConfig
  */
-console.warn('Config env', {
-  NUXT_RABBITMQ_URL: process.env?.NUXT_RABBITMQ_URL || '?'
-})
+// console.warn('Config env', {
+//   NUXT_RABBITMQ_URL: process.env?.NUXT_RABBITMQ_URL || '?'
+// })
 
 const rabbitmqUrl = process.env?.NUXT_RABBITMQ_URL || '?'
 
