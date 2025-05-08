@@ -33,7 +33,7 @@ export const useB24 = (): B24Hook => {
 }
 
 /**
- * @todo get from app
+ * @todo get from activity.params
  */
 export const useCurrentLang = (): typeof B24LangList[keyof typeof B24LangList] => {
   return B24LangList.en
@@ -64,11 +64,10 @@ export const useB24HelperManager = async () => {
 
 /**
  * @todo test under not admin use !!
- * @param dealId
  */
-export const useFetchDeal = (dealId: number) => {
+export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: number) => {
   return useAsyncData(
-    `deal-${dealId}`,
+    `${entityTypeId}-${entityId}`,
     async () => {
       let entity: Deal = {
         id: 0,
@@ -83,8 +82,8 @@ export const useFetchDeal = (dealId: number) => {
         entityItem: {
           method: 'crm.item.get',
           params: {
-            entityTypeId: EnumCrmEntityTypeId.deal,
-            id: dealId,
+            entityTypeId: entityTypeId,
+            id: entityId,
             select: [
               'id',
               'title',
@@ -96,15 +95,15 @@ export const useFetchDeal = (dealId: number) => {
         entityItemPaymentList: {
           method: 'crm.item.payment.list',
           params: {
-            entityTypeId: EnumCrmEntityTypeId.deal,
-            entityId: dealId
+            entityTypeId: entityTypeId,
+            entityId: entityId
           }
         },
         entityItemDeliveryList: {
           method: 'crm.item.delivery.list',
           params: {
-            entityTypeId: EnumCrmEntityTypeId.deal,
-            entityId: dealId
+            entityTypeId: entityTypeId,
+            entityId: entityId
           }
         },
         entityCompanyItem: {

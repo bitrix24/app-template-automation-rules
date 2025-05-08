@@ -1,19 +1,7 @@
-/*
-frontend  | ws://chrome:9222/devtools/browser/c47972fe-9f50-49cd-8cf0-339ba8cf765b
-frontend  | Connected to browser: Chrome/124.0.6367.78
-frontend  | make PDF for:  https://bitrix24.com/
-frontend  | ℹ ✨ new dependencies optimized: @bitrix24/b24icons-vue/main/FileCheckIcon, @bitrix24/b24icons-vue/main/SettingsIcon, @bitrix24/b24icons-vue/button/SearchIcon, @bitrix24/b24icons-vue/main/CheckIcon, @bitrix24/b24icons-vue/main/Market1Icon, @bitrix24/b24icons-vue/specialized/SpinnerIcon, @bitrix24/b24icons-vue/main/AttentionIIcon, fuse.js, @vueuse/core
-frontend  | ℹ ✨ optimized dependencies changed. reloading
-frontend  |
-frontend  |  ERROR  [unhandledRejection] write EPIPE
-frontend  |
- */
 import puppeteer from 'puppeteer-core'
-// import { sleepAction } from '../../app/utils/sleep'
+import { appOptions } from '../app.config'
 import type { Browser, Page } from 'puppeteer-core'
-import { config } from 'dotenv'
-
-config({ path: '.env' })
+import { consola } from 'consola'
 
 function transformWsUrl(
   httpUrl: string,
@@ -28,7 +16,7 @@ function transformWsUrl(
 }
 
 const connectToBrowser = async () => {
-  const chromeUrl = process.env['NUXT_CHROME_URL'] || '?'
+  const chromeUrl = appOptions().chromeUrl
 
   console.log('Connected chromeUrl:', chromeUrl)
 
@@ -48,31 +36,18 @@ const connectToBrowser = async () => {
 
 export async function generatePDF(
   url: string,
-  _params: { token: string, entityId: string | number }
+  params: { token: string }
 ) {
   let browser: Browser | null = null
   try {
     browser = await connectToBrowser()
     const page = await browser.newPage()
 
-    // await page.setRequestInterception(true)
-    // page.on('request', req => {
-    //   if (['image', 'stylesheet', 'font'].includes(req.resourceType())) {
-    //     req.abort()
-    //   } else {
-    //     req.continue()
-    //   }
-    // })
-
-    // await page.setExtraHTTPHeaders({
-    //  'Authorization': `Bearer ${params.token}`,
-    //  'X-Forwarded-For': '127.0.0.1',
-    //  'X-Forwarded-For': '172.18.0.3',
-    //  'X-Forwarded-Proto': 'http',
-    //  'Host': 'localhost'
-    // })
-    const internalUrl = new URL(`${process.env['NUXT_APP_INTERNAL_URL'] || '?'}${url}`)
-    console.log('make PDF for:', internalUrl.toString())
+    await page.setExtraHTTPHeaders({
+     'Authorization': `Bearer ${params.token}`
+    })
+    const internalUrl = new URL(`${appOptions().appInternalUrl}${url}`)
+    consola.log('make PDF for:', internalUrl.toString())
 
     await page.goto(
       internalUrl.toString(),
@@ -82,13 +57,12 @@ export async function generatePDF(
       }
     )
 
-    console.log('page wait >>>')
+    consola.log('page wait >>>')
     await checkSSRCompleteness(page)
 
-    console.log('PDF generation >>>')
+    consola.log('PDF generation >>>')
     /**
      * @memo some custom for page
-     * @todo remove this
      */
     await page.emulateMediaType('print')
     await page.addStyleTag({
@@ -98,7 +72,7 @@ export async function generatePDF(
     })
 
     /**
-     * @todo make config for margin
+     * @todo make config for options
      */
     const pdfBuffer = await page.pdf({
       format: 'A4',
@@ -110,7 +84,7 @@ export async function generatePDF(
 
     return pdfBuffer
   } catch (error) {
-    console.error('PDF generation error:', error)
+    consola.error('PDF generation error:', error)
 
     // Handling Puppeteer Specific Errors
     if (error instanceof Error) {
@@ -143,8 +117,11 @@ export async function generatePDF(
 }
 
 const checkSSRCompleteness = async (page: Page) => {
-  console.log('wait __nuxt >>>')
+  consola.log('wait __nuxt >>>')
   await page.waitForSelector('#__nuxt', { visible: true, timeout: 10_000 })
-  console.log('wait .app-loading-indicator >>>')
+  /**
+   * @see frontend/app/pages/render/invoice-by-deal/[id].server.vue
+   */
+  consola.log('wait .app-loading-indicator >>>')
   await page.waitForSelector('.app-loading-indicator', { hidden: true, timeout: 10_000 })
 }

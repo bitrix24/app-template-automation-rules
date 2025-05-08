@@ -23,9 +23,9 @@ importers:
       consola:
         specifier: ^3.4.2
         version: 3.4.2
-      dotenv:
-        specifier: ^16.5.0
-        version: 16.5.0
+      jose:
+        specifier: ^6.0.11
+        version: 6.0.11
       puppeteer-core:
         specifier: ^24.6.1
         version: 24.8.1
@@ -36,6 +36,9 @@ importers:
       '@types/node':
         specifier: ^22.15.11
         version: 22.15.14
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
       eslint:
         specifier: ^9.25.1
         version: 9.26.0
@@ -1005,6 +1008,9 @@ packages:
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  jose@6.0.11:
+    resolution: {integrity: sha512-QxG7EaliDARm1O1S8BGakqncGT9s25bKL1WSf6/oa17Tkqwi8D2ZNglqCF+DsYF88/rV66Q/Q2mFAy697E1DUg==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -2591,6 +2597,8 @@ snapshots:
   is-promise@4.0.0: {}
 
   isexe@2.0.0: {}
+
+  jose@6.0.11: {}
 
   js-tokens@4.0.0: {}
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { CatalogProductType } from '@bitrix24/b24jssdk'
-import { useCurrentLang, useFetchDeal, useFormatterNumber } from '~/composables/useBitrix24'
+import { jwtVerify } from 'jose'
+import { CatalogProductType, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { useCurrentLang, useFetchEntity, useFormatterNumber } from '~/composables/useBitrix24'
 import { chunkProductsList } from '~/utils/chunkArray'
 import type { ProductRow } from '~/types/bitrix'
 import QRCode from 'qrcode'
@@ -26,17 +27,57 @@ const route = useRoute()
 /**
  * @todo add some test query
  */
-const taskId = computed(() => {
-  const id = route.params.id
-  return Number.parseInt((Array.isArray(id) ? id[0] : id) || '0')
+const entityId = computed(() => {
+  const entityId = route.params.entityId
+  return Number.parseInt((Array.isArray(entityId) ? entityId[0] : entityId) || '0')
 })
 
-if (!taskId.value) {
+/**
+ * @todo fix by @b24
+ */
+function getEnumValue<T extends Record<string, string | number>>(
+  enumObj: T,
+  value: string | number
+): T[keyof T] | undefined {
+  return (Object.values(enumObj) as (string | number)[]).includes(value)
+    ? value as T[keyof T]
+    : undefined
+}
+
+const entityTypeId = computed(() => {
+  const entityTypeId = route.params.entityTypeId
+  const value = Number.parseInt((Array.isArray(entityTypeId) ? entityTypeId[0] : entityTypeId) || '0')
+  return getEnumValue(EnumCrmEntityTypeId, value) || EnumCrmEntityTypeId.undefined
+})
+
+if (!entityId.value) {
   throw createError({
     statusCode: 400,
-    message: 'taskId not specified'
+    message: 'entityId not specified'
   })
 }
+
+const config = useRuntimeConfig()
+
+const token = '123'
+$logger.info('jwt route', route.params)
+try {
+  const { payload } = await jwtVerify(
+    token,
+    new TextEncoder().encode(config.jwtSecret),
+    {
+      issuer: config.appClientSecret,
+      audience: 'render-invoice-by-entity'
+    }
+  )
+
+  $logger.info('jwt', payload)
+
+} catch (error) {
+  $logger.error('jwt', error)
+}
+
+$logger.info(`come >> ${entityTypeId.value} : ${entityId.value}`)
 
 /**
  * @todo fix this
@@ -73,14 +114,12 @@ const {
   data: dealData,
   status: processStatus,
   error: processError
-} = await useFetchDeal(taskId.value)
+} = await useFetchEntity(entityTypeId.value, entityId.value)
 
 const $b24Helper = await useB24HelperManager()
 
 const currentLang = useCurrentLang()
 const formatterNumber = useFormatterNumber()
-
-console.log(currentLang)
 
 const getTitle = computed(() => {
   return `Invoice No. ${dealData.value?.id} from ${currentDateTime.value}`

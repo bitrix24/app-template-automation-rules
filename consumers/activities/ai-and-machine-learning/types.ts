@@ -1,4 +1,5 @@
 import type { Message } from '@bitrix24/b24rabbitmq'
+import type { B24OAuthParams } from '@bitrix24/b24jssdk'
 
 /**
  * @todo move to jsSdk
@@ -36,25 +37,6 @@ export interface UploadDocumentRequest {
   refresh_token: string
 }
 
-
-/**
- * @todo move to jsSdk
- */
-export interface Auth {
-  applicationToken: string
-  userId: string
-  memberId: string
-  accessToken: string
-  refreshToken: string
-  expires: string
-  expiresIn: string
-  scope: string
-  domain: string
-  clientEndpoint: string
-  serverEndpoint: string
-  status: string
-}
-
 export interface MessageWithAuth extends Message {
-  auth: Auth
+  auth: B24OAuthParams
 }

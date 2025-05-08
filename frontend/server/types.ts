@@ -1,29 +1,11 @@
 import type { Message } from '@bitrix24/b24rabbitmq'
-import type { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
-
-/**
- * @todo move to jsSdk
- */
-export interface Auth {
-  applicationToken: string
-  userId: string
-  memberId: string
-  accessToken: string
-  refreshToken: string
-  expires: string
-  expiresIn: string
-  scope: string
-  domain: string
-  clientEndpoint: string
-  serverEndpoint: string
-  status: string
-}
+import type { EnumCrmEntityTypeId, B24OAuthParams } from '@bitrix24/b24jssdk'
 
 export interface Options {
   entityTypeId: EnumCrmEntityTypeId
   entityId: number
-  workflowId?: string
-  eventToken?: string
+  workflowId: string
+  eventToken: string
   code: string
   useSubscription: boolean
   timeoutDuration: number
@@ -31,9 +13,9 @@ export interface Options {
   documentId: string[]
   documentType: string[]
   properties: Record<string, any>
-  auth: Auth
+  auth: B24OAuthParams
 }
 
 export interface MessageWithAuth extends Message {
-  auth: Auth
+  auth: B24OAuthParams
 }

@@ -1,95 +1,194 @@
 /**
  * @todo fix this
+ * @todo test under not admin use !!
  *
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-activity/bizproc-activity-log.html
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-robot/bizproc-event-send.html
  */
-import { EnumCrmEntityTypeId, omit } from '@bitrix24/b24jssdk'
+import type { BoolString } from '@bitrix24/b24jssdk'
+import { EnumAppStatus, EnumCrmEntityTypeId, omit } from '@bitrix24/b24jssdk'
+import * as qs from 'qs-esm'
 import { Salt } from '~/services/salt'
 import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
-import type { Options, MessageWithAuth } from '~~/server/types'
+import type { MessageWithAuth, Options } from '~~/server/types'
 
 const { clearSalt } = Salt()
 
+// region fix by @b24 ////
+
+// { workflow_id: '681c894d3f0ec8.54818143',
+//   code: 'AIandMachineLearning____dev',
+//   document_id: [ 'crm', 'CCrmDocumentDeal', 'DEAL_1188' ],
+//   document_type: [ 'crm', 'CCrmDocumentDeal', 'DEAL' ],
+//   event_token:
+//   '681c894d3f0ec8.54818143|A36717_5720_22885_29158|X3QpQY6RKFD8ULUtOiKllFEZLUaVuDYn.29c803f2e57290aade3fcfcb061b2aa2d26f682deddb9de32f556040c6041901',
+//     properties: { entityTypeId: 'CRM_DEAL', entityId: '1188' },
+//   use_subscription: 'N',
+//     timeout_duration: '0',
+//   ts: '1746700621',
+//   auth:
+//   { access_token: '5d971c6800782a4e000011e7000000010000005599262cf2ead07da4b5dd68fb55479e',
+//     expires: '1746704221',
+//     expires_in: '3600',
+//     scope: 'crm,catalog,bizproc,placement,user_brief',
+//     domain: 'bel.bitrix24.ru',
+//     server_endpoint: 'https://oauth.bitrix.info/rest/',
+//     status: 'L',
+//     client_endpoint: 'https://bel.bitrix24.ru/rest/',
+//     member_id: '3d906b2a32030386ccc7274d2313a01b',
+//     user_id: '1',
+//     refresh_token: '4d16446800782a4e000011e700000001000000196f6f744d817fac72c4f1c9ad438dd4',
+//     application_token: '565be534fe44bce005bae699aa0313f8' } }
+
+/**
+ * @todo fix by @b24
+ */
+interface HandlerAuthParams {
+  access_token: string
+  expires: string
+  expires_in: string
+  scope: string
+  domain: string
+  server_endpoint: string
+  status: string
+  client_endpoint: string
+  member_id: string
+  user_id: string
+  refresh_token: string
+  application_token: string
+}
+
+/**
+ * @todo fix by @b24
+ */
+interface ActivityHandlerParams {
+  event_token: string
+  workflow_id: string
+  code: string
+  document_id: string[]
+  document_type: string[]
+  properties?: Record<string, string>
+  use_subscription: BoolString
+  timeout_duration: string
+  ts: string
+  auth: HandlerAuthParams
+}
+
+/**
+ * @todo fix by @b24
+ */
+enum EnumBizprocDocumentType {
+  undefined = 'undefined',
+  lead = 'CCrmDocumentLead',
+  deal = 'CCrmDocumentDeal',
+  contact = 'CCrmDocumentContact',
+  company = 'CCrmDocumentCompany',
+  /**
+   * @todo test this
+   */
+  oldInvoice = 'CCrmDocumentSmartInvoice',
+  quote = 'CCrmDocumentSmartQuote',
+  order = 'CCrmDocumentSmartOrder'
+}
+
+/**
+ * @todo test this
+ */
+function convertBizprocDocumentTypeToCrmEntityTypeId(documentType: EnumBizprocDocumentType): EnumCrmEntityTypeId {
+  switch (documentType) {
+    case EnumBizprocDocumentType.lead:
+      return EnumCrmEntityTypeId.lead
+    case EnumBizprocDocumentType.deal:
+      return EnumCrmEntityTypeId.deal
+    case EnumBizprocDocumentType.contact:
+      return EnumCrmEntityTypeId.contact
+    case EnumBizprocDocumentType.company:
+      return EnumCrmEntityTypeId.company
+    case EnumBizprocDocumentType.oldInvoice:
+      return EnumCrmEntityTypeId.oldInvoice
+    case EnumBizprocDocumentType.quote:
+      return EnumCrmEntityTypeId.quote
+    case EnumBizprocDocumentType.order:
+      return EnumCrmEntityTypeId.order
+  }
+
+  return EnumCrmEntityTypeId.undefined
+}
+
+/**
+ * @todo fix by @b24
+ */
+export function getEnumValue<T extends Record<string, string | number>>(
+  enumObj: T,
+  value: string | number
+): T[keyof T] | undefined {
+  return (Object.values(enumObj) as (string | number)[]).includes(value)
+    ? value as T[keyof T]
+    : undefined
+}
+// endregion ////
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
+  const data = qs.parse(body) as unknown as Partial<ActivityHandlerParams>
 
   const options: Options = {
-    code: clearSalt(body?.code || 'notSetCodeOptions'),
+    code: clearSalt(data?.code || 'notSetCodeOptions'),
     entityTypeId: EnumCrmEntityTypeId.undefined,
     entityId: 0,
-    workflowId: (body?.workflow_id || null),
-    eventToken: (body?.event_token || null),
-    useSubscription: body?.use_subscription === 'Y',
-    timeoutDuration: Number.parseInt(body?.timeout_duration || '0'),
-    ts: Number.parseInt(body?.ts || '0'),
-    documentId: [
-      body['document_id[0]'] || null,
-      body['document_id[1]'] || null,
-      body['document_id[2]'] || null
-    ].filter(Boolean),
-    documentType: [
-      body['document_type[0]'] || null,
-      body['document_type[1]'] || null,
-      body['document_type[2]'] || null
-    ].filter(Boolean),
+    workflowId: (data?.workflow_id || '?'),
+    eventToken: (data?.event_token || '?'),
+    useSubscription: data?.use_subscription === 'Y',
+    timeoutDuration: Number.parseInt(data?.timeout_duration || '0'),
+    ts: Number.parseInt(data?.ts || '0'),
+    documentId: data?.document_id
+      ? [
+          data.document_id[0],
+          data.document_id[1],
+          data.document_id[2]
+        ].filter(Boolean)
+      : [],
+    documentType: data?.document_type
+      ? [
+          data.document_type[0],
+          data.document_type[1],
+          data.document_type[2]
+        ].filter(Boolean)
+      : [],
     properties: {},
     auth: {
-      applicationToken: body['auth[application_token]'] || 'empty',
-      userId: body['auth[user_id]'] || 'empty',
-      memberId: body['auth[member_id]'] || 'empty',
-      accessToken: body['auth[access_token]'] || 'empty',
-      refreshToken: body['auth[access_token]'] || 'empty',
-      expires: body['auth[expires]'] || '0',
-      expiresIn: body['auth[expires_in]'] || '3600',
-      scope: body['auth[scope]'] || 'empty',
-      domain: body['auth[domain]'] || 'empty',
-      clientEndpoint: body['auth[client_endpoint]'] || 'empty',
-      serverEndpoint: body['auth[server_endpoint]'] || 'empty',
-      status: body['auth[status]'] || 'empty'
+      applicationToken: data?.auth?.application_token || '?',
+      userId: Number.parseInt(data?.auth?.user_id || '0'),
+      memberId: data?.auth?.member_id || '?',
+      accessToken: data?.auth?.access_token || '?',
+      refreshToken: data?.auth?.refresh_token || '?',
+      expires: Number.parseInt(data?.auth?.expires || '0'),
+      expiresIn: Number.parseInt(data?.auth?.expires_in || '3600'),
+      scope: data?.auth?.scope || '',
+      domain: data?.auth?.domain || '',
+      clientEndpoint: data?.auth?.client_endpoint || '?',
+      serverEndpoint: data?.auth?.server_endpoint || '?',
+      status: data?.auth?.status || EnumAppStatus.Free
     }
   }
 
-  /**
-   * @todo move to jsSdk
-   */
   if (options.documentType[1]) {
-    switch (options.documentType[1]) {
-      case 'CCrmDocumentLead':
-        options.entityTypeId = EnumCrmEntityTypeId.lead
-        break
-      case 'CCrmDocumentDeal':
-        options.entityTypeId = EnumCrmEntityTypeId.deal
-        break
-      case 'CCrmDocumentContact':
-        options.entityTypeId = EnumCrmEntityTypeId.contact
-        break
-      case 'CCrmDocumentCompany':
-        options.entityTypeId = EnumCrmEntityTypeId.company
-        break
-      /**
-       * @todo test this
-       */
-      case 'CCrmDocumentSmartInvoice':
-        options.entityTypeId = EnumCrmEntityTypeId.invoice
-        break
-      case 'CCrmDocumentSmartQuote':
-        options.entityTypeId = EnumCrmEntityTypeId.quote
-        break
-      case 'CCrmDocumentSmartOrder':
-        options.entityTypeId = EnumCrmEntityTypeId.order
-        break
-    }
+    options.entityTypeId = convertBizprocDocumentTypeToCrmEntityTypeId(
+      getEnumValue(EnumBizprocDocumentType, options.documentType[1]) || EnumBizprocDocumentType.undefined
+    )
   }
 
-  if (options.documentId[2] && options.documentType[2]) {
-    options.entityId = Number.parseInt(options.documentId[2].replace(`${options.documentType[2]}_`, '') || '0')
+  const match = options.documentId[2].match(/_(\d+)$/)
+  if (!match) {
+    options.entityId = 0
+  } else {
+    const value = Number.parseInt(match[1], 10)
+    options.entityId = Number.isNaN(value) ? 0 : value
   }
 
   try {
-    const response = await handleActivity(options)
-    return response
+    return await handleActivity(options)
   } catch {
     throw createError({
       statusCode: 400,

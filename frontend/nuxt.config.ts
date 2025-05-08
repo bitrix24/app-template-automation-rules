@@ -34,6 +34,8 @@ export default defineNuxtConfig({
     appInternalUrl: '',
     jwtSecret: '',
     allowedIps: '',
+    appClientId: '',
+    appClientSecret: '',
     // @todo remove this
     b24HookUrl: '',
     b24HookUserId: 0,
