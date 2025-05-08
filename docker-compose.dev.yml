@@ -2,9 +2,8 @@ services:
   frontend:
     container_name: dev-frontend
     depends_on:
-      - rabbitmq
-# @todo fix this
-#      - condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     build:
       context: ./frontend
       dockerfile: Dockerfile_dev
@@ -18,7 +17,7 @@ services:
     networks:
       - internal-net
       - proxy-net
-    # restart: always
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -33,14 +32,14 @@ services:
     ports:
       - '9223:9223'
     healthcheck:
-      # @todo fix this
-      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9223/json/version || exit 1" ]
+      test: [ "CMD-SHELL", "wget -q --spider http://0.0.0.0:9223/json/version || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 30s
     networks:
       - internal-net
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -73,6 +72,7 @@ services:
     networks:
       - internal-net
       - proxy-net
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -81,10 +81,10 @@ services:
 
   consumer-ai-and-machine-learning:
     depends_on:
-      - chrome
-      - rabbitmq
-# @todo fix this
-#      - condition: service_healthy
+      chrome:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     build:
       context: ./consumers/activities/ai-and-machine-learning
       dockerfile: Dockerfile_dev
@@ -94,7 +94,7 @@ services:
     env_file: .env.dev
     networks:
       - internal-net
-    # restart: always
+    restart: unless-stopped
     deploy:
       resources:
         limits:

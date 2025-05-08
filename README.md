@@ -234,7 +234,7 @@ docker network inspect inner | grep -A 10 Containers
 
 # chrome
 docker inspect dev-chrome
-docker exec -it dev-chrome wget -qO- http://localhost:9222/json/version
+docker exec -it dev-chrome wget -qO- http://0.0.0.0:9223/json/version
 docker exec -it dev-chrome wget -qO- http://dev-frontend:3000/
 
 docker exec -it prod-chrome wget -qO- http://prod-frontend:80/render/invoice-by-deal/1058/
