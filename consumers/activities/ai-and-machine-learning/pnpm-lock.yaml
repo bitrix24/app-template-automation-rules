@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@bitrix24/b24jssdk':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.4.2
+        version: 0.4.2
       '@bitrix24/b24rabbitmq':
-        specifier: ^0.0.2
-        version: 0.0.2(amqplib@0.10.8)
+        specifier: ^0.0.3
+        version: 0.0.3(amqplib@0.10.8)
       amqplib:
         specifier: ^0.10.8
         version: 0.10.8
@@ -59,12 +59,12 @@ packages:
     resolution: {integrity: sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow==}
     engines: {node: '>=6.9.0'}
 
-  '@bitrix24/b24jssdk@0.4.1':
-    resolution: {integrity: sha512-fTpQivMEArDQJn67b+67dwcctD8TroePzlVI0OdnFu7Qlv5pnpzF8t+BN4Wx+KskDbFiRSRzT2uswXg0y6IHdw==}
-    engines: {node: ^20.0.0 || >=22.0.0}
+  '@bitrix24/b24jssdk@0.4.2':
+    resolution: {integrity: sha512-MMrtSmyQ713LM31kmJRiLNxAfGHDJ/N0GRXHPB1/MLyGk4zWcgReISLkNn6Y8QE51okZokql8DOlHOXm0MZoUw==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
 
-  '@bitrix24/b24rabbitmq@0.0.2':
-    resolution: {integrity: sha512-xZF1x0r1WLtnaT8wyLF3rCvIhWNd3FUkpoN3JuQCT/2Wn5ifrkk8DeL3qqK4vaigLvyBa4OEtEFGl/qSWnCuvw==}
+  '@bitrix24/b24rabbitmq@0.0.3':
+    resolution: {integrity: sha512-/QbC/RSuCPfXIm3TgZA86p1Zoq/XRmcHDA+9h0IvzJ9wdfDKGq5D5jEKO+jLE149kEv3HkOzvaX2O9YVs8/vhw==}
     engines: {node: ^20.0.0 || >=22.0.0}
     peerDependencies:
       amqplib: ^0.10.8
@@ -1606,7 +1606,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.27.1': {}
 
-  '@bitrix24/b24jssdk@0.4.1':
+  '@bitrix24/b24jssdk@0.4.2':
     dependencies:
       '@types/luxon': 3.6.2
       axios: 1.9.0
@@ -1615,7 +1615,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@bitrix24/b24rabbitmq@0.0.2(amqplib@0.10.8)':
+  '@bitrix24/b24rabbitmq@0.0.3(amqplib@0.10.8)':
     dependencies:
       amqplib: 0.10.8
       consola: 3.4.2

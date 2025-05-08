@@ -14,8 +14,8 @@
     "consumer:run": "tsx consumer.ts"
   },
   "dependencies": {
-    "@bitrix24/b24jssdk": "^0.4.1",
-    "@bitrix24/b24rabbitmq": "^0.0.2",
+    "@bitrix24/b24jssdk": "^0.4.2",
+    "@bitrix24/b24rabbitmq": "^0.0.3",
     "amqplib": "^0.10.8",
     "axios": "^1.9.0",
     "consola": "^3.4.2",
