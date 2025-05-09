@@ -370,15 +370,3 @@ docker system prune -a --volumes
 ```
 
 @todo add clear docker log
-
-
-# Test Events
-
-@todo fix this
-
-```shell
-curl -X POST http://localhost:3000/api/bitrix-webhook \
-  -H "X-Bitrix-Auth-Token: your_secret_token" \
-  -H "Content-Type: application/json" \
-  -d '{"event":"ONCOMPANYADD","data":{"FIELDS":{"ID":123}}}'
-```

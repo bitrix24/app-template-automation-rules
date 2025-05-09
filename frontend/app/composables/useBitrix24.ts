@@ -2,11 +2,6 @@ import { LoggerBrowser, B24Hook, useB24Helper, B24LangList, LoadDataType, EnumCr
 import type { Deal, ProductInfo, ProductRow } from '~/types/bitrix'
 import type { CatalogProductImage } from '@bitrix24/b24jssdk'
 
-export const $logger = LoggerBrowser.build(
-  'useB24 ',
-  import.meta.env?.DEV === true
-)
-
 let $b24: null | B24Hook = null
 
 const {
@@ -69,6 +64,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
   return useAsyncData(
     `${entityTypeId}-${entityId}`,
     async () => {
+      // @todo fix this -> set type by entityTypeId
       let entity: Deal = {
         id: 0,
         title: '',
@@ -291,6 +287,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
       }
 
       return entity
-    }
+    },
+    { server: true }
   )
 }

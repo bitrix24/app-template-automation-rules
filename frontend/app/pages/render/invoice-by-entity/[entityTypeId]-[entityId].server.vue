@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { jwtVerify } from 'jose'
-import { CatalogProductType, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
+import { CatalogProductType, EnumCrmEntityTypeId, LoggerBrowser } from '@bitrix24/b24jssdk'
+import type { B24OAuthParams } from '@bitrix24/b24jssdk'
 import { useCurrentLang, useFetchEntity, useFormatterNumber } from '~/composables/useBitrix24'
 import { chunkProductsList } from '~/utils/chunkArray'
 import type { ProductRow } from '~/types/bitrix'
@@ -10,7 +10,8 @@ import TelephonyHandset1Icon from '@bitrix24/b24icons-vue/main/TelephonyHandset1
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 
 definePageMeta({
-  layout: false
+  layout: false,
+  middleware: '02-render-invoice-by-entity-server'
 })
 
 useHead({
@@ -23,77 +24,71 @@ useHead({
   }
 })
 
-const route = useRoute()
-/**
- * @todo add some test query
- */
-const entityId = computed(() => {
-  const entityId = route.params.entityId
-  return Number.parseInt((Array.isArray(entityId) ? entityId[0] : entityId) || '0')
-})
+const $logger = LoggerBrowser.build(
+  'render-invoice-by-entity ',
+  import.meta.env?.DEV === true
+)
 
-/**
- * @todo fix by @b24
- */
-function getEnumValue<T extends Record<string, string | number>>(
-  enumObj: T,
-  value: string | number
-): T[keyof T] | undefined {
-  return (Object.values(enumObj) as (string | number)[]).includes(value)
-    ? value as T[keyof T]
-    : undefined
-}
+const requestData = useState('auth')
+
+// const {
+//   data: requestData
+// } = await useAsyncData(
+//   'authToken',
+//   async () => {
+//     const event = useRequestEvent()
+//     const route = useRoute()
+//     const authHeader = event?.node.req.headers['authorization'] || ''
+//     const token = authHeader.replace('Bearer ', '')
+//
+//     const config = useRuntimeConfig()
+//     try {
+//       const { payload } = await jwtVerify(token, new TextEncoder().encode(config.jwtSecret))
+//       if (payload.iss !== config.appClientSecret) {
+//         throw createError({ statusCode: 400, message: 'Invalid Issuer', fatal: true })
+//       } else if (payload.aud !== 'render-invoice-by-entity') {
+//         throw createError({ statusCode: 400, message: 'Invalid Audience', fatal: true })
+//       }
+//
+//       return { ...payload, entityId, entityTypeId } as RequestParamsForRenderPage
+//     } catch {
+//       throw createError({ statusCode: 401, message: 'Invalid token', fatal: true })
+//     }
+//   },
+//   { server: true, immediate: true }
+// )
 
 const entityTypeId = computed(() => {
-  const entityTypeId = route.params.entityTypeId
-  const value = Number.parseInt((Array.isArray(entityTypeId) ? entityTypeId[0] : entityTypeId) || '0')
-  return getEnumValue(EnumCrmEntityTypeId, value) || EnumCrmEntityTypeId.undefined
+  return requestData?.value?.entityTypeId ?? EnumCrmEntityTypeId.undefined
 })
+const entityId = computed(() => {
+  return requestData?.value?.entityId ?? 0
+})
+
+$logger.info(`come >> ${entityTypeId.value} : ${entityId.value}`, requestData.value || '?')
 
 if (!entityId.value) {
   throw createError({
     statusCode: 400,
-    message: 'entityId not specified'
+    message: 'entityId not specified',
+    fatal: true
   })
 }
 
-const config = useRuntimeConfig()
+const {
+  data: dealData,
+  status: processStatus,
+  error: processError
+} = await useFetchEntity(entityTypeId.value, entityId.value)
 
-const token = '123'
-$logger.info('jwt route', route.params)
-try {
-  const { payload } = await jwtVerify(
-    token,
-    new TextEncoder().encode(config.jwtSecret),
-    {
-      issuer: config.appClientSecret,
-      audience: 'render-invoice-by-entity'
-    }
-  )
+const $b24Helper = await useB24HelperManager()
 
-  $logger.info('jwt', payload)
-
-} catch (error) {
-  $logger.error('jwt', error)
-}
-
-$logger.info(`come >> ${entityTypeId.value} : ${entityId.value}`)
-
+const currentLang = useCurrentLang()
+const formatterNumber = useFormatterNumber()
 /**
  * @todo fix this
  */
 const currentDateTime = ref(formatDate(new Date()))
-
-/**
- * @todo fix this
- */
-function formatDate(date: Date): string {
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = date.toLocaleString('en-US', { month: 'long' }).toLowerCase()
-  const year = date.getFullYear()
-
-  return `${day} ${month} ${year}`
-}
 
 /**
  * @todo move to useFetchDeal
@@ -110,16 +105,17 @@ const { data: qrcode } = await useAsyncData(
   { immediate: true }
 )
 
-const {
-  data: dealData,
-  status: processStatus,
-  error: processError
-} = await useFetchEntity(entityTypeId.value, entityId.value)
+// region functions ////
+/**
+ * @todo fix this
+ */
+function formatDate(date: Date): string {
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = date.toLocaleString('en-US', { month: 'long' }).toLowerCase()
+  const year = date.getFullYear()
 
-const $b24Helper = await useB24HelperManager()
-
-const currentLang = useCurrentLang()
-const formatterNumber = useFormatterNumber()
+  return `${day} ${month} ${year}`
+}
 
 const getTitle = computed(() => {
   return `Invoice No. ${dealData.value?.id} from ${currentDateTime.value}`
@@ -246,6 +242,7 @@ function formatPrice(price: number, currency?: string): string {
     currentLang
   )
 }
+// endregion ////
 </script>
 
 <template>
