@@ -1,31 +1,14 @@
-import { LoggerBrowser, B24Hook, useB24Helper, B24LangList, LoadDataType, EnumCrmEntityTypeId, EnumCrmEntityTypeShort, useFormatter } from '@bitrix24/b24jssdk'
+import { useB24Helper, B24LangList, LoadDataType, EnumCrmEntityTypeId, EnumCrmEntityTypeShort, useFormatter } from '@bitrix24/b24jssdk'
+import type { CatalogProductImage, B24OAuth } from '@bitrix24/b24jssdk'
 import type { Deal, ProductInfo, ProductRow } from '~/types/bitrix'
-import type { CatalogProductImage } from '@bitrix24/b24jssdk'
 
-let $b24: null | B24Hook = null
+// let $b24: null | B24OAuth = null
 
 const {
   getB24Helper,
   isInitB24Helper,
   initB24Helper
 } = useB24Helper()
-
-export const useB24 = (): B24Hook => {
-  if ($b24) {
-    return $b24
-  }
-
-  const config = useRuntimeConfig()
-
-  $b24 = new B24Hook({
-    b24Url: config.b24HookUrl,
-    userId: config.b24HookUserId,
-    secret: config.b24HookSecret
-  })
-  $b24.setLogger(LoggerBrowser.build('Core', false))
-
-  return $b24
-}
 
 /**
  * @todo get from activity.params
@@ -41,11 +24,12 @@ export const useFormatterNumber = (): typeof formatterNumber => {
   return formatterNumber
 }
 
-export const useB24HelperManager = async () => {
+export const useB24HelperManager = async (
+  $b24: B24OAuth
+) => {
   if (isInitB24Helper()) {
     return getB24Helper()
   }
-  const $b24 = useB24()
   await initB24Helper(
     $b24,
     [
@@ -60,7 +44,11 @@ export const useB24HelperManager = async () => {
 /**
  * @todo test under not admin use !!
  */
-export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: number) => {
+export const useFetchEntity = (
+  $b24: B24OAuth,
+  entityTypeId: EnumCrmEntityTypeId,
+  entityId: number
+) => {
   return useAsyncData(
     `${entityTypeId}-${entityId}`,
     async () => {
@@ -74,7 +62,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
 
       let catalogId: number[] = []
 
-      const response = await useB24().callBatch({
+      const response = await $b24.callBatch({
         entityItem: {
           method: 'crm.item.get',
           params: {
@@ -187,7 +175,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
        * @todo not move to batch -> may be more > 50
        */
       entity.products = []
-      const generator = useB24().fetchListMethod(
+      const generator = $b24.fetchListMethod(
         'crm.item.productrow.list',
         {
           filter: {
@@ -213,7 +201,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
         return entity
       }
 
-      const generatorProducts = useB24().fetchListMethod(
+      const generatorProducts = $b24.fetchListMethod(
         'catalog.product.list',
         {
           filter: {
@@ -265,7 +253,7 @@ export const useFetchEntity = (entityTypeId: EnumCrmEntityTypeId, entityId: numb
         return entity
       }
 
-      const responseCatalogImages = await useB24().callBatchByChunk(
+      const responseCatalogImages = await $b24.callBatchByChunk(
         commandList,
         false
       )

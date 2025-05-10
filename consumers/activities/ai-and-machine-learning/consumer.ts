@@ -9,7 +9,7 @@ import { rabbitMQConfig } from './rabbitmq.config'
 import { SignJWT } from 'jose'
 import { Text, EnumCrmEntityTypeId, B24OAuth, LoggerBrowser } from '@bitrix24/b24jssdk'
 import type { B24OAuthSecret, B24OAuthParams } from '@bitrix24/b24jssdk'
-import type { MessageWithAuth, UploadDocumentRequest, UploadDocumentResponse } from './types'
+import type { MessageWithAuth } from './types'
 import { generatePDF } from './utils/pdf-generator'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -50,7 +50,7 @@ const startConsumer = async () => {
           .setProtectedHeader({ alg: 'HS256' })
           .setIssuedAt()
           .setIssuer(appOptions().appClientSecret)
-          .setAudience('render-invoice-by-entity')
+          .setAudience('server-render')
           .setExpirationTime('5m')
           .sign(appOptions().jwtSecret)
 
@@ -71,10 +71,7 @@ const startConsumer = async () => {
         }
 
         const $b24 = new B24OAuth(authOptions, oAuthSecret)
-        /**
-         * @todo remove
-         */
-        $b24.setLogger(LoggerBrowser.build('Consumer [B24]', true))
+        $b24.setLogger(LoggerBrowser.build('Consumer [B24]', false))
         /**
          * @todo fix work && remove
          */

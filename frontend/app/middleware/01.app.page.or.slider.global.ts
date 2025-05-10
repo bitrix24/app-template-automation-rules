@@ -2,8 +2,8 @@ import { LoggerBrowser } from '@bitrix24/b24jssdk'
 import type { RouteLocationNormalized } from 'vue-router'
 
 const $logger = LoggerBrowser.build(
-  'middleware:app.page.or.slider.global'
-  // import.meta.env?.DEV === true
+  'middleware:app.page.or.slider.global',
+  import.meta.dev
 )
 
 const baseDir = '/'

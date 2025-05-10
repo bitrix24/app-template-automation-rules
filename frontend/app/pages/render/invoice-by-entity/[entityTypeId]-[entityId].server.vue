@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CatalogProductType, EnumCrmEntityTypeId, LoggerBrowser } from '@bitrix24/b24jssdk'
-import type { B24OAuthParams } from '@bitrix24/b24jssdk'
+import { B24OAuth, CatalogProductType, EnumCrmEntityTypeId, LoggerBrowser } from '@bitrix24/b24jssdk'
+import type { B24OAuthSecret, B24OAuthParams } from '@bitrix24/b24jssdk'
 import { useCurrentLang, useFetchEntity, useFormatterNumber } from '~/composables/useBitrix24'
 import { chunkProductsList } from '~/utils/chunkArray'
 import type { ProductRow } from '~/types/bitrix'
@@ -11,7 +11,7 @@ import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 
 definePageMeta({
   layout: false,
-  middleware: '02-render-invoice-by-entity-server'
+  middleware: 'auth-server-render'
 })
 
 useHead({
@@ -25,47 +25,19 @@ useHead({
 })
 
 const $logger = LoggerBrowser.build(
-  'render-invoice-by-entity ',
-  import.meta.env?.DEV === true
+  'render-invoice-by-entity',
+  import.meta.dev
 )
 
-const requestData = useState('auth')
-
-// const {
-//   data: requestData
-// } = await useAsyncData(
-//   'authToken',
-//   async () => {
-//     const event = useRequestEvent()
-//     const route = useRoute()
-//     const authHeader = event?.node.req.headers['authorization'] || ''
-//     const token = authHeader.replace('Bearer ', '')
-//
-//     const config = useRuntimeConfig()
-//     try {
-//       const { payload } = await jwtVerify(token, new TextEncoder().encode(config.jwtSecret))
-//       if (payload.iss !== config.appClientSecret) {
-//         throw createError({ statusCode: 400, message: 'Invalid Issuer', fatal: true })
-//       } else if (payload.aud !== 'render-invoice-by-entity') {
-//         throw createError({ statusCode: 400, message: 'Invalid Audience', fatal: true })
-//       }
-//
-//       return { ...payload, entityId, entityTypeId } as RequestParamsForRenderPage
-//     } catch {
-//       throw createError({ statusCode: 401, message: 'Invalid token', fatal: true })
-//     }
-//   },
-//   { server: true, immediate: true }
-// )
+const requestDataServerRender = useRequestDataServerRender()
 
 const entityTypeId = computed(() => {
-  return requestData?.value?.entityTypeId ?? EnumCrmEntityTypeId.undefined
-})
-const entityId = computed(() => {
-  return requestData?.value?.entityId ?? 0
+  return requestDataServerRender?.value?.entityTypeId ?? EnumCrmEntityTypeId.undefined
 })
 
-$logger.info(`come >> ${entityTypeId.value} : ${entityId.value}`, requestData.value || '?')
+const entityId = computed(() => {
+  return requestDataServerRender?.value?.entityId ?? 0
+})
 
 if (!entityId.value) {
   throw createError({
@@ -75,13 +47,23 @@ if (!entityId.value) {
   })
 }
 
+const config = useRuntimeConfig()
+const authOptions: B24OAuthParams = requestDataServerRender.value!.auth as B24OAuthParams
+const oAuthSecret: B24OAuthSecret = {
+  clientId: config.appClientId,
+  clientSecret: config.appClientSecret
+}
+
+const $b24 = new B24OAuth(authOptions, oAuthSecret)
+$b24.setLogger(LoggerBrowser.build('Consumer [B24]', false))
+
 const {
   data: dealData,
   status: processStatus,
   error: processError
-} = await useFetchEntity(entityTypeId.value, entityId.value)
+} = await useFetchEntity($b24, entityTypeId.value, entityId.value)
 
-const $b24Helper = await useB24HelperManager()
+const $b24Helper = await useB24HelperManager($b24)
 
 const currentLang = useCurrentLang()
 const formatterNumber = useFormatterNumber()
