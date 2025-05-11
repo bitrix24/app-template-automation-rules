@@ -1,49 +1,16 @@
-import { useB24Helper, B24LangList, LoadDataType, EnumCrmEntityTypeId, EnumCrmEntityTypeShort, useFormatter } from '@bitrix24/b24jssdk'
+import { EnumCrmEntityTypeId, EnumCrmEntityTypeShort, omit } from '@bitrix24/b24jssdk'
 import type { CatalogProductImage, B24OAuth } from '@bitrix24/b24jssdk'
-import type { Deal, ProductInfo, ProductRow } from '~/types/bitrix'
-
-// let $b24: null | B24OAuth = null
-
-const {
-  getB24Helper,
-  isInitB24Helper,
-  initB24Helper
-} = useB24Helper()
+import type { EntityForRender, ProductInfo, ProductRow } from '~/types/bitrix'
+import QRCode from 'qrcode'
 
 /**
- * @todo get from activity.params
+ * @todo move to b24.jsSdk
  */
-export const useCurrentLang = (): typeof B24LangList[keyof typeof B24LangList] => {
-  return B24LangList.en
+function getEnumCrmEntityTypeShort(id: EnumCrmEntityTypeId): EnumCrmEntityTypeShort {
+  const key = EnumCrmEntityTypeId[id] as keyof typeof EnumCrmEntityTypeShort
+  return EnumCrmEntityTypeShort[key] || EnumCrmEntityTypeShort.undefined
 }
 
-const { formatterNumber } = useFormatter()
-formatterNumber.setDefLocale(useCurrentLang())
-
-export const useFormatterNumber = (): typeof formatterNumber => {
-  return formatterNumber
-}
-
-export const useB24HelperManager = async (
-  $b24: B24OAuth
-) => {
-  if (isInitB24Helper()) {
-    return getB24Helper()
-  }
-  await initB24Helper(
-    $b24,
-    [
-      LoadDataType.Profile,
-      LoadDataType.Currency
-    ]
-  )
-
-  return getB24Helper()
-}
-
-/**
- * @todo test under not admin use !!
- */
 export const useFetchEntity = (
   $b24: B24OAuth,
   entityTypeId: EnumCrmEntityTypeId,
@@ -52,16 +19,17 @@ export const useFetchEntity = (
   return useAsyncData(
     `${entityTypeId}-${entityId}`,
     async () => {
-      // @todo fix this -> set type by entityTypeId
-      let entity: Deal = {
+      let entity: EntityForRender = {
         id: 0,
         title: '',
         companyId: 0,
-        contactId: 0
+        contactId: 0,
+        qrCode: null
       }
 
       let catalogId: number[] = []
 
+      const customFieldsForLead = ['lastName', 'name', 'secondName', 'companyTitle', 'phone', 'email']
       const response = await $b24.callBatch({
         entityItem: {
           method: 'crm.item.get',
@@ -73,7 +41,11 @@ export const useFetchEntity = (
               'title',
               'companyId',
               'contactId'
-            ]
+            ].concat(
+              entityTypeId === EnumCrmEntityTypeId.lead
+                ? customFieldsForLead
+                : []
+            )
           }
         },
         entityItemPaymentList: {
@@ -124,7 +96,20 @@ export const useFetchEntity = (
 
       entity = Object.assign(
         entity,
-        data.entityItem.item || {}
+        omit(data.entityItem.item || {}, customFieldsForLead)
+      )
+
+      /**
+       * @todo $b24.getTargetOrigin() - remove right /
+       * https://bitrix24.page.link/?link=https://bel.bitrix24.ru/?intent=mobapp_popup%3B8fvGiVmBbrd2t5TVYxf7R147DtX9hstH&apn=com.bitrix24.android&isi=561683423&ibi=com.bitrixsoft.cpmobile
+       * https://bitrix24.page.link/?link=https://bel.bitrix24.ru/&apn=com.bitrix24.android&isi=561683423&ibi=com.bitrixsoft.cpmobile
+       */
+      entity.qrCode = await QRCode.toDataURL(
+        `${$b24.getTargetOrigin()}crm/type/${entityTypeId}/details/${entity.id}/?any=app-qrCode`,
+        {
+          errorCorrectionLevel: 'H',
+          margin: 0
+        }
       )
 
       if (
@@ -132,6 +117,16 @@ export const useFetchEntity = (
         && data.entityCompanyItem.item?.id
       ) {
         entity.company = data.entityCompanyItem.item
+      } else if (
+        entityTypeId === EnumCrmEntityTypeId.lead
+        && (data?.entityItem?.item?.companyTitle || '').length > 0
+      ) {
+        entity.company = {
+          id: 0,
+          title: data?.entityItem?.item?.companyTitle,
+          phone: data?.entityItem?.item?.phone,
+          email: data?.entityItem?.item?.email
+        }
       }
 
       if (
@@ -145,6 +140,27 @@ export const useFetchEntity = (
             entity.contact?.name,
             entity.contact?.secondName
           ].filter(Boolean).join(' ')
+        }
+      } else if (
+        entityTypeId === EnumCrmEntityTypeId.lead
+        && (
+          (data?.entityItem?.item?.lastName || '').length > 0
+          || (data?.entityItem?.item?.name || '').length > 0
+          || (data?.entityItem?.item?.secondName || '').length > 0
+        )
+      ) {
+        entity.contact = {
+          id: 0,
+          title: [
+            data?.entityItem?.item?.lastName || '',
+            data?.entityItem?.item?.name || '',
+            data?.entityItem?.item?.secondName || ''
+          ].filter(Boolean).join(' '),
+          lastName: data?.entityItem?.item?.lastName,
+          name: data?.entityItem?.item?.name,
+          secondName: data?.entityItem?.item?.secondName,
+          phone: data?.entityItem?.item?.phone,
+          email: data?.entityItem?.item?.email
         }
       }
 
@@ -172,14 +188,14 @@ export const useFetchEntity = (
       }
 
       /**
-       * @todo not move to batch -> may be more > 50
+       * @memo Not move to batch -> may be more > 50
        */
       entity.products = []
       const generator = $b24.fetchListMethod(
         'crm.item.productrow.list',
         {
           filter: {
-            '=ownerType': EnumCrmEntityTypeShort.deal,
+            '=ownerType': getEnumCrmEntityTypeShort(entityTypeId),
             '=ownerId': entity.id
           }
         },

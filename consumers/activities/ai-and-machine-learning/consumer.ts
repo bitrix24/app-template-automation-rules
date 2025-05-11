@@ -1,6 +1,7 @@
 /**
  * Consumer for generate PDF from HTML
  * @todo add fail queue
+ * @todo test connect - while doker up
  */
 import { consola } from 'consola'
 import { RabbitMQConsumer } from '@bitrix24/b24rabbitmq'

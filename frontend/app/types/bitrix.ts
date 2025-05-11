@@ -43,7 +43,7 @@ export type Contact = Entity & {
   email?: string
 }
 
-export type Deal = Entity & {
+export type EntityForRender = Entity & {
   opportunity?: number
   currencyId?: string
   companyId: number

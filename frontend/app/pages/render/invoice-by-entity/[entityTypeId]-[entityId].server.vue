@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { B24OAuth, CatalogProductType, EnumCrmEntityTypeId, LoggerBrowser } from '@bitrix24/b24jssdk'
+import {
+  B24OAuth,
+  useB24Helper,
+  CatalogProductType,
+  EnumCrmEntityTypeId,
+  LoggerBrowser,
+  B24LangList,
+  LoadDataType,
+  useFormatter
+} from '@bitrix24/b24jssdk'
 import type { B24OAuthSecret, B24OAuthParams } from '@bitrix24/b24jssdk'
-import { useCurrentLang, useFetchEntity, useFormatterNumber } from '~/composables/useBitrix24'
+import { useFetchEntity } from '~/composables/useBitrix24'
 import { chunkProductsList } from '~/utils/chunkArray'
 import type { ProductRow } from '~/types/bitrix'
-import QRCode from 'qrcode'
 import CompanyIcon from '@bitrix24/b24icons-vue/crm/CompanyIcon'
 import TelephonyHandset1Icon from '@bitrix24/b24icons-vue/main/TelephonyHandset1Icon'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
@@ -24,11 +32,12 @@ useHead({
   }
 })
 
-const $logger = LoggerBrowser.build(
-  'render-invoice-by-entity',
-  import.meta.dev
-)
+// const $logger = LoggerBrowser.build(
+//   'render-invoice-by-entity',
+//   import.meta.dev
+// )
 
+// region Init requestData ////
 const requestDataServerRender = useRequestDataServerRender()
 
 const entityTypeId = computed(() => {
@@ -47,6 +56,54 @@ if (!entityId.value) {
   })
 }
 
+/**
+ * @todo get from activity.params
+ */
+const currentLang = computed(() => {
+  return B24LangList.en
+})
+
+/**
+ * @todo move to b24.jsSdk
+ * @todo add all lang
+ */
+const localeMap: Record<B24LangList, string> = {
+  [B24LangList.en]: 'en-EN',
+  [B24LangList.de]: 'de-DE',
+  [B24LangList.la]: 'es-ES',
+  [B24LangList.br]: 'pt-BR',
+  [B24LangList.fr]: 'fr-FR',
+  [B24LangList.it]: 'it-IT',
+  [B24LangList.pl]: 'pl-PL',
+  [B24LangList.ru]: 'ru-RU',
+  [B24LangList.ua]: 'uk-UA',
+  [B24LangList.tr]: 'tr-TR',
+  [B24LangList.sc]: 'zh-CN',
+  [B24LangList.tc]: 'zh-TW',
+  [B24LangList.ja]: 'ja-JP',
+  [B24LangList.vn]: 'vi-VN',
+  [B24LangList.id]: 'id-ID',
+  [B24LangList.ms]: 'ms-MY',
+  [B24LangList.th]: 'th-TH',
+  [B24LangList.ar]: 'ar-SA'
+}
+
+function formatDate(date: Date): string {
+  const day = date.getDate().toString().padStart(2, '0')
+  const localeLang = localeMap[currentLang.value] || 'en-EN'
+  const month = date.toLocaleString(localeLang, { month: 'long' }).toLowerCase()
+  const year = date.getFullYear()
+
+  return `${day} ${month} ${year}`
+}
+
+const { formatterNumber } = useFormatter()
+formatterNumber.setDefLocale(currentLang.value)
+
+const currentDate = ref(formatDate(new Date()))
+// endregion ////
+
+// region Init B24 ////
 const config = useRuntimeConfig()
 const authOptions: B24OAuthParams = requestDataServerRender.value!.auth as B24OAuthParams
 const oAuthSecret: B24OAuthSecret = {
@@ -58,95 +115,78 @@ const $b24 = new B24OAuth(authOptions, oAuthSecret)
 $b24.setLogger(LoggerBrowser.build('Consumer [B24]', false))
 
 const {
-  data: dealData,
+  getB24Helper,
+  initB24Helper
+} = useB24Helper()
+
+await initB24Helper(
+  $b24,
+  [
+    LoadDataType.Profile,
+    LoadDataType.Currency
+  ]
+)
+
+const $b24Helper = getB24Helper()
+// endregion ////
+
+// region Load Data From B24 ////
+const {
+  data: entityData,
   status: processStatus,
   error: processError
 } = await useFetchEntity($b24, entityTypeId.value, entityId.value)
-
-const $b24Helper = await useB24HelperManager($b24)
-
-const currentLang = useCurrentLang()
-const formatterNumber = useFormatterNumber()
-/**
- * @todo fix this
- */
-const currentDateTime = ref(formatDate(new Date()))
-
-/**
- * @todo move to useFetchDeal
- */
-const { data: qrcode } = await useAsyncData(
-  'page-qrCode',
-  async () => await QRCode.toDataURL(
-    'https://dev-1.bx-shef.by/render/invoice-by-deal/1188/',
-    {
-      errorCorrectionLevel: 'H',
-      margin: 0
-    }
-  ),
-  { immediate: true }
-)
+// endregion ////
 
 // region functions ////
-/**
- * @todo fix this
- */
-function formatDate(date: Date): string {
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = date.toLocaleString('en-US', { month: 'long' }).toLowerCase()
-  const year = date.getFullYear()
-
-  return `${day} ${month} ${year}`
-}
-
 const getTitle = computed(() => {
-  return `Invoice No. ${dealData.value?.id} from ${currentDateTime.value}`
+  return `Invoice No. ${entityData.value?.id} from ${currentDate.value}`
 })
 
 const getClientTitle = computed(() => {
   return (
-    dealData.value?.company
-      ? dealData.value.company.title
-      : dealData.value?.contact?.title
+    entityData.value?.company
+      ? entityData.value.company.title
+      : entityData.value?.contact?.title
   ) || '-'
 })
 
 const getClientPhone = computed(() => {
   return (
-    dealData.value?.company
-      ? dealData.value.company?.phone
-      : dealData.value?.company?.phone
+    entityData.value?.company
+      ? entityData.value.company?.phone
+      : entityData.value?.company?.phone
   ) || '-'
 })
 
 const getPaymentList = computed(() => {
   return (
-    dealData.value?.paymentList
-      ? dealData.value.paymentList.map(row => row.paySystemName).join('; ')
+    entityData.value?.paymentList
+      ? entityData.value.paymentList.map(row => row.paySystemName).join('; ')
       : '-'
   ) || '-'
 })
 
 const getDeliveryList = computed(() => {
   return (
-    dealData.value?.deliveryList
-      ? dealData.value.deliveryList.map(row => row.deliveryName).join('; ')
+    entityData.value?.deliveryList
+      ? entityData.value.deliveryList.map(row => row.deliveryName).join('; ')
       : '-'
   ) || '-'
 })
 
 const getDeliveryPrice = computed(() => {
   return (
-    dealData.value?.deliveryList
-      ? dealData.value.deliveryList.reduce((sum, item) => sum + item.priceDelivery, 0)
+    entityData.value?.deliveryList
+      ? entityData.value.deliveryList.reduce((sum, item) => sum + item.priceDelivery, 0)
       : 0.0
   ) || 0.0
 })
 
 const productsChunkPage = computed<ProductRow[][]>(() => {
-  const list = chunkProductsList<ProductRow>(dealData.value?.products || [])
+  const list = chunkProductsList<ProductRow>(entityData.value?.products || [])
   // const list = chunkProductsList<ProductRow>(
-  //   [...dealData.value?.products || [], ...dealData.value?.products || [], ...dealData.value?.products || []] // .slice(0, 9)
+  //   [...entityData.value?.products || [], ...entityData.value?.products || [], ...entityData.value?.products || []] // .slice(0, 9)
   // )
   if (list.length < 1) {
     list.push([])
@@ -164,7 +204,7 @@ const globalIndexes = computed(() => {
 
 const globalWeight = computed(() => {
   let weight = 0
-  const list: ProductRow[] = dealData.value?.products || []
+  const list: ProductRow[] = entityData.value?.products || []
 
   list.forEach((product: ProductRow) => {
     /**
@@ -181,7 +221,7 @@ const globalWeight = computed(() => {
 
 const globalIsSomeEmptyWeight = computed(() => {
   let isHasEmpty = false
-  const list: ProductRow[] = dealData.value?.products || []
+  const list: ProductRow[] = entityData.value?.products || []
 
   list.forEach((product: ProductRow) => {
     /**
@@ -202,7 +242,7 @@ const globalIsSomeEmptyWeight = computed(() => {
 
 const globalDiscount = computed(() => {
   let ttlDiscount = 0.0
-  const list: ProductRow[] = dealData.value?.products || []
+  const list: ProductRow[] = entityData.value?.products || []
 
   list.forEach((product: ProductRow) => {
     if (product.discountSum) {
@@ -221,7 +261,7 @@ function formatPrice(price: number, currency?: string): string {
   return $b24Helper?.currency.format(
     price,
     currency,
-    currentLang
+    currentLang.value
   )
 }
 // endregion ////
@@ -238,7 +278,7 @@ function formatPrice(price: number, currency?: string): string {
     :title="processError?.message"
     :description="processError?.stack "
   />
-  <main v-else-if="processStatus === 'success' && dealData">
+  <main v-else-if="processStatus === 'success' && entityData">
     <template v-for="(page, pageKey) in productsChunkPage" :key="pageKey">
       <div class="page p-[1cm] border border-base-200 rounded-xs w-[210mm] min-h-[297mm] mx-auto my-[10mm] print:m-0 print:border-0 print:w-auto print:min-h-auto print:bg-inherit print:rounded-none">
         <div class="subpage h-[276mm] p-[0cm] mx-auto">
@@ -276,7 +316,8 @@ function formatPrice(price: number, currency?: string): string {
               </div>
               <div class="flex-1">
                 <ProseImg
-                  :src="qrcode"
+                  v-if="entityData?.qrCode"
+                  :src="entityData.qrCode"
                   alt="QR Code"
                   class="ml-auto aspect-square w-full max-w-[80px] object-cover"
                 />
@@ -309,7 +350,7 @@ function formatPrice(price: number, currency?: string): string {
                   </div>
                 </li>
                 <li
-                  v-if="dealData.paymentList?.length"
+                  v-if="entityData.paymentList?.length"
                   class="grid justify-start"
                 >
                   <div class="w-32 text-base-900">
@@ -320,7 +361,7 @@ function formatPrice(price: number, currency?: string): string {
                   </div>
                 </li>
                 <li
-                  v-if="dealData.deliveryList?.length"
+                  v-if="entityData.deliveryList?.length"
                   class="grid justify-start"
                 >
                   <div class="w-32 text-base-900">
@@ -411,18 +452,18 @@ function formatPrice(price: number, currency?: string): string {
                     </div>
                   </td>
                   <td>
-                    <span v-html="formatPrice(product.price, dealData.currencyId)" />
+                    <span v-html="formatPrice(product.price, entityData.currencyId)" />
                     <div
                       v-if="product.discountSum > 0.0"
                       class="text-[10px] text-base-900 line-through"
-                      v-html="formatPrice(product.priceBrutto, dealData.currencyId)"
+                      v-html="formatPrice(product.priceBrutto, entityData.currencyId)"
                     />
                   </td>
                   <td>
                     {{ formatterNumber.format(product.quantity || 0) }} <span class="text-base-900">{{ product.measureName }}</span>
                   </td>
                   <td>
-                    <span v-html="formatPrice((product.price * product.quantity), dealData.currencyId)" />
+                    <span v-html="formatPrice((product.price * product.quantity), entityData.currencyId)" />
                   </td>
                 </tr>
               </tbody>
@@ -447,27 +488,27 @@ function formatPrice(price: number, currency?: string): string {
                   <div>
                     Discount:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(-1 * (globalDiscount || 0.0), dealData.currencyId)" />
+                  <div class="font-bold" v-html="formatPrice(-1 * (globalDiscount || 0.0), entityData.currencyId)" />
                 </div>
                 <div
-                  v-if="dealData.deliveryList?.length"
+                  v-if="entityData.deliveryList?.length"
                   class="w-full flex flex-row items-center justify-between gap-2"
                 >
                   <div>
                     Delivery price:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, dealData.currencyId)" />
+                  <div class="font-bold" v-html="formatPrice(getDeliveryPrice || 0.0, entityData.currencyId)" />
                 </div>
                 <div
                   class="w-full flex flex-row items-center justify-between gap-2 text-2xl"
                   :class="[
-                    (globalDiscount > 0.0 || dealData.deliveryList?.length) ? 'border-t-2 border-t-base-ebony pt-1.5' : ''
+                    (globalDiscount > 0.0 || entityData.deliveryList?.length) ? 'border-t-2 border-t-base-ebony pt-1.5' : ''
                   ]"
                 >
                   <div>
                     To be paid:
                   </div>
-                  <div class="font-bold" v-html="formatPrice(dealData?.opportunity || 0.0, dealData.currencyId)" />
+                  <div class="font-bold" v-html="formatPrice(entityData?.opportunity || 0.0, entityData.currencyId)" />
                 </div>
                 <div class="w-full -mt-1 text-xs text-base-900">
                   The invoice is valid for 3 calendar days
@@ -480,7 +521,7 @@ function formatPrice(price: number, currency?: string): string {
     </template>
   </main>
   <div v-else>
-    <h2>Empty dealData</h2>
+    <h2>Empty entity data</h2>
   </div>
 </template>
 
