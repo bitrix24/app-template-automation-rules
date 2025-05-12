@@ -26,13 +26,16 @@
       },
       "step": {
         "init": {
-          "caption": "You need to wait a bit..."
+          "caption": "You need to wait a bit ..."
+        },
+        "events": {
+          "caption": "Events ..."
         },
         "placement": {
-          "caption": "Placement..."
+          "caption": "Placement ..."
         },
         "crm": {
-          "caption": "CRM..."
+          "caption": "CRM ..."
         },
         "finish": {
           "caption": "Completion"

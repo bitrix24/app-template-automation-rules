@@ -12,6 +12,9 @@ useHead({
 })
 
 // region Init ////
+const config = useRuntimeConfig()
+const appUrl = config.public.appUrl
+
 const { processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
@@ -30,37 +33,61 @@ const steps = ref<Record<string, IStep>>({
     caption: t('page.install.step.init.caption'),
     action: makeInit
   },
-  placement: {
-    caption: t('page.install.step.init.caption'),
+  events: {
+    caption: t('page.install.step.events.caption'),
     action: async () => {
       /**
-       * Registering placement
+       * Registering onAppInstall | onAppUninstall
        */
-      if (steps.value.placement) {
-        steps.value.placement.data = {
-          par21: 'val21',
-          par22: 'val22'
+      await $b24.callBatch([
+        {
+          method: 'event.bind',
+          params: {
+            event: 'ONAPPINSTALL',
+            handler: `${appUrl}/api/event/onAppInstall`
+          }
+        },
+        {
+          method: 'event.bind',
+          params: {
+            event: 'ONAPPUNINSTALL',
+            handler: `${appUrl}/api/event/onAppUninstall`
+          }
         }
-      }
-
-      return sleepAction()
+      ])
     }
   },
-  crm: {
-    caption: t('page.install.step.crm.caption'),
-    action: async () => {
-      /**
-       * Some actions for crm
-       */
-      if (steps.value.crm) {
-        steps.value.crm.data = {
-          par31: 'val31',
-          par32: 'val32'
-        }
-      }
-      return sleepAction()
-    }
-  },
+  // placement: {
+  //   caption: t('page.install.step.placement.caption'),
+  //   action: async () => {
+  //     /**
+  //      * Registering placement
+  //      */
+  //     if (steps.value.placement) {
+  //       steps.value.placement.data = {
+  //         par21: 'val21',
+  //         par22: 'val22'
+  //       }
+  //     }
+  //
+  //     return sleepAction()
+  //   }
+  // },
+  // crm: {
+  //   caption: t('page.install.step.crm.caption'),
+  //   action: async () => {
+  //     /**
+  //      * Some actions for crm
+  //      */
+  //     if (steps.value.crm) {
+  //       steps.value.crm.data = {
+  //         par31: 'val31',
+  //         par32: 'val32'
+  //       }
+  //     }
+  //     return sleepAction()
+  //   }
+  // },
   finish: {
     caption: t('page.install.step.finish.caption'),
     action: makeFinish
