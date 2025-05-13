@@ -1,13 +1,13 @@
 services:
   server:
-    container_name: server
     image: nginxproxy/nginx-proxy
+    container_name: server
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./certs:/etc/nginx/certs:ro
-      - ./html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - proxy-net
@@ -19,13 +19,13 @@ services:
           cpus: '1.0'
 
   letsencrypt:
-    container_name: letsencrypt
     image: nginxproxy/acme-companion
+    container_name: letsencrypt
     volumes_from:
       - server
     volumes:
-      - ./certs:/etc/nginx/certs:rw
-      - ./acme:/etc/acme.sh
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - server
@@ -37,6 +37,11 @@ services:
         limits:
           memory: 100M
           cpus: '1.0'
+
+volumes:
+  certs:
+  html:
+  acme:
 
 networks:
   proxy-net:
