@@ -1,6 +1,5 @@
 # @memo We close our eyes to the mistakes of D-BUS
 FROM zenika/alpine-chrome
-
 LABEL maintainer="B24Sdk <github.com/bitrix24>"
 
 USER root

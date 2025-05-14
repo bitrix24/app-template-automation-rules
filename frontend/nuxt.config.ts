@@ -6,11 +6,11 @@ import { contentLocales } from './i18n.map'
 export default defineNuxtConfig({
   modules: [
     '@bitrix24/b24ui-nuxt',
+    '@bitrix24/b24jssdk-nuxt',
     '@nuxt/eslint',
     '@nuxt/content',
     '@nuxtjs/i18n',
-    '@pinia/nuxt',
-    '@bitrix24/b24jssdk-nuxt'
+    '@pinia/nuxt'
   ],
   ssr: true,
   devtools: { enabled: false },
@@ -36,31 +36,15 @@ export default defineNuxtConfig({
     allowedIps: '',
     appClientId: '',
     appClientSecret: '',
-    // @todo remove this
-    b24HookUrl: '',
-    b24HookUserId: 0,
-    b24HookSecret: '',
     public: {
       contentLocales: contentLocales,
-      appUrl: '',
-      // @todo remove this
-      b24HookUrl: '',
-      b24HookUserId: 0,
-      b24HookSecret: ''
+      appUrl: ''
     }
   },
   build: {
     transpile: [
       'jsonwebtoken'
     ]
-  },
-  /**
-   * @todo remove this
-   */
-  routeRules: {
-    '/install': { ssr: false },
-    '/index': { ssr: false },
-    '/activity-list': { ssr: false }
   },
   devServer: {
     loadingTemplate: () => {
@@ -70,9 +54,7 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4
   },
-
   compatibilityDate: '2024-11-27',
-
   vite: {
     plugins: [
       tailwindcss()

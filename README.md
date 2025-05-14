@@ -87,6 +87,12 @@ tuna http 3000
 
 ---
 
+## psql
+
+```shell
+psql \! chcp 1251
+```
+
 ## Docker
 
 ### Status
@@ -108,8 +114,8 @@ docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules 
 ### Server
 ```shell
 docker network create proxy-net
-
 docker compose -f docker-compose.server.yml -p server__global up -d
+docker compose -f docker-compose.server.yml -p server__global up -d --build
 
 docker compose -f docker-compose.server.yml -p server__global top
 
@@ -128,59 +134,67 @@ docker logs -f letsencrypt
 
 ### Dev
 ```shell
+
+# STOP
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
+
+# START
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+docker exec dev-frontend sh -c "pnpm run prisma:migrate-deploy"
+# OR
+# docker exec dev-frontend sh -c "pnpx prisma migrate deploy"
+
+# LOG
 docker logs -f dev-frontend
 docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learning-1
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down -v
+docker logs -f dev-db
 ```
 
 ```shell
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules top
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules build
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop chrome
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start chrome
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules stop frontend
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules start frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules start chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules start frontend
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down chrome && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down chrome && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build chrome
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down frontend && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build frontend
  
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d frontend 
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down frontend && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d frontend 
 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules down consumer-ai-and-machine-learning && \
- docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-ai-and-machine-learning && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-ai-and-machine-learning
  
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --build --scale consumer-ai-and-machine-learning=2
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d --scale consumer-ai-and-machine-learning=2
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules up -d consumer-ai-and-machine-learning
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-ai-and-machine-learning=2
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --scale consumer-ai-and-machine-learning=2
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d consumer-ai-and-machine-learning
  
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs 
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs chrome
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f chrome
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs frontend
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules logs -f frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs 
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs -f chrome
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs frontend
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs -f frontend
 
 docker logs -f dev-chrome
 docker logs -f dev-frontend
@@ -190,6 +204,26 @@ docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learni
 ```
 
 ### Prod
+```shell
+
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
+
+# STOP
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
+
+# START
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
+docker exec prod-frontend sh -c "npx prisma migrate deploy"
+# OR
+# docker exec prod-frontend sh -c "pnpm run prisma:migrate-deploy"
+# docker exec prod-frontend sh -c "pnpx prisma migrate deploy"
+
+# LOG
+docker logs -f prod-frontend
+docker logs -f prod__app-template-automation-rules-consumer-ai-and-machine-learning-1
+docker logs -f prod-db
+```
+
 ```shell
 docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
 docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
@@ -229,8 +263,15 @@ cp .env.dev.example .env.dev
 
 ```shell
 # network
+docker network inspect internal-net
 docker network inspect inner
 docker network inspect inner | grep -A 10 Containers
+
+# postgres
+docker logs dev-db | grep -i 'password'
+docker exec dev-db env | grep POSTGRES
+
+docker exec dev-frontend sh -c "pnpx prisma migrate dev --name create_b24app_table"
 
 # chrome
 docker inspect dev-chrome
@@ -252,6 +293,7 @@ docker exec -it chrome sh -c "
 "
 
 # frontend
+docker exec dev-frontend env | grep DATABASE_URL
 docker inspect dev-frontend
 docker exec -it dev-frontend wget -qO- http://dev-chrome:9223/json/version
 
@@ -264,42 +306,6 @@ docker exec -it dev-frontend sh -c "whoami && id" # check user at container
 
 docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-chrome:9223/json/version
 docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-frontend:3000/render/invoice-by-deal/1058/
-```
-
-### Stop
-
-```shell
-# All
-docker compose --env-file .env.dev stop
-# frontend
-docker stop frontend
-docker compose --env-file .env.dev stop frontend
-# server
-docker compose --env-file .env.dev stop server
-# letsencrypt
-docker compose --env-file .env.dev stop letsencrypt
-```
-
-### Restart
-
-```shell
-# All
-docker compose down && docker compose --env-file .env.dev up -d --build
-# chrome
-docker compose down chrome && docker compose --env-file .env.dev up -d --build chrome
-# frontend
-docker compose down frontend && docker compose --env-file .env.dev up -d --build frontend
-docker compose down frontend && docker compose --env-file .env.dev up --build frontend
-
-# no-cache
-docker compose down && docker compose --env-file .env.dev build --no-cache && docker compose --env-file .env.dev up
-# no-cache frontend
-docker compose down frontend && docker compose --env-file .env.dev up -d --build frontend
-docker compose down frontend && docker compose --env-file .env.dev up -d --build --force-recreate frontend
-docker compose --env-file .env.dev build --no-cache && docker compose --env-file .env.dev up frontend
-
-# server
-docker compose down server && docker compose --env-file .env.dev up -d --build server
 ```
 
 ### Log

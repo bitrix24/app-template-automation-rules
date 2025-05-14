@@ -4,4 +4,7 @@ ignoredBuiltDependencies:
   - unrs-resolver
   - vue-demi
 onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
   - better-sqlite3
+  - prisma

@@ -1,4 +1,4 @@
-# For Nuxt app
+# For consumer
 # @memo: copy everything to /usr/src/app
 
 FROM node:20-slim
@@ -20,10 +20,10 @@ WORKDIR /usr/src/app
 RUN corepack enable
 
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY prisma ./prisma/
 RUN pnpm install
+RUN pnpm run prisma:generate
 
 COPY . ./
-
-ENV DEV=true
 
 CMD ["pnpm", "run", "consumer:dev"]

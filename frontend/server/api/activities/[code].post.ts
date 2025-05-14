@@ -12,35 +12,11 @@ import { Salt } from '~/services/salt'
 import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
 import type { MessageWithAuth, Options } from '~~/server/types'
+import prisma from '../../utils/prisma'
 
 const { clearSalt } = Salt()
 
 // region fix by @b24 ////
-
-// { workflow_id: '681c894d3f0ec8.54818143',
-//   code: 'AIandMachineLearning____dev',
-//   document_id: [ 'crm', 'CCrmDocumentDeal', 'DEAL_1188' ],
-//   document_type: [ 'crm', 'CCrmDocumentDeal', 'DEAL' ],
-//   event_token:
-//   '681c894d3f0ec8.54818143|A36717_5720_22885_29158|X3QpQY6RKFD8ULUtOiKllFEZLUaVuDYn.29c803f2e57290aade3fcfcb061b2aa2d26f682deddb9de32f556040c6041901',
-//     properties: { entityTypeId: 'CRM_DEAL', entityId: '1188' },
-//   use_subscription: 'N',
-//     timeout_duration: '0',
-//   ts: '1746700621',
-//   auth:
-//   { access_token: '5d971c6800782a4e000011e7000000010000005599262cf2ead07da4b5dd68fb55479e',
-//     expires: '1746704221',
-//     expires_in: '3600',
-//     scope: 'crm,catalog,bizproc,placement,user_brief',
-//     domain: 'bel.bitrix24.ru',
-//     server_endpoint: 'https://oauth.bitrix.info/rest/',
-//     status: 'L',
-//     client_endpoint: 'https://bel.bitrix24.ru/rest/',
-//     member_id: '3d906b2a32030386ccc7274d2313a01b',
-//     user_id: '1',
-//     refresh_token: '4d16446800782a4e000011e700000001000000196f6f744d817fac72c4f1c9ad438dd4',
-//     application_token: '565be534fe44bce005bae699aa0313f8' } }
-
 /**
  * @todo fix by @b24
  */
@@ -133,6 +109,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const data = qs.parse(body) as unknown as Partial<ActivityHandlerParams>
 
+  // region Init Options ////
   const options: Options = {
     code: clearSalt(data?.code || 'notSetCodeOptions'),
     entityTypeId: EnumCrmEntityTypeId.undefined,
@@ -160,7 +137,7 @@ export default defineEventHandler(async (event) => {
     auth: {
       applicationToken: data?.auth?.application_token || '?',
       userId: Number.parseInt(data?.auth?.user_id || '0'),
-      memberId: data?.auth?.member_id || '?',
+      memberId: data?.auth?.member_id || 'notSet',
       accessToken: data?.auth?.access_token || '?',
       refreshToken: data?.auth?.refresh_token || '?',
       expires: Number.parseInt(data?.auth?.expires || '0'),
@@ -170,6 +147,8 @@ export default defineEventHandler(async (event) => {
       clientEndpoint: data?.auth?.client_endpoint || '?',
       serverEndpoint: data?.auth?.server_endpoint || '?',
       status: data?.auth?.status || EnumAppStatus.Free
+      // @todo add to jsSdk
+      // issuer: 'request'
     }
   }
 
@@ -186,13 +165,53 @@ export default defineEventHandler(async (event) => {
     const value = Number.parseInt(match[1], 10)
     options.entityId = Number.isNaN(value) ? 0 : value
   }
+  // endregion ////
+
+  console.log('Current AUTH', options.auth)
+
+  // region Check memberId ////
+  const appRow = await prisma.b24App.findFirst({
+    where: {
+      memberId: options.auth.memberId
+    }
+  })
+
+  console.log('DB AUTH', appRow)
+
+  if (!appRow) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'ERROR_ACTIVITY_HANDLE_memberId'
+    })
+  }
+  // endregion ////
+
+  // region Restore Auth From DB ////
+  if (options.auth.accessToken === '?') {
+    console.log('EMPTY AUTH come', options.auth, appRow)
+
+    options.auth.applicationToken = appRow.applicationToken
+    options.auth.userId = appRow.userId
+    options.auth.accessToken = appRow.accessToken
+    options.auth.refreshToken = appRow.refreshToken
+    options.auth.expires = appRow.expires
+    options.auth.expiresIn = appRow.expiresIn
+    options.auth.scope = appRow.scope
+    options.auth.domain = appRow.domain
+    options.auth.clientEndpoint = appRow.clientEndpoint
+    options.auth.serverEndpoint = appRow.serverEndpoint
+    options.auth.status = appRow.status
+    // @todo add to jsSdk
+    // options.auth.issuer = 'db'
+  }
+  // endregion ////
 
   try {
     return await handleActivity(options)
   } catch {
     throw createError({
       statusCode: 400,
-      statusMessage: 'ERROR_ACTIVITY_HANDLE'
+      statusMessage: 'ERROR_ACTIVITY_HANDLE_handleActivity'
     })
   }
 })

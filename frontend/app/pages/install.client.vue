@@ -41,6 +41,20 @@ const steps = ref<Record<string, IStep>>({
        */
       await $b24.callBatch([
         {
+          method: 'event.unbind',
+          params: {
+            event: 'ONAPPINSTALL',
+            handler: `${appUrl}/api/event/onAppInstall`
+          }
+        },
+        {
+          method: 'event.unbind',
+          params: {
+            event: 'ONAPPUNINSTALL',
+            handler: `${appUrl}/api/event/onAppUninstall`
+          }
+        },
+        {
           method: 'event.bind',
           params: {
             event: 'ONAPPINSTALL',

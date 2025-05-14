@@ -10,8 +10,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
-    "consumer:dev": "tsx watch consumer.ts",
-    "consumer:run": "tsx consumer.ts"
+    "consumer:dev": "tsx watch app/consumer.ts",
+    "consumer:run": "tsx app/consumer.ts",
+    "prisma:generate": "pnpx prisma generate"
   },
   "dependencies": {
     "@bitrix24/b24jssdk": "^0.4.2",
@@ -29,6 +30,8 @@
     "eslint": "^9.25.1",
     "eslint-config-unjs": "^0.4.2",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "prisma": "^6.7.0",
+    "@prisma/client": "^6.7.0"
   }
 }

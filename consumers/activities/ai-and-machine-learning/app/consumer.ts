@@ -1,17 +1,17 @@
 /**
  * Consumer for generate PDF from HTML
  * @todo add fail queue
- * @todo test connect - while doker up
+ * @todo test connect - while docker up
  */
 import { consola } from 'consola'
 import { RabbitMQConsumer } from '@bitrix24/b24rabbitmq'
-import { appOptions } from './app.config'
-import { rabbitMQConfig } from './rabbitmq.config'
+import { appOptions, rabbitMQConfig } from '../app.config'
 import { SignJWT } from 'jose'
 import { Text, EnumCrmEntityTypeId, B24OAuth, LoggerBrowser } from '@bitrix24/b24jssdk'
 import type { B24OAuthSecret, B24OAuthParams } from '@bitrix24/b24jssdk'
 import type { MessageWithAuth } from './types'
 import { generatePDF } from './utils/pdf-generator'
+import prisma from './utils/prisma'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
@@ -44,7 +44,22 @@ const startConsumer = async () => {
         const pagePath = `/render/invoice-by-entity/${msg.entityTypeId}-${msg.entityId}/`
         consola.log('start gen >> ', pagePath)
 
-        // Generate JWT token
+        // region Check memberId ////
+        const appRow = await prisma.b24App.findFirst({
+          where: {
+            memberId: msg.auth.memberId
+          }
+        })
+
+        console.log('DB AUTH', appRow)
+
+        if (!appRow) {
+          throw new Error('Not find memberId in DB')
+        }
+        // endregion ////
+
+        // region Generate JWT token ////
+        // @todo add params
         const token = await new SignJWT({
             auth: msg.auth
           })
@@ -54,15 +69,19 @@ const startConsumer = async () => {
           .setAudience('server-render')
           .setExpirationTime('5m')
           .sign(appOptions().jwtSecret)
+        // endregion ////
 
+        // region Generate PDF ////
         const pdfBuffer = await generatePDF(pagePath, { token })
         consola.log('stop gen')
+        // endregion ////
 
         // region getEmpty docx ////
         const fileDocxPath = resolve(process.cwd(), 'assets/empty.docx')
         const fileDocxBuffer = await readFile(fileDocxPath)
         // endregion ////
 
+        // region Save Result ////
         let documentId = 0
 
         const authOptions: B24OAuthParams = msg.auth
@@ -99,6 +118,7 @@ const startConsumer = async () => {
 
         documentId = Number.parseInt(response.getData().result?.document.id || '0')
         consola.log('stop send to b24 >> documentId:', documentId)
+        // endregion ////
         ack()
       } catch (error) {
         const problem = error instanceof Error ? error : new Error(`[RabbitMQ::${activityCode}] process error`, { cause: error })

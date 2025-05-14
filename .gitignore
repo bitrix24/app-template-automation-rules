@@ -1,11 +1,12 @@
 # Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
-
+frontend/.output
+frontend/.data
+frontend/.nuxt
+frontend/.nitro
+frontend/.cache
+frontend/dist
+/frontend/prisma/*.db
+/frontend/prisma/*.db-journal
 
 certs
 acme
@@ -30,3 +31,5 @@ logs
 !.env.dev.example
 !.env.prod.example
 /.run/
+
+

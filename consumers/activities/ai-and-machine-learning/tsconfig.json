@@ -4,7 +4,6 @@
   ],
   "exclude": [
     "node_modules",
-    "b24rabbitmq",
     "dist"
   ],
   "compilerOptions": {

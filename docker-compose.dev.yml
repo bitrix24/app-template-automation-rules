@@ -1,38 +1,13 @@
 services:
-  frontend:
-    container_name: dev-frontend
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile_dev
-    expose:
-      - '3000'
-    volumes:
-      - ./frontend:/usr/src/app
-      - ./logs:/tmp
-      - /usr/src/app/node_modules
-    env_file: .env.dev
-    networks:
-      - internal-net
-      - proxy-net
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-          cpus: '2.0'
-
   chrome:
     container_name: dev-chrome
     build:
       context: ./chrome
       dockerfile: Dockerfile_dev
     ports:
-      - '9223:9223'
+      - '9222:9222'
     healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://0.0.0.0:9223/json/version || exit 1" ]
+      test: [ "CMD-SHELL", "wget -q --spider http://0.0.0.0:9222/json/version || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -49,20 +24,16 @@ services:
   rabbitmq:
     container_name: dev-rabbitmq
     image: rabbitmq:3.12-management-alpine
-#    build:
-#      context: ./rabbitmq
-#      dockerfile: Dockerfile_dev
     ports:
-      - '5672:5672'
+      - '5672:5672' # need sync with RABBITMQ_NODE_PORT
       - '15672:15672' # Management UI
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     env_file: .env.dev
     environment:
-      # @todo fix this - self env ??
       VIRTUAL_PORT: 15672
-      VIRTUAL_HOST: rabbitmq.dev-1.bx-shef.by
-      LETSENCRYPT_HOST: rabbitmq.dev-1.bx-shef.by
+      VIRTUAL_HOST: "rabbitmq.${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "rabbitmq.${LETSENCRYPT_HOST}"
     healthcheck:
       test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
       interval: 10s
@@ -79,19 +50,85 @@ services:
           memory: 1G
           cpus: '1.0'
 
+  db:
+    image: postgres:17-alpine
+    container_name: dev-db
+    ports:
+      - "5432:5432" # need sync with PGPORT
+    env_file: .env.dev
+    networks:
+      - internal-net
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+    shm_size: 128mb
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '1.0'
+        reservations:
+          memory: 128M
+          cpus: '0.5'
+
+  frontend:
+    container_name: dev-frontend
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_dev
+    expose:
+      - '3000'
+    env_file: .env.dev
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
+    command: >
+      sh -c "pnpm prisma migrate deploy &&
+        pnpm run dev"
+    networks:
+      - internal-net
+      - proxy-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
+
   consumer-ai-and-machine-learning:
     depends_on:
       chrome:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+      db:
+        condition: service_healthy
     build:
       context: ./consumers/activities/ai-and-machine-learning
       dockerfile: Dockerfile_dev
+    env_file: .env.dev
     volumes:
       - ./consumers/activities/ai-and-machine-learning:/usr/src/app
       - /usr/src/app/node_modules
-    env_file: .env.dev
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
     networks:
       - internal-net
     restart: unless-stopped
@@ -110,3 +147,4 @@ networks:
 
 volumes:
   rabbitmq_data:
+  postgres_data:

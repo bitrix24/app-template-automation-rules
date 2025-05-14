@@ -1,47 +1,135 @@
 services:
-  frontend:
-    container_name: prod-frontend
-    depends_on:
-      - chrome
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile_prod
-    expose:
-      - '80'
-    volumes:
-      - ./logs:/tmp
-    env_file: .env.prod
-    networks:
-      - internal-net
-      - proxy-net
-    restart: always
-    # @todo fix this
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-          cpus: '2.0'
-
   chrome:
     container_name: prod-chrome
     build:
       context: ./chrome
       dockerfile: Dockerfile_prod
     ports:
-      - '9222:9222'
+      - '9223:9223'
     healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9222/json/version || exit 1" ]
+      test: [ "CMD-SHELL", "wget -q --spider http://0.0.0.0:9223/json/version || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 30s
     networks:
       - internal-net
-    # @todo fix this
+    restart: always
     deploy:
       resources:
         limits:
           memory: 1G
+          cpus: '1.0'
+
+  rabbitmq:
+    container_name: prod-rabbitmq
+    image: rabbitmq:3.12-management-alpine
+    ports:
+      - '5673:5673' # need sync with RABBITMQ_NODE_PORT
+      - '15673:15672' # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    env_file: .env.prod
+    environment:
+      VIRTUAL_PORT: 15673
+      VIRTUAL_HOST: "rabbitmq.${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "rabbitmq.${LETSENCRYPT_HOST}"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - internal-net
+      - proxy-net
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+
+  db:
+    image: postgres:17-alpine
+    container_name: prod-db
+    ports:
+      - "5433:5433" # need sync with PGPORT
+    env_file: .env.prod
+    networks:
+      - internal-net
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    restart: always
+    shm_size: 128mb
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '1.0'
+        reservations:
+          memory: 128M
+          cpus: '0.5'
+
+  frontend:
+    container_name: prod-frontend
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_prod
+    expose:
+      - '80'
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
+    command: >
+      sh -c "npx prisma migrate deploy &&
+        node /usr/src/app/server/index.mjs"
+    networks:
+      - internal-net
+      - proxy-net
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
+
+  consumer-ai-and-machine-learning:
+    depends_on:
+      chrome:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    build:
+      context: ./consumers/activities/ai-and-machine-learning
+      dockerfile: Dockerfile_prod
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
+    networks:
+      - internal-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 500M
           cpus: '1.0'
 
 networks:
@@ -50,3 +138,7 @@ networks:
     external: true
   internal-net:
     driver: bridge
+
+volumes:
+  rabbitmq_data:
+  postgres_data:
