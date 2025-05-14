@@ -98,11 +98,11 @@ psql \! chcp 1251
 ### Status
 
 ```shell
+docker stats
 docker ps
 docker ps -a | grep chrome
 watch -n 2 docker ps
 
-docker stats
 
 sudo systemctl status docker
 sudo ss -tuln | grep 2376
@@ -113,7 +113,10 @@ docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules 
 
 ### Server
 ```shell
+# create network
 docker network create proxy-net
+
+# up server
 docker compose -f docker-compose.server.yml -p server__global up -d
 docker compose -f docker-compose.server.yml -p server__global up -d --build
 
@@ -121,13 +124,11 @@ docker compose -f docker-compose.server.yml -p server__global top
 
 docker compose -f docker-compose.server.yml -p server__global build
 
-docker compose -f docker-compose.server.yml -p server__global up -d --build
-
+# down server
 docker compose -f docker-compose.server.yml -p server__global down
 docker compose -f docker-compose.server.yml -p server__global stop
 
-docker compose -f docker-compose.server.yml -p server__global logs -f server
-docker compose -f docker-compose.server.yml -p server__global logs -f letsencrypt
+# LOG
 docker logs -f server
 docker logs -f letsencrypt
 ```
