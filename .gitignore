@@ -5,7 +5,7 @@ frontend/.nuxt
 frontend/.nitro
 frontend/.cache
 frontend/dist
-frontend/generated
+frontend/**/generated
 consumers/**/generated
 
 certs

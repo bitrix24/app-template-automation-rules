@@ -6,6 +6,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - dhparam:/etc/nginx/dhparam
       - certs:/etc/nginx/certs:ro
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -39,6 +42,9 @@ services:
           cpus: '1.0'
 
 volumes:
+  conf:
+  vhost:
+  dhparam:
   certs:
   html:
   acme:

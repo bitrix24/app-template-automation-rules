@@ -32,8 +32,8 @@ services:
     env_file: .env.prod
     environment:
       VIRTUAL_PORT: 15673
-      VIRTUAL_HOST: "rabbitmq.${VIRTUAL_HOST}"
-      LETSENCRYPT_HOST: "rabbitmq.${LETSENCRYPT_HOST}"
+      VIRTUAL_HOST: "rbt.${VIRTUAL_HOST}"
+      LETSENCRYPT_HOST: "rbt.${LETSENCRYPT_HOST}"
     healthcheck:
       test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
       interval: 10s
@@ -97,9 +97,6 @@ services:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
       NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
       NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
-    command: >
-      sh -c "npx prisma migrate deploy &&
-        node /usr/src/app/server/index.mjs"
     networks:
       - internal-net
       - proxy-net

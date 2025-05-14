@@ -1,4 +1,5 @@
 node_modules
+prisma/generated
 .git
 .gitignore
 .DS_Store

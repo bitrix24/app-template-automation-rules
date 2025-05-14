@@ -12,6 +12,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
+    "prisma:generate": "pnpx prisma generate",
     "dev": "nuxt dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
@@ -22,7 +23,6 @@
     "lint:fix": "eslint --fix .",
     "translate-content": "tsx tools/translate.content.ts",
     "translate-ui": "tsx tools/translate.ui.ts",
-    "prisma:generate": "pnpx prisma generate",
     "prisma:migrate-dev": "pnpx prisma migrate dev",
     "prisma:migrate-deploy": "pnpx prisma migrate deploy"
   },

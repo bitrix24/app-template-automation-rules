@@ -3,6 +3,7 @@
  * @todo add fail queue
  * @todo test connect - while docker up
  */
+
 import { consola } from 'consola'
 import { RabbitMQConsumer } from '@bitrix24/b24rabbitmq'
 import { appOptions, rabbitMQConfig } from '../app.config'
@@ -11,7 +12,8 @@ import { Text, EnumCrmEntityTypeId, B24OAuth, LoggerBrowser } from '@bitrix24/b2
 import type { B24OAuthSecret, B24OAuthParams } from '@bitrix24/b24jssdk'
 import type { MessageWithAuth } from './types'
 import { generatePDF } from './utils/pdf-generator'
-import prisma from './utils/prisma'
+import { prisma } from './utils/prisma'
+import process from 'node:process'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 

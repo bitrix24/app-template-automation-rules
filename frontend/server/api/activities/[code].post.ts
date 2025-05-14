@@ -12,7 +12,7 @@ import { Salt } from '~/services/salt'
 import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { rabbitMQConfig } from '../../rabbitmq.config'
 import type { MessageWithAuth, Options } from '~~/server/types'
-import prisma from '../../utils/prisma'
+import { prisma } from '~~/utils/prisma'
 
 const { clearSalt } = Salt()
 

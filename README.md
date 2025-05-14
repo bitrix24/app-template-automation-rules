@@ -117,8 +117,8 @@ docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules 
 docker network create proxy-net
 
 # up server
-docker compose -f docker-compose.server.yml -p server__global up -d
 docker compose -f docker-compose.server.yml -p server__global up -d --build
+docker compose -f docker-compose.server.yml -p server__global up -d
 
 docker compose -f docker-compose.server.yml -p server__global top
 
@@ -136,19 +136,34 @@ docker logs -f letsencrypt
 ### Dev
 ```shell
 
+# RESTART
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+
 # STOP
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
 
 # START
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
-docker exec dev-frontend sh -c "pnpm run prisma:migrate-deploy"
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
 # OR
-# docker exec dev-frontend sh -c "pnpx prisma migrate deploy"
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+
+# DB migrate
+# docker exec -it dev-frontend sh -c "pnpx prisma migrate reset"
+
+docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
+# OR
+# docker exec -it dev-frontend sh -c "pnpx prisma migrate deploy"
 
 # LOG
 docker logs -f dev-frontend
 docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learning-1
 docker logs -f dev-db
+
+
+# commands
+docker exec -it dev-frontend sh -c "pnpm install"
 ```
 
 ```shell
@@ -214,10 +229,10 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-temp
 
 # START
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
-docker exec prod-frontend sh -c "npx prisma migrate deploy"
-# OR
-# docker exec prod-frontend sh -c "pnpm run prisma:migrate-deploy"
-# docker exec prod-frontend sh -c "pnpx prisma migrate deploy"
+
+# DB migrate
+# docker exec -it prod-frontend sh -c "npx prisma migrate reset"
+docker exec -it prod-frontend sh -c "npx prisma migrate deploy"
 
 # LOG
 docker logs -f prod-frontend

@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer-core'
-import { appOptions } from '../app.config'
+import { appOptions } from '../../app.config'
 import type { Browser, Page } from 'puppeteer-core'
 import { consola } from 'consola'
 

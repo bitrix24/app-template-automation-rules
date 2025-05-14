@@ -8,7 +8,7 @@
 import * as qs from 'qs-esm'
 import { B24LangList, EnumAppStatus } from '@bitrix24/b24jssdk'
 import type { BoolString } from '@bitrix24/b24jssdk'
-import prisma from '../../utils/prisma'
+import { prisma } from '~~/utils/prisma'
 
 /**
  * @todo remove this
@@ -115,7 +115,8 @@ export default defineEventHandler(async (event) => {
         domain: data?.auth?.domain || '',
         clientEndpoint: data?.auth?.client_endpoint || '?',
         serverEndpoint: data?.auth?.server_endpoint || '?',
-        status: data?.auth?.status || EnumAppStatus.Free
+        status: data?.auth?.status || EnumAppStatus.Free,
+        isFromAppInstall: true
       }
     })
   } else {
@@ -135,7 +136,8 @@ export default defineEventHandler(async (event) => {
         domain: data?.auth?.domain || '',
         clientEndpoint: data?.auth?.client_endpoint || '?',
         serverEndpoint: data?.auth?.server_endpoint || '?',
-        status: data?.auth?.status || EnumAppStatus.Free
+        status: data?.auth?.status || EnumAppStatus.Free,
+        isFromAppInstall: true
       }
     })
   }
