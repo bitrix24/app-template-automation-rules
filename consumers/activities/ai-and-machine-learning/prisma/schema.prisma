@@ -5,6 +5,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma/client"
 }
 
 datasource db {
@@ -15,12 +16,12 @@ datasource db {
 model B24App {
   id               Int    @id @default(autoincrement())
   memberId         String
+  applicationToken String
+  userId           Int
   version          String
   languageId       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  applicationToken String
-  userId           Int
   accessToken      String
   refreshToken     String
   expires          Int
@@ -30,6 +31,6 @@ model B24App {
   clientEndpoint   String
   serverEndpoint   String
   status           String
+  isFromAppInstall   Boolean @default(false)
+  @@unique([memberId, applicationToken, userId], name: "b24_app_user")
 }
-
-// @@unique([field1, field2, field3], name: "composite_key")

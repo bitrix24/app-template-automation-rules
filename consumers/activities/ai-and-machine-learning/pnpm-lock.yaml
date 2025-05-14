@@ -14,6 +14,9 @@ importers:
       '@bitrix24/b24rabbitmq':
         specifier: ^0.0.3
         version: 0.0.3(amqplib@0.10.8)
+      '@prisma/client':
+        specifier: ^6.7.0
+        version: 6.7.0(prisma@6.7.0(typescript@5.8.3))(typescript@5.8.3)
       amqplib:
         specifier: ^0.10.8
         version: 0.10.8
@@ -30,9 +33,6 @@ importers:
         specifier: ^24.6.1
         version: 24.8.1
     devDependencies:
-      '@prisma/client':
-        specifier: ^6.7.0
-        version: 6.7.0(prisma@6.7.0(typescript@5.8.3))(typescript@5.8.3)
       '@types/amqplib':
         specifier: ^0.10.7
         version: 0.10.7

@@ -89,16 +89,16 @@ services:
       dockerfile: Dockerfile_dev
     expose:
       - '3000'
-    env_file: .env.dev
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+    env_file: .env.dev
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
       NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
       NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
     command: >
-      sh -c "pnpm prisma migrate deploy &&
+      sh -c "pnpm run prisma:migrate-deploy &&
         pnpm run dev"
     networks:
       - internal-net
@@ -121,10 +121,10 @@ services:
     build:
       context: ./consumers/activities/ai-and-machine-learning
       dockerfile: Dockerfile_dev
-    env_file: .env.dev
     volumes:
       - ./consumers/activities/ai-and-machine-learning:/usr/src/app
       - /usr/src/app/node_modules
+    env_file: .env.dev
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
       NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"

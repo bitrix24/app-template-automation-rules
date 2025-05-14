@@ -5,6 +5,7 @@
 .dockerignore
 .gitignore
 *.yml
+Dockerfile
 Dockerfile*
 Makefile
 README.md
@@ -19,10 +20,9 @@ test
 **/.nitro
 **/.cache
 **/dist
+**/generated
 **/node_modules
 
-
-Dockerfile
 *.env*
 *.pem
 *.crt
