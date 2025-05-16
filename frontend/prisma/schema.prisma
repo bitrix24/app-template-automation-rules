@@ -4,8 +4,8 @@
 // @memo Need sync with consumers/activities/**/prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
-  // output   = "generated/prisma/client"
+  provider = "prisma-client"
+  output   = "../generated/prisma/client"
 }
 
 datasource db {
