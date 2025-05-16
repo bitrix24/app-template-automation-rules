@@ -17,10 +17,10 @@ const { clearSalt } = Salt()
  * Composable handling application initialization
  * Coordinates data loading via batch request
  */
-export const useAppInit = () => {
+export const useAppInit = (loggerTitle?: string) => {
   const $logger = LoggerBrowser.build(
-    'App',
-    import.meta.env?.DEV === true
+    loggerTitle ?? 'App',
+    import.meta.dev
   )
 
   // Stores

@@ -1,3 +1,4 @@
+// @memo Need sync with consumers/activities/**/app.config.ts
 import type { RabbitMQConfig } from '@bitrix24/b24rabbitmq'
 
 const config = useRuntimeConfig()
@@ -10,7 +11,12 @@ export const rabbitMQConfig: RabbitMQConfig = {
   },
   exchanges: [
     {
-      name: 'activities',
+      name: 'activities.v1',
+      type: 'direct',
+      options: { durable: true }
+    },
+    {
+      name: 'activities.service.v1',
       type: 'direct',
       options: { durable: true }
     }

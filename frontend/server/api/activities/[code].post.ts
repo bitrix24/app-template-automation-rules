@@ -179,6 +179,10 @@ export default defineEventHandler(async (event) => {
   console.log('DB AUTH', appRow)
 
   if (!appRow) {
+    if (import.meta.dev) {
+      console.error(`The database did not find authorization by memberId <${options.auth.memberId}> from the onAppInstall event.\nMost likely, you cleared the b24App table.\nYou need to reinstall the application in B24`)
+    }
+
     throw createError({
       statusCode: 400,
       statusMessage: 'ERROR_ACTIVITY_HANDLE_memberId'
@@ -241,7 +245,7 @@ async function handleActivity(options: Options) {
     }
 
     await producer.publish(
-      'activities',
+      'activities.v1',
       message.routingKey,
       message
     )

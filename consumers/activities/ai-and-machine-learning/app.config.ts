@@ -14,6 +14,7 @@ export function appOptions() {
   }
 }
 
+// @memo Need sync with frontend/server/rabbitmq.config.ts
 export const rabbitMQConfig: RabbitMQConfig = {
   connection: {
     url: appOptions().rabbitmqUrl,
@@ -22,21 +23,66 @@ export const rabbitMQConfig: RabbitMQConfig = {
   },
   exchanges: [
     {
-      name: 'activities',
+      name: 'activities.v1',
+      type: 'direct',
+      options: { durable: true }
+    },
+    {
+      name: 'activities.service.v1',
       type: 'direct',
       options: { durable: true }
     }
   ],
   queues: [
+    // Main queue (room)
     {
-      name: 'activity.AIandMachineLearning',
+      name: 'activity.AIandMachineLearning.v1',
+      options: {
+        durable: true,
+        arguments: {
+          'x-dead-letter-exchange': 'activities.service.v1',
+          'x-dead-letter-routing-key': 'failed'
+        }
+      },
       bindings: [
         {
-          exchange: 'activities',
+          exchange: 'activities.v1',
           routingKey: 'activity.AIandMachineLearning'
+        },
+        {
+          exchange: 'activities.service.v1',
+          routingKey: 'activity.service.AIandMachineLearning'
         }
-      ],
-      options: { durable: true }
+      ]
+    },
+    // Queue with delay (balcony)
+    {
+      name: 'activity.AIandMachineLearning.delayed.6000.v1',
+      options: {
+        durable: true,
+        arguments: {
+          'x-message-ttl': 6000,
+          'x-dead-letter-exchange': 'activities.service.v1',
+          'x-dead-letter-routing-key': 'activity.service.AIandMachineLearning'
+        }
+      },
+      bindings: [
+        {
+          exchange: 'activities.service.v1',
+          routingKey: 'delay.AIandMachineLearning.6000'
+        }
+      ]
+    },
+    // Queue of problematic messages (vegetable garden)
+    {
+      name: 'activities.failed.v1',
+      options: { durable: true },
+      bindings: [
+        {
+          exchange: 'activities.service.v1',
+          routingKey: 'failed'
+        }
+      ]
     }
   ],
   channel: {
