@@ -8,7 +8,6 @@ useHead({
 })
 
 // region Init ////
-
 const { $logger, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()

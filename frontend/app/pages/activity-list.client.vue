@@ -36,8 +36,6 @@ const { $logger, initApp, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
 
-$logger.warn($b24)
-
 const isLoading = ref(true)
 const isShowDebug = ref(false)
 
