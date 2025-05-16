@@ -3,7 +3,7 @@
   "description": "Example of Bitrix24 application for working with Business Process actions",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bitrix24/app-template-automation-rules.git"
@@ -12,17 +12,17 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "prisma:generate": "pnpx prisma generate",
+    "postinstall": "nuxt prepare && pnpm run prisma:generate",
     "dev": "nuxt dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
     "build": "nuxt build",
     "run": "node .output/server/index.mjs",
-    "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "translate-content": "tsx tools/translate.content.ts",
     "translate-ui": "tsx tools/translate.ui.ts",
+    "prisma:generate": "pnpx prisma generate",
     "prisma:migrate-dev": "pnpx prisma migrate dev",
     "prisma:migrate-deploy": "pnpx prisma migrate deploy"
   },

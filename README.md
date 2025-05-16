@@ -131,6 +131,10 @@ docker compose -f docker-compose.server.yml -p server__global stop
 # LOG
 docker logs -f server
 docker logs -f letsencrypt
+
+docker exec -it server sh -c "cat /etc/nginx/conf.d/default.conf"
+
+docker exec -it server sh
 ```
 
 ### Dev
@@ -138,10 +142,15 @@ docker logs -f letsencrypt
 
 # RESTART
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build --no-cache && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
+
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
  docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
 
 # STOP
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
+
 
 # START
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build
@@ -386,6 +395,9 @@ docker image prune -a
 
 # Delete unused volumes
 docker volume prune
+docker volume prune -a
+docker volume ls
+docker volume rm xxx xxx xxx
 
 # Delete EVERYTHING unused (including volumes and images)
 docker system prune -a --volumes

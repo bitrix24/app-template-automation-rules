@@ -92,6 +92,7 @@ services:
 #    volumes:
 #      - ./frontend:/usr/src/app
 #      - /usr/src/app/node_modules
+#      - /usr/src/app/generated
     env_file: .env.prod
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
@@ -121,6 +122,7 @@ services:
     volumes:
       - ./consumers/activities/ai-and-machine-learning:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/generated
     env_file: .env.prod
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
@@ -132,8 +134,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: 500M
-          cpus: '1.0'
+          memory: 256M
+          cpus: '0.2'
 
 networks:
   proxy-net:

@@ -1,10 +1,13 @@
+dist
 node_modules
-prisma/generated
+.data
+.nuxt
+.output
+generated
 .git
 .gitignore
 .DS_Store
 .env
 *.md
-dist
 **/.pnpm-store
 **/cache

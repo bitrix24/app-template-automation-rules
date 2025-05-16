@@ -3,15 +3,16 @@
   "description": "Example of Bitrix24 application for working with Business Process actions",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "type": "module",
   "license": "MIT",
   "scripts": {
+    "postinstall": "pnpm run prisma:generate",
+    "consumer:dev": "tsx watch app/consumer.ts",
+    "consumer:run": "tsx app/consumer.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
-    "consumer:dev": "tsx watch app/consumer.ts",
-    "consumer:run": "tsx app/consumer.ts",
     "prisma:generate": "pnpx prisma generate"
   },
   "dependencies": {

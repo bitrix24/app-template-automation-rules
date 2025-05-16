@@ -12,8 +12,8 @@ RUN corepack enable
 
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma ./prisma/
-RUN pnpm install
-RUN pnpm run prisma:generate
+RUN pnpm install --frozen-lockfile
+# RUN pnpm run prisma:generate
 
 COPY . ./
 
