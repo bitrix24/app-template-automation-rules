@@ -31,3 +31,4 @@ logs
 !.env.dev.example
 !.env.prod.example
 /.run/
+/consumers/activities/php-calc-task/vendor/

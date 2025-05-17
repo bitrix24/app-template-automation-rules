@@ -1,0 +1,12 @@
+{
+  "name": "bitrix24/app-template-automation-rules-php-calc-task",
+  "description": "Example of Bitrix24 application for working with Business Process actions",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "require": {
+    "bitrix24/b24phpsdk": "1.2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}
