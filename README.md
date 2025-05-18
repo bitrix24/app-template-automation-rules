@@ -168,6 +168,7 @@ docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
 # LOG
 docker logs -f dev-frontend
 docker logs -f dev__app-template-automation-rules-consumer-ai-and-machine-learning-1
+docker logs -f dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
 docker logs -f dev-db
 
 

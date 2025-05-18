@@ -95,7 +95,10 @@ class MessageProcess
       ));
       $filter = [
         '>ID' => $lastId,
-        'UF_CRM_TASK' => $ufCrmTask
+        /**
+         * @todo on this
+         */
+        // 'UF_CRM_TASK' => $ufCrmTask
       ];
 
       try {

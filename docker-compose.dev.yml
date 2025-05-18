@@ -137,6 +137,34 @@ services:
           memory: 256M
           cpus: '0.2'
 
+# @todo fix this all
+  consumer-php-crm-entity-task-calc:
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    build:
+      context: ./consumers/activities/php-calc-task
+#      context: ./consumers/activities/php-crm-entity-task-calc
+      dockerfile: Dockerfile_dev
+    volumes:
+#      - ./consumers/activities/php-crm-entity-task-calc:/usr/src/app
+      - ./consumers/activities/php-calc-task:/usr/src/app
+    env_file: .env.dev
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
+    networks:
+      - internal-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.2'
+
 networks:
   proxy-net:
     driver: bridge
