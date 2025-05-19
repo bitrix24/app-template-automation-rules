@@ -7,6 +7,7 @@ frontend/.cache
 frontend/dist
 frontend/**/generated
 consumers/**/generated
+consumers/**/vendor
 
 certs
 acme

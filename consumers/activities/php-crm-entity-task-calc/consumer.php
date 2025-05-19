@@ -29,4 +29,6 @@ $consumer->registerHandler(
   $processor
 );
 
-$consumer->consume($processor->getConfigRabbitMQ()->getParams()->getQueueName());
+$consumer->consume(
+  $processor->getConfigRabbitMQ()->getParams()->getQueueName()
+);
