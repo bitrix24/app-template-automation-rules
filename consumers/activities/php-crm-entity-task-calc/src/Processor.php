@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace AppCrmEntityTaskCalc;
 
+use Bitrix24\RabbitMQ\Producer;
 use Bitrix24\RabbitMQ\Types\IMessageHandler;
+use Bitrix24\SDK\Core\Exceptions\BaseException;
+use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
+use Bitrix24\SDK\Core\Exceptions\TransportException;
+use Bitrix24\SDK\Core\Exceptions\UnknownScopeCodeException;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Psr\Log\LoggerInterface;
@@ -25,11 +30,11 @@ class Processor
     );
   }
 
+  // region RabbitMq ////
   public function __construct(?LoggerInterface $logger = null) {
-    if ($logger === null) {
+    if (null === $logger) {
       $logger = new NullLogger();
     }
-
     $this->logger = $logger;
   }
 
@@ -38,40 +43,156 @@ class Processor
     callable $ack,
     callable $nack
   ): void {
-    $this->logger->debug('Received: '.print_r($msg, true));
+    try {
+      $retryCount = (int)($msg['retryCount'] ?? 0);
+      if ($retryCount >= static::maxRetryCount) {
+        throw new \Exception('Max retries exceeded');
+      }
+      $this->logger->info(
+        sprintf(
+          '[RabbitMQ::%s] >> %s | %s',
+          static::activityCode,
+          (string)$msg['routingKey'],
+          $retryCount
+        ),
+        [
+          'routingKey' => (string)$msg['routingKey'],
+          'retryCount' => $retryCount,
+          'msg' => $msg
+        ]
+      );
+
+      // $this->logger->debug(json_encode($msg, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR));
 
 
-    /**
-     * @todo remove this
-     * @todo get oauth from DB
-     */
-    $B24 = ServiceBuilderFactory::createServiceBuilderFromWebhook(
-      $_ENV['HOOK_URL']
-    );
-    $entityTypeId = 2;
-    $entityId = 1188;
+      /**
+       * @memo use for test
+       */
+      /*/
+      if (1 > 0 || mt_rand() / mt_getrandmax() < 0.5) {
+        throw new \Exception('Some Fail');
+      }
+      //*/
 
-    $this->process(
-      $B24,
-      $entityTypeId,
-      $entityId
-    );
+      $this->process($msg);
 
-    $ack();
+      $ack();
+    } catch (\Throwable $problem) {
+      $retryCount = (int)($msg['retryCount'] ?? 0);
+      $newRetryCount = $retryCount + 1;
+
+      $this->logger->error($problem->getMessage(), [
+        'throwable' => $problem
+      ]);
+
+      $producer = new Producer($this->getConfigRabbitMQ()->rabbitmqConfig);
+      $producer->initialize();
+      try {
+        if ($newRetryCount < static::maxRetryCount) {
+          $msg['retryCount'] = $newRetryCount;
+          // Send to the balcony with a delay
+          $producer->publish(
+            $this->getConfigRabbitMQ()->getParams()->getServiceExchange(),
+            $this->getConfigRabbitMQ()->getParams()->getDelayRoutingKey(),
+            array_merge($msg, ['error' => $problem->getMessage()])
+          );
+        } else {
+          // We send to the garden
+          $producer->publish(
+            $this->getConfigRabbitMQ()->getParams()->getServiceExchange(),
+            $this->getConfigRabbitMQ()->getParams()->getFailedRoutingKey(),
+            array_merge($msg, ['error' => $problem->getMessage()])
+          );
+        }
+      } finally {
+        $producer->disconnect();
+        unset($producer);
+      }
+
+      $ack();
+    }
   }
+  // endregion ////
 
+  // region Process ////
+  /**
+   * @throws TransportException
+   * @throws InvalidArgumentException
+   * @throws UnknownScopeCodeException
+   * @throws BaseException
+   */
   public function process(
-    ServiceBuilder $B24,
-    int $entityTypeId,
-    int $entityId
+    $msg
   ): void
   {
+    B24Service::setLogger($this->logger);
+    $B24 = B24Service::getB24Service(
+      $msg['auth']['memberId'] ?? null
+    );
+
+    $entityTypeId = $msg['entityTypeId'] ?? 0;
+    $entityId = $msg['entityId'] ?? 0;
+    $workflowId = $msg['additionalData']['workflowId'] ?? null;
+    $eventToken = $msg['additionalData']['eventToken'] ?? null;
+
+    if (empty($eventToken)) {
+      throw new InvalidArgumentException('eventToken is empty');
+    }
+
+    try {
+      if ($entityTypeId < 1) {
+        throw new InvalidArgumentException('entityTypeId is empty');
+      } elseif ($entityId < 1) {
+        throw new InvalidArgumentException('entityId is empty');
+      } elseif (empty($workflowId)) {
+        throw new InvalidArgumentException('workflowId is empty');
+      }
+    } catch (\Exception $exception) {
+      $B24->getBizProcScope()->activity()->log(
+        $eventToken,
+        sprintf('Error: %s', $exception->getMessage())
+      );
+
+      throw $exception;
+    }
+
     $entityType = Crm\EnumEntityType::from($entityTypeId);
     $ufCrmTask = join('_', [$entityType->getEntityTypeAbbr(), $entityId]);
+
     $taskList = $this->getAllTasksForEntity($B24, $ufCrmTask);
-    $this->logger->debug(sprintf('TTL ROWS: %s', count($taskList)));
+    $ttl = count($taskList);
+    $ttlTime = array_sum(array_column($taskList, 'timeSpentInLogs'));
+
+    $hours = floor($ttlTime / 3600);
+    $minutes = floor(($ttlTime % 3600) / 60);
+    $seconds = $ttlTime % 60;
+    $ttlTimeFormat = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+    $logMessage = sprintf('Success: ttl: %s | ttlTime: %s sec | $ttlTimeFormat : %s', $ttl, $ttlTime, $ttlTimeFormat);
+    $this->logger->debug($logMessage);
+
+    $B24->getBizProcScope()->event()->send(
+      $eventToken,
+      [
+        'ttlTask' => $ttl,
+        'ttlTime' => $ttlTime,
+        'ttlTimeFormat' => $ttlTimeFormat
+      ],
+      $logMessage
+    );
+
+    unset($B24);
   }
 
+  /**
+   * Load all task from crm.entity.item
+   *
+   * @param ServiceBuilder $B24
+   * @param string $ufCrmTask
+   * @return array
+   * @throws \Bitrix24\SDK\Core\Exceptions\BaseException
+   * @throws \Bitrix24\SDK\Core\Exceptions\TransportException
+   */
   private function getAllTasksForEntity(
     ServiceBuilder $B24,
     string $ufCrmTask
@@ -97,17 +218,13 @@ class Processor
       ));
       $filter = [
         '>ID' => $lastId,
-        /**
-         * @todo on this
-         */
-        // 'UF_CRM_TASK' => $ufCrmTask
+       // 'UF_CRM_TASK' => $ufCrmTask
       ];
 
       try {
         if ($iterator >= $limitCall) {
           throw new Exceptions\NeedSleepException('Need sleep');
         }
-
         $data = $B24->core
           ->call(
             'tasks.task.list',
@@ -157,4 +274,5 @@ class Processor
 
     return $result;
   }
+  // endregion ////
 }

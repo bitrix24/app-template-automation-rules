@@ -221,7 +221,14 @@ export default defineEventHandler(async (event) => {
 })
 
 async function handleActivity(options: Options) {
-  const activityCode = options.code
+  let activityCode = options.code
+
+  /**
+   * @todo fix this
+   */
+  if (activityCode === 'AppMarketplace') {
+    activityCode = 'CrmEntityTaskCalc'
+  }
 
   console.log('come >> ', options.code)
   if (!options.workflowId

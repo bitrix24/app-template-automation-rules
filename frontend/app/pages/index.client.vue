@@ -72,33 +72,6 @@ function openActivityList() {
   }, 10)
 }
 // endregion ////
-/**
- * @todo remove this
- */
-const generatePDF = async () => {
-  try {
-    const response = await fetch('/render/invoice-by-deal/1188/')
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
-    const blob = await response.blob()
-    if (!blob.type.includes('application/pdf')) {
-      throw new Error('Invalid content type')
-    }
-
-    const downloadUrl = URL.createObjectURL(blob)
-    const anchor = document.createElement('a')
-    anchor.href = downloadUrl
-    anchor.download = 'document.pdf'
-    anchor.click()
-
-    URL.revokeObjectURL(downloadUrl)
-  } catch (error) {
-    console.error('PDF download failed:', error)
-  }
-}
 </script>
 
 <template>
@@ -114,13 +87,6 @@ const generatePDF = async () => {
         color="primary"
         @click.stop="openActivityList"
       />
-      <B24Button
-        rounded
-        loading-auto
-        @click="generatePDF"
-      >
-        @todo remove this Generate from URL
-      </B24Button>
     </div>
   </div>
 </template>

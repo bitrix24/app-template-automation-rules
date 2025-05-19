@@ -45,6 +45,7 @@ const startConsumer = async () => {
         if (1 > 0 || Math.random() < 0.5) {
           throw new Error('Some Fail')
         }
+
         await processMessage(msg);
 
         ack()

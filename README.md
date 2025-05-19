@@ -155,10 +155,7 @@ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-templat
 
 # DB migrate
 # docker exec -it dev-frontend sh -c "pnpx prisma migrate reset"
-
 docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
-# OR
-# docker exec -it dev-frontend sh -c "pnpx prisma migrate deploy"
 
 # LOG
 docker logs -f dev-frontend
@@ -166,9 +163,15 @@ docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-
 docker logs -f dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
 docker logs -f dev-db
 
-
 # commands
 docker exec -it dev-frontend sh -c "pnpm install"
+
+# consumer restart
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-php-crm-entity-task-calc
+ 
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-nodejs-pdf-from-html
 ```
 
 ```shell
@@ -210,6 +213,9 @@ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-templat
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-nodejs-pdf-from-html=2
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d consumer-nodejs-pdf-from-html
+
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-php-crm-entity-task-calc
  
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs 
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs chrome

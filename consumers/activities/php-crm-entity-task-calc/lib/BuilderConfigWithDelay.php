@@ -24,56 +24,85 @@ readonly class BuilderConfigWithDelay
   }
 
   // region Info ////
+  /**
+   * @inheritDoc
+   */
   public function getExchange(): string
   {
     return sprintf('%s.%s', $this->exchangeBaseTitle, $this->ver);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getServiceExchange(): string
   {
     return sprintf('%s.service.%s', $this->exchangeBaseTitle, $this->ver);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getServiceRoutingKey(): string
   {
     return sprintf('%s.service.%s', $this->queueBaseTitle, $this->activityCode);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getQueueName(): string
   {
     return sprintf('%s.%s.%s', $this->queueBaseTitle, $this->activityCode, $this->ver);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getDelayedQueueName(): string
   {
     return sprintf('%s.%s.delayed.%s.%s', $this->queueBaseTitle, $this->activityCode, $this->delayMs, $this->ver);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getFailedQueueName(): string
   {
     return sprintf('%s.failed.%s', $this->exchangeBaseTitle, $this->ver);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getRoutingKey(): string
   {
     return sprintf('%s.%s', $this->queueBaseTitle, $this->activityCode);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getDelayRoutingKey(): string
   {
     return sprintf('delay.%s.%s', $this->activityCode, $this->delayMs);
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getFailedRoutingKey(): string
   {
     return 'failed';
   }
 
+  /**
+   * @inheritdoc
+   */
   public function getDelayMs(): int
   {
     return $this->delayMs;
   }
-
   // endregion ////
 
   public function buildExchanges(): array

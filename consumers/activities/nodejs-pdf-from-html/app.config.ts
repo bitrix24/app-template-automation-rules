@@ -10,6 +10,7 @@ export function appOptions() {
     appInternalUrl: process.env['NUXT_APP_INTERNAL_URL'] || '?',
     appClientId: process.env['NUXT_APP_CLIENT_ID'] || '?',
     appClientSecret: process.env['NUXT_APP_CLIENT_SECRET'] || '?',
+    appScope: process.env['NUXT_APP_SCOPE'] || '?',
     rabbitmqUrl: process.env['NUXT_RABBITMQ_URL'] || '?'
   }
 }

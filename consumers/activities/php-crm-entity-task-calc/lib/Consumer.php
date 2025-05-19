@@ -136,6 +136,7 @@ class Consumer
           $startTime
         )
       ) {
+        $this->logger->info('[RabbitMQ] Attempts - normal termination');
         break;
       }
 
@@ -148,6 +149,7 @@ class Consumer
         );
       } catch (AMQPTimeoutException $exception) {
         // Timeout - normal termination
+        $this->logger->info('[RabbitMQ] Timeout - normal termination');
         break;
       }
 

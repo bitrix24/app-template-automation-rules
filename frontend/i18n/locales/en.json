@@ -8,8 +8,7 @@
         "title": "Bitrix24 UI - bpActivity"
       },
       "page": {
-        "install": "1. Install",
-        "main": "2. Main page"
+        "main": "Main page"
       },
       "settings": {
         "currentLang": "{title}",

@@ -14,7 +14,9 @@ class Config
   public readonly bool $isDev;
   public readonly string $appClientId;
   public readonly string $appClientSecret;
+  public readonly string $appScope;
   public readonly string $rabbitmqUrl;
+  public readonly string $databaseUrl;
 
   public static function getInstance(): self
   {
@@ -33,7 +35,9 @@ class Config
     $this->isDev = ($_ENV['NODE_ENV'] ?? '?') === 'development';
     $this->appClientId = $_ENV['NUXT_APP_CLIENT_ID'] ?? '?';
     $this->appClientSecret = $_ENV['NUXT_APP_CLIENT_SECRET'] ?? '?';
+    $this->appScope = $_ENV['NUXT_APP_SCOPE'] ?? '?';
     $this->rabbitmqUrl = $_ENV['NUXT_RABBITMQ_URL'] ?? '?';
+    $this->databaseUrl = $_ENV['DATABASE_URL'] ?? '?';
   }
 
   private function __clone() {}

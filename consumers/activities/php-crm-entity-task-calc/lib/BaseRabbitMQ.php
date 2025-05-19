@@ -52,15 +52,18 @@ abstract class BaseRabbitMQ
 
   public function registerExchange(Types\ExchangeParams $exchange): void
   {
+    $options = $exchange->options;
+    unset($options['durable']);
+
     $this->channel->exchange_declare(
       $exchange->name,
       $exchange->type,
       false,
-      true,
+      $exchange->options['durable'] ?? false,
       false,
       false,
       false,
-      new AMQPTable($exchange->options)
+      new AMQPTable($options)
     );
   }
 
@@ -86,11 +89,11 @@ abstract class BaseRabbitMQ
     $result = $this->channel->queue_declare(
       $queue->name ?? '',
       false,
-      true,
+      $queue->options['durable'] ?? false,
       false,
       false,
       false,
-      new AMQPTable(array_merge($arguments, $queue->options))
+      new AMQPTable(array_merge($arguments, $queue->options['arguments'] ?? []))
     );
 
     foreach ($queue->bindings as $binding) {

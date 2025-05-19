@@ -55,6 +55,7 @@ export interface ActivityOrRobotConfig extends Omit<ActivityConfig, 'HANDLER' | 
  * @todo fix properties lang
  */
 export const activitiesConfig: ActivityOrRobotConfig[] = [
+  // nodejs-pdf-from-html
   {
     type: 'robot',
     CODE: 'AIandMachineLearning',
@@ -91,9 +92,7 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
           [EnumCrmEntityType.lead]: 'Lead',
           [EnumCrmEntityType.deal]: 'Deal',
           [EnumCrmEntityType.quote]: 'Quote',
-          [EnumCrmEntityType.invoice]: 'Invoice',
-          [EnumCrmEntityType.order]: 'Order',
-          CrmDynamic: 'SPA'
+          [EnumCrmEntityType.invoice]: 'Invoice'
         }
       },
       entityId: {
@@ -109,8 +108,9 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
       }
     }
   },
+  // php-crm-entity-task-calc
   {
-    type: 'activity',
+    type: 'robot',
     CODE: 'AppMarketplace',
     FILTER: {
       INCLUDE: [
@@ -120,46 +120,25 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
         ['crm', 'CCrmDocumentLead'],
         ['crm', 'CCrmDocumentDeal'],
         ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\Quote'],
-        ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\SmartInvoice'],
-        ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\Dynamic'],
-        /**
-         * @todo test this
-         */
-        ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\Order']
+        ['crm', 'Bitrix\\Crm\\Integration\\BizProc\\Document\\SmartInvoice']
       ]
     },
     USE_SUBSCRIPTION: 'Y',
     AUTH_USER_ID: 1,
-    USE_PLACEMENT: 'Y',
-    PROPERTIES: {
-      entityTypeId: {
-        Required: 'Y',
-        Name: 'entityTypeId',
-        Type: 'select',
-        Options: {
-          [EnumCrmEntityType.lead]: 'Lead',
-          [EnumCrmEntityType.deal]: 'Deal',
-          [EnumCrmEntityType.quote]: 'Quote',
-          [EnumCrmEntityType.invoice]: 'Invoice',
-          [EnumCrmEntityType.order]: 'Order',
-          CrmDynamic: 'SPA'
-        }
-      },
-      entityId: {
-        Required: 'Y',
-        Name: 'entity Id',
-        Type: 'int'
-      }
-    },
+    USE_PLACEMENT: 'N',
     RETURN_PROPERTIES: {
-      documentId: {
-        Name: 'Rendered document id',
+      ttlTask: {
+        Name: 'ttlTask',
         Type: 'int'
+      },
+      ttlTime: {
+        Name: 'ttlTime',
+        Type: 'int'
+      },
+      ttlTimeFormat: {
+        Name: 'ttlTimeFormat',
+        Type: 'string'
       }
     }
-  },
-  {
-    type: 'activity',
-    CODE: 'BlockchainTechnology'
   }
 ]

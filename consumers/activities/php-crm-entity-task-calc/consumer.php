@@ -1,6 +1,6 @@
 <?php
 /**
- * php consumer.php
+ * @todo add used memo info
  */
 declare(strict_types=1);
 
@@ -30,5 +30,7 @@ $consumer->registerHandler(
 );
 
 $consumer->consume(
-  $processor->getConfigRabbitMQ()->getParams()->getQueueName()
+  $processor->getConfigRabbitMQ()->getParams()->getQueueName(),
+  0,
+  1000 * 60 * 10 // -> 10 min
 );

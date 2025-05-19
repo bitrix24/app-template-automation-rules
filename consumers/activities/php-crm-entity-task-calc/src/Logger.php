@@ -8,6 +8,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger as MonologLogger;
+use Monolog\Utils;
 use Psr\Log\LoggerInterface;
 
 class Logger
@@ -21,10 +22,13 @@ class Logger
       Config::getInstance()->isDev
         ? Level::Debug
         : Level::Info,
+      true,
+      null,
+      true
     );
 
     $formatter = new LineFormatter(
-      "%datetime% > %channel% > %level_name% > %message%\n",
+      "%datetime% > %channel% > %level_name% > %message% %context%\n",
       "Y-m-d H:i:s"
     );
 
