@@ -23,7 +23,7 @@ services:
 
   rabbitmq:
     container_name: dev-rabbitmq
-    image: rabbitmq:3.12-management-alpine
+    image: rabbitmq:4.1.0-management-alpine
     ports:
       - '5672:5672' # need sync with RABBITMQ_NODE_PORT
       - '15672:15672' # Management UI
@@ -108,7 +108,7 @@ services:
           memory: 2G
           cpus: '2.0'
 
-  consumer-ai-and-machine-learning:
+  consumer-nodejs-pdf-from-html:
     depends_on:
       chrome:
         condition: service_healthy
@@ -117,10 +117,10 @@ services:
       db:
         condition: service_healthy
     build:
-      context: ./consumers/activities/ai-and-machine-learning
+      context: ./consumers/activities/nodejs-pdf-from-html
       dockerfile: Dockerfile_dev
     volumes:
-      - ./consumers/activities/ai-and-machine-learning:/usr/src/app
+      - ./consumers/activities/nodejs-pdf-from-html:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/generated
     env_file: .env.dev
@@ -137,7 +137,6 @@ services:
           memory: 256M
           cpus: '0.2'
 
-# @todo fix this all
   consumer-php-crm-entity-task-calc:
     depends_on:
       rabbitmq:
@@ -145,12 +144,11 @@ services:
       db:
         condition: service_healthy
     build:
-      context: ./consumers/activities/php-calc-task
-#      context: ./consumers/activities/php-crm-entity-task-calc
+      context: ./consumers/activities/php-crm-entity-task-calc
       dockerfile: Dockerfile_dev
     volumes:
-#      - ./consumers/activities/php-crm-entity-task-calc:/usr/src/app
-      - ./consumers/activities/php-calc-task:/usr/src/app
+      - ./consumers/activities/php-crm-entity-task-calc:/usr/src/app
+      - /usr/src/app/vendor
     env_file: .env.dev
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
