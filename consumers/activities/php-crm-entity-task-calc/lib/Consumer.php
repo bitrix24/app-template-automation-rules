@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Bitrix24\RabbitMQ;
 
+use Exception;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
+use Bitrix24\RabbitMQ\Exceptions\RabbitMQException;
+use Bitrix24\RabbitMQ\Exceptions\MemoryException;
 
 class Consumer
   extends BaseRabbitMQ
@@ -19,8 +22,13 @@ class Consumer
     $this->connect();
     $this->setupExchanges();
     $this->setupQueues();
+    Utils\Memory\Manager::getInstance()->start();
   }
 
+  /**
+   * @return void
+   * @throws Exceptions\RabbitMQException
+   */
   public function connect(): void
   {
     try {
@@ -39,12 +47,15 @@ class Consumer
       );
       $this->retries = 0;
       $this->logger->info('[RabbitMQ::Consumer] connected successfully');
-    } catch (\Exception $e) {
-      $this->logger->error('[RabbitMQ::Consumer] connection error: ' . $e->getMessage());
+    } catch (Exception $exception) {
+      $this->logger->error('[RabbitMQ::Consumer] connection error: ' . $exception->getMessage());
       $this->handleReconnect();
     }
   }
 
+  /**
+   * @throws RabbitMQException
+   */
   private function handleReconnect(): void
   {
     $maxRetries = $this->config->connection['maxRetries'] ?? 5;
@@ -105,10 +116,22 @@ class Consumer
       false,
       false,
       function (AMQPMessage $msg) use ($queueName) {
+
+        $gcInterval = 1_000;
+        $sleepSeconds = 0;
+        $sleepNanoseconds = 10_000_000;
+
         if (isset($this->handlers[$queueName])) {
+          /** @var Types\IMessageHandler $handler */
+          $handler = $this->handlers[$queueName];
           try {
             $body = json_decode($msg->getBody(), true);
-            $this->handlers[$queueName]->handle(
+
+            $gcInterval = $handler->getGcInterval();
+            $sleepSeconds = $handler->getSleepSeconds();
+            $sleepNanoseconds = $handler->getSleepNanoseconds();
+
+            $handler->handle(
               $body,
               function () use ($msg) {
                 $msg->ack();
@@ -122,6 +145,12 @@ class Consumer
             $msg->nack(false);
           }
         }
+
+        Utils\Memory\Manager::getInstance()->performGarbageCollection(
+          $gcInterval,
+          $sleepSeconds,
+          $sleepNanoseconds
+        );
       }
     );
 
@@ -136,7 +165,8 @@ class Consumer
           $startTime
         )
       ) {
-        $this->logger->info('[RabbitMQ] Attempts - normal termination');
+        Utils\Memory\Manager::getInstance()->stop();
+
         break;
       }
 
@@ -147,8 +177,10 @@ class Consumer
           false,
           $this->calculateRemainingTimeout($timeoutMs, $startTime)
         );
+
       } catch (AMQPTimeoutException $exception) {
         // Timeout - normal termination
+        Utils\Memory\Manager::getInstance()->stop();
         $this->logger->info('[RabbitMQ] Timeout - normal termination');
         break;
       }
@@ -169,6 +201,10 @@ class Consumer
       $maxAttempts > 0
       && $currentAttempts >= $maxAttempts
     ) {
+      $this->logger->info('[RabbitMQ] Attempts - normal termination', [
+        'currentAttempts' => $currentAttempts,
+        'maxAttempts' => $maxAttempts,
+      ]);
       return true;
     }
 
@@ -177,10 +213,53 @@ class Consumer
       $timeoutMs > 0
       && $this->getElapsedTimeMs($startTime) >= $timeoutMs
     ) {
+      $this->logger->info('[RabbitMQ] Timeout - normal termination', []);
+      return true;
+    }
+
+    // Memory limit
+    if ($this->isMemoryLimitApproaching()) {
+      $this->logger->info('[RabbitMQ] Memory - normal termination', [
+        'limit' => ($this->getMemoryLimit()).' MB',
+        'reserv' => ($this->getMemoryReserv()).' MB',
+        'used' => Utils\Memory\Manager::getInstance()->getPeakMemoryUsage(),
+      ]);
       return true;
     }
 
     return false;
+  }
+
+  /**
+   * Returns the set memory limit
+   *
+   * @return int
+   */
+  public function getMemoryLimit(): int
+  {
+    return $this->config->connection['memoryLimit'] ?? 5;
+  }
+
+  public function getMemoryReserv(): int
+  {
+    return $this->config->connection['memoryReserv'] ?? 2;
+  }
+
+  /**
+   * Checks that the memory is greater than that allowed to this process.
+   *
+   * @return boolean
+   */
+  protected function isMemoryLimitApproaching(): bool
+  {
+    try {
+      return Utils\Memory\Manager::getInstance()->isMemoryLimitApproaching(
+        ($this->getMemoryLimit()).'M',
+        ($this->getMemoryReserv()).'M'
+      );
+    } catch (MemoryException $exception) {
+      return false;
+    }
   }
 
   private function getElapsedTimeMs(float $startTime): float

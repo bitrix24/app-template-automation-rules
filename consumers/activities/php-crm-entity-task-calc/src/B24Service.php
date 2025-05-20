@@ -113,7 +113,11 @@ class B24Service
       'BITRIX24_PHP_SDK_APPLICATION_SCOPE' => $config->appScope
     ]);
 
-    static::getLogger()->debug('getApplicationProfile.finish');
+    static::getLogger()->debug('getApplicationProfile.finish', [
+//      'appClientId' => $profile->clientId,
+//      'appClientSecret' => $profile->clientSecret,
+//      'appScope' => $profile->scope->getScopeCodes()
+    ]);
     return $profile;
   }
 }

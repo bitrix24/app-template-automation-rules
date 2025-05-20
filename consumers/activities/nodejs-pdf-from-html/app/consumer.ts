@@ -42,9 +42,12 @@ const startConsumer = async () => {
         }
         consola.info(`[RabbitMQ::${activityCode}] ${Text.getDateForLog()}>> `, msg.routingKey, retryCount)
 
-        if (1 > 0 || Math.random() < 0.5) {
-          throw new Error('Some Fail')
-        }
+        /**
+         * @memo use for test
+         */
+        // if (1 > 0 || Math.random() < 0.5) {
+        //   throw new Error('Some Fail')
+        // }
 
         await processMessage(msg);
 

@@ -9,7 +9,6 @@ use Bitrix24\RabbitMQ\Types\IBuilderConfig;
 use Bitrix24\RabbitMQ\Types\IBuilderConfigSomeDelayed;
 use Bitrix24\RabbitMQ\Types\IBuilderConfigSomeRouting;
 use Bitrix24\RabbitMQ\Types\RabbitMQConfig;
-use Exception;
 
 class ConfigRabbitMQ
 {
@@ -52,7 +51,9 @@ class ConfigRabbitMQ
       [
         'url' => RabbitMQConfig::getConnectionFromUrl(Config::getInstance()->rabbitmqUrl),
         'reconnectInterval' => 5000,
-        'maxRetries' => 5
+        'maxRetries' => 5,
+        'memoryLimit' => 20,
+        'memoryReserv' => 2
       ],
       $this->params->buildExchanges(),
       $this->params->buildQueues(),
@@ -67,10 +68,10 @@ class ConfigRabbitMQ
   private function __clone() {}
 
   /**
-   * @throws Exception
+   * @throws \LogicException
    */
   public function __wakeup()
   {
-    throw new Exception('Cannot unserialize singleton');
+    throw new \LogicException('Cannot unserialize singleton');
   }
 }

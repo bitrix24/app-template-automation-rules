@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Bitrix24\RabbitMQ;
 
+use Exception;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Wire\AMQPTable;
@@ -17,8 +18,12 @@ class Producer
   {
     $this->connect();
     $this->setupExchanges();
+    Utils\Memory\Manager::getInstance()->start();
   }
 
+  /**
+   * @throws Exception
+   */
   public function connect(): void
   {
     try {
@@ -36,9 +41,9 @@ class Producer
         false
       );
       $this->logger->info('[RabbitMQ::Producer] connected successfully');
-    } catch (\Exception $e) {
-      $this->logger->error('[RabbitMQ::Producer] connection error: ' . $e->getMessage());
-      throw $e;
+    } catch (Exception $exception) {
+      $this->logger->error('[RabbitMQ::Producer] connection error: ' . $exception->getMessage());
+      throw $exception;
     }
   }
 

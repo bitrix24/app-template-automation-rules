@@ -6,12 +6,12 @@ namespace AppCrmEntityTaskCalc;
 
 use Bitrix24\RabbitMQ\Producer;
 use Bitrix24\RabbitMQ\Types\IMessageHandler;
+use Bitrix24\RabbitMQ\Utils\Memory;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\TransportException;
 use Bitrix24\SDK\Core\Exceptions\UnknownScopeCodeException;
 use Bitrix24\SDK\Services\ServiceBuilder;
-use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -50,8 +50,9 @@ class Processor
       }
       $this->logger->info(
         sprintf(
-          '[RabbitMQ::%s] >> %s | %s',
+          '[RabbitMQ::%s] mem: %s >> %s | %s',
           static::activityCode,
+          Memory\Manager::getInstance()->getPeakMemoryUsage(),
           (string)$msg['routingKey'],
           $retryCount
         ),
@@ -111,6 +112,14 @@ class Processor
 
       $ack();
     }
+
+    $this->logger->info(
+      sprintf(
+        '[RabbitMQ::%s] mem: %s >> stop',
+        static::activityCode,
+        Memory\Manager::getInstance()->getPeakMemoryUsage()
+      )
+    );
   }
   // endregion ////
 
@@ -125,11 +134,6 @@ class Processor
     $msg
   ): void
   {
-    B24Service::setLogger($this->logger);
-    $B24 = B24Service::getB24Service(
-      $msg['auth']['memberId'] ?? null
-    );
-
     $entityTypeId = $msg['entityTypeId'] ?? 0;
     $entityId = $msg['entityId'] ?? 0;
     $workflowId = $msg['additionalData']['workflowId'] ?? null;
@@ -139,7 +143,13 @@ class Processor
       throw new InvalidArgumentException('eventToken is empty');
     }
 
-    try {
+    B24Service::setLogger($this->logger);
+    $B24 = B24Service::getB24Service(
+      $msg['auth']['memberId'] ?? null
+    );
+
+    try
+    {
       if ($entityTypeId < 1) {
         throw new InvalidArgumentException('entityTypeId is empty');
       } elseif ($entityId < 1) {
@@ -147,12 +157,13 @@ class Processor
       } elseif (empty($workflowId)) {
         throw new InvalidArgumentException('workflowId is empty');
       }
-    } catch (\Exception $exception) {
+    }
+    catch (\Exception $exception) {
       $B24->getBizProcScope()->activity()->log(
         $eventToken,
         sprintf('Error: %s', $exception->getMessage())
       );
-
+      unset($B24);
       throw $exception;
     }
 
@@ -168,7 +179,7 @@ class Processor
     $seconds = $ttlTime % 60;
     $ttlTimeFormat = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 
-    $logMessage = sprintf('Success: ttl: %s | ttlTime: %s sec | $ttlTimeFormat : %s', $ttl, $ttlTime, $ttlTimeFormat);
+    $logMessage = sprintf('Success: mem: %s | ttl: %s | ttlTime: %s sec | $ttlTimeFormat : %s', Memory\Manager::getInstance()->getPeakMemoryUsage(), $ttl, $ttlTime, $ttlTimeFormat);
     $this->logger->debug($logMessage);
 
     $B24->getBizProcScope()->event()->send(
@@ -181,7 +192,7 @@ class Processor
       $logMessage
     );
 
-    unset($B24);
+    unset($B24, $hours, $minutes, $seconds, $ttlTimeFormat, $ufCrmTask, $entityType);
   }
 
   /**
@@ -211,14 +222,16 @@ class Processor
     while (!$finish)
     {
       $this->logger->debug(sprintf(
-        '$iterator: %s | $lastId: %s | count: %s',
+        '$iterator: %s | memory: %s | $lastId: %s | count: %s',
         $iterator,
+        Memory\Manager::getInstance()->getPeakMemoryUsage(),
         $lastId,
         count($result)
       ));
+
       $filter = [
         '>ID' => $lastId,
-       // 'UF_CRM_TASK' => $ufCrmTask
+        'UF_CRM_TASK' => $ufCrmTask
       ];
 
       try {
@@ -275,4 +288,28 @@ class Processor
     return $result;
   }
   // endregion ////
+
+  /**
+   * @inheritDoc
+   */
+  public function getGcInterval(): int
+  {
+    return 1_000;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getSleepSeconds(): int
+  {
+    return 0;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getSleepNanoseconds(): int
+  {
+    return 10_000_000;
+  }
 }

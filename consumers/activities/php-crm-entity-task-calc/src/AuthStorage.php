@@ -78,7 +78,7 @@ class AuthStorage
         'refresh_token' => $row['refreshToken'],
         'expires' => (int)$row['expires'],
       ],
-      'domain_url' => $row['domain'],
+      'domain_url' => sprintf('https://%s', str_replace(['https://', 'http://'], '', $row['domain'])),
       'application_token' => $row['applicationToken'],
     ]);
   }
@@ -121,32 +121,40 @@ class AuthStorage
       throw new Exceptions\AuthNotFoundException('Not found auth in db');
     }
 
+    $rowId = (int)$row['id'];
+    $fields = [
+      '"updatedAt"' => 'NOW()',
+      '"accessToken"' => $renewedAuthToken->authToken->accessToken,
+      '"refreshToken"' => $renewedAuthToken->authToken->refreshToken,
+      '"expires"' => $renewedAuthToken->authToken->expires,
+      '"expiresIn"' => $renewedAuthToken->authToken->expiresIn ?? 3600,
+      /**
+       * @todo fix phpSdk
+       * @memo at this place $renewedAuthToken->domain = 'oauth.bitrix.info' -> need self b24
+       */
+      // '"domain"' => $renewedAuthToken->domain,
+      /**
+       * @todo fix phpSdk
+       * @memo at this place $renewedAuthToken->applicationStatus->getStatusCode() = 'local' -> need 'L'
+       */
+      // '"status"' => $renewedAuthToken->applicationStatus->getStatusCode(),
+      // '"clientEndpoint"' => $renewedAuthToken->clientEndpoint,
+      // '"serverEndpoint"' => $renewedAuthToken->serverEndpoint
+    ];
+
     $response = $this->conn->update(
-      'B24App',
+      '"B24App"',
+      $fields,
       [
-        /**
-         * @todo test this
-         */
-        'updatedAt' => new \DateTime(),
-        'accessToken' => $renewedAuthToken->authToken->accessToken,
-        'refreshToken' => $renewedAuthToken->authToken->refreshToken,
-        'expires' => $renewedAuthToken->authToken->expires,
-        'expiresIn' => $renewedAuthToken->authToken->expiresIn,
-        'domain' => $renewedAuthToken->domain,
-        'status' => $renewedAuthToken->applicationStatus->getStatusCode(),
-        'clientEndpoint' => $renewedAuthToken->clientEndpoint,
-        'serverEndpoint' => $renewedAuthToken->serverEndpoint
-      ],
-      [
-        'id' => (int)$row['id']
+        'id' => $rowId
       ]
     );
-    /**
-     * @todo off this
-     */
-    $this->logger->debug('UPDATE: ' . print_r($response, true));
 
-    $this->logger->debug('AppAuthFileStorage.saveRenewedToken.finish');
+    $this->logger->debug('AppAuthFileStorage.saveRenewedToken.finish', [
+      'memberId' => $this->memberId,
+      'rowId' => $rowId,
+      'fields' => $fields
+    ]);
   }
 
   /**

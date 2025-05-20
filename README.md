@@ -170,6 +170,9 @@ docker exec -it dev-frontend sh -c "pnpm install"
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
  docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-php-crm-entity-task-calc
  
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
+ 
 docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
  docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-nodejs-pdf-from-html
 ```
@@ -233,6 +236,9 @@ docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-
 ### Prod
 ```shell
 
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
+
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
 
 # STOP
@@ -248,6 +254,7 @@ docker exec -it prod-frontend sh -c "npx prisma migrate deploy"
 # LOG
 docker logs -f prod-frontend
 docker logs -f prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
+docker logs -f prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
 docker logs -f prod-db
 ```
 

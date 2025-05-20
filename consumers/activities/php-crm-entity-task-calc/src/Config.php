@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AppCrmEntityTaskCalc;
 
 use Dotenv\Dotenv;
-use Exception;
 
 class Config
 {
@@ -43,10 +42,10 @@ class Config
   private function __clone() {}
 
   /**
-   * @throws Exception
+   * @throws \LogicException
    */
   public function __wakeup()
   {
-    throw new Exception('Cannot unserialize singleton');
+    throw new \LogicException('Cannot unserialize singleton');
   }
 }

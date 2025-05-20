@@ -23,15 +23,16 @@ services:
 
   rabbitmq:
     container_name: prod-rabbitmq
-    image: rabbitmq:3.12-management-alpine
+    image: rabbitmq:4.1.0-management-alpine
     ports:
       - '5673:5673' # need sync with RABBITMQ_NODE_PORT
-      - '15673:15672' # Management UI
+      - '15672:15672' # Management UI
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     env_file: .env.prod
     environment:
-      VIRTUAL_PORT: 15673
+#     @todo fix this: 15672 -> 15673
+      VIRTUAL_PORT: 15672
       VIRTUAL_HOST: "rbt.${VIRTUAL_HOST}"
       LETSENCRYPT_HOST: "rbt.${LETSENCRYPT_HOST}"
     healthcheck:
@@ -108,7 +109,7 @@ services:
           memory: 2G
           cpus: '2.0'
 
-  consumer-ai-and-machine-learning:
+  consumer-nodejs-pdf-from-html:
     depends_on:
       chrome:
         condition: service_healthy
@@ -117,10 +118,10 @@ services:
       db:
         condition: service_healthy
     build:
-      context: ./consumers/activities/ai-and-machine-learning
+      context: ./consumers/activities/nodejs-pdf-from-html
       dockerfile: Dockerfile_prod
     volumes:
-      - ./consumers/activities/ai-and-machine-learning:/usr/src/app
+      - ./consumers/activities/nodejs-pdf-from-html:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/generated
     env_file: .env.prod
@@ -130,7 +131,33 @@ services:
       NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
     networks:
       - internal-net
-    restart: unless-stopped
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.2'
+
+  consumer-php-crm-entity-task-calc:
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    build:
+      context: ./consumers/activities/php-crm-entity-task-calc
+      dockerfile: Dockerfile_dev
+    volumes:
+      - ./consumers/activities/php-crm-entity-task-calc:/usr/src/app
+      - /usr/src/app/vendor
+    env_file: .env.dev
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+      NUXT_PUBLIC_APP_URL: "https://${VIRTUAL_HOST}"
+      NUXT_RABBITMQ_URL: "amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:${RABBITMQ_NODE_PORT}"
+    networks:
+      - internal-net
+    restart: always
     deploy:
       resources:
         limits:
