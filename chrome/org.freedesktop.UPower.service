@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.UPower
-Exec=/bin/true
