@@ -78,6 +78,24 @@ services:
       retries: 5
     restart: always
 
+  migrator:
+    container_name: prod-migrator
+    profiles:
+      - migrate
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_prod
+      target: migrator
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal-net
+    restart: on-failure
+
   frontend:
     container_name: prod-frontend
     depends_on:
@@ -85,9 +103,13 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+#      # @todo fix this
+#      migrator:
+#        condition: service_started
     build:
       context: ./frontend
       dockerfile: Dockerfile_prod
+      target: production
     deploy:
       resources:
         limits:

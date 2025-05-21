@@ -237,60 +237,53 @@ docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-
 ### Prod
 ```shell
 
+# Build
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
+# Run
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d
+# DB migrate
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up migrator
+# Stop
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
+
+# Rebuild
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down && \
  docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
 
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
+# Rebuild DB migrate
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate down migrator && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up --build migrator
 
-# STOP
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
 
-# START
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
 
-# DB migrate
-# docker exec -it prod-frontend sh -c "npx prisma migrate reset"
-docker exec -it prod-frontend sh -c "npx prisma migrate deploy"
+# Restart consumers
+# consumer-nodejs-pdf-from-html
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d consumer-nodejs-pdf-from-html
 
-# LOG
+# consumer-php-crm-entity-task-calc
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d consumer-php-crm-entity-task-calc
+
+# Scale consumers
+# consumer-nodejs-pdf-from-html
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
+
+# consumer-php-crm-entity-task-calc
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
+
+# Log
 docker logs -f prod-frontend
 docker logs -f prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
 docker logs -f prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
 docker logs -f prod-db
-```
 
-```shell
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules build
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-frontend
-
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down --volumes --rmi all --remove-orphans
-
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-chrome
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules stop prod-frontend
-
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down && \
- docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build
-
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down prod-chrome && \
- docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build prod-chrome
-
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules up -d --build frontend
- 
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
-
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=3
- 
-docker logs -f prod-chrome
-docker logs -f prod-frontend
-
+# Connect
+docker exec -it prod-frontend sh -c "ls .la"
+docker exec -it prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh -c "ls .la"
+docker exec -it prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh -c "ls .la"
 ```
 
 @todo -> add all info to example
@@ -322,15 +315,6 @@ docker exec -it prod-chrome wget -qO- http://prod-frontend:80/render/invoice-by-
 docker exec -it dev-chrome netstat -tulpn | grep 9222
 docker exec -it dev-chrome ping -c 4 frontend
 
-docker exec -it chrome sh -c "
-  dbus-send --system \
-  --dest=org.freedesktop.DBus \
-  --type=method_call \
-  --print-reply \
-  /org/freedesktop/DBus \
-  org.freedesktop.DBus.ListNames
-"
-
 # frontend
 docker exec dev-frontend env | grep DATABASE_URL
 docker inspect dev-frontend
@@ -345,21 +329,6 @@ docker exec -it dev-frontend sh -c "whoami && id" # check user at container
 
 docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-chrome:9223/json/version
 docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-frontend:3000/render/invoice-by-deal/1058/
-```
-
-### Log
-
-```shell
-# chrome
-docker compose logs -f chrome
-docker logs chrome
-
-# frontend
-docker compose logs -f frontend
-# server
-docker compose logs -f server
-# letsencrypt
-docker compose logs -f letsencrypt
 ```
 
 ### Connect
