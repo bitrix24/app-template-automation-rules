@@ -91,7 +91,8 @@ export default defineEventHandler(async (event) => {
   const appRow = await prisma.b24App.findFirst({
     where: {
       memberId,
-      userId
+      userId,
+      isFromAppInstall: true
     }
   })
 
@@ -142,6 +143,6 @@ export default defineEventHandler(async (event) => {
     })
   }
   console.info('----------')
-  const list = await prisma.b24App.findMany()
-  console.info('----------', list)
+  console.info(await prisma.b24App.findMany())
+  console.info('----------')
 })

@@ -34,16 +34,6 @@ class B24Service
   }
 
   /**
-   * Event listener for when the authentication token is renewed.
-   *
-   * @param AuthTokenRenewedEvent $authTokenRenewedEvent The event object containing the renewed authentication token.
-   */
-  protected static function onAuthTokenRenewedEventListener(AuthTokenRenewedEvent $authTokenRenewedEvent): void
-  {
-
-  }
-
-  /**
    * @throws InvalidArgumentException
    * @throws UnknownScopeCodeException
    */
@@ -84,10 +74,7 @@ class B24Service
     $auth = $authRepository->getAuth();
     return (new ServiceBuilderFactory(
       $eventDispatcher,
-      /**
-       * @todo fix this
-       */
-      new NullLogger() //static::getLogger()
+      static::getLogger()
     ))->init(
       static::getApplicationProfile(),
       $auth->getAuthToken(),
@@ -114,9 +101,8 @@ class B24Service
     ]);
 
     static::getLogger()->debug('getApplicationProfile.finish', [
-//      'appClientId' => $profile->clientId,
-//      'appClientSecret' => $profile->clientSecret,
-//      'appScope' => $profile->scope->getScopeCodes()
+      'appClientId' => $profile->clientId,
+      'appScope' => $profile->scope->getScopeCodes(),
     ]);
     return $profile;
   }

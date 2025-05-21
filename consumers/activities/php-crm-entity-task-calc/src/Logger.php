@@ -21,7 +21,7 @@ class Logger
       'php://stdout',
       Config::getInstance()->isDev
         ? Level::Debug
-        : Level::Info,
+        : Level::Notice,
       true,
       null,
       true

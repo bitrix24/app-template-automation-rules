@@ -236,13 +236,15 @@ docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-
 
 ### Prod
 ```shell
-
 # Build
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
+
 # Run
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d
+
 # DB migrate
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up migrator
+
 # Stop
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
 
@@ -254,8 +256,6 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-temp
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate down migrator && \
  docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up --build migrator
 
-
-
 # Restart consumers
 # consumer-nodejs-pdf-from-html
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
@@ -264,6 +264,9 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-temp
 # consumer-php-crm-entity-task-calc
 docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
  docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d consumer-php-crm-entity-task-calc
+ 
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d  --build consumer-php-crm-entity-task-calc
 
 # Scale consumers
 # consumer-nodejs-pdf-from-html
@@ -282,8 +285,11 @@ docker logs -f prod-db
 
 # Connect
 docker exec -it prod-frontend sh -c "ls .la"
+docker exec -it prod-frontend sh -c "ls .la"
 docker exec -it prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh -c "ls .la"
 docker exec -it prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh -c "ls .la"
+
+docker exec -it prod-db psql -U dbuser -d dbapp
 ```
 
 @todo -> add all info to example

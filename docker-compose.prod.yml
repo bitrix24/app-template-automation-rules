@@ -171,7 +171,7 @@ services:
         condition: service_healthy
     build:
       context: ./consumers/activities/php-crm-entity-task-calc
-      dockerfile: Dockerfile_dev
+      dockerfile: Dockerfile_prod
     deploy:
       resources:
         limits:
@@ -180,7 +180,7 @@ services:
     volumes:
       - ./consumers/activities/php-crm-entity-task-calc:/usr/src/app
       - /usr/src/app/vendor
-    env_file: .env.dev
+    env_file: .env.prod
     environment:
       PHP_MEMORY_LIMIT: 256M
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${PGPORT}/${POSTGRES_DB}?schema=public"

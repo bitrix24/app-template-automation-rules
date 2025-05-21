@@ -72,6 +72,10 @@ class AuthStorage
       throw new Exceptions\AuthNotFoundException('Not found auth in db');
     }
 
+    $this->logger->debug('rowId: '.$row['id'], [
+      'row' => $row
+    ]);
+
     return LocalAppAuth::initFromArray([
       'auth_token' => [
         'access_token' => $row['accessToken'],

@@ -180,7 +180,7 @@ class Processor
     $ttlTimeFormat = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 
     $logMessage = sprintf('Success: mem: %s | ttl: %s | ttlTime: %s sec | $ttlTimeFormat : %s', Memory\Manager::getInstance()->getPeakMemoryUsage(), $ttl, $ttlTime, $ttlTimeFormat);
-    $this->logger->debug($logMessage);
+    $this->logger->notice($logMessage);
 
     $B24->getBizProcScope()->event()->send(
       $eventToken,
