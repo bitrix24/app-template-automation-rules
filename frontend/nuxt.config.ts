@@ -56,6 +56,14 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
   compatibilityDate: '2024-11-27',
+  nitro: {
+    /**
+     * @memo bug prisma -> https://github.com/prisma/prisma/issues/26908#issuecomment-2818964476
+     */
+    replace: {
+      'import * as process': 'import * as processUnused'
+    }
+  },
   vite: {
     plugins: [
       tailwindcss()
