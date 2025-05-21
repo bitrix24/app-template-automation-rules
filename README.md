@@ -98,9 +98,10 @@ docker ps
 docker ps -a | grep chrome
 watch -n 2 docker ps
 
-
 sudo systemctl status docker
 sudo ss -tuln | grep 2376
+
+watch -n 5 "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}'"
 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
 docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
@@ -283,6 +284,10 @@ docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules
  
 docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-chrome
 docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rule logs -f prod-frontend
+
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=3
+ 
 docker logs -f prod-chrome
 docker logs -f prod-frontend
 
