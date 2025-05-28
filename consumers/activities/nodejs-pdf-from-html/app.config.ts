@@ -3,6 +3,13 @@ import type { RabbitMQConfig } from '@bitrix24/b24rabbitmq'
 
 config({ path: '.env' })
 
+const base = 'activities'
+const entity = 'activity'
+const activityCode = 'PdfFromHtml'
+const ver = 'v1'
+const delayedMs = 6000
+const failedRoutingKey = failed
+
 export function appOptions() {
   return {
     jwtSecret: new TextEncoder().encode(process.env['NUXT_JWT_SECRET'] || '?'),
@@ -11,7 +18,13 @@ export function appOptions() {
     appClientId: process.env['NUXT_APP_CLIENT_ID'] || '?',
     appClientSecret: process.env['NUXT_APP_CLIENT_SECRET'] || '?',
     appScope: process.env['NUXT_APP_SCOPE'] || '?',
-    rabbitmqUrl: process.env['NUXT_RABBITMQ_URL'] || '?'
+    rabbitmqUrl: process.env['NUXT_RABBITMQ_URL'] || '?',
+    activityCode,
+    ver,
+    queueName: `${entity}.${activityCode}.${ver}`,
+    exchangeService: `${base}.service.${ver}`,
+    delayRoutingKey: `delay.${activityCode}.${delayedMs}`,
+    failedRoutingKey,
   }
 }
 
@@ -24,12 +37,12 @@ export const rabbitMQConfig: RabbitMQConfig = {
   },
   exchanges: [
     {
-      name: 'activities.v1',
+      name: `${base}.${ver}`,
       type: 'direct',
       options: { durable: true }
     },
     {
-      name: 'activities.service.v1',
+      name: appOptions().exchangeService,
       type: 'direct',
       options: { durable: true }
     }
@@ -37,51 +50,51 @@ export const rabbitMQConfig: RabbitMQConfig = {
   queues: [
     // Main queue (room)
     {
-      name: 'activity.AIandMachineLearning.v1',
+      name: appOptions().queueName,
       options: {
         durable: true,
         arguments: {
-          'x-dead-letter-exchange': 'activities.service.v1',
-          'x-dead-letter-routing-key': 'failed'
+          'x-dead-letter-exchange': appOptions().exchangeService,
+          'x-dead-letter-routing-key': appOptions().failedRoutingKey
         }
       },
       bindings: [
         {
-          exchange: 'activities.v1',
-          routingKey: 'activity.AIandMachineLearning'
+          exchange: `${base}.${ver}`,
+          routingKey: `${activityCode}.${ver}`
         },
         {
-          exchange: 'activities.service.v1',
-          routingKey: 'activity.service.AIandMachineLearning'
+          exchange: appOptions().exchangeService,
+          routingKey: `${entity}.service.${activityCode}`
         }
       ]
     },
     // Queue with delay (balcony)
     {
-      name: 'activity.AIandMachineLearning.delayed.6000.v1',
+      name: `${entity}.${activityCode}.delayed.${delayedMs}.${ver}`,
       options: {
         durable: true,
         arguments: {
-          'x-message-ttl': 6000,
-          'x-dead-letter-exchange': 'activities.service.v1',
-          'x-dead-letter-routing-key': 'activity.service.AIandMachineLearning'
+          'x-message-ttl': delayedMs,
+          'x-dead-letter-exchange': appOptions().exchangeService,
+          'x-dead-letter-routing-key': `${entity}.service.${activityCode}`
         }
       },
       bindings: [
         {
-          exchange: 'activities.service.v1',
-          routingKey: 'delay.AIandMachineLearning.6000'
+          exchange: appOptions().exchangeService,
+          routingKey: appOptions().delayRoutingKey
         }
       ]
     },
     // Queue of problematic messages (vegetable garden)
     {
-      name: 'activities.failed.v1',
+      name: `${base}.${appOptions().failedRoutingKey}.${ver}`,
       options: { durable: true },
       bindings: [
         {
-          exchange: 'activities.service.v1',
-          routingKey: 'failed'
+          exchange: appOptions().exchangeService,
+          routingKey:  appOptions().failedRoutingKey
         }
       ]
     }

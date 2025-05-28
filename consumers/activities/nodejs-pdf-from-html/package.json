@@ -16,23 +16,23 @@
     "prisma:generate": "pnpx prisma generate"
   },
   "dependencies": {
-    "@bitrix24/b24jssdk": "^0.4.2",
+    "@bitrix24/b24jssdk": "^0.4.3",
     "@bitrix24/b24rabbitmq": "^0.0.3",
     "amqplib": "^0.10.8",
     "axios": "^1.9.0",
     "consola": "^3.4.2",
-    "puppeteer-core": "^24.6.1",
+    "puppeteer-core": "^24.9.0",
     "jose": "^6.0.11",
-    "@prisma/client": "^6.7.0"
+    "@prisma/client": "^6.8.2"
   },
   "devDependencies": {
     "dotenv": "^16.5.0",
     "@types/amqplib": "^0.10.7",
-    "@types/node": "^22.15.11",
-    "eslint": "^9.25.1",
+    "@types/node": "^22.15.23",
+    "eslint": "^9.27.0",
     "eslint-config-unjs": "^0.4.2",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
-    "prisma": "^6.7.0"
+    "prisma": "^6.8.2"
   }
 }
