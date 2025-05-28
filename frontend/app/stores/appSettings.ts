@@ -73,6 +73,22 @@ export const useAppSettingsStore = defineStore(
       )
     }
 
+    function removeFromActivityInstalled(code: string): void {
+      const index = activityInstalled.findIndex(
+        item => item.toLowerCase() === code.toLowerCase()
+      )
+
+      if (index !== -1) {
+        activityInstalled.splice(index, 1)
+      }
+    }
+
+    function addToActivityInstalled(code: string): void {
+      if (!isActivityInstalled(code)) {
+        activityInstalled.push(code)
+      }
+    }
+
     /**
      * Save settings to Bitrix24
      */
@@ -160,7 +176,9 @@ export const useAppSettingsStore = defineStore(
       updateIntegrator,
       integratorPreview,
       activityInstalled,
-      isActivityInstalled
+      isActivityInstalled,
+      addToActivityInstalled,
+      removeFromActivityInstalled
     }
   }
 )

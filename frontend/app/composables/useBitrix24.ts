@@ -91,8 +91,8 @@ export const useFetchEntity = (
         omit(data.entityItem.item || {}, customFieldsForLead)
       )
 
-      entity.qrCode = QRCode.toDataURL(
-        `${$b24.getTargetOrigin()}crm/type/${entityTypeId}/details/${entity.id}/?any=app-qrCode`,
+      entity.qrCode = await QRCode.toDataURL(
+        `${$b24.getTargetOrigin()}/crm/type/${entityTypeId}/details/${entity.id}/?any=app-qrCode`,
         {
           errorCorrectionLevel: 'H',
           margin: 0
