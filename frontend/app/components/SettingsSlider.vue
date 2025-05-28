@@ -1,36 +1,71 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { navigateTo } from '#imports'
+import { AjaxError } from '@bitrix24/b24jssdk'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import ListIcon from '@bitrix24/b24icons-vue/main/ListIcon'
+import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 import ClockWithArrowIcon from '@bitrix24/b24icons-vue/main/ClockWithArrowIcon'
+
+const toast = useToast()
+const appSettings = useAppSettingsStore()
+const { $logger } = useAppInit()
+const { $initializeB24Frame } = useNuxtApp()
+const $b24: B24Frame = await $initializeB24Frame()
 
 const emit = defineEmits<{ close: [boolean] }>()
 
 async function openLogSlider() {
-  /**
-   * @todo open in b24
-   */
-  alert('/settings/configs/event_log.php')
+  navigateTo({
+    path: $b24.slider.getUrl('/settings/configs/event_log.php').toString(),
+    query: {}
+  }, {
+    external: true,
+    open: {
+      target: '_blank'
+    }
+  })
 }
 
 async function openEmployeesSlider() {
-  /**
-   * @todo open in b24
-   */
-  alert('/company/')
+  return $b24.slider.openPath(
+    $b24.slider.getUrl('/company/')
+  )
 }
 
 const deviceHistoryCleanupDays = ref([
   30, 60, 90, 120, 15, 180
 ])
 
-const deviceHistoryCleanupDay = ref(deviceHistoryCleanupDays.value[0])
+const deviceHistoryCleanupDay = ref(appSettings.configSettings.deviceHistoryCleanupDays)
 
 async function makeSave() {
-  /**
-   * @todo send to b24 use pina
-   */
-  alert('make save')
-  emit('close', true)
+  try {
+    appSettings.configSettings.deviceHistoryCleanupDays = deviceHistoryCleanupDay.value
+    await appSettings.saveSettings()
+    emit('close', true)
+  } catch (error) {
+    $logger.error(error)
+
+    let title = 'Error'
+    let description = ''
+
+    if (error instanceof AjaxError) {
+      title = `[${error.name}] ${error.code} (${error.status})`
+      description = `${error.message}`
+    } else if (error instanceof Error) {
+      description = error.message
+    } else {
+      description = error as string
+    }
+
+    toast.add({
+      title: title,
+      description,
+      color: 'danger',
+      icon: CloudErrorIcon
+    })
+  }
 }
 </script>
 

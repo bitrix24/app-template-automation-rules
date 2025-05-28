@@ -7,72 +7,8 @@
  */
 import * as qs from 'qs-esm'
 import { B24LangList, EnumAppStatus } from '@bitrix24/b24jssdk'
-import type { BoolString } from '@bitrix24/b24jssdk'
+import type { EventOnAppInstallHandlerParams } from '@bitrix24/b24jssdk'
 import { prisma } from '~~/utils/prisma'
-
-/**
- * @todo remove this
- */
-// {
-//   event: 'ONAPPINSTALL',
-//   event_handler_id: '540',
-//   data: { VERSION: '1', ACTIVE: 'Y', INSTALLED: 'Y', LANGUAGE_ID: 'ru' },
-//   ts: '1747023749',
-//   auth: {
-//     access_token: 'xxxx',
-//     expires: '1747027349',
-//     expires_in: '3600',
-//     scope: 'crm,catalog,bizproc,placement,user_brief',
-//     domain: 'xx.bitrix24.ru',
-//     server_endpoint: 'https://oauth.bitrix.info/rest/',
-//     status: 'L',
-//     client_endpoint: 'https://xx.bitrix24.ru/rest/',
-//     member_id: 'xxx',
-//     user_id: '1',
-//     refresh_token: 'xxx',
-//     application_token: 'xxxx'
-//   }
-// }
-
-/**
- * @todo fix by @b24
- */
-interface HandlerAuthParams {
-  access_token: string
-  expires: string
-  expires_in: string
-  scope: string
-  domain: string
-  server_endpoint: string
-  status: string
-  client_endpoint: string
-  member_id: string
-  user_id: string
-  refresh_token: string
-  application_token: string
-}
-
-/**
- * @todo fix by @b24
- */
-interface EventHandlerParams {
-  event: string
-  event_handler_id: string
-  ts: string
-  auth?: HandlerAuthParams
-}
-/**
- * @todo fix by @b24
- */
-interface EventOnAppInstallHandlerParams extends EventHandlerParams {
-  data: {
-    VERSION: string
-    ACTIVE: BoolString
-    INSTALLED: BoolString
-    LANGUAGE_ID: B24LangList
-  }
-  auth: HandlerAuthParams
-}
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

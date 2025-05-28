@@ -72,7 +72,7 @@ const helpItems = computed(() => {
     icon: SettingsIcon,
     async onSelect(e: Event) {
       e?.preventDefault()
-      await settingsSlider.open()
+      settingsSlider.open()
     }
   })
 

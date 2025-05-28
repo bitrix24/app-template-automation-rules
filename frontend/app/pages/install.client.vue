@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { sleepAction } from '~/utils/sleep'
 import type { ProgressProps } from '@bitrix24/b24ui-nuxt'
 import type { IStep } from '~/types'
-import { sleepAction } from '~/utils/sleep'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import Logo from '~/components/Logo.vue'
 
 const { t } = useI18n()
@@ -17,7 +18,7 @@ const appUrl = config.public.appUrl
 
 const { processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
-const $b24 = await $initializeB24Frame()
+const $b24: B24Frame = await $initializeB24Frame()
 
 const confetti = useConfetti()
 
@@ -113,7 +114,7 @@ const stepCode = ref<string>('init' as const)
 // region Actions ////
 async function makeInit(): Promise<void> {
   /**
-   * @todo add lang
+   * @need fix lang
    */
   await $b24.parent.setTitle('App: install')
 

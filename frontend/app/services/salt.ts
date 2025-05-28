@@ -1,8 +1,5 @@
 export const Salt = () => {
   function getSalt(): string {
-    /**
-     * @todo not work at RabbitMQService
-     */
     return `____${import.meta.env?.DEV ? 'dev' : 'prod'}`
   }
 

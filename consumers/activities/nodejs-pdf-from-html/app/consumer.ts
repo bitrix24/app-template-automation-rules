@@ -1,9 +1,6 @@
 /**
  * Consumer for generate PDF from HTML
- * @todo add fail queue
- * @todo test connect - while docker up
  */
-
 import { consola } from 'consola'
 import { RabbitMQConsumer, RabbitMQProducer } from '@bitrix24/b24rabbitmq'
 import { appOptions, rabbitMQConfig } from '../app.config'
@@ -17,13 +14,13 @@ import process from 'node:process'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
-const activityCode = 'AIandMachineLearning'
+const activityCode = appOptions().activityCode
 const maxRetryCount = 5
 
 const startConsumer = async () => {
   const consumer = new RabbitMQConsumer(rabbitMQConfig)
   await consumer.initialize()
-  const queueName = `activity.${activityCode}.v1`
+  const queueName = appOptions().queueName
 
   consola.log(`Consumer for ${activityCode} started ...`)
 
@@ -36,7 +33,7 @@ const startConsumer = async () => {
 
       try {
         // @todo add to rbtMq interface Message
-        const retryCount = Number.parseInt(msg.retryCount || '0')
+        const retryCount = msg?.retryCount || 0
         if (retryCount >= maxRetryCount) {
           throw new Error('Max retries exceeded')
         }
@@ -53,7 +50,7 @@ const startConsumer = async () => {
 
         ack()
       } catch (error) {
-        const retryCount = Number.parseInt(msg.retryCount || '0')
+        const retryCount = msg.retryCount || 0
         const newRetryCount = retryCount + 1
 
         const problem = error instanceof Error ? error : new Error(`[RabbitMQ::${activityCode}] process error`, { cause: error })
@@ -67,8 +64,8 @@ const startConsumer = async () => {
           msg.retryCount = newRetryCount
           // Send to the balcony with a delay
           await producer.publish(
-            'activities.service.v1',
-            `delay.${activityCode}.6000`,
+            appOptions().exchangeService,
+            appOptions().delayRoutingKey,
             {
               ...msg,
               // @todo add to rbtMq interface Message
@@ -78,8 +75,8 @@ const startConsumer = async () => {
         } else {
           // We send to the garden
           await producer.publish(
-            'activities.service.v1',
-            'failed',
+            appOptions().exchangeService,
+            appOptions().failedRoutingKey,
             {
               ...msg,
               // @todo add to rbtMq interface Message
@@ -159,11 +156,6 @@ async function processMessage(
 
   const $b24 = new B24OAuth(authOptions, oAuthSecret)
   $b24.setLogger(LoggerBrowser.build('Consumer [B24]', false))
-  /**
-   * @todo fix work && remove
-   */
-  // $b24.initIsAdmin()
-  // consola.info('<<', $b24.auth.isAdmin)
 
   const response = await $b24.callMethod(
       `crm.documentgenerator.document.upload`,
@@ -185,7 +177,6 @@ async function processMessage(
 
   documentId = Number.parseInt(response.getData().result?.document.id || '0')
   consola.log('stop send to b24 >> documentId:', documentId)
-
   // endregion ////
 }
 

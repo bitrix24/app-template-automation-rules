@@ -30,7 +30,7 @@
     "@bitrix24/b24icons-vue": "^1.0.5",
     "@bitrix24/b24jssdk-nuxt": "^0.4.3",
     "@bitrix24/b24ui-nuxt": "^0.6.7",
-    "@bitrix24/b24rabbitmq": "^0.0.3",
+    "@bitrix24/b24rabbitmq": "^0.0.4",
     "@nuxt/content": "^3.5.1",
     "@nuxtjs/i18n": "^9.5.4",
     "@pinia/nuxt": "^0.11.0",

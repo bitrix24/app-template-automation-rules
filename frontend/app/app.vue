@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
 const { locale, defaultLocale, locales: localesI18n, setLocale } = useI18n()
 const lang = computed(() => locales[locale.value]?.code || defaultLocale)
@@ -24,7 +25,7 @@ onMounted(async () => {
 
   try {
     const { $initializeB24Frame } = useNuxtApp()
-    const $b24 = await $initializeB24Frame()
+    const $b24: B24Frame = await $initializeB24Frame()
 
     const b24CurrentLang = $b24.getLang()
     if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {

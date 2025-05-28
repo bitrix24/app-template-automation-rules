@@ -1,13 +1,13 @@
 <script setup lang="ts">
 /**
  * @todo make layout template
- *
  * @link https://apidocs.bitrix24.com/tutorials/bizproc/setting-robot.html
  */
 import { ref, computed, onMounted } from 'vue'
 import { activitiesConfig } from '~/activity.config'
 import { ActivitySettings } from '#components'
 import { Salt } from '~/services/salt'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
 // const { t } = useI18n()
 const { clearSalt } = Salt()
@@ -17,7 +17,7 @@ const activityConfig = computed(() =>
 )
 
 /**
- * @todo add lang
+ * @need fix lang
  */
 useHead({
   title: 'Some activity settings'
@@ -26,7 +26,7 @@ useHead({
 // region Init ////
 const { $logger, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
-const $b24 = await $initializeB24Frame()
+const $b24: B24Frame = await $initializeB24Frame()
 
 const isLoading = ref(true)
 const formValues = ref<Record<string, any>>({})
@@ -45,9 +45,6 @@ onMounted(async () => {
 
       for (const [key, prop] of Object.entries(activityConfig.value.PROPERTIES || {})) {
         // if (prop.Type === 'select' && prop.Options?.length < 1) {
-        //   /**
-        //    * @todo fix this
-        //    */
         //   // const options = await bx.loadOptions(getMethodByKey(key))
         //   const options = [
         //     { value: '???', label: '???' }
@@ -89,13 +86,10 @@ const getEmptyValue = (type: string) => {
   }
 }
 
-/**
- * @todo fix this
- */
 const handleValuesUpdate = async (newValues: Record<string, any>) => {
   formValues.value = { ...newValues }
 
-  $logger.warn('b24.placement.setPropertyValue >>', formValues.value)
+  $logger.log('b24.placement.setPropertyValue >>', formValues.value)
 
   await $b24.placement.call(
     'setPropertyValue',
@@ -174,7 +168,7 @@ const makeFitWindow = async () => {
         :current-values="formValues"
         @update:current-values="handleValuesUpdate"
       />
-      <!-- @todo set lang -->
+      <!-- @need fix lang -->
       <B24Alert v-else title="Activity settings not find" />
     </template>
   </div>

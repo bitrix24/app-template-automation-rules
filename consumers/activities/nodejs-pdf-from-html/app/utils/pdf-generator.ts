@@ -71,9 +71,6 @@ export async function generatePDF(
       `
     })
 
-    /**
-     * @todo make config for options
-     */
     const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,

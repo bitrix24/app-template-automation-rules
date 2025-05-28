@@ -23,7 +23,7 @@ const updateField = (key: string, value: any) => {
 
 // const { $logger } = useAppInit()
 /**
- * @todo fix this
+ * @need fix lang
  */
 const localized = (obj: string | Record<string, string> = {}) => {
   return obj
@@ -33,7 +33,7 @@ const localized = (obj: string | Record<string, string> = {}) => {
 </script>
 
 <template>
-  <div class="border border-base-200">
+  <div>
     <div
       v-for="[key, prop] in Object.entries(activityConfig?.PROPERTIES || {})"
       :key="key"

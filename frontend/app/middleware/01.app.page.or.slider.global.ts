@@ -1,4 +1,5 @@
 import { LoggerBrowser } from '@bitrix24/b24jssdk'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import type { RouteLocationNormalized } from 'vue-router'
 
 const $logger = LoggerBrowser.build(
@@ -39,7 +40,7 @@ export default defineNuxtRouteMiddleware(async (
 
   try {
     const { $initializeB24Frame } = useNuxtApp()
-    const $b24 = await $initializeB24Frame()
+    const $b24: B24Frame = await $initializeB24Frame()
 
     $logger.log('>> placement.options', $b24.placement.options)
 

@@ -1,20 +1,6 @@
 import { jwtVerify } from 'jose'
-import { EnumCrmEntityTypeId, omit } from '@bitrix24/b24jssdk'
+import { EnumCrmEntityTypeId, omit, getEnumValue } from '@bitrix24/b24jssdk'
 import type { B24OAuthParams } from '@bitrix24/b24jssdk'
-
-// region TMP /////
-/**
- * @todo fix by @b24
- */
-function getEnumValue<T extends Record<string, string | number>>(
-  enumObj: T,
-  value: string | number
-): T[keyof T] | undefined {
-  return (Object.values(enumObj) as (string | number)[]).includes(value)
-    ? value as T[keyof T]
-    : undefined
-}
-// endregion ////
 
 export default defineNuxtRouteMiddleware(async (to) => {
   if (!import.meta.server) {

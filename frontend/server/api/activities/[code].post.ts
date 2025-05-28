@@ -1,12 +1,11 @@
 /**
- * @todo fix this
- * @todo test under not admin use !!
+ * @todo test under not admin
  *
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-activity/bizproc-activity-log.html
  * @see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-robot/bizproc-event-send.html
  */
-import type { BoolString } from '@bitrix24/b24jssdk'
-import { EnumAppStatus, EnumCrmEntityTypeId, omit } from '@bitrix24/b24jssdk'
+import { EnumAppStatus, EnumCrmEntityTypeId, EnumBizprocDocumentType, convertBizprocDocumentTypeToCrmEntityTypeId, getEnumValue, omit } from '@bitrix24/b24jssdk'
+import type { ActivityHandlerParams } from '@bitrix24/b24jssdk'
 import * as qs from 'qs-esm'
 import { Salt } from '~/services/salt'
 import { RabbitMQProducer } from '@bitrix24/b24rabbitmq'
@@ -15,95 +14,6 @@ import type { MessageWithAuth, Options } from '~~/server/types'
 import { prisma } from '~~/utils/prisma'
 
 const { clearSalt } = Salt()
-
-// region fix by @b24 ////
-/**
- * @todo fix by @b24
- */
-interface HandlerAuthParams {
-  access_token: string
-  expires: string
-  expires_in: string
-  scope: string
-  domain: string
-  server_endpoint: string
-  status: string
-  client_endpoint: string
-  member_id: string
-  user_id: string
-  refresh_token: string
-  application_token: string
-}
-
-/**
- * @todo fix by @b24
- */
-interface ActivityHandlerParams {
-  event_token: string
-  workflow_id: string
-  code: string
-  document_id: string[]
-  document_type: string[]
-  properties?: Record<string, string>
-  use_subscription: BoolString
-  timeout_duration: string
-  ts: string
-  auth: HandlerAuthParams
-}
-
-/**
- * @todo fix by @b24
- */
-enum EnumBizprocDocumentType {
-  undefined = 'undefined',
-  lead = 'CCrmDocumentLead',
-  deal = 'CCrmDocumentDeal',
-  contact = 'CCrmDocumentContact',
-  company = 'CCrmDocumentCompany',
-  /**
-   * @todo test this
-   */
-  oldInvoice = 'CCrmDocumentSmartInvoice',
-  quote = 'CCrmDocumentSmartQuote',
-  order = 'CCrmDocumentSmartOrder'
-}
-
-/**
- * @todo test this
- */
-function convertBizprocDocumentTypeToCrmEntityTypeId(documentType: EnumBizprocDocumentType): EnumCrmEntityTypeId {
-  switch (documentType) {
-    case EnumBizprocDocumentType.lead:
-      return EnumCrmEntityTypeId.lead
-    case EnumBizprocDocumentType.deal:
-      return EnumCrmEntityTypeId.deal
-    case EnumBizprocDocumentType.contact:
-      return EnumCrmEntityTypeId.contact
-    case EnumBizprocDocumentType.company:
-      return EnumCrmEntityTypeId.company
-    case EnumBizprocDocumentType.oldInvoice:
-      return EnumCrmEntityTypeId.oldInvoice
-    case EnumBizprocDocumentType.quote:
-      return EnumCrmEntityTypeId.quote
-    case EnumBizprocDocumentType.order:
-      return EnumCrmEntityTypeId.order
-  }
-
-  return EnumCrmEntityTypeId.undefined
-}
-
-/**
- * @todo fix by @b24
- */
-export function getEnumValue<T extends Record<string, string | number>>(
-  enumObj: T,
-  value: string | number
-): T[keyof T] | undefined {
-  return (Object.values(enumObj) as (string | number)[]).includes(value)
-    ? value as T[keyof T]
-    : undefined
-}
-// endregion ////
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -146,9 +56,8 @@ export default defineEventHandler(async (event) => {
       domain: data?.auth?.domain || '',
       clientEndpoint: data?.auth?.client_endpoint || '?',
       serverEndpoint: data?.auth?.server_endpoint || '?',
-      status: data?.auth?.status || EnumAppStatus.Free
-      // @todo add to jsSdk
-      // issuer: 'request'
+      status: Object.values(EnumAppStatus).find(value => value === data?.auth?.status) || EnumAppStatus.Free,
+      issuer: 'request'
     }
   }
 
@@ -204,9 +113,8 @@ export default defineEventHandler(async (event) => {
     options.auth.domain = appRow.domain
     options.auth.clientEndpoint = appRow.clientEndpoint
     options.auth.serverEndpoint = appRow.serverEndpoint
-    options.auth.status = appRow.status
-    // @todo add to jsSdk
-    // options.auth.issuer = 'db'
+    options.auth.status = Object.values(EnumAppStatus).find(value => value === appRow.status) || EnumAppStatus.Free
+    options.auth.issuer = 'store'
   }
   // endregion ////
 
@@ -221,16 +129,9 @@ export default defineEventHandler(async (event) => {
 })
 
 async function handleActivity(options: Options) {
-  let activityCode = options.code
+  const activityCode = options.code
 
-  /**
-   * @todo fix this
-   */
-  if (activityCode === 'AppMarketplace') {
-    activityCode = 'CrmEntityTaskCalc'
-  }
-
-  console.log('come >> ', options.code)
+  console.log('come >> ', activityCode)
   if (!options.workflowId
     || options.entityTypeId === EnumCrmEntityTypeId.undefined
     || options.entityId < 1

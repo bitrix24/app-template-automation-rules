@@ -25,6 +25,9 @@ export default unjs({
 			}
 		]
 	},
+  ignores: [
+    'generated/*'
+  ],
 	markdown: {
 		rules: {
 			// markdown rule overrides

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * @todo fix lang
+ * @need fix lang
  */
 import { IntegratorModal } from '#components'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
@@ -18,7 +18,8 @@ const openPopover = ref(false)
 async function setInfo() {
   if (user.isAdmin) {
     openPopover.value = false
-    const isSave = await modalForIntegrators.open()
+    const modalForIntegratorsInstance = modalForIntegrators.open()
+    const isSave = await modalForIntegratorsInstance.result
     if (!isSave) {
       return
     }

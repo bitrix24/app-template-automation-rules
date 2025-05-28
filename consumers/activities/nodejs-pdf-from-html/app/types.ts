@@ -1,9 +1,6 @@
 import type { Message } from '@bitrix24/b24rabbitmq'
 import type { B24OAuthParams } from '@bitrix24/b24jssdk'
 
-/**
- * @todo move to jsSdk
- */
 export interface UploadDocumentResponse {
   result?: {
     document: {
@@ -21,9 +18,6 @@ export interface UploadDocumentResponse {
   error?: string
 }
 
-/**
- * @todo move to jsSdk
- */
 export interface UploadDocumentRequest {
   entityTypeId: number
   entityId: number

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
 const { t } = useI18n()
 
@@ -10,7 +11,7 @@ useHead({
 // region Init ////
 const { $logger, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
-const $b24 = await $initializeB24Frame()
+const $b24: B24Frame = await $initializeB24Frame()
 
 const isAutoOpenActivityList = ref(true)
 const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false
@@ -24,7 +25,7 @@ if (!import.meta.hot && import.meta.client) {
 onMounted(async () => {
   try {
     /**
-     * @todo add lang
+     * @need fix lang
      */
     await $b24.parent.setTitle('App: index')
 
@@ -57,7 +58,7 @@ function openActivityList() {
 
   window.setTimeout(() => {
     /**
-     * @todo add lang
+     * @need fix lang
      */
     $b24.slider.openSliderAppPage({
       place: 'activity-list',

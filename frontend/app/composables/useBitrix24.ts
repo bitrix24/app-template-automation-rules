@@ -1,15 +1,7 @@
-import { EnumCrmEntityTypeId, EnumCrmEntityTypeShort, omit } from '@bitrix24/b24jssdk'
+import { EnumCrmEntityTypeId, getEnumCrmEntityTypeShort, omit } from '@bitrix24/b24jssdk'
 import type { CatalogProductImage, B24OAuth } from '@bitrix24/b24jssdk'
 import type { EntityForRender, ProductInfo, ProductRow } from '~/types/bitrix'
 import QRCode from 'qrcode'
-
-/**
- * @todo move to b24.jsSdk
- */
-function getEnumCrmEntityTypeShort(id: EnumCrmEntityTypeId): EnumCrmEntityTypeShort {
-  const key = EnumCrmEntityTypeId[id] as keyof typeof EnumCrmEntityTypeShort
-  return EnumCrmEntityTypeShort[key] || EnumCrmEntityTypeShort.undefined
-}
 
 export const useFetchEntity = (
   $b24: B24OAuth,
@@ -99,12 +91,7 @@ export const useFetchEntity = (
         omit(data.entityItem.item || {}, customFieldsForLead)
       )
 
-      /**
-       * @todo $b24.getTargetOrigin() - remove right /
-       * https://bitrix24.page.link/?link=https://bel.bitrix24.ru/?intent=mobapp_popup%3B8fvGiVmBbrd2t5TVYxf7R147DtX9hstH&apn=com.bitrix24.android&isi=561683423&ibi=com.bitrixsoft.cpmobile
-       * https://bitrix24.page.link/?link=https://bel.bitrix24.ru/&apn=com.bitrix24.android&isi=561683423&ibi=com.bitrixsoft.cpmobile
-       */
-      entity.qrCode = await QRCode.toDataURL(
+      entity.qrCode = QRCode.toDataURL(
         `${$b24.getTargetOrigin()}crm/type/${entityTypeId}/details/${entity.id}/?any=app-qrCode`,
         {
           errorCorrectionLevel: 'H',

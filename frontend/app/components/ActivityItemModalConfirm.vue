@@ -1,7 +1,4 @@
 <script setup lang="ts">
-/**
- * @todo: area for close
- */
 import type { IActivity } from '~/types'
 
 defineProps<{

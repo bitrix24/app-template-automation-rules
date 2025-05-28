@@ -11,9 +11,9 @@ import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import { Salt } from '~/services/salt'
+import type { B24Frame, ActivityConfig, ActivityProperty } from '@bitrix24/b24jssdk'
 import type { Collections } from '@nuxt/content'
 import type { IActivity } from '~/types'
-import type { ActivityConfig, ActivityProperty } from '~/activity.config'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
@@ -34,7 +34,7 @@ useHead({
 const { addSalt } = Salt()
 const { $logger, initApp, processErrorGlobal } = useAppInit()
 const { $initializeB24Frame } = useNuxtApp()
-const $b24 = await $initializeB24Frame()
+const $b24: B24Frame = await $initializeB24Frame()
 
 const isLoading = ref(true)
 const isShowDebug = ref(false)
@@ -113,7 +113,7 @@ async function makeInstall(activity: IActivity): Promise<void> {
     }
 
     /**
-     * @todo add lang
+     * @need fix lang
      */
     const params: ActivityConfig = {
       CODE: addSalt(activityConfig.CODE),

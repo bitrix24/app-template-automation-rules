@@ -16,10 +16,6 @@ Look at docs to learn more:
 ## Folder Structure
 
 ```plaintext
-/acme
-/certs
-/html
-/logs
 /frontend
   /app
   /content
@@ -54,13 +50,8 @@ docker-compose.server.yml
 ```
 
 ## App config
-### scopes
 
-- crm
-- catalog
-- bizproc
-- placement
-- user_brief
+scopes: crm,catalog,bizproc,placement,user_brief,task
 
 ---
 

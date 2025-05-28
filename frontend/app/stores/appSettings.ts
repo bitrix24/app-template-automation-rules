@@ -21,6 +21,9 @@ export const useAppSettingsStore = defineStore(
       site: '',
       comments: ''
     })
+    const configSettings = reactive({
+      deviceHistoryCleanupDays: 30
+    })
     const activityInstalled = reactive<string[]>([])
     // endregion ////
 
@@ -35,16 +38,21 @@ export const useAppSettingsStore = defineStore(
      * @param data.version
      * @param data.isTrial
      * @param data.integrator
+     * @param data.configSettings
      */
     function initFromBatch(data: {
       version?: string
       isTrial?: boolean
       integrator?: typeof integrator
+      configSettings?: typeof configSettings
     }) {
       version.value = data.version || '0.0.1'
       isTrial.value = data.isTrial ?? true
       if (data.integrator) {
         Object.assign(integrator, data.integrator)
+      }
+      if (data.configSettings) {
+        Object.assign(configSettings, data.configSettings)
       }
     }
 
@@ -77,7 +85,8 @@ export const useAppSettingsStore = defineStore(
       return $b24.callMethod(
         'app.option.set',
         {
-          integrator
+          integrator: { ...integrator },
+          configSettings: { ...configSettings }
         }
       )
     }
@@ -88,7 +97,7 @@ export const useAppSettingsStore = defineStore(
     }
 
     /**
-     * @todo fix lang
+     * @need fix lang
      */
     const integratorPreview = computed(() => {
       const result = []
@@ -146,6 +155,7 @@ export const useAppSettingsStore = defineStore(
       initFromBatch,
       initFromBatchByActivityInstalled,
       saveSettings,
+      configSettings,
       integrator,
       updateIntegrator,
       integratorPreview,

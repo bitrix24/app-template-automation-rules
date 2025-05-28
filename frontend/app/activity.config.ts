@@ -1,4 +1,5 @@
-import { EnumCrmEntityType, getDocumentTypeForFilter, EnumBizprocDocumentType, ActivityOrRobotConfig } from '@bitrix24/b24jssdk'
+import { EnumCrmEntityType, getDocumentTypeForFilter, EnumBizprocDocumentType } from '@bitrix24/b24jssdk'
+import type { ActivityOrRobotConfig } from '@bitrix24/b24jssdk'
 
 /**
  * @need fix lang

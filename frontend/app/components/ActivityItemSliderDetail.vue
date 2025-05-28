@@ -1,11 +1,8 @@
 <script setup lang="ts">
-/**
- * @todo: open support
- * @todo: area for close
- */
 import { computed } from 'vue'
 import type { IActivity } from '~/types'
 import type { Collections } from '@nuxt/content'
+import { navigateTo } from '#imports'
 
 const { locale, defaultLocale } = useI18n()
 
@@ -26,6 +23,22 @@ const { data: content } = await useAsyncData(
     return queryCollection(contentCollection.value).path(props.activity.path).first()
   }
 )
+// endregion ////
+
+// region Action ////
+const makeOpenSupport = () => {
+  navigateTo({
+    path: 'https://helpdesk.bitrix24.com/',
+    query: {
+      activityPath: props.activity.path
+    }
+  }, {
+    external: true,
+    open: {
+      target: '_blank'
+    }
+  })
+}
 // endregion ////
 </script>
 
@@ -52,6 +65,7 @@ const { data: content } = await useAsyncData(
             size="xs"
             color="primary"
             :label="$t('component.activity.item.slider.advice.action')"
+            @click.stop="makeOpenSupport"
           />
         </div>
       </B24Advice>

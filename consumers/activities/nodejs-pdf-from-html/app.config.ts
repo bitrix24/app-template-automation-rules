@@ -8,7 +8,7 @@ const entity = 'activity'
 const activityCode = 'PdfFromHtml'
 const ver = 'v1'
 const delayedMs = 6000
-const failedRoutingKey = failed
+const failedRoutingKey = 'failed'
 
 export function appOptions() {
   return {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * @todo fix lang
+ * @need fix lang
  */
 import { ref, onBeforeUnmount } from 'vue'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
@@ -81,7 +81,6 @@ const processImage = (file: File): Promise<string> => {
         const ctx = canvas.getContext('2d')
         if (!ctx) return reject('Canvas context not found')
 
-        // Рассчет новых размеров
         let width = img.width
         let height = img.height
 

@@ -15,8 +15,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(magicast@0.3.5)
       '@bitrix24/b24rabbitmq':
-        specifier: ^0.0.3
-        version: 0.0.3(amqplib@0.10.8)
+        specifier: ^0.0.4
+        version: 0.0.4(amqplib@0.10.8)
       '@bitrix24/b24ui-nuxt':
         specifier: ^0.6.7
         version: 0.6.7(@babel/parser@7.27.2)(axios@1.9.0)(embla-carousel@8.6.0)(jwt-decode@4.0.0)(magicast@0.3.5)(qrcode@1.5.4)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.23)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.14(typescript@5.8.3)))(vue@3.5.14(typescript@5.8.3))(zod@3.25.32)
@@ -224,8 +224,8 @@ packages:
     resolution: {integrity: sha512-QBYJpOwZjn9yaIYJgBcmLbSOoAt408Rlu3vofcYvyPdpIVxV/HML7lO6qbXsryhQBo+bHxtFMw1bNb43scyubw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
 
-  '@bitrix24/b24rabbitmq@0.0.3':
-    resolution: {integrity: sha512-/QbC/RSuCPfXIm3TgZA86p1Zoq/XRmcHDA+9h0IvzJ9wdfDKGq5D5jEKO+jLE149kEv3HkOzvaX2O9YVs8/vhw==}
+  '@bitrix24/b24rabbitmq@0.0.4':
+    resolution: {integrity: sha512-TWZ+zsQncwi2H3Jpv6eS2HLY5RM0ECzrbmp3lets5NLsDRA8vcVW3qWew7XLdUZTEtVe5zGS86gAW9FwmtVClQ==}
     engines: {node: ^20.0.0 || >=22.0.0}
     peerDependencies:
       amqplib: ^0.10.8
@@ -6288,7 +6288,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@bitrix24/b24rabbitmq@0.0.3(amqplib@0.10.8)':
+  '@bitrix24/b24rabbitmq@0.0.4(amqplib@0.10.8)':
     dependencies:
       amqplib: 0.10.8
       consola: 3.4.2

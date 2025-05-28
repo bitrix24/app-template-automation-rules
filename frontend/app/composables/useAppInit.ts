@@ -60,13 +60,11 @@ export const useAppInit = (loggerTitle?: string) => {
       ...(data.robotList || [])
     ].map(row => clearSalt(row)))
 
-    /**
-     * @todo from props
-     */
     appSettings.initFromBatch({
       version: data.appInfo?.VERSION || '0.0.1',
       isTrial: data.appInfo?.STATUS === 'T',
-      integrator: data.appSettings?.integrator || {}
+      integrator: data.appSettings?.integrator || {},
+      configSettings: data.appSettings?.configSettings || {}
     })
 
     userSettings.setB24($b24)
