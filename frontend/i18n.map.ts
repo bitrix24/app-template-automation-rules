@@ -1,6 +1,5 @@
 /**
  * @memo file put at frontend/i18n/locales
- * @todo Refactor me
  */
 export const contentLocales = [
   { code: 'en', name: 'English', file: 'en.json' },
