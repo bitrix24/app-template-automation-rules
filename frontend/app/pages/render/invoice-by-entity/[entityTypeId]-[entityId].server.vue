@@ -29,7 +29,7 @@ useHead({
   },
   bodyAttrs: {
     // font-b24-system || font-b24-system-mono || font-b24-helvetica ////
-    class: 'bg-white text-base-ebony font-b24-system-mono antialiased'
+    class: 'bg-white text-base-ebony font-b24-system antialiased'
   }
 })
 
