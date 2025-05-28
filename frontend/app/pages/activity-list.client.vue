@@ -138,12 +138,8 @@ async function makeInstall(activity: IActivity): Promise<void> {
       params
     )
 
-    /**
-     * @todo move to store
-     */
-    if (!appSettings.isActivityInstalled(activityConfig.CODE)) {
-      appSettings.activityInstalled.push(activityConfig.CODE)
-    }
+    appSettings.addToActivityInstalled(activityConfig.CODE)
+
     activity.isInstall = true
 
     toast.add({
@@ -195,15 +191,7 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
       }
     )
 
-    /**
-     * @todo move to store
-     */
-    const index = appSettings.activityInstalled.findIndex(
-      item => item.toLowerCase() === activityCode.toLowerCase()
-    )
-    if (index !== -1) {
-      appSettings.activityInstalled.splice(index, 1)
-    }
+    appSettings.removeFromActivityInstalled(activityCode)
 
     activity.isInstall = false
 
