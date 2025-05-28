@@ -26,7 +26,6 @@ abstract class BaseRabbitMQ
     ?LoggerInterface     $logger = null
   )
   {
-    // @todo need this ? ////
     $this->config = new Types\RabbitMQConfig(
       $config->connection,
       $config->exchanges,
