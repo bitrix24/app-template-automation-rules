@@ -10,9 +10,6 @@ interface LocaleConfig {
 }
 
 const getLocales = (): LocaleConfig[] => {
-  /**
-   * @todo Refactor me
-   */
   try {
     const locales: unknown = contentLocales
 
