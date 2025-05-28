@@ -32,7 +32,6 @@ const startConsumer = async () => {
     ) => {
 
       try {
-        // @todo add to rbtMq interface Message
         const retryCount = msg?.retryCount || 0
         if (retryCount >= maxRetryCount) {
           throw new Error('Max retries exceeded')
@@ -68,7 +67,6 @@ const startConsumer = async () => {
             appOptions().delayRoutingKey,
             {
               ...msg,
-              // @todo add to rbtMq interface Message
               error: problem.message
             }
           )
@@ -79,7 +77,6 @@ const startConsumer = async () => {
             appOptions().failedRoutingKey,
             {
               ...msg,
-              // @todo add to rbtMq interface Message
               error: problem.message
             }
           )

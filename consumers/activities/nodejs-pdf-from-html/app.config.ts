@@ -61,7 +61,7 @@ export const rabbitMQConfig: RabbitMQConfig = {
       bindings: [
         {
           exchange: `${base}.${ver}`,
-          routingKey: `${activityCode}.${ver}`
+          routingKey: `${entity}.${activityCode}`
         },
         {
           exchange: appOptions().exchangeService,
