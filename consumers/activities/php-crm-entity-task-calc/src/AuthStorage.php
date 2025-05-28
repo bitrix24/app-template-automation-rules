@@ -133,12 +133,11 @@ class AuthStorage
       '"expires"' => $renewedAuthToken->authToken->expires,
       '"expiresIn"' => $renewedAuthToken->authToken->expiresIn ?? 3600,
       /**
-       * @todo fix phpSdk
        * @memo at this place $renewedAuthToken->domain = 'oauth.bitrix.info' -> need self b24
        */
       // '"domain"' => $renewedAuthToken->domain,
       /**
-       * @todo fix phpSdk
+       * @need fix phpSdk
        * @memo at this place $renewedAuthToken->applicationStatus->getStatusCode() = 'local' -> need 'L'
        */
       // '"status"' => $renewedAuthToken->applicationStatus->getStatusCode(),

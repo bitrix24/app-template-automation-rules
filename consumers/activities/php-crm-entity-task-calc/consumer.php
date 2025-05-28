@@ -1,7 +1,5 @@
 <?php
-/**
- * @todo add used memo info
- */
+
 declare(strict_types=1);
 
 use Bitrix24\RabbitMQ\Consumer;
