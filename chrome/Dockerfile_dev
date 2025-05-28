@@ -3,13 +3,21 @@ FROM zenika/alpine-chrome
 LABEL maintainer="B24Sdk <github.com/bitrix24>"
 
 USER root
+
+# Install dependencies: Nginx + Noto fonts (support the ruble symbol)
 RUN apk add --no-cache \
-    nginx && \
+    nginx \
+    font-noto \
+    font-noto-extra \
+    fontconfig && \
     # Nginx
     mkdir -p /var/lib/nginx/tmp && \
     # Chrome
     chown -R chrome:chrome /var/lib/nginx /run /var/log/nginx && \
-    rm -rf /var/cache/apk/*
+    # Clearing cache
+    rm -rf /var/cache/apk/* && \
+    # Updating font cache
+    fc-cache -f -v
 
 COPY nginx_dev.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh /
