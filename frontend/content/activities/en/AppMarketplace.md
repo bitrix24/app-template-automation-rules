@@ -6,7 +6,7 @@ categories:
   - 'category_2'
   - 'category_3'
 badges:
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AppMarketplace.webp'
 ---
 # Instruction for Using and Configuring the "App Marketplace" Action
