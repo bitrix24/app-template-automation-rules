@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * @todo make layout template
+ * @need make layout template && add skeleton
  * @link https://apidocs.bitrix24.com/tutorials/bizproc/setting-robot.html
  */
 import { ref, computed, onMounted } from 'vue'
@@ -8,6 +8,7 @@ import { activitiesConfig } from '~/activity.config'
 import { ActivitySettings } from '#components'
 import { Salt } from '~/services/salt'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 
 // const { t } = useI18n()
 const { clearSalt } = Salt()
@@ -138,27 +139,8 @@ const makeFitWindow = async () => {
 <template>
   <div class="px-1 min-h-[320px]">
     <template v-if="isLoading">
-      <!-- @todo add skeleton -->
-      <div class="relative p-sm2 rounded-md flex flex-row gap-sm border-2 border-base-master/10">
-        <B24Skeleton class="h-12 w-12 rounded-full" />
-        <div class="flex-1 flex flex-col items-start justify-between gap-2">
-          <div class="w-full flex flex-col items-start justify-between gap-2">
-            <div class="w-full">
-              <B24Skeleton class="mb-xs2 h-sm2 w-2/3 bg-base-400 rounded-2xs" />
-              <div class="mb-1.5 w-full flex flex-row flex-wrap items-start justify-start gap-2">
-                <B24Skeleton class="h-sm w-1/4" />
-                <B24Skeleton class="h-sm w-1/4" />
-              </div>
-            </div>
-            <B24Skeleton class="h-2 w-5/6 rounded-2xs" />
-            <B24Skeleton class="mb-1 h-2 w-3/4 rounded-2xs" />
-          </div>
-          <div class="w-full flex flex-row gap-1 items-center justify-end">
-            <div class="border-2 border-gray-200 dark:border-gray-800 h-[26px] w-[80px] px-lg rounded-full flex items-center justify-center">
-              <B24Skeleton class="h-xs w-full rounded-3xs" />
-            </div>
-          </div>
-        </div>
+      <div class="h-[calc(100vh_-_90px)] flex flex-col items-center justify-center">
+        <SpinnerIcon class="animate-spin stroke-2 size-[50px]" />
       </div>
     </template>
     <template v-else>
