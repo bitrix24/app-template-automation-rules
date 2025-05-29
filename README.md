@@ -1,88 +1,140 @@
 # @bitrix24/app-template-automation-rules
 
-> [!WARNING]  
-> These are experimental
-> Still in early Alpha
+An application for creating robots (actions) for Bitrix24 business processes using RabbitMQ.
 
-Look at docs to learn more:
+## Core Components
+- **Consumers**:
+  - `nodejs-pdf-from-html`: Generates PDF invoices from HTML using deal/lead data
+  - `php-crm-entity-task-calc`: Calculates task durations for deals/leads
+- **Required scopes**: `crm, catalog, bizproc, placement, user_brief, task`
 
-- [@bitrix24/b24ui-nuxt](https://bitrix24.github.io/b24ui/)
-- [@bitrix24/b24jssdk](https://bitrix24.github.io/b24jssdk/)
-- [@bitrix24/b24icons](https://bitrix24.github.io/b24icons/)
-- [@bitrix24/b24style](https://bitrix24.github.io/b24style/)
-- [Nuxt](https://nuxt.com/docs/getting-started/introduction)
-- SSL Server Test [Qualys](https://www.ssllabs.com/ssltest/index.html)
-
-## Folder Structure
-
+## 📁 Project Structure
 ```plaintext
 /frontend
-  /app
-  /content
-  /i18n
-  /public
-  /server
-  /template
-  /tools
-  package.json
-  nuxt.config.ts
-  i18n.options.ts
-  i18n.map.ts
-  content.config.ts
-  eslint.config.mjs
-  tsconfig.json
-  Dockerfile
-  entrypoint.sh
-/chrome
-  entrypoint.sh
-  Dockerfile_dev
-  nginx_dev.conf
-  Dockerfile_prod
-  nginx_prod.conf
-.gitignore
-.dockerignore
-.editorconfig
-.env.dev
-.env.prod
-docker-compose.dev.yml
-docker-compose.prod.yml
-docker-compose.server.yml
+  /app          # Application pages (Nuxt3)
+  /server       # API and event handlers
+  /prisma       # Database models (PostgreSQL)
+  /content      # Markdown action descriptions
+  /i18n         # Localization
+  /tools        # Translation scripts
+/consumers
+  /activities   # Action consumers
+    /nodejs-pdf-from-html        # PDF generator
+    /php-crm-entity-task-calc    # Task calculator
+/chrome         # Chrome configuration for rendering
 ```
 
-## App config
+## 🐳 Docker Installation
 
-scopes: crm,catalog,bizproc,placement,user_brief,task
-
----
-
-## Ngrok
-
-[ngrok.com](https://ngrok.com/)
+- [Docker](https://docs.docker.com/compose/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/linux/)
 
 ```shell
-ngrok http 3000
+# 1. Install Docker and Docker Compose
+# 2. Create network
+docker network create proxy-net
+
+# 3. Launch core services
+docker compose -f docker-compose.server.yml -p server__global up -d
 ```
 
-## Tuna
+### 🔧 Development (Dev)
+![Docker Dev](./.github/assets/docker__dev.jpg)
 
-[Tuna](https://tuna.am/en/docs/)
+Configure environment variables:
+```shell
+cp .env.dev.example .env.dev
+```
 
 ```shell
-tuna http 3000
+# Start
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+
+# DB migration
+docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
+
+# Stop
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
 ```
 
----
+**Container management:**
+```shell
+# Logs
+docker logs -f dev-frontend
+docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
+docker logs -f dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
+docker logs -f dev-db
 
-## psql
+# Consumer scaling
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-php-crm-entity-task-calc=2
+ 
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-nodejs-pdf-from-html=2
+
+# Restart
+docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
+ docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+ 
+# Container debugging
+docker exec -it dev-frontend sh
+docker exec -it dev-frontend sh -c "ls .la"
+docker exec -it dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh
+docker exec -it dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh
+# @memo dbuser && dbapp see in .env.xxx
+docker exec -it dev-db psql -U dbuser -d dbapp
+dbapp# select "memberId", "userId", "domain" from "B24App";
+```
+
+### 🚀 Production (Prod)
+![Docker Prod](./.github/assets/docker__prod.jpg)
+
+Configure environment variables:
+```shell
+cp .env.prod.example .env.prod
+```
 
 ```shell
-psql \! chcp 1251
+# Start
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d
+
+# DB migration
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up migrator
+
+# Stop
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
 ```
 
-## Docker
+**Container management:**
+```shell
+# Logs
+docker logs -f prod-frontend
+docker logs -f prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
+docker logs -f prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
+docker logs -f prod-db
 
-### Status
+## Rebuild migration
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate down migrator && \
+  docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up --build migrator
 
+# Consumer scaling
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
+ 
+docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
+ docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
+
+# Container debugging
+docker exec -it prod-frontend sh
+docker exec -it prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh
+docker exec -it prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh
+# @memo dbuser && dbapp see in .env.xxx
+docker exec -it prod-db psql -U dbuser -d dbapp
+dbapp# select "memberId", "userId", "domain" from "B24App";
+```
+
+### 🔍 Monitoring
 ```shell
 docker stats
 docker ps
@@ -95,277 +147,10 @@ sudo ss -tuln | grep 2376
 watch -n 5 "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}'"
 
 docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
-docker compose -f docker-compose.dev.yml -p prod__app-template-automation-rules top
+docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules top
 ```
 
-### Server
-```shell
-# create network
-docker network create proxy-net
-
-# up server
-docker compose -f docker-compose.server.yml -p server__global up -d --build
-docker compose -f docker-compose.server.yml -p server__global up -d
-
-docker compose -f docker-compose.server.yml -p server__global top
-
-docker compose -f docker-compose.server.yml -p server__global build
-
-# down server
-docker compose -f docker-compose.server.yml -p server__global down
-docker compose -f docker-compose.server.yml -p server__global stop
-
-# LOG
-docker logs -f server
-docker logs -f letsencrypt
-
-docker exec -it server sh -c "cat /etc/nginx/conf.d/default.conf"
-
-docker exec -it server sh
-```
-
-### Dev
-```shell
-
-# RESTART
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build --no-cache && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
-
-# STOP
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
-
-
-# START
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
-# OR
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
-
-# DB migrate
-# docker exec -it dev-frontend sh -c "pnpx prisma migrate reset"
-docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
-
-# LOG
-docker logs -f dev-frontend
-docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
-docker logs -f dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
-docker logs -f dev-db
-
-# commands
-docker exec -it dev-frontend sh -c "pnpm install"
-
-# consumer restart
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-php-crm-entity-task-calc
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-nodejs-pdf-from-html
-```
-
-```shell
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules top
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules build
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build chrome
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build frontend
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-nodejs-pdf-from-html
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down --volumes --rmi all --remove-orphans
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop chrome
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules start chrome
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules stop frontend
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules start frontend
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down chrome && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build chrome
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build frontend
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down frontend && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d frontend 
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-nodejs-pdf-from-html
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-nodejs-pdf-from-html=2
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d consumer-nodejs-pdf-from-html
-
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build consumer-php-crm-entity-task-calc
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs chrome
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs -f chrome
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs frontend
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules logs -f frontend
-
-docker logs -f dev-chrome
-docker logs -f dev-frontend
-docker logs -f dev-consumer-AIandMachineLearning
-docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
-
-```
-
-### Prod
-```shell
-# Build
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
-
-# Run
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d
-
-# DB migrate
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up migrator
-
-# Stop
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
-
-# Rebuild
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --build
-
-# Rebuild DB migrate
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate down migrator && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up --build migrator
-
-# Restart consumers
-# consumer-nodejs-pdf-from-html
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d consumer-nodejs-pdf-from-html
-
-# consumer-php-crm-entity-task-calc
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d consumer-php-crm-entity-task-calc
- 
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d  --build consumer-php-crm-entity-task-calc
-
-# Scale consumers
-# consumer-nodejs-pdf-from-html
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
-
-# consumer-php-crm-entity-task-calc
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
-
-# Log
-docker logs -f prod-frontend
-docker logs -f prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
-docker logs -f prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
-docker logs -f prod-db
-
-# Connect
-docker exec -it prod-frontend sh -c "ls .la"
-docker exec -it prod-frontend sh -c "ls .la"
-docker exec -it prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh -c "ls .la"
-docker exec -it prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh -c "ls .la"
-
-docker exec -it prod-db psql -U dbuser -d dbapp
-```
-
-@todo -> add all info to example
-```shell
-cp .env.dev.example .env.dev
-```
-
-### Check
-
-```shell
-# network
-docker network inspect internal-net
-docker network inspect inner
-docker network inspect inner | grep -A 10 Containers
-
-# postgres
-docker logs dev-db | grep -i 'password'
-docker exec dev-db env | grep POSTGRES
-
-docker exec dev-frontend sh -c "pnpx prisma migrate dev --name create_b24app_table"
-
-# chrome
-docker inspect dev-chrome
-docker exec -it dev-chrome wget -qO- http://0.0.0.0:9223/json/version
-docker exec -it dev-chrome wget -qO- http://dev-frontend:3000/
-
-docker exec -it prod-chrome wget -qO- http://prod-frontend:80/render/invoice-by-deal/1058/
-
-docker exec -it dev-chrome netstat -tulpn | grep 9222
-docker exec -it dev-chrome ping -c 4 frontend
-
-# frontend
-docker exec dev-frontend env | grep DATABASE_URL
-docker inspect dev-frontend
-docker exec -it dev-frontend wget -qO- http://dev-chrome:9223/json/version
-
-docker exec -it prod-frontend wget -qO- http://prod-chrome:9223/json/version
-
-docker exec -it dev-frontend nc -zv chrome 9223
-docker exec -it dev-frontend ping -c 4 chrome
-docker exec -it dev-frontend nslookup chrome
-docker exec -it dev-frontend sh -c "whoami && id" # check user at container
-
-docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-chrome:9223/json/version
-docker exec -it dev-consumer-AIandMachineLearning wget -qO- http://dev-frontend:3000/render/invoice-by-deal/1058/
-```
-
-### Connect
-
-```shell
-# chrome
-docker exec -it chrome /bin/bash
-docker exec -it chrome /bin/bash
-docker exec -it chrome /bin/sh
-
-docker exec -it chrome netstat -tulpn
-
-# frontend
-docker exec -it frontend /bin/bash
-docker exec -it dev-frontend /bin/bash
-docker exec -it dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 /bin/bash
-docker exec -it dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 /bin/sh
-docker exec -it 
-# server
-docker exec -it server /bin/bash
-
-# letsencrypt
-docker exec -it letsencrypt /bin/bash
-```
-
-### Clear
-
-> Delete all data in volumes (including DB)
->
-> Require rebuilding images on next startup
->
-> Irreversibly delete information
-> Should not be used in **production** **without understanding** the consequences
-
-Disc size
-```shell
-df -h
-du -sh /var/lib/docker
-```
-
+### 🧹 Cleanup
 ```shell
 # Delete all stopped containers
 docker container prune
@@ -375,12 +160,134 @@ docker image prune -a
 
 # Delete unused volumes
 docker volume prune
-docker volume prune -a
+
 docker volume ls
-docker volume rm xxx xxx xxx
+docker volume rm xxx1 xxx2 xxx3
+
+docker volume prune -a
 
 # Delete EVERYTHING unused (including volumes and images)
 docker system prune -a --volumes
 ```
 
-@todo add clear docker log
+## Application
+![Frontend public](./.github/assets/frontend__app.jpg)
+
+Application pages in `frontend/app/pages`:
+- `install.client.vue` - installation handler
+- `index.client.vue` - main page redirects to `activity-list.client.vue`
+- `activity-list.client.vue` - shows actions list and app settings
+- `pages/setting/[code].client.vue` - `placement` handler for BP action parameters (requires customization)
+
+Special page `render/invoice-by-entity/[entityTypeId]-[entityId].server.vue` generates invoices. Server-side only, used by `CrmEntityTaskCalc`.
+
+![Frontend server](./.github/assets/frontend__server.jpg)
+
+Server scripts in `frontend/server`:
+- `rabbitmq.config.ts` configures RabbitMQ connections
+
+Event handlers:
+- `api/event/onAppInstall.post.ts` - app installation (stores tokens in DB)
+- `api/event/onAppUninstall.post.ts` - app removal (deletes tokens)
+
+Business process action handlers:
+- `api/activities/[code].post.ts` - receives calls, finds `memberId`, publishes to 'activities.v1' exchange [`producer`].
+
+## Business Process Action (Robot)
+
+Action settings in `frontend/app/activity.config.ts`. Descriptions in `frontend/content/activities/xx/yyyy.md`.
+
+### Creating New Action
+Example code: `NewDemoActivity`
+
+Steps:
+1. Configure in `frontend/app/activity.config.ts`:
+```typescript
+export const activitiesConfig: ActivityOrRobotConfig[] = [
+  // ...
+  {
+    type: 'robot',
+    CODE: 'NewDemoActivity',
+    FILTER: { /*...*/ },
+    PROPERTIES: { /*...*/ },
+    RETURN_PROPERTIES: { /*...*/ }
+  }
+]
+```
+2. Add description: `frontend/content/activities/en/NewDemoActivity.md`
+```markdown
+---
+title: Title for new activity
+description: Description for new activity
+categories: 
+  - 'category_1'
+  - 'category_2'
+badges: 
+  - 'badge_1'
+  - 'badge_2'
+avatar: '/activities/NewDemoActivity.webp'
+---
+```
+3. Add icon: `frontend/public/activities/NewDemoActivity.webp`
+4. Install action via Bitrix24
+5. Create consumer in `consumers/activities/new-demo-activity` handling queue `activity.NewDemoActivity.v1`
+6. Configure in `docker-compose.*.yml` files
+
+### `PdfFromHtml` Example
+![Consumer NodeJs PdfFromHtml](./.github/assets/consumer__nodejs-pdf-from-html.jpg)
+- NodeJS-based (`consumers/activities/nodejs-pdf-from-html`)
+- Main file: `app/consumer.ts` (`processMessage()` logic)
+- Renders page: `frontend/app/pages/render/invoice-by-entity/[entityTypeId]-[entityId].server.vue`
+- RabbitMQ config: `app.config.ts`
+
+Workflow:
+1. Gets auth data from message → verifies in DB
+2. Creates JWT token (5min TTL) with oAuth params
+3. Calls Chrome-rendered page `render/invoice-by-entity/[entityTypeId]-[entityId]`
+4. Page script validates JWT → fetches deal/lead data from Bitrix24
+5. Generates HTML invoice → converts to PDF via Chrome
+6. Sends PDF to Bitrix24
+
+### `CrmEntityTaskCalc` Example
+![Consumer php CrmEntityTaskCalc](./.github/assets/consumer__php-crm-entity-task-calc.jpg)
+- PHP-based (`consumers/activities/php-crm-entity-task-calc`)
+- Main file: `consumer.php` (logic in `src/Processor.php`)
+- RabbitMQ config: `src/ConfigRabbitMQ.php`
+
+Workflow:
+1. Fetches/renews auth from DB via `memberId`
+2. Retrieves all entity tasks from Bitrix24 (admin rights)
+3. Calculates task durations
+4. Returns results to waiting Bitrix24 business process
+
+## 🔌 RabbitMQ Architecture
+![RabbitMq theory](./.github/assets/rabbitmq__theory.jpg)
+> `v1` = version tag for routing organization
+
+Implementation:
+- **producer** → **exchange** `activities.v1`
+- Service **exchange** `activities.service.v1`
+- Dead-letter **queue** `activities.failed.v1`
+- Per-action queues: `activity.activityCode.v1` + `activity.activityCode.delayed.6000.v1`
+- Failure handling:
+  - (1) Consumer crash → message requeued
+  - (2) Success → message removed
+  - (3) Processing failure:
+    - First 4 attempts → `delayed.6000` (6sec) → retry
+    - 5th attempt → `failed.v1` (manual handling required)
+
+## 🛠 Development Tools
+AI-powered translation via DeepSeek (scripts in `frontend/tools`):
+```shell
+# Translate action descriptions
+pnpm run translate-content
+
+# Translate UI phrases
+pnpm run translate-ui
+```
+
+## 🔮 Roadmap
+- [OpenTelemetry](https://opentelemetry.io/) integration
+- Dead-letter queue (`activities.failed.v1`) processing system
+- RabbitMQ optimizations for NodeJS/PHP
+- Bitrix24 Market publication assets
