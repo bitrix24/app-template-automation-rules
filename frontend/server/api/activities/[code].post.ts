@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
           data.document_type[2]
         ].filter(Boolean)
       : [],
-    properties: {},
+    properties: data?.properties || {},
     auth: {
       applicationToken: data?.auth?.application_token || '?',
       userId: Number.parseInt(data?.auth?.user_id || '0'),
