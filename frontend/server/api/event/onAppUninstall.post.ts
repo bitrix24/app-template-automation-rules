@@ -24,9 +24,6 @@ interface EventOnAppUnInstallHandlerParams {
 }
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  /**
-   * @todo fix in jsSDK
-   */
   const data = qs.parse(body) as unknown as Partial<EventOnAppUnInstallHandlerParams>
 
   if (data.event?.toUpperCase() !== 'ONAPPUNINSTALL') {
