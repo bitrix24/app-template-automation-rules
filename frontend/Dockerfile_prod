@@ -4,7 +4,7 @@
 FROM node:20-alpine AS builder
 LABEL maintainer="B24Sdk <github.com/bitrix24>"
 
-# RUN apt-get update && apt-get install -y openssl
+RUN apk add --no-cache openssl
 
 WORKDIR /usr/src/app
 
