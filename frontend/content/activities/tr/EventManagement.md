@@ -25,14 +25,14 @@ avatar: '/activities/EventManagement.webp'
 
 ### 3: Eylemi Yapılandırma
 - Etkinlik Planlama:
-  - Etkinlik tarihi, saati ve yerini belirleyin.
+  - Etkinlik tarihi, saati ve yerini ayarlayın.
   - Gündem, konuşmacılar veya özel talimatlar gibi etkinlik detaylarını ekleyin.
 - Katılımcı Yönetimi:
   - Katılımcı listesi oluşturun veya kişileri içe aktarın.
-  - RSVP takibi ve hatırlatıcılar ayarlayın.
+  - RSVP takibi ve hatırlatıcıları ayarlayın.
 - Görev Otomasyonu:
   - Etkinlik hazırlığı için ekip üyelerine görevler atayın.
-  - Son teslim tarihleri ve teslimatlar için otomatik hatırlatıcılar ayarlayın.
+  - Son teslim tarihleri ve teslimler için otomatik hatırlatıcılar oluşturun.
 - Etkinlik Sonrası Takip:
   - Teşekkür notları veya geri bildirim istekleri için e-posta şablonları oluşturun.
   - Etkinlik sonrası gönderilecek takip e-postalarını planlayın.

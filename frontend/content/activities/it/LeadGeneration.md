@@ -6,11 +6,11 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/LeadGeneration.webp'
 ---
 
-# Istruzioni per l'Uso e la Configurazione dell'Azione "Generazione di Lead"
+# Istruzioni per l'Utilizzo e la Configurazione dell'Azione "Generazione di Lead"
 
 ## Descrizione dell'Azione
 
@@ -22,21 +22,21 @@ avatar: '/activities/LeadGeneration.webp'
 - Trova l'azione **"Generazione di Lead"** nell'elenco delle azioni disponibili e aggiungila al processo.
 
 ### 2. Configurazione delle Fonti di Lead
-- Collega le fonti di lead (ad esempio, moduli del sito web, campagne pubblicitarie, social media).
-- Configura la creazione automatica di lead nel CRM quando vengono ricevuti dati.
-- Usa i **moduli web** di Bitrix24 per raccogliere informazioni di contatto.
+- Collega le fonti di lead (es. moduli del sito, campagne pubblicitarie, social media).
+- Configura la creazione automatica di lead nel CRM quando i dati vengono ricevuti.
+- Utilizza i **moduli web** di Bitrix24 per raccogliere informazioni di contatto.
 
 ### 3. Automazione dell'Elaborazione dei Lead
-- Configura la classificazione automatica dei lead per categorie (ad esempio, fonte, regione, interessi).
-- Usa **robot** per inviare automaticamente email o SMS ai nuovi lead.
+- Imposta la classificazione automatica dei lead per categorie (es. fonte, regione, interessi).
+- Utilizza **robot** per inviare automaticamente email o SMS ai nuovi lead.
 - Configura notifiche per i manager riguardo ai nuovi lead.
 
 ### 4. Coltivazione dei Lead
 - Crea scenari di **sales funnel** per coinvolgere i lead passo dopo passo.
-- Usa **campagne email** e **promemoria automatici** per mantenere il contatto.
-- Configura trigger per convertire i lead in offerte quando vengono soddisfatte determinate condizioni.
+- Utilizza **campagne email** e **promemoria automatici** per mantenere il contatto.
+- Imposta trigger per convertire i lead in opportunità quando determinate condizioni sono soddisfatte.
 
 ### 5. Analisi e Ottimizzazione
-- Usa i report integrati per analizzare l'efficacia della generazione di lead (ad esempio, numero di lead, conversione in offerte).
-- Configura notifiche per le persone responsabili con le metriche chiave.
+- Utilizza report integrati per analizzare l'efficacia della generazione di lead (es. numero di lead, conversione in opportunità).
+- Configura notifiche per i responsabili con metriche chiave.
 - Ottimizza i processi basandoti sui dati analitici.

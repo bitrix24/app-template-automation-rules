@@ -1,12 +1,12 @@
 ---
 title: Cyberbezpieczeństwo
-description: Chroń swoją firmę przed zagrożeniami cybernetycznymi i wyciekami danych.
+description: Chroń swoją firmę przed zagrożeniami cybernetycznymi i naruszeniami danych.
 categories: 
   - 'category_1'
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/Cybersecurity.webp'
 ---
 # Instrukcja korzystania i konfiguracji akcji "Cyberbezpieczeństwo"
@@ -22,20 +22,20 @@ avatar: '/activities/Cybersecurity.webp'
 
 ### 2: Dodaj akcję Cyberbezpieczeństwo
 - W Projektancie Workflow przeciągnij i upuść akcję **Cyberbezpieczeństwo** z listy dostępnych akcji.
-- Umieść akcję w miejscu, w którym ma wystąpić w Twoim workflow.
+- Umieść akcję w miejscu, gdzie ma wystąpić w Twoim workflow.
 
 ### 3: Skonfiguruj akcję
 - Monitorowanie zagrożeń:
-  - Ustaw parametry do wykrywania nietypowej aktywności (np. wiele nieudanych prób logowania).
+  - Ustaw parametry wykrywania nietypowej aktywności (np. wielokrotne nieudane próby logowania).
   - Wybierz systemy lub dane do monitorowania pod kątem potencjalnych zagrożeń.
 - Szyfrowanie danych:
-  - Wybierz typy danych do zaszyfrowania (np. informacje o klientach, dane finansowe).
-  - Określ protokoły szyfrowania, które mają być używane.
+  - Wybierz typy danych do zaszyfrowania (np. dane klientów, zapisy finansowe).
+  - Określ protokoły szyfrowania, które mają być użyte.
 - Kontrola dostępu:
   - Zdefiniuj role użytkowników i uprawnienia.
   - Ogranicz dostęp do wrażliwych danych na podstawie ról użytkowników.
-- Reagowanie na incydenty:
-  - Utwórz automatyczne odpowiedzi na określone incydenty (np. blokowanie adresów IP, powiadamianie zespołu bezpieczeństwa).
+- Reakcja na incydenty:
+  - Utwórz zautomatyzowane odpowiedzi na konkretne incydenty (np. blokowanie adresów IP, powiadamianie zespołu bezpieczeństwa).
   - Skonfiguruj procedury eskalacji dla krytycznych zagrożeń.
 
 ### 4: Zapisz i aktywuj

@@ -1,6 +1,6 @@
 ---
 title: Collaboration d'équipe
-description: Facilitez une communication et une collaboration fluides au sein de votre équipe.
+description: Facilitez la communication et la collaboration au sein de votre équipe.
 categories: 
   - 'category_1'
   - 'category_3'
@@ -10,7 +10,7 @@ badges:
 avatar: '/activities/TeamCollaboration.webp'
 
 ---
-# Instructions pour l'utilisation et la configuration de l'action "Collaboration d'équipe"
+# Instructions pour utiliser et configurer l'action "Collaboration d'équipe"
 
 ## Description de l'action
 
@@ -34,9 +34,9 @@ avatar: '/activities/TeamCollaboration.webp'
 ### 4. Intégration avec d'autres outils
 - Connectez le **CRM** pour gérer les clients et les transactions.
 - Utilisez le **calendrier** pour planifier les réunions et les échéances.
-- Configurez les **analytiques** pour suivre les performances de l'équipe.
+- Configurez les **analyses** pour suivre les performances de l'équipe.
 
 ### 5. Analyse et optimisation
 - Utilisez les rapports intégrés pour analyser l'achèvement des tâches et la collaboration.
 - Configurez des notifications pour les managers avec des indicateurs clés.
-- Optimisez les processus en fonction des données analytiques.
+- Optimisez les processus en fonction des données d'analyse.

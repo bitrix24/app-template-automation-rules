@@ -1,42 +1,41 @@
 ---
-title: Uygulama Mağazası
-description: İşinizi geliştirmek için üçüncü taraf uygulamaları keşfedin ve entegre edin.
+title: Uygulama Marketi
+description: İşletmenizi geliştirmek için üçüncü taraf uygulamaları keşfedin ve entegre edin.
 categories: 
   - 'category_1'
   - 'category_2'
   - 'category_3'
-badges: 
+badges:
   - 'badge_2'
-  - 'badge_3'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# "Uygulama Mağazası" Eylemini Kullanma ve Yapılandırma Talimatı
+# "Uygulama Marketi" Eylemini Kullanma ve Yapılandırma Talimatı
 
 ## Eylem Açıklaması
 
-## **"Uygulama Mağazası" Eylemini Yapılandırma**
+## **"Uygulama Marketi" Eylemini Yapılandırma**
 
-### 1. İş Sürecine Eylem Ekleme
-- Bitrix24'ünüzdeki **"İş Süreçleri"** bölümüne gidin.
+### 1. Eylemi Bir İş Sürecine Eklemek
+- Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
-- Mevcut eylemler listesinde **"Uygulama Mağazası"** eylemini bulun ve sürece ekleyin.
+- Mevcut eylemler listesinden **"Uygulama Marketi"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Uygulama Arama ve Seçme
-- Bitrix24 arayüzü üzerinden **Uygulama Mağazası**'nı açın.
-- İş ihtiyaçlarınıza uygun uygulamaları bulmak için filtreleri ve kategorileri kullanın (örneğin, pazarlama, analitik, proje yönetimi).
-- Uygulama açıklamalarını, derecelendirmelerini ve kullanıcı geri bildirimlerini inceleyin.
+- Bitrix24 arayüzü üzerinden **Uygulama Marketi**'ni açın.
+- İş ihtiyaçlarınıza uygun uygulamaları bulmak için filtreleri ve kategorileri kullanın (örneğin, pazarlama, analiz, proje yönetimi).
+- Uygulama açıklamalarını, derecelendirmelerini ve kullanıcı yorumlarını inceleyin.
 
-![Uygulama Mağazası](/activities/AppMarketplace.webp)
+![Uygulama Marketi](/activities/AppMarketplace.webp)
 
-### 3. Uygulama Kurma ve Yapılandırma
-- Seçilen uygulama için **"Kur"** düğmesine tıklayın.
-- Kurulumu tamamlamak için ekrandaki talimatları izleyin.
-- Uygulamanın Bitrix24 ile veri ve süreçlerinizle entegrasyonunu yapılandırın (örneğin, CRM bağlantısı, API kurulumu).
+### 3. Uygulamaları Yükleme ve Yapılandırma
+- Seçilen uygulama için **"Yükle"** butonuna tıklayın.
+- Yükleme işlemini tamamlamak için ekrandaki talimatları izleyin.
+- Uygulamanın Bitrix24 ile entegrasyonunu verileriniz ve süreçlerinizle yapılandırın (örneğin, CRM bağlantısı, API kurulumu).
 
 ### 4. İş Süreçleriyle Entegrasyon
-- Kurulu uygulamaları kullanarak görevleri otomatikleştirin (örneğin, otomatik veri senkronizasyonu, bildirim gönderme).
-- İş süreçlerinde tetikleyiciler ve eylemler ayarlayarak uygulamanın işlevselliğinden yararlanın.
+- Yüklenen uygulamaları görevleri otomatikleştirmek için kullanın (örneğin, otomatik veri senkronizasyonu, bildirim gönderme).
+- Uygulamanın işlevselliğinden yararlanmak için iş süreçlerinde tetikleyiciler ve eylemler ayarlayın.
 
 ### 5. Yönetim ve Güncellemeler
-- Kurulu uygulamaların güncellemelerini düzenli olarak kontrol ederek uyumluluk ve güvenliği sağlayın.
+- Uyumluluk ve güvenlik için yüklü uygulamaların güncellemelerini düzenli olarak kontrol edin.
 - Sistem performansını optimize etmek için kullanılmayan uygulamaları kaldırın.

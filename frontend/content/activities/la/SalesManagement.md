@@ -1,12 +1,12 @@
 ---
 title: Gestión de Ventas
-description: Herramientas y conocimientos para gestionar tu pipeline de ventas de manera efectiva.
+description: Herramientas y perspectivas para gestionar tu pipeline de ventas de manera efectiva.
 categories: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesManagement.webp'
 ---
 
@@ -16,29 +16,29 @@ avatar: '/activities/SalesManagement.webp'
 
 ## **Configuración de la Acción "Gestión de Ventas"**
 
-### 1: Accede al Diseñador de Flujos de Trabajo
+### 1: Acceder al Diseñador de Flujos de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
-### 2: Añade la Acción de Gestión de Ventas
+### 2: Añadir la Acción de Gestión de Ventas
 - En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Gestión de Ventas** de la lista de acciones disponibles.
 - Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
-### 3: Configura la Acción
-- Seguimiento de Prospectos:
+### 3: Configurar la Acción
+- Seguimiento de Leads:
   - Define las etapas de tu pipeline de ventas.
-  - Configura notificaciones para cambios de estado de los prospectos.
+  - Configura notificaciones para cambios de estado de los leads.
 - Análisis de Rendimiento:
-  - Elige las métricas que deseas rastrear (por ejemplo, tasas de conversión, valores de los tratos).
+  - Elige las métricas que deseas rastrear (ej. tasas de conversión, valores de tratos).
   - Configura informes automatizados para revisiones periódicas de rendimiento.
 - Automatización de Tareas:
-  - Identifica tareas repetitivas (por ejemplo, enviar correos de seguimiento).
+  - Identifica tareas repetitivas (ej. enviar correos de seguimiento).
   - Crea reglas de automatización para manejar estas tareas.
 - Gestión de Tratos:
-  - Configura las etapas de los tratos y los criterios para su progresión.
-  - Asigna tareas y plazos a los miembros del equipo para cada trato.
+  - Configura etapas de tratos y criterios para su progresión.
+  - Asigna tareas y plazos a miembros del equipo para cada trato.
 
-### 4: Guarda y Activa
+### 4: Guardar y Activar
 - Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
 - Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de Gestión de Ventas en tu flujo de trabajo.

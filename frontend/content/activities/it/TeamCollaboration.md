@@ -19,11 +19,11 @@ avatar: '/activities/TeamCollaboration.webp'
 ### 1. Aggiunta dell'Azione a un Processo Aziendale
 - Vai alla sezione **"Processi Aziendali"** nel tuo Bitrix24.
 - Crea un nuovo processo o apri uno esistente.
-- Trova l'azione **"Collaborazione di Team"** nell'elenco delle azioni disponibili e aggiungila al processo.
+- Trova l'azione **"Collaborazione di Team"** nella lista delle azioni disponibili e aggiungila al processo.
 
 ### 2. Configurazione degli Strumenti di Comunicazione
 - Abilita **chat** e **videochiamate** per una comunicazione istantanea.
-- Usa **task di gruppo** per distribuire le responsabilità.
+- Utilizza **task di gruppo** per distribuire le responsabilità.
 - Configura **documenti condivisi** e **archiviazione file** per il lavoro collaborativo.
 
 ### 3. Organizzazione dei Flussi di Lavoro
@@ -37,6 +37,6 @@ avatar: '/activities/TeamCollaboration.webp'
 - Configura **analisi** per monitorare le prestazioni del team.
 
 ### 5. Analisi e Ottimizzazione
-- Usa i report integrati per analizzare il completamento dei task e la collaborazione.
+- Utilizza i report integrati per analizzare il completamento dei task e la collaborazione.
 - Configura notifiche per i manager con metriche chiave.
-- Ottimizza i processi basandoti sui dati delle analisi.
+- Ottimizza i processi basandoti sui dati analitici.

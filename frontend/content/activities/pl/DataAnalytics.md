@@ -3,28 +3,28 @@ title: Analiza Danych
 description: Analizuj dane swojej firmy, aby podejmować świadome decyzje.
 categories: 
   - 'category_2'
-  - 'category_3'
+  - 'category_1'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/DataAnalytics.webp'
 ---
-# Instrukcja korzystania i konfiguracji akcji "Analiza Danych"
+# Instrukcja Używania i Konfiguracji Akcji "Analiza Danych"
 
-## Opis akcji
+## Opis Akcji
 
-## **Konfiguracja akcji "Analiza Danych"**
+## **Konfiguracja Akcji "Analiza Danych"**
 
 ### 1: Dostęp do Projektanta Procesów
 - Zaloguj się do swojego konta Bitrix24.
 - Przejdź do **CRM** > **Automatyzacja** > **Procesy Biznesowe**.
 - Kliknij **Utwórz Proces Biznesowy** lub wybierz istniejący do edycji.
 
-### 2: Dodaj akcję Zarządzania Sprzedażą
+### 2: Dodaj Akcję Zarządzania Sprzedażą
 - W Projektancie Procesów przeciągnij i upuść akcję **Zarządzanie Sprzedażą** z listy dostępnych akcji.
-- Umieść akcję w miejscu, w którym ma wystąpić w Twoim procesie.
+- Umieść akcję w miejscu, gdzie ma wystąpić w Twoim procesie.
 
-### 3: Skonfiguruj akcję
+### 3: Skonfiguruj Akcję
 - Śledzenie Leadów:
   - Zdefiniuj etapy swojego procesu sprzedaży.
   - Skonfiguruj powiadomienia o zmianach statusu leadów.
@@ -39,5 +39,5 @@ avatar: '/activities/DataAnalytics.webp'
   - Przydziel zadania i terminy członkom zespołu dla każdej transakcji.
 
 ### 4: Zapisz i Aktywuj
-- Przejrzyj ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
-- Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję Zarządzania Sprzedażą do swojego procesu.
+- Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
+- Kliknij **Zapisz**, a następnie **Aktywuj**, aby uruchomić akcję Zarządzania Sprzedażą w Twoim procesie.

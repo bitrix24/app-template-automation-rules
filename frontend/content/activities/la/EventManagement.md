@@ -8,16 +8,16 @@ badges:
   - 'badge_1'
 avatar: '/activities/EventManagement.webp'
 ---
-# Instrucciones para Usar y Configurar la Acción "Gestión de Eventos"
+# Instrucción para Usar y Configurar la Acción "Gestión de Eventos"
 
 ## Descripción de la Acción
 
 ## **Configuración de la Acción "Gestión de Eventos"**
 
-### 1: Acceso al Diseñador de Flujos de Trabajo
+### 1: Acceder al Diseñador de Flujos de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
 ### 2: Añadir la Acción de Gestión de Eventos
 - En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Gestión de Eventos** de la lista de acciones disponibles.
@@ -31,12 +31,12 @@ avatar: '/activities/EventManagement.webp'
   - Crea una lista de asistentes o importa contactos.
   - Configura el seguimiento de RSVP y recordatorios.
 - Automatización de Tareas:
-  - Asigna tareas a los miembros del equipo para la preparación del evento.
-  - Automatiza recordatorios para plazos y entregables.
+  - Asigna tareas a miembros del equipo para la preparación del evento.
+  - Automatiza recordatorios para fechas límite y entregables.
 - Seguimiento Posterior al Evento:
-  - Crea plantillas de correo electrónico para notas de agradecimiento o solicitudes de comentarios.
-  - Programa correos electrónicos de seguimiento para enviarse después del evento.
+  - Crea plantillas de correo para notas de agradecimiento o solicitudes de feedback.
+  - Programa correos de seguimiento para enviar después del evento.
 
 ### 4: Guardar y Activar
-- Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
-- Haz clic en **Guardar** y luego en **Activar** para hacer que la acción de Gestión de Eventos esté activa en tu flujo de trabajo.
+- Revisa tus ajustes para asegurarte de que todo está configurado correctamente.
+- Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de Gestión de Eventos en tu flujo de trabajo.

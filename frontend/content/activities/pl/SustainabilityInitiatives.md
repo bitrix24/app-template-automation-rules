@@ -12,7 +12,7 @@ avatar: '/activities/SocialMediaManagement.webp'
 
 # Instrukcja korzystania i konfiguracji akcji „Inicjatywy Zrównoważonego Rozwoju”
 
-## Opis Akcji
+## Opis akcji
 
 ## **Konfiguracja akcji „Inicjatywy Zrównoważonego Rozwoju”**
 
@@ -23,22 +23,22 @@ avatar: '/activities/SocialMediaManagement.webp'
 
 ### 2: Dodaj akcję Inicjatywy Zrównoważonego Rozwoju
 - W Projektancie Procesów przeciągnij i upuść akcję **Inicjatywy Zrównoważonego Rozwoju** z listy dostępnych akcji.
-- Umieść akcję w miejscu, w którym ma wystąpić w Twoim procesie.
+- Umieść akcję w miejscu, w którym ma wystąpić w procesie.
 
 ### 3: Skonfiguruj akcję
-- Wdrażanie Praktyk Przyjaznych dla Środowiska:
+- Wdrażanie praktyk przyjaznych dla środowiska:
   - Zdefiniuj praktyki do wdrożenia (np. redukcja odpadów, efektywność energetyczna).
-  - Przypisz odpowiedzialnych członków zespołu do każdej praktyki.
-- Śledzenie Wpływu:
-  - Skonfiguruj wskaźniki do pomiaru wpływu na środowisko (np. ślad węglowy, oszczędności energii).
+  - Przypisz odpowiedzialnych członków zespołu dla każdej praktyki.
+- Śledzenie wpływu:
+  - Skonfiguruj metryki do pomiaru wpływu na środowisko (np. ślad węglowy, oszczędności energii).
   - Zintegruj źródła danych do automatycznego śledzenia.
-- Monitorowanie Celów:
+- Monitorowanie celów:
   - Ustal jasne cele zrównoważonego rozwoju i harmonogramy.
   - Skonfiguruj śledzenie postępów i alerty dla kamieni milowych.
 - Raportowanie:
-  - Dostosuj szablony raportów, aby zawierały kluczowe wskaźniki zrównoważonego rozwoju.
+  - Dostosuj szablony raportów, aby uwzględniały kluczowe metryki zrównoważonego rozwoju.
   - Zaplanuj automatyczne generowanie i dystrybucję raportów.
 
-### 4: Zapisz i Aktywuj
+### 4: Zapisz i aktywuj
 - Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
-- Kliknij **Zapisz**, a następnie **Aktywuj**, aby akcja Inicjatywy Zrównoważonego Rozwoju była aktywna w Twoim procesie.
+- Kliknij **Zapisz**, a następnie **Aktywuj**, aby akcja Inicjatywy Zrównoważonego Rozwoju stała się aktywna w procesie.

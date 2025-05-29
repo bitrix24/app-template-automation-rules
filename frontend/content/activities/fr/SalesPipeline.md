@@ -6,7 +6,7 @@ categories:
   - 'category_2'
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesPipeline.webp'
 ---
 ### Tutoriel Vidéo
@@ -28,14 +28,14 @@ L'action `Pipeline de Vente` est conçue pour gérer efficacement votre pipeline
 ### Comment Utiliser l'Action "Pipeline de Vente"
 
 1. **Ajouter l'Action à un Processus Métier :**
-  - Accédez à la section "Processus Métier" dans votre Bitrix24.
+  - Allez dans la section "Processus Métier" de votre Bitrix24.
   - Créez un nouveau processus métier ou ouvrez-en un existant.
   - Trouvez l'action "Pipeline de Vente" dans la liste des actions disponibles et ajoutez-la à votre processus.
 
 2. **Configurer l'Action :**
   - Spécifiez les étapes du pipeline de vente qui seront impliquées dans le processus.
   - Configurez les conditions de transition entre les étapes (par exemple, lorsque le statut d'une affaire change).
-  - Assignez des responsables pour chaque étape et configurez les notifications.
+  - Attribuez des responsables pour chaque étape et configurez les notifications.
 
 3. **Lancer et Tester :**
   - Enregistrez les paramètres et lancez le processus métier.
@@ -45,4 +45,4 @@ L'action `Pipeline de Vente` est conçue pour gérer efficacement votre pipeline
 
 - Analysez régulièrement l'efficacité de votre pipeline de vente et ajustez les paramètres de l'action si besoin.
 - Utilisez les notifications pour informer les membres de l'équipe des changements d'étape des affaires.
-- Intégrez l'action avec d'autres outils de Bitrix24, tels que le CRM, les tâches et le calendrier.
+- Intégrez l'action avec d'autres outils Bitrix24, tels que le CRM, les tâches et le calendrier.

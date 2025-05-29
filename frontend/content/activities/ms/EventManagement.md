@@ -27,12 +27,12 @@ avatar: '/activities/EventManagement.webp'
 - Penjadualan Acara:
   - Tetapkan tarikh, masa, dan lokasi acara.
   - Tambah butiran acara seperti agenda, penceramah, atau arahan khas.
-- Pengurusan Peserta:
-  - Cipta senarai peserta atau import kenalan.
-  - Sediakan penjejakan RSVP dan peringatan.
-- Automasi Tugasan:
-  - Berikan tugasan kepada ahli pasukan untuk persiapan acara.
-  - Automasikan peringatan untuk tarikh akhir dan penghantaran.
+- Pengurusan Tetamu:
+  - Buat senarai tetamu atau import kenalan.
+  - Sediakan pengesanan RSVP dan peringatan.
+- Automasi Tugas:
+  - Tetapkan tugas kepada ahli pasukan untuk persiapan acara.
+  - Automatkan peringatan untuk tarikh akhir dan penghantaran.
 - Tindakan Susulan Selepas Acara:
   - Cipta templat e-mel untuk nota terima kasih atau permintaan maklum balas.
   - Jadualkan e-mel susulan untuk dihantar selepas acara.

@@ -9,15 +9,15 @@ badges:
   - 'badge_2'
 avatar: '/activities/CrisisManagement.webp'
 ---
-# Petunjuk untuk Menggunakan dan Mengonfigurasi Aksi "Manajemen Krisis"
+# Petunjuk Penggunaan dan Konfigurasi Aksi "Manajemen Krisis"
 
 ## Deskripsi Aksi
 
-## **Mengonfigurasi Aksi "Manajemen Krisis"**
+## **Konfigurasi Aksi "Manajemen Krisis"**
 
 ### 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Automation** > **Business Processes**.
+- Navigasi ke **CRM** > **Automation** > **Business Processes**.
 - Klik **Create Business Process** atau pilih yang sudah ada untuk diedit.
 
 ### 2: Tambahkan Aksi Manajemen Krisis
@@ -36,7 +36,7 @@ avatar: '/activities/CrisisManagement.webp'
   - Sesuaikan pesan untuk berbagai jenis krisis.
 - Penugasan Tugas:
   - Tetapkan tugas spesifik kepada anggota tim.
-  - Tetapkan tenggat waktu dan prioritas untuk setiap tugas.
+  - Atur tenggat waktu dan prioritas untuk setiap tugas.
 
 ### 4: Simpan dan Aktifkan
 - Tinjau pengaturan Anda untuk memastikan semuanya dikonfigurasi dengan benar.

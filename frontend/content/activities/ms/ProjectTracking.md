@@ -14,9 +14,9 @@ avatar: '/activities/ProjectTracking.webp'
 
 ## **Mengkonfigurasi Tindakan "Penjejakan Projek"**
 
-### 1. Menambah Tindakan ke Proses Perniagaan
+### 1. Menambahkan Tindakan ke dalam Proses Perniagaan
 - Pergi ke bahagian **"Proses Perniagaan"** dalam Bitrix24 anda.
-- Cipta proses baru atau buka proses yang sedia ada.
+- Cipta proses baru atau buka yang sedia ada.
 - Cari tindakan **"Penjejakan Projek"** dalam senarai tindakan yang tersedia dan tambahkannya ke dalam proses.
 
 ### 2. Menetapkan Parameter Projek
@@ -26,14 +26,14 @@ avatar: '/activities/ProjectTracking.webp'
 
 ### 3. Menjejak Kemajuan
 - Gunakan **papan Kanban** atau **carta Gantt** untuk memvisualisasikan kemajuan.
-- Tetapkan pemberitahuan automatik untuk tarikh akhir yang semakin hampir.
+- Tetapkan pemberitahuan automatik untuk tarikh akhir yang menghampiri.
 - Kemas kini status tugas secara berkala untuk memastikan data terkini.
 
 ### 4. Analisis dan Pelaporan
-- Gunakan laporan terbina dalam untuk menganalisis penyelesaian tugas (contohnya, peratusan tugas yang selesai, kelewatan).
+- Gunakan laporan terbina dalam untuk menganalisis penyelesaian tugas (contohnya, peratusan tugas selesai, kelewatan).
 - Tetapkan pemberitahuan untuk pengurus dengan metrik utama.
-- Optimalkan proses berdasarkan data analisis.
+- Optimumkan proses berdasarkan data analitik.
 
 ### 5. Mengintegrasikan dengan Proses Perniagaan
 - Tetapkan pencetus untuk kemas kini status automatik (contohnya, apabila tugas selesai atau tarikh akhir berubah).
-- Gunakan data CRM untuk mengambil kira urus niaga dan pelanggan yang berkaitan.
+- Gunakan data CRM untuk mengambil kira urusan dan pelanggan yang berkaitan.

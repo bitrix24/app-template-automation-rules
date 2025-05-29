@@ -1,10 +1,10 @@
 ---
 title: Bilgi Paylaşımı
-description: Organizasyonunuz için merkezi bir bilgi bankası oluşturun.
+description: Kuruluşunuz için merkezi bir bilgi tabanı oluşturun.
 categories: 
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/KnowledgeSharing.webp'
 ---
 # "Bilgi Paylaşımı" Eylemini Kullanma ve Yapılandırma Talimatı
@@ -15,27 +15,27 @@ avatar: '/activities/KnowledgeSharing.webp'
 
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
-- **CRM** > **Otomasyon** > **İş Süreçleri**'ne gidin.
-- **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir iş sürecini seçin.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
+- **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
-### 2: Bilgi Paylaşımı Eylemini Ekleme
-- İş Akışı Tasarımcısı'nda, mevcut eylemler listesinden **Bilgi Paylaşımı** eylemini sürükleyip bırakın.
-- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere yerleştirin.
+### 2: Bilgi Paylaşımı Eylemini Ekleyin
+- İş Akışı Tasarımcısında, mevcut eylemler listesinden **Bilgi Paylaşımı** eylemini sürükleyip bırakın.
+- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
-### 3: Eylemi Yapılandırma
-- Merkezi Bilgi Bankası:
-  - Bilgiyi organize etmek için kategoriler ve alt kategoriler tanımlayın.
-  - Mevcut belge ve kaynakları bilgi bankasına yükleyin.
+### 3: Eylemi Yapılandırın
+- Merkezi Bilgi Tabanı:
+  - Bilgiyi düzenlemek için kategoriler ve alt kategoriler tanımlayın.
+  - Mevcut belgeleri ve kaynakları bilgi tabanına yükleyin.
 - Kolay Erişim:
-  - Bilgi kaynaklarını kimlerin görüntüleyebileceğini ve düzenleyebileceğini kontrol etmek için izinleri ayarlayın.
+  - Bilgi kaynaklarını görüntüleyebilecek ve düzenleyebilecek kişileri kontrol etmek için izinleri ayarlayın.
   - Sık erişilen bilgilere kısayollar veya bağlantılar oluşturun.
 - İş Birliği:
-  - Bilgi makaleleri üzerinde yorum ve geri bildirimleri etkinleştirin.
-  - Bilgi bankasındaki güncellemeler ve değişiklikler için bildirimler ayarlayın.
+  - Bilgi makalelerinde yorum ve geri bildirim özelliğini etkinleştirin.
+  - Bilgi tabanındaki güncellemeler ve değişiklikler için bildirimler ayarlayın.
 - Arama İşlevselliği:
-  - İlgili etiketleri ve anahtar kelimeleri içerecek şekilde arama ayarlarını yapılandırın.
+  - İlgili etiketleri ve anahtar kelimeleri dahil etmek için arama ayarlarını yapılandırın.
   - Tüm belgelerin hızlı erişim için indekslendiğinden emin olun.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı her şeyin doğru yapılandırıldığından emin olmak için gözden geçirin.
+- Her şeyin doğru yapılandırıldığından emin olmak için ayarlarınızı gözden geçirin.
 - **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Bilgi Paylaşımı eylemini iş akışınızda aktif hale getirin.

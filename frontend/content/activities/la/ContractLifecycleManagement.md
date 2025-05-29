@@ -5,11 +5,11 @@ categories:
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 
-# Instrucciones para Usar y Configurar la Acción "Gestión del Ciclo de Vida de Contratos"
+# Instrucción para Usar y Configurar la Acción "Gestión del Ciclo de Vida de Contratos"
 
 ## Descripción de la Acción
 
@@ -18,23 +18,23 @@ avatar: '/activities/ContractLifecycleManagement.webp'
 ### 1. Agregar la Acción a un Proceso de Negocio
 - Ve a la sección **"Procesos de Negocio"** en tu Bitrix24.
 - Crea un nuevo proceso o abre uno existente.
-- Busca la acción **"Gestión del Ciclo de Vida de Contratos"** en la lista de acciones disponibles y agrégala al proceso.
+- Encuentra la acción **"Gestión del Ciclo de Vida de Contratos"** en la lista de acciones disponibles y agrégalo al proceso.
 
-### 2. Configuración de los Parámetros del Contrato
-- Crea una **plantilla de contrato** con todas las secciones necesarias (por ejemplo, partes, términos, condiciones).
-- Asigna personas responsables para cada etapa (por ejemplo, abogado, gerente).
+### 2. Configurar los Parámetros del Contrato
+- Crea una **plantilla de contrato** con todas las secciones necesarias (ej.: partes, términos, condiciones).
+- Asigna personas responsables para cada etapa (ej.: abogado, gerente).
 - Establece plazos para cada etapa.
 
 ### 3. Seguimiento del Ciclo de Vida del Contrato
-- Usa **notificaciones automáticas** para recordar eventos próximos (por ejemplo, renovación, terminación).
+- Usa **notificaciones automáticas** para recordar eventos próximos (ej.: renovación, terminación).
 - Configura **encuestas** y **cuestionarios** para recopilar comentarios de las partes.
-- Habilita la **integración con CRM** para tener en cuenta los datos del contrato.
+- Activa la **integración con CRM** para registrar datos del contrato.
 
-### 4. Análisis y Reportes
-- Usa los reportes incorporados para analizar los datos del contrato (por ejemplo, número de contratos activos, fechas de finalización).
-- Configura notificaciones para las personas responsables con métricas clave.
+### 4. Análisis e Informes
+- Utiliza informes integrados para analizar datos de contratos (ej.: número de contratos activos, fechas de finalización).
+- Configura notificaciones para personas responsables con métricas clave.
 - Optimiza el proceso de gestión de contratos basado en datos analíticos.
 
 ### 5. Integración con Procesos de Negocio
-- Configura disparadores para actualizaciones automáticas de datos (por ejemplo, al cambiar términos o condiciones).
-- Usa datos de CRM para tener en cuenta tratos y clientes relacionados.
+- Configura disparadores para actualizaciones automáticas de datos (ej.: al cambiar términos o condiciones).
+- Usa datos del CRM para registrar tratos y clientes relacionados.

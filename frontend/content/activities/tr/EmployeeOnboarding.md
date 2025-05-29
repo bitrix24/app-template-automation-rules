@@ -7,7 +7,7 @@ badges:
   - 'badge_2'
 avatar: '/activities/EmployeeOnboarding.webp'
 ---
-# "Çalışan Oryantasyonu" Eylemini Kullanma ve Yapılandırma Talimatı
+# "Çalışan Oryantasyonu" Eylemini Kullanma ve Yapılandırma Talimatları
 
 ## Eylem Açıklaması
 
@@ -16,10 +16,10 @@ avatar: '/activities/EmployeeOnboarding.webp'
 ### 1. Eylemi Bir İş Sürecine Ekleme
 - Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
-- Mevcut eylemler listesinde **"Çalışan Oryantasyonu"** eylemini bulun ve sürece ekleyin.
+- Mevcut eylemler listesinden **"Çalışan Oryantasyonu"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Oryantasyon Aşamalarını Ayarlama
-- Tüm gerekli aşamaları içeren bir **oryantasyon süreci şablonu** oluşturun (örneğin, belge işleme, eğitim, ekip tanıtımı).
+- Tüm gerekli aşamaları (örneğin, belge işleme, eğitim, ekip tanıtımı) içeren bir **oryantasyon süreci şablonu** oluşturun.
 - Her aşama için sorumlu kişiler atayın.
 - Her aşama için son tarihler belirleyin.
 
@@ -28,12 +28,12 @@ avatar: '/activities/EmployeeOnboarding.webp'
 - Sorumlu kişiler için otomatik görev oluşturmayı ayarlayın.
 - Yeni çalışan verilerini hesaba katmak için **CRM entegrasyonunu** etkinleştirin.
 
-### 4. İlerlemeyi İzleme
-- İlerlemeyi görselleştirmek için **Kanban panoları** veya **Gantt şemaları** kullanın.
-- Sorumlu kişiler için aşama tamamlanma bildirimlerini ayarlayın.
+### 4. İlerlemeyi Takip Etme
+- İlerlemeyi görselleştirmek için **Kanban panoları** veya **Gantt şemalarını** kullanın.
+- Aşama tamamlanması için sorumlu kişilere bildirimler ayarlayın.
 - Verilerin güncel kalması için görev durumlarını düzenli olarak güncelleyin.
 
 ### 5. Analiz ve Optimizasyon
-- Oryantasyon sürecinin etkinliğini analiz etmek için yerleşik raporları kullanın (örneğin, tamamlanma süresi, memnuniyet düzeyi).
-- Yöneticiler için temel metriklerle bildirimler ayarlayın.
+- Oryantasyon sürecinin etkinliğini analiz etmek için (örneğin, tamamlama süresi, memnuniyet düzeyi) yerleşik raporları kullanın.
+- Yöneticilere temel metriklerle bildirimler ayarlayın.
 - Analiz verilerine dayanarak süreci optimize edin.

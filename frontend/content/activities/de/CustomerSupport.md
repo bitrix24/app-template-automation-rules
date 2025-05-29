@@ -11,13 +11,13 @@ avatar: '/activities/CustomerSupport.webp'
 ---
 # Anleitung zur Verwendung und Konfiguration der "Kundensupport"-Aktion
 
-## Beschreibung der Aktion
+## Aktionsbeschreibung
 
 ## **Konfiguration der "Kundensupport"-Aktion**
 
 ### 1. Hinzufügen der Aktion zu einem Geschäftsprozess
-- Öffnen Sie den Geschäftsprozess, in dem Sie die "Kundensupport"-Aktion hinzufügen möchten.
-- Suchen Sie im Aktionsmenü den Abschnitt "Kundensupport" und ziehen Sie die Aktion auf die Leinwand des Geschäftsprozesses.
+- Öffnen Sie den Geschäftsprozess, dem Sie die "Kundensupport"-Aktion hinzufügen möchten.
+- Suchen Sie im Aktionsmenü den Abschnitt "Kundensupport" und ziehen Sie die Aktion auf die Geschäftsprozess-Leinwand.
 
 ### 2. Einrichtung der Integration
 - Sobald die Anwendung installiert ist, greifen Sie auf deren Einstellungen zu.
@@ -25,8 +25,8 @@ avatar: '/activities/CustomerSupport.webp'
 
 ### 3. Feldzuordnung
 - Bei der Konfiguration der "Kundensupport"-Aktion ordnen Sie Bitrix24-Felder den Feldern in der ausgewählten Anwendung zu.
-- Dadurch können Daten zwischen Bitrix24 und der Drittanbieteranwendung übertragen werden.
+- Dies ermöglicht die Übertragung von Daten zwischen Bitrix24 und der Drittanbieter-Anwendung.
 
 ### 4. Festlegen von Bedingungen
 - Legen Sie die Bedingungen fest, unter denen die "Kundensupport"-Aktion ausgeführt werden soll.
-- Dies ermöglicht die Automatisierung der Aktion basierend auf bestimmten Ereignissen oder Kriterien.
+- Dadurch wird die Automatisierung der Aktion basierend auf bestimmten Ereignissen oder Kriterien ermöglicht.

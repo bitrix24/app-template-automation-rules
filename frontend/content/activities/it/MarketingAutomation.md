@@ -4,7 +4,7 @@ description: Automatizza le tue campagne di marketing e monitora le loro prestaz
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/MarketingAutomation.webp'
 ---
 # Istruzioni per l'Utilizzo e la Configurazione dell'Azione "Automazione del Marketing"
@@ -16,21 +16,21 @@ avatar: '/activities/MarketingAutomation.webp'
 ### 1: Accedi al Workflow Designer
 - Accedi al tuo account Bitrix24.
 - Vai a **CRM** > **Automazione** > **Processi Aziendali**.
-- Clicca su **Crea Processo Aziendale** o seleziona uno esistente per modificarlo.
+- Clicca su **Crea Processo Aziendale** o seleziona uno esistente da modificare.
 
-### 2: Aggiungi l'Azione Automazione del Marketing
+### 2: Aggiungi l'Azione di Automazione del Marketing
 - Nel Workflow Designer, trascina e rilascia l'azione **Automazione del Marketing** dalla lista delle azioni disponibili.
-- Posiziona l'azione dove desideri che avvenga nel tuo flusso di lavoro.
+- Posiziona l'azione dove vuoi che avvenga nel tuo workflow.
 
 ### 3: Configura l'Azione
-- Automazione della Campagna:
-  - Definisci i trigger per avviare una campagna (ad esempio, nuovo lead, data specifica).
+- Automazione delle Campagne:
+  - Definisci i trigger per avviare una campagna (es. nuovo lead, data specifica).
   - Configura attività automatizzate come l'invio di email, la pubblicazione sui social media o la gestione degli annunci.
 - Monitoraggio delle Prestazioni:
-  - Seleziona gli indicatori chiave di prestazione (KPI) da monitorare (ad esempio, tassi di apertura, tassi di clic).
+  - Seleziona gli indicatori chiave di prestazione (KPI) da monitorare (es. tassi di apertura, tassi di click-through).
   - Configura dashboard per visualizzare le prestazioni della campagna.
-- Nutrizione dei Lead:
-  - Crea sequenze di follow-up automatizzate basate sul comportamento dei lead.
+- Lead Nurturing:
+  - Crea sequenze di follow-up automatizzate basate sul comportamento del lead.
   - Imposta promemoria e notifiche per il tuo team di vendita.
 - Personalizzazione:
   - Definisci segmenti di pubblico basati sui dati del CRM.
@@ -38,4 +38,4 @@ avatar: '/activities/MarketingAutomation.webp'
 
 ### 4: Salva e Attiva
 - Rivedi le impostazioni per assicurarti che tutto sia configurato correttamente.
-- Clicca su **Salva** e poi su **Attiva** per rendere operativa l'azione Automazione del Marketing nel tuo flusso di lavoro.
+- Clicca **Salva** e poi **Attiva** per rendere operativa l'azione di Automazione del Marketing nel tuo workflow.

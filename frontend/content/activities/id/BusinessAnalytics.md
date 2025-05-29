@@ -1,17 +1,17 @@
 ---
 title: Analisis Bisnis
-description: Manfaatkan wawasan berbasis data untuk membuat keputusan yang informasional.
+description: Manfaatkan wawasan berbasis data untuk membuat keputusan yang tepat.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
 avatar: '/activities/BusinessAnalytics.webp'
 ---
-# Instruksi untuk Menggunakan dan Mengonfigurasi Aksi "Analisis Bisnis"
+# Petunjuk Penggunaan dan Konfigurasi Aksi "Analisis Bisnis"
 
 ## Deskripsi Aksi
 
-## **Mengonfigurasi Aksi "Analisis Bisnis"**
+## **Konfigurasi Aksi "Analisis Bisnis"**
 
 ### 1. Menambahkan Aksi ke Proses Bisnis
 - Buka bagian **"Proses Bisnis"** di Bitrix24 Anda.
@@ -20,7 +20,7 @@ avatar: '/activities/BusinessAnalytics.webp'
 
 ### 2. Mengatur Sumber Data
 - Hubungkan sumber data yang diperlukan (misalnya, CRM, platform pemasaran, sistem akuntansi).
-- Konfigurasikan sinkronisasi data untuk pembaruan analitik otomatis.
+- Konfigurasikan sinkronisasi data untuk pembaruan analisis otomatis.
 - Pastikan data terintegrasi dengan benar dan tersedia untuk analisis.
 
 ### 3. Membuat Laporan dan Dasbor
@@ -30,9 +30,9 @@ avatar: '/activities/BusinessAnalytics.webp'
 
 ### 4. Menganalisis Data dan Membuat Keputusan
 - Jelajahi data menggunakan filter dan segmentasi untuk mengidentifikasi tren dan pola.
-- Gunakan alat analitik untuk peramalan dan pemodelan skenario.
+- Gunakan alat analitis untuk peramalan dan pemodelan skenario.
 - Buat keputusan berbasis data untuk mengoptimalkan proses bisnis.
 
-### 5. Mengintegrasikan dengan Proses Bisnis
-- Siapkan pemicu untuk meluncurkan tugas analitik secara otomatis (misalnya, saat data berubah atau tahap proses selesai).
-- Gunakan analitik untuk mengotomatisasi keputusan (misalnya, mengirim notifikasi, mengubah status).
+### 5. Integrasi dengan Proses Bisnis
+- Siapkan pemicu untuk meluncurkan tugas analitis secara otomatis (misalnya, saat data berubah atau tahap proses selesai).
+- Gunakan analisis untuk mengotomatisasi keputusan (misalnya, mengirim notifikasi, mengubah status).

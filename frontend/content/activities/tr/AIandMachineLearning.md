@@ -1,16 +1,16 @@
 ---
 title: AI ve Makine Öğrenmesi
-description: İşletmenizi geliştirmek için üçüncü taraf uygulamaları keşfedin ve entegre edin.
+description: İşinizi geliştirmek için üçüncü taraf uygulamaları keşfedin ve entegre edin.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Video Eğitimi
 
-`AI ve Makine Öğrenmesi` eylemini kurma ve kullanma hakkında görsel bir rehber için videoyu izleyin:
+`AI ve Makine Öğrenmesi` eylemini ayarlama ve kullanma hakkında görsel bir rehber için videoyu izleyin:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -20,7 +20,7 @@ avatar: '/activities/AIandMachineLearning.webp'
   allowfullscreen>
 </iframe>
 
-# "AI ve Makine Öğrenmesi" Eylemini Kullanma ve Yapılandırma Talimatı
+# "AI ve Makine Öğrenmesi" Eylemini Kullanma ve Yapılandırma Talimatları
 
 ## Eylem Açıklaması
 
@@ -28,7 +28,7 @@ avatar: '/activities/AIandMachineLearning.webp'
 
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
-- **CRM** > **Otomasyon** > **İş Süreçleri**'ne gidin.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
 - **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
 ### 2: AI ve Makine Öğrenmesi Eylemini Ekleyin
@@ -39,8 +39,8 @@ avatar: '/activities/AIandMachineLearning.webp'
 - Süreç Otomasyonu:
   - Otomatikleştirmek istediğiniz görevleri veya süreçleri seçin.
   - Otomasyon için koşulları ve tetikleyicileri tanımlayın.
-- Tahmine Dayalı Analitik:
-  - Analiz için veri kaynaklarını seçin (ör. CRM, satış verileri).
+- Tahmine Dayalı Analiz:
+  - Analiz için veri kaynaklarını seçin (örneğin, CRM, satış verileri).
   - Tahminler ve içgörüler oluşturmak için parametreleri ayarlayın.
 - Veri Analizi:
   - Analiz edilecek veri kümelerini belirtin.
@@ -50,5 +50,5 @@ avatar: '/activities/AIandMachineLearning.webp'
   - Almak istediğiniz öneri türlerini özelleştirin.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı her şeyin doğru yapılandırıldığından emin olmak için gözden geçirin.
-- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak AI ve Makine Öğrenmesi eylemini iş akışınızda canlı hale getirin.
+- Ayarlarınızı doğru yapılandırıldığından emin olmak için gözden geçirin.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak AI ve Makine Öğrenmesi eylemini iş akışınızda aktif hale getirin.

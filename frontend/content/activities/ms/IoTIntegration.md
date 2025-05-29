@@ -35,8 +35,8 @@ avatar: '/activities/IoTIntegration.webp'
   - Sesuaikan papan pemuka untuk memaparkan metrik utama dan status peranti.
 - Amaran dan Pemberitahuan:
   - Tetapkan ambang untuk prestasi peranti atau anomali data.
-  - Konfigurasi saluran pemberitahuan (contohnya, e-mel, SMS, sembang Bitrix24) untuk amaran.
+  - Konfigurasi saluran pemberitahuan (contohnya, emel, SMS, chat Bitrix24) untuk amaran.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Integrasi IoT aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Integrasi IoT berfungsi dalam aliran kerja anda.

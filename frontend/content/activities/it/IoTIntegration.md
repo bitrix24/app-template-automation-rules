@@ -17,26 +17,26 @@ avatar: '/activities/IoTIntegration.webp'
 ### 1: Accedi al Workflow Designer
 - Accedi al tuo account Bitrix24.
 - Vai su **CRM** > **Automazione** > **Processi Aziendali**.
-- Clicca su **Crea Processo Aziendale** o seleziona uno esistente per modificarlo.
+- Clicca su **Crea Processo Aziendale** o selezionane uno esistente per modificarlo.
 
-### 2: Aggiungi l'Azione di Integrazione IoT
+### 2: Aggiungi l'Azione Integrazione IoT
 - Nel Workflow Designer, trascina e rilascia l'azione **Integrazione IoT** dalla lista delle azioni disponibili.
-- Posiziona l'azione dove desideri che avvenga nel tuo flusso di lavoro.
+- Posiziona l'azione dove vuoi che avvenga nel tuo workflow.
 
 ### 3: Configura l'Azione
-- Connessione dei Dispositivi:
-  - Seleziona i dispositivi IoT che desideri integrare.
+- Connettività dei Dispositivi:
+  - Seleziona i dispositivi IoT che vuoi integrare.
   - Configura le impostazioni di connessione (es. chiavi API, endpoint).
 - Automazione dei Dati:
   - Definisci i punti dati da raccogliere dai dispositivi.
-  - Imposta le regole per l'elaborazione e la memorizzazione dei dati raccolti.
+  - Imposta le regole per l'elaborazione e lo storage dei dati raccolti.
 - Monitoraggio in Tempo Reale:
   - Abilita il monitoraggio in tempo reale per i dispositivi connessi.
-  - Personalizza la dashboard per visualizzare le metriche chiave e lo stato dei dispositivi.
+  - Personalizza la dashboard per visualizzare metriche chiave e stato dei dispositivi.
 - Avvisi e Notifiche:
   - Imposta soglie per le prestazioni dei dispositivi o anomalie nei dati.
   - Configura i canali di notifica (es. email, SMS, chat Bitrix24) per gli avvisi.
 
 ### 4: Salva e Attiva
 - Rivedi le impostazioni per assicurarti che tutto sia configurato correttamente.
-- Clicca su **Salva** e poi su **Attiva** per rendere attiva l'azione di Integrazione IoT nel tuo flusso di lavoro.
+- Clicca **Salva** e poi **Attiva** per rendere attiva l'azione Integrazione IoT nel tuo workflow.

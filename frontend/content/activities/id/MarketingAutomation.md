@@ -4,7 +4,7 @@ description: Otomatiskan kampanye pemasaran Anda dan lacak kinerjanya.
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/MarketingAutomation.webp'
 ---
 # Petunjuk Penggunaan dan Konfigurasi Aksi "Otomatisasi Pemasaran"
@@ -15,7 +15,7 @@ avatar: '/activities/MarketingAutomation.webp'
 
 ### 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Otomatisasi** > **Proses Bisnis**.
+- Navigasi ke **CRM** > **Otomatisasi** > **Proses Bisnis**.
 - Klik **Buat Proses Bisnis** atau pilih yang sudah ada untuk diedit.
 
 ### 2: Tambahkan Aksi Otomatisasi Pemasaran
@@ -38,4 +38,4 @@ avatar: '/activities/MarketingAutomation.webp'
 
 ### 4: Simpan dan Aktifkan
 - Tinjau pengaturan Anda untuk memastikan semuanya dikonfigurasi dengan benar.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk mengaktifkan aksi Otomatisasi Pemasaran dalam alur kerja Anda.
+- Klik **Simpan** lalu **Aktifkan** untuk mengaktifkan aksi Otomatisasi Pemasaran dalam alur kerja Anda.

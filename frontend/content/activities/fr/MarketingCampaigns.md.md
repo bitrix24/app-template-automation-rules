@@ -16,7 +16,7 @@ avatar: '/activities/MarketingCampaigns.webp'
 
 ## 1. Ajout de l'Action à un Processus Métier
 - Accédez à la section **"Processus Métier"** dans votre Bitrix24.
-- Créez un nouveau processus ou ouvrez un processus existant.
+- Créez un nouveau processus ou ouvrez un existant.
 - Trouvez l'action **"Campagnes Marketing"** dans la liste des actions disponibles et ajoutez-la au processus.
 
 ## 2. Paramétrage des Campagnes
@@ -26,13 +26,13 @@ avatar: '/activities/MarketingCampaigns.webp'
 
 ## 3. Planification et Lancement
 - Définissez la **date et l'heure de début** de la campagne.
-- Configurez les **déclencheurs** pour un lancement automatique (par exemple, lorsqu'un nouveau prospect est ajouté ou que le statut d'une affaire change).
+- Configurez des **déclencheurs** pour un lancement automatique (par exemple, lorsqu'un nouveau lead est ajouté ou que le statut d'une affaire change).
 - Vérifiez tous les paramètres et lancez la campagne.
 
 ## 4. Analyse des Résultats
 - Après la fin de la campagne, collectez automatiquement les données sur les résultats (par exemple, nombre de clients engagés, taux de conversion, ROI).
 - Utilisez les **rapports** intégrés pour analyser l'efficacité de la campagne.
-- Configurez des **notifications** pour les responsables avec les résultats de la campagne.
+- Configurez des **notifications** pour les personnes responsables avec les résultats de la campagne.
 
 ## 5. Optimisation des Processus
 - Sur la base des données obtenues, apportez des ajustements à votre stratégie de campagne marketing.

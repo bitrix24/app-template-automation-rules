@@ -1,13 +1,13 @@
 ---
 title: Suivi du Temps
-description: Planifiez et exécutez des événements en toute simplicité grâce à des outils dédiés.
+description: Planifiez et exécutez des événements avec facilité grâce à des outils dédiés.
 categories: 
   - 'category_2'
 badges: 
   - 'badge_2'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# Instruction pour l'Utilisation et la Configuration de l'Action "App Marketplace"
+# Instructions pour l'Utilisation et la Configuration de l'Action "App Marketplace"
 
 ## Description de l'Action
 
@@ -15,18 +15,18 @@ avatar: '/activities/AppMarketplace.webp'
 
 ### 1 : Accéder au Concepteur de Workflow
 - Connectez-vous à votre compte Bitrix24.
-- Accédez à **CRM** > **Automatisation** > **Processus Métier**.
+- Accédez à **CRM** > **Automatisation** > **Processus Métiers**.
 - Cliquez sur **Créer un Processus Métier** ou sélectionnez-en un existant à modifier.
 
-### 2 : Ajouter l'Action de Suivi du Temps
-- Dans le Concepteur de Workflow, faites glisser et déposez l'action **Suivi du Temps** depuis la liste des actions disponibles.
-- Positionnez l'action à l'endroit où vous souhaitez qu'elle intervienne dans votre workflow.
+### 2 : Ajouter l'Action Suivi du Temps
+- Dans le Concepteur de Workflow, glissez-déposez l'action **Suivi du Temps** depuis la liste des actions disponibles.
+- Positionnez l'action où vous souhaitez qu'elle intervienne dans votre workflow.
 
 ### 3 : Configurer l'Action
 - Suivi du Temps des Tâches :
   - Attribuez des tâches aux membres de l'équipe et activez le suivi du temps pour chaque tâche.
-  - Définissez les durées prévues pour la réalisation des tâches.
-- Rappels Automatiques :
+  - Définissez les durées estimées pour la réalisation des tâches.
+- Rappels Automatisés :
   - Configurez des rappels pour les échéances à venir ou les tâches en retard.
   - Choisissez les méthodes de notification (par exemple, e-mail, alertes dans l'application).
 - Reporting :

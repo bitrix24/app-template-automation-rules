@@ -5,10 +5,10 @@ categories:
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ECommerceSolutions.webp'
 ---
-# Istruzioni per l'uso e la configurazione dell'azione "Soluzioni E-commerce"
+# Istruzioni per l'Utilizzo e la Configurazione dell'Azione "Soluzioni E-commerce"
 
 ## Descrizione dell'Azione
 
@@ -16,27 +16,27 @@ avatar: '/activities/ECommerceSolutions.webp'
 
 ### 1: Accedi al Workflow Designer
 - Accedi al tuo account Bitrix24.
-- Vai a **CRM** > **Automazione** > **Processi Aziendali**.
-- Clicca su **Crea Processo Aziendale** o seleziona uno esistente per modificarlo.
+- Vai su **CRM** > **Automazione** > **Processi Aziendali**.
+- Clicca su **Crea Processo Aziendale** o seleziona uno esistente da modificare.
 
 ### 2: Aggiungi l'Azione Soluzioni E-commerce
 - Nel Workflow Designer, trascina e rilascia l'azione **Soluzioni E-commerce** dalla lista delle azioni disponibili.
-- Posiziona l'azione dove desideri che avvenga nel tuo flusso di lavoro.
+- Posiziona l'azione dove desideri che avvenga nel tuo workflow.
 
 ### 3: Configura l'Azione
-- Gestione degli Ordini:
+- Gestione Ordini:
   - Imposta flussi di lavoro automatizzati per la conferma degli ordini, l'elaborazione dei pagamenti e le notifiche di spedizione.
-  - Integrati con la tua piattaforma e-commerce per sincronizzare gli ordini in tempo reale.
-- Coinvolgimento del Cliente:
-  - Crea modelli di email personalizzati per conferme d'ordine, promozioni e follow-up.
+  - Integra con la tua piattaforma e-commerce per sincronizzare gli ordini in tempo reale.
+- Coinvolgimento Clienti:
+  - Crea modelli di email personalizzati per conferme ordini, promozioni e follow-up.
   - Imposta risposte automatiche alle richieste e ai feedback dei clienti.
-- Gestione dell'Inventario:
-  - Definisci soglie di livello di stock e automatizza gli avvisi per stock basso.
-  - Sincronizza i dati dell'inventario con la tua piattaforma e-commerce per garantire l'accuratezza.
-- Analisi e Reportistica:
-  - Configura dashboard per monitorare metriche chiave come vendite, fidelizzazione dei clienti e prestazioni dei prodotti.
-  - Pianifica l'invio automatico di report al tuo team.
+- Gestione Inventario:
+  - Definisci soglie di livello di stock e automatizza gli avvisi per scorte basse.
+  - Sincronizza i dati dell'inventario con la tua piattaforma e-commerce per garantire precisione.
+- Analisi e Reporting:
+  - Configura dashboard per monitorare metriche chiave come vendite, fidelizzazione clienti e performance dei prodotti.
+  - Programma report automatizzati da inviare al tuo team.
 
 ### 4: Salva e Attiva
 - Rivedi le impostazioni per assicurarti che tutto sia configurato correttamente.
-- Clicca su **Salva** e poi su **Attiva** per rendere attiva l'azione Soluzioni E-commerce nel tuo flusso di lavoro.
+- Clicca **Salva** e poi **Attiva** per rendere operativa l'azione Soluzioni E-commerce nel tuo workflow.

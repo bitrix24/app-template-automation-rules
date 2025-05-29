@@ -9,7 +9,7 @@ badges:
   - 'badge_2'
 avatar: '/activities/CustomerSupport.webp'
 ---
-# Instrução para Uso e Configuração da Ação "Suporte ao Cliente"
+# Instruções para Usar e Configurar a Ação "Suporte ao Cliente"
 
 ## Descrição da Ação
 
@@ -19,7 +19,7 @@ avatar: '/activities/CustomerSupport.webp'
 - Abra o processo de negócios onde deseja adicionar a ação "Suporte ao Cliente".
 - Na paleta de ações, localize a seção "Suporte ao Cliente" e arraste a ação para a tela do processo de negócios.
 
-### 2. Configuração da Integração
+### 2. Configurando a Integração
 - Após a instalação do aplicativo, acesse suas configurações.
 - Configure a integração com o Bitrix24 de acordo com as instruções do aplicativo.
 
@@ -27,6 +27,6 @@ avatar: '/activities/CustomerSupport.webp'
 - Ao configurar a ação "Suporte ao Cliente", mapeie os campos do Bitrix24 para os campos no aplicativo selecionado.
 - Isso permite a transferência de dados entre o Bitrix24 e o aplicativo de terceiros.
 
-### 4. Definição de Condições
+### 4. Definindo Condições
 - Estabeleça as condições sob as quais a ação "Suporte ao Cliente" deve ser executada.
-- Isso permite a automação da ação com base em eventos ou critérios específicos.
+- Isso possibilita a automação da ação com base em eventos ou critérios específicos.

@@ -5,18 +5,18 @@ categories:
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/RemoteWorkTools.webp'
 ---
-# Instruksi untuk Menggunakan dan Mengonfigurasi Aksi "Alat Kerja Jarak Jauh"
+# Panduan Penggunaan dan Konfigurasi Aksi "Alat Kerja Jarak Jauh"
 
 ## Deskripsi Aksi
 
-## **Mengonfigurasi Aksi "Alat Kerja Jarak Jauh"**
+## **Konfigurasi Aksi "Alat Kerja Jarak Jauh"**
 
 ### Langkah 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Automation** > **Business Processes**.
+- Navigasi ke **CRM** > **Automation** > **Business Processes**.
 - Klik **Create Business Process** atau pilih yang sudah ada untuk diedit.
 
 ### Langkah 2: Tambahkan Aksi Alat Kerja Jarak Jauh
@@ -26,15 +26,15 @@ avatar: '/activities/RemoteWorkTools.webp'
 ### Langkah 3: Konfigurasi Aksi
 - **Manajemen Tugas**:
   - Tentukan template tugas untuk proyek berulang.
-  - Tetapkan tenggat waktu dan tunjuk anggota tim yang bertanggung jawab.
+  - Atur tenggat waktu dan tentukan anggota tim yang bertanggung jawab.
 - **Alat Komunikasi**:
-  - Aktifkan integrasi chat dan panggilan video.
-  - Atur pengingat otomatis untuk rapat dan pembaruan.
+  - Aktifkan integrasi obrolan dan panggilan video.
+  - Siapkan pengingat otomatis untuk rapat dan pembaruan.
 - **Berbagi File**:
   - Konfigurasi izin akses untuk file yang dibagikan.
   - Integrasikan dengan layanan penyimpanan cloud seperti Google Drive atau Dropbox.
 - **Pelacakan Waktu**:
-  - Atur pelacakan waktu untuk tugas atau proyek tertentu.
+  - Siapkan pelacakan waktu untuk tugas atau proyek tertentu.
   - Hasilkan laporan untuk menganalisis produktivitas tim.
 - **Integrasi Pihak Ketiga**:
   - Hubungkan Bitrix24 dengan alat seperti Zoom, Slack, atau Microsoft Teams.

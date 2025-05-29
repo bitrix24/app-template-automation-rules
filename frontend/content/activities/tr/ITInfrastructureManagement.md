@@ -5,7 +5,7 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ITInfrastructureManagement.webp'
 ---
 # "BT Altyapı Yönetimi" Eylemini Kullanma ve Yapılandırma Talimatı
@@ -19,24 +19,24 @@ avatar: '/activities/ITInfrastructureManagement.webp'
 - **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
 - **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
-### 2: BT Altyapı Yönetimi Eylemini Ekleme
-- İş Akışı Tasarımcısı'nda, mevcut eylemler listesinden **BT Altyapı Yönetimi** eylemini sürükleyip bırakın.
+### 2: BT Altyapı Yönetimi Eylemini Ekleyin
+- İş Akışı Tasarımcısında, mevcut eylemler listesinden **BT Altyapı Yönetimi** eylemini sürükleyip bırakın.
 - Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
-### 3: Eylemi Yapılandırma
+### 3: Eylemi Yapılandırın
 - Sistem İzleme:
-  - İzlenecek metrikleri tanımlayın (ör. sunucu çalışma süresi, ağ gecikmesi).
-  - Performans uyarıları için eşik değerlerini belirleyin.
+  - İzlenecek metrikleri tanımlayın (örneğin, sunucu çalışma süresi, ağ gecikmesi).
+  - Performans uyarıları için eşik değerler belirleyin.
 - Otomatik Uyarılar:
-  - Uyarı tetikleme koşullarını belirtin (ör. CPU kullanımı %90'ın üzerinde).
-  - Bildirim kanallarını seçin (ör. e-posta, SMS, Bitrix24 sohbeti).
+  - Uyarı tetikleme koşullarını belirtin (örneğin, CPU kullanımı %90'ın üzerinde).
+  - Bildirim kanallarını seçin (örneğin, e-posta, SMS, Bitrix24 sohbet).
 - Bakım Planlama:
-  - Rutin bakım görevleri için bir program oluşturun (ör. yedeklemeler, güncellemeler).
-  - Her görev için sorumlu ekip üyelerini atayın.
+  - Rutin bakım görevleri için bir program oluşturun (örneğin, yedeklemeler, güncellemeler).
+  - Her görev için sorumlu takım üyelerini atayın.
 - Olay Yönetimi:
-  - Olay bildirme ve çözüm süreçleri için iş akışları oluşturun.
-  - Çözülmeyen sorunlar için yükseltme yollarını tanımlayın.
+  - Olay bildirme ve çözüm için iş akışları oluşturun.
+  - Çözümlenmeyen sorunlar için yükseltme yollarını tanımlayın.
 
 ### 4: Kaydet ve Etkinleştir
-- Her şeyin doğru yapılandırıldığından emin olmak için ayarlarınızı gözden geçirin.
-- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak BT Altyapı Yönetimi eylemini iş akışınızda canlı hale getirin.
+- Ayarlarınızı doğru yapılandırıldığından emin olmak için gözden geçirin.
+- **Kaydet**'e ve ardından **Etkinleştir**'e tıklayarak BT Altyapı Yönetimi eylemini iş akışınızda aktif hale getirin.

@@ -20,22 +20,22 @@ avatar: '/activities/BlockchainTechnology.webp'
 
 ### 2: Thêm Hành động Công nghệ Blockchain
 - Trong Trình Thiết kế Quy trình Làm việc, kéo và thả hành động **Công nghệ Blockchain** từ danh sách các hành động có sẵn.
-- Đặt hành động ở vị trí bạn muốn nó xảy ra trong quy trình làm việc của bạn.
+- Đặt hành động tại vị trí bạn muốn nó xuất hiện trong quy trình làm việc.
 
 ### 3: Cấu hình Hành động
 - Giao dịch An toàn:
   - Chỉ định loại giao dịch sẽ được ghi lại trên blockchain.
   - Chọn mạng blockchain (ví dụ: Ethereum, Hyperledger) để tích hợp.
 - Hợp đồng Thông minh:
-  - Tải lên hoặc tạo các mẫu hợp đồng thông minh cho các quy trình tự động.
+  - Tải lên hoặc tạo mẫu hợp đồng thông minh cho các quy trình tự động.
   - Xác định các kích hoạt và điều kiện để thực thi hợp đồng.
 - Tính Toàn vẹn Dữ liệu:
   - Chọn các trường dữ liệu hoặc bản ghi sẽ được lưu trữ trên blockchain.
   - Cấu hình quyền truy cập cho người dùng được ủy quyền.
 - Lưu trữ Phi tập trung:
-  - Xác định các tệp hoặc tài liệu nhạy cảm sẽ được lưu trữ trên blockchain.
+  - Xác định các tệp hoặc tài liệu nhạy cảm để lưu trữ trên blockchain.
   - Thiết lập mã hóa và kiểm soát truy cập để tăng cường bảo mật.
 
 ### 4: Lưu và Kích hoạt
-- Xem lại các cài đặt của bạn để đảm bảo mọi thứ được cấu hình chính xác.
-- Nhấp vào **Lưu** và sau đó **Kích hoạt** để đưa hành động Công nghệ Blockchain vào hoạt động trong quy trình làm việc của bạn.
+- Kiểm tra lại các cài đặt để đảm bảo mọi thứ được cấu hình chính xác.
+- Nhấp **Lưu** và sau đó **Kích hoạt** để đưa hành động Công nghệ Blockchain vào hoạt động trong quy trình làm việc của bạn.

@@ -7,6 +7,7 @@ badges:
   - 'badge_3'
 avatar: '/activities/PdfFromHtml.webp'
 ---
-## Some info
+## Info
+
 - list crm entity
 - robot

@@ -1,6 +1,6 @@
 ---
-title: Zarządzanie Magazynem
-description: Śledź i optymalizuj poziomy zapasów w czasie rzeczywistym.
+title: Zarządzanie Zapasami
+description: Śledź i optymalizuj poziom swoich zapasów w czasie rzeczywistym.
 categories: 
   - 'category_2'
 badges: 
@@ -8,30 +8,30 @@ badges:
   - 'badge_2'
 avatar: '/activities/InventoryManagement.webp'
 ---
-# Instrukcja korzystania i konfiguracji akcji "Zarządzanie Magazynem"
+# Instrukcja Używania i Konfiguracji Akcji „Zarządzanie Zapasami”
 
-## **Konfiguracja akcji "Zarządzanie Magazynem"**
+## **Konfiguracja Akcji „Zarządzanie Zapasami”**
 
-### 1. Dodanie akcji do procesu biznesowego
-- Przejdź do sekcji **"Procesy Biznesowe"** w swoim Bitrix24.
+### 1. Dodanie Akcji do Procesu Biznesowego
+- Przejdź do sekcji **„Procesy Biznesowe”** w swoim Bitrix24.
 - Utwórz nowy proces lub otwórz istniejący.
-- Znajdź akcję **"Zarządzanie Magazynem"** na liście dostępnych akcji i dodaj ją do procesu.
+- Znajdź akcję **„Zarządzanie Zapasami”** na liście dostępnych akcji i dodaj ją do procesu.
 
-### 2. Konfiguracja bazy produktów
+### 2. Konfiguracja Bazy Produktów
 - Zaimportuj dane produktów z pliku CSV lub dodaj je ręcznie.
 - Określ charakterystyki produktów (np. nazwa, SKU, kategoria, ilość).
-- Skonfiguruj **magazyny** i ich lokalizacje w celu dokładnego śledzenia.
+- Skonfiguruj **magazyny** i ich lokalizacje dla precyzyjnego śledzenia.
 
-### 3. Śledzenie zapasów
-- Wykorzystaj **automatyczne aktualizacje** poziomów zapasów podczas sprzedaży lub zakupów.
-- Skonfiguruj powiadomienia o niskich poziomach zapasów, aby zapewnić terminowe uzupełnienie.
-- Włącz **rezerwacje produktów**, aby zapobiec nadmiernej sprzedaży.
+### 3. Śledzenie Zapasów
+- Wykorzystaj **automatyczne aktualizacje** poziomu zapasów podczas sprzedaży lub zakupów.
+- Skonfiguruj powiadomienia o niskim poziomie zapasów, aby zapewnić terminowe uzupełnienie.
+- Włącz **rezerwacje produktów**, aby uniknąć nadmiernej sprzedaży.
 
-### 4. Analiza i optymalizacja
-- Korzystaj z wbudowanych raportów do analizy ruchu produktów (np. rotacja, poziomy zapasów).
+### 4. Analiza i Optymalizacja
+- Korzystaj z wbudowanych raportów do analizy ruchu produktów (np. rotacja, poziom zapasów).
 - Skonfiguruj powiadomienia dla odpowiedzialnych osób z kluczowymi metrykami.
-- Optymalizuj poziomy zapasów na podstawie danych analitycznych.
+- Optymalizuj poziom zapasów na podstawie danych analitycznych.
 
-### 5. Integracja z procesami biznesowymi
-- Skonfiguruj wyzwalacze do automatycznej aktualizacji zapasów (np. po sprzedaży lub przyjęciu towaru).
-- Wykorzystuj dane z CRM do uwzględnienia powiązanych transakcji i klientów.
+### 5. Integracja z Procesami Biznesowymi
+- Skonfiguruj wyzwalacze do automatycznej aktualizacji zapasów (np. przy sprzedaży lub przyjęciu towaru).
+- Wykorzystaj dane z CRM do uwzględnienia powiązanych transakcji i klientów.

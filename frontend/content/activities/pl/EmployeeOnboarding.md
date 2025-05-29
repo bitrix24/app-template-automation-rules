@@ -1,26 +1,26 @@
 ---
 title: Wdrażanie Pracowników
-description: Uprość proces wdrażania nowych pracowników.
+description: Uprość proces wprowadzania nowych pracowników.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_2'
 avatar: '/activities/EmployeeOnboarding.webp'
 ---
-# Instrukcja Używania i Konfigurowania Akcji "Wdrażanie Pracowników"
+# Instrukcja Używania i Konfiguracji Akcji "Wdrażanie Pracowników"
 
 ## Opis Akcji
 
-## **Konfigurowanie Akcji "Wdrażanie Pracowników"**
+## **Konfiguracja Akcji "Wdrażanie Pracowników"**
 
-### 1. Dodawanie Akcji do Procesu Biznesowego
+### 1. Dodanie Akcji do Procesu Biznesowego
 - Przejdź do sekcji **"Procesy Biznesowe"** w Twoim Bitrix24.
 - Utwórz nowy proces lub otwórz istniejący.
 - Znajdź akcję **"Wdrażanie Pracowników"** na liście dostępnych akcji i dodaj ją do procesu.
 
-### 2. Konfigurowanie Etapów Wdrażania
-- Utwórz **szablon procesu wdrażania** ze wszystkimi niezbędnymi etapami (np. przetwarzanie dokumentów, szkolenia, wprowadzenie do zespołu).
-- Przypisz odpowiedzialne osoby do każdego etapu.
+### 2. Konfiguracja Etapów Wdrażania
+- Utwórz **szablon procesu wdrażania** ze wszystkimi niezbędnymi etapami (np. przetwarzanie dokumentów, szkolenie, wprowadzenie do zespołu).
+- Przypisz odpowiedzialne osoby za każdy etap.
 - Ustaw terminy dla każdego etapu.
 
 ### 3. Automatyzacja Zadań
@@ -34,6 +34,6 @@ avatar: '/activities/EmployeeOnboarding.webp'
 - Regularnie aktualizuj statusy zadań, aby dane były aktualne.
 
 ### 5. Analiza i Optymalizacja
-- Użyj wbudowanych raportów do analizy skuteczności procesu wdrażania (np. czas realizacji, poziom satysfakcji).
+- Użyj wbudowanych raportów do analizy skuteczności procesu wdrażania (np. czas realizacji, poziom zadowolenia).
 - Skonfiguruj powiadomienia dla menedżerów z kluczowymi metrykami.
 - Optymalizuj proces na podstawie danych analitycznych.

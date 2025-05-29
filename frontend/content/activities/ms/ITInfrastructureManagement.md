@@ -1,11 +1,11 @@
 ---
 title: Pengurusan Infrastruktur IT
-description: Pantau dan kekalkan sistem IT anda untuk prestasi yang optimum.
+description: Pantau dan jaga sistem IT anda untuk prestasi optimum.
 categories: 
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ITInfrastructureManagement.webp'
 ---
 # Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Pengurusan Infrastruktur IT"
@@ -25,13 +25,13 @@ avatar: '/activities/ITInfrastructureManagement.webp'
 
 ### 3: Konfigurasi Tindakan
 - Pemantauan Sistem:
-  - Tentukan metrik untuk dipantau (contohnya, masa aktif pelayan, kependaman rangkaian).
+  - Tentukan metrik untuk dipantau (contoh: masa aktif pelayan, kependaman rangkaian).
   - Tetapkan ambang untuk amaran prestasi.
 - Amaran Automatik:
-  - Nyatakan syarat untuk mencetuskan amaran (contohnya, penggunaan CPU melebihi 90%).
-  - Pilih saluran pemberitahuan (contohnya, e-mel, SMS, sembang Bitrix24).
+  - Nyatakan syarat untuk mencetuskan amaran (contoh: penggunaan CPU melebihi 90%).
+  - Pilih saluran notifikasi (contoh: e-mel, SMS, sembang Bitrix24).
 - Penjadualan Penyelenggaraan:
-  - Cipta jadual untuk tugas penyelenggaraan rutin (contohnya, sandaran, kemas kini).
+  - Buat jadual untuk tugas penyelenggaraan rutin (contoh: sandaran, kemas kini).
   - Tetapkan ahli pasukan yang bertanggungjawab untuk setiap tugas.
 - Pengurusan Insiden:
   - Sediakan aliran kerja untuk pelaporan dan penyelesaian insiden.
@@ -39,4 +39,4 @@ avatar: '/activities/ITInfrastructureManagement.webp'
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Pengurusan Infrastruktur IT aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Pengurusan Infrastruktur IT hidup dalam aliran kerja anda.

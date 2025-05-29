@@ -4,7 +4,7 @@ description: Ölçeklenebilir ve esnek operasyonlar için bulut teknolojisinden 
 categories: 
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/CloudSolutions.webp'
 ---
 # "Bulut Çözümleri" Eylemini Kullanma ve Yapılandırma Talimatı
@@ -31,11 +31,11 @@ avatar: '/activities/CloudSolutions.webp'
   - Ekip üyeleri için erişim izinlerini ayarlayın.
 - Otomatik Yedeklemeler:
   - Yedekleme sıklığını seçin (örneğin, günlük, haftalık).
-  - Yedekleme işlemine dahil edilecek verileri veya dosyaları seçin.
+  - Yedekleme sürecine dahil edilecek verileri veya dosyaları seçin.
 - Ölçeklenebilir Operasyonlar:
-  - İş ihtiyaçlarınıza göre depolama limitlerini veya yükseltme planlarını tanımlayın.
+  - İş ihtiyaçlarınıza göre depolama sınırlarını veya yükseltme planlarını tanımlayın.
   - Bulut tabanlı uygulamalar için kaynak tahsisini yapılandırın.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı her şeyin doğru yapılandırıldığından emin olmak için gözden geçirin.
+- Ayarlarınızı kontrol ederek her şeyin doğru yapılandırıldığından emin olun.
 - **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Bulut Çözümleri eylemini iş akışınızda canlı hale getirin.

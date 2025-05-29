@@ -6,14 +6,13 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
 avatar: '/activities/CRMIntegration.webp'
 ---
-# Instrukcja korzystania i konfiguracji akcji "Integracja CRM"
+# Instrukcja korzystania i konfigurowania akcji "Integracja CRM"
 
 ## Opis akcji
 
-## **Konfiguracja akcji "Integracja CRM"**
+## **Konfigurowanie akcji "Integracja CRM"**
 
 ### 1: Dostęp do Projektanta Workflow
 - Zaloguj się do swojego konta Bitrix24.
@@ -22,19 +21,19 @@ avatar: '/activities/CRMIntegration.webp'
 
 ### 2: Dodaj akcję Integracja CRM
 - W Projektancie Workflow przeciągnij i upuść akcję **Integracja CRM** z listy dostępnych akcji.
-- Umieść akcję w miejscu, w którym ma wystąpić w Twoim workflow.
+- Umieść akcję w miejscu, w którym ma wystąpić w twoim workflow.
 
 ### 3: Skonfiguruj akcję
-- Wybierz zewnętrzne narzędzie lub platformę, z którą chcesz się zintegrować (np. oprogramowanie do marketingu e-mail, system ERP lub platforma wsparcia klienta).
-- Zmapuj pola między Bitrix24 CRM a systemem zewnętrznym, aby zapewnić dokładną synchronizację danych.
-- Skonfiguruj wyzwalacze i warunki, kiedy integracja ma nastąpić (np. gdy dodany zostanie nowy lead lub zaktualizowana zostanie umowa).
+- Wybierz zewnętrzne narzędzie lub platformę, z którą chcesz się zintegrować (np. oprogramowanie do email marketingu, system ERP lub platforma wsparcia klienta).
+- Zmapuj pola między Bitrix24 CRM a zewnętrznym systemem, aby zapewnić dokładną synchronizację danych.
+- Ustaw wyzwalacze i warunki, kiedy integracja ma nastąpić (np. gdy dodano nowego leada lub zaktualizowano deal).
 - Skonfiguruj obsługę błędów i powiadomienia, aby ostrzegać zespół w przypadku problemów z integracją.
 
 ### 4: Przetestuj integrację
-- Przeprowadź test, aby upewnić się, że dane są poprawnie przesyłane między Bitrix24 CRM a systemem zewnętrznym.
+- Przeprowadź test, aby upewnić się, że dane są poprawnie przesyłane między Bitrix24 CRM a zewnętrznym systemem.
 - Sprawdź, czy wszystkie zmapowane pola są synchronizowane zgodnie z oczekiwaniami.
-- Sprawdź, czy nie występują błędy lub niespójności i dostosuj konfigurację, jeśli to konieczne.
+- Zweryfikuj występowanie błędów lub niespójności i dostosuj konfigurację w razie potrzeby.
 
 ### 5: Zapisz i aktywuj
-- Przejrzyj swoje ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
-- Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję Integracja CRM do swojego workflow.
+- Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
+- Kliknij **Zapisz**, a następnie **Aktywuj**, aby uruchomić akcję Integracja CRM w swoim workflow.

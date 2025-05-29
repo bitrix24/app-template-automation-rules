@@ -5,12 +5,11 @@ categories:
   - 'category_1'
   - 'category_2'
   - 'category_3'
-badges: 
+badges:
   - 'badge_2'
-  - 'badge_3'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# Petunjuk Penggunaan dan Konfigurasi Aksi "Pasar Aplikasi"
+# Panduan Penggunaan dan Konfigurasi Aksi "Pasar Aplikasi"
 
 ## Deskripsi Aksi
 
@@ -24,7 +23,7 @@ avatar: '/activities/AppMarketplace.webp'
 ### 2. Mencari dan Memilih Aplikasi
 - Buka **Pasar Aplikasi** melalui antarmuka Bitrix24.
 - Gunakan filter dan kategori untuk menemukan aplikasi yang sesuai dengan kebutuhan bisnis Anda (misalnya, pemasaran, analitik, manajemen proyek).
-- Tinjau deskripsi aplikasi, peringkat, dan umpan balik pengguna.
+- Tinjau deskripsi aplikasi, rating, dan umpan balik pengguna.
 
 ![Pasar Aplikasi](/activities/AppMarketplace.webp)
 
@@ -34,9 +33,9 @@ avatar: '/activities/AppMarketplace.webp'
 - Konfigurasikan integrasi aplikasi dengan data dan proses Anda di Bitrix24 (misalnya, koneksi CRM, pengaturan API).
 
 ### 4. Mengintegrasikan dengan Proses Bisnis
-- Gunakan aplikasi yang diinstal untuk mengotomatiskan tugas (misalnya, sinkronisasi data otomatis, mengirim notifikasi).
-- Atur pemicu dan aksi dalam proses bisnis untuk memanfaatkan fungsionalitas aplikasi.
+- Gunakan aplikasi yang terinstal untuk mengotomatisasi tugas (misalnya, sinkronisasi data otomatis, mengirim notifikasi).
+- Siapkan pemicu dan aksi dalam proses bisnis untuk memanfaatkan fungsionalitas aplikasi.
 
 ### 5. Manajemen dan Pembaruan
-- Secara rutin periksa pembaruan untuk aplikasi yang diinstal untuk memastikan kompatibilitas dan keamanan.
+- Secara rutin periksa pembaruan untuk aplikasi yang terinstal untuk memastikan kompatibilitas dan keamanan.
 - Hapus aplikasi yang tidak digunakan untuk mengoptimalkan kinerja sistem.

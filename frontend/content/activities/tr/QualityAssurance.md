@@ -6,7 +6,7 @@ categories:
 
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/QualityAssurance.webp'
 ---
 # "Kalite Güvencesi" Eylemini Kullanma ve Yapılandırma Talimatı
@@ -15,10 +15,10 @@ avatar: '/activities/QualityAssurance.webp'
 
 ## **"Kalite Güvencesi" Eylemini Yapılandırma**
 
-### 1. Eylemi Bir İş Sürecine Ekleme
+### 1. Eylemi Bir İş Sürecine Eklemek
 - Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
-- Mevcut eylemler listesinde **"Kalite Güvencesi"** eylemini bulun ve sürece ekleyin.
+- Mevcut eylemler listesinden **"Kalite Güvencesi"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Test Parametrelerini Ayarlama
 - **Test kriterlerini** tanımlayın (örneğin, işlevsellik, performans, kullanılabilirlik).
@@ -27,12 +27,12 @@ avatar: '/activities/QualityAssurance.webp'
 
 ### 3. Test Süreçlerini Otomatikleştirme
 - Tekrarlayan görevleri kolaylaştırmak için **otomatik test araçlarını** kullanın.
-- Ürün belirli bir aşamaya ulaştığında testi başlatmak için **tetikleyiciler** ayarlayın (örneğin, geliştirme sonrası veya yayın öncesi).
+- Ürün belirli bir aşamaya ulaştığında testi başlatmak için **tetikleyiciler** ayarlayın (örneğin, geliştirmeden sonra veya yayın öncesi).
 - Test sonuçları ve tespit edilen sorunlar için **bildirimler** yapılandırın.
 
 ### 4. İzleme ve Raporlama
-- Test ilerlemesini ve sonuçlarını görselleştirmek için **panoları** kullanın.
-- Temel metrikleri analiz etmek için **raporlar** oluşturun (örneğin, hata oranı, test kapsamı, geçme/başarısız oranları).
+- Test ilerlemesini ve sonuçlarını görselleştirmek için **gösterge panolarını** kullanın.
+- Temel metrikleri analiz etmek için **raporlar** oluşturun (örneğin, hata oranı, test kapsamı, geçme/başarısız olma oranları).
 - Acil müdahale gerektiren kritik sorunlar için **uyarılar** ayarlayın.
 
 ### 5. İş Süreçleriyle Entegrasyon

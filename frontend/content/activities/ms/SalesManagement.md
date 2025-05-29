@@ -1,12 +1,12 @@
 ---
 title: Pengurusan Jualan
-description: Alatan dan pandangan untuk mengurus saluran jualan anda dengan berkesan.
+description: Alatan dan panduan untuk mengurus saluran jualan anda dengan berkesan.
 categories: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesManagement.webp'
 ---
 
@@ -41,4 +41,4 @@ avatar: '/activities/SalesManagement.webp'
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Pengurusan Jualan aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Pengurusan Jualan hidup dalam aliran kerja anda.

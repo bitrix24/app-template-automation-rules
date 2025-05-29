@@ -1,11 +1,11 @@
 ---
 title: AI và Học Máy
-description: Khám phá và tích hợp các ứng dụng bên thứ ba để nâng cao hoạt động kinh doanh của bạn.
+description: Khám phá và tích hợp ứng dụng bên thứ ba để nâng cao hiệu quả kinh doanh.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Hướng Dẫn Video
@@ -33,22 +33,22 @@ avatar: '/activities/AIandMachineLearning.webp'
 
 ### 2: Thêm Hành Động AI và Học Máy
 - Trong Trình Thiết Kế Quy Trình, kéo và thả hành động **AI và Học Máy** từ danh sách các hành động có sẵn.
-- Đặt hành động ở vị trí bạn muốn nó xuất hiện trong quy trình của bạn.
+- Đặt hành động ở vị trí bạn muốn nó xuất hiện trong quy trình.
 
 ### 3: Cấu Hình Hành Động
 - Tự Động Hóa Quy Trình:
-  - Chọn các nhiệm vụ hoặc quy trình bạn muốn tự động hóa.
-  - Xác định các điều kiện và kích hoạt cho tự động hóa.
+  - Chọn các tác vụ hoặc quy trình bạn muốn tự động hóa.
+  - Xác định điều kiện và kích hoạt cho việc tự động hóa.
 - Phân Tích Dự Đoán:
-  - Chọn các nguồn dữ liệu để phân tích (ví dụ: CRM, dữ liệu bán hàng).
-  - Thiết lập các tham số để tạo ra dự báo và thông tin chi tiết.
+  - Chọn nguồn dữ liệu để phân tích (ví dụ: CRM, dữ liệu bán hàng).
+  - Thiết lập các tham số để tạo dự đoán và thông tin chi tiết.
 - Phân Tích Dữ Liệu:
-  - Chỉ định các bộ dữ liệu để phân tích.
-  - Cấu hình các chỉ số và KPI để theo dõi.
+  - Chỉ định các bộ dữ liệu cần phân tích.
+  - Cấu hình các chỉ số và KPIs cần theo dõi.
 - Đề Xuất Thông Minh:
-  - Kích hoạt các đề xuất dựa trên AI để tối ưu hóa quy trình.
-  - Tùy chỉnh các loại đề xuất bạn muốn nhận.
+  - Bật các gợi ý dựa trên AI để tối ưu hóa quy trình.
+  - Tùy chỉnh loại đề xuất bạn muốn nhận.
 
 ### 4: Lưu và Kích Hoạt
-- Kiểm tra lại các cài đặt của bạn để đảm bảo mọi thứ được cấu hình chính xác.
+- Kiểm tra lại các thiết lập để đảm bảo mọi thứ đã được cấu hình chính xác.
 - Nhấp **Lưu** và sau đó **Kích Hoạt** để đưa hành động AI và Học Máy vào hoạt động trong quy trình của bạn.

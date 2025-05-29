@@ -22,14 +22,14 @@ avatar: '/activities/CrisisManagement.webp'
 
 ### 2: Kriz Yönetimi Eylemini Ekleme
 - İş Akışı Tasarımcısında, mevcut eylemler listesinden **Kriz Yönetimi** eylemini sürükleyip bırakın.
-- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere yerleştirin.
+- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
 ### 3: Eylemi Yapılandırma
 - Kriz Planı Oluşturma:
   - Bir kriz sırasında atılacak adımları tanımlayın.
-  - Kilit personel ve harici ortaklar için iletişim bilgilerini ekleyin.
+  - Ana personel ve dış ortaklar için iletişim bilgilerini ekleyin.
 - Otomatik Uyarılar:
-  - Kriz tespiti için tetikleyicileri ayarlayın (örneğin, olumsuz duygu durumu, sistem arızaları).
+  - Kriz tespiti için tetikleyiciler ayarlayın (örneğin, olumsuz algı, sistem arızaları).
   - Bildirim gönderilecek ekip üyelerini veya departmanları belirtin.
 - İletişim Şablonları:
   - Dahili ve harici iletişim için şablonlar oluşturun.
@@ -39,5 +39,5 @@ avatar: '/activities/CrisisManagement.webp'
   - Her görev için son tarihler ve öncelikler belirleyin.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı doğru bir şekilde yapılandırıldığından emin olmak için gözden geçirin.
-- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Kriz Yönetimi eylemini iş akışınızda etkin hale getirin.
+- Ayarlarınızı kontrol ederek her şeyin doğru yapılandırıldığından emin olun.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Kriz Yönetimi eylemini iş akışınızda aktif hale getirin.

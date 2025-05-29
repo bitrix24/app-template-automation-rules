@@ -14,18 +14,18 @@ avatar: '/activities/ProjectTracking.webp'
 
 ## **"Proje Takibi" Eylemini Yapılandırma**
 
-### 1. Eylemi Bir İş Sürecine Ekleme
+### 1. Eylemi Bir İş Sürecine Eklemek
 - Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
 - Mevcut eylemler listesinde **"Proje Takibi"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Proje Parametrelerini Ayarlama
-- Proje adını ve temel aşamalarını belirtin.
+- Proje adını ve ana aşamalarını belirtin.
 - Her aşama için sorumlu kişileri atayın.
 - Her görev için son tarihleri belirleyin.
 
 ### 3. İlerlemeyi Takip Etme
-- İlerlemeyi görselleştirmek için **Kanban panoları** veya **Gantt çizelgeleri** kullanın.
+- İlerlemeyi görselleştirmek için **Kanban panoları** veya **Gantt şemaları** kullanın.
 - Yaklaşan son tarihler için otomatik bildirimler ayarlayın.
 - Verilerin güncel kalması için görev durumlarını düzenli olarak güncelleyin.
 
@@ -36,4 +36,4 @@ avatar: '/activities/ProjectTracking.webp'
 
 ### 5. İş Süreçleriyle Entegrasyon
 - Otomatik durum güncellemeleri için tetikleyiciler ayarlayın (örneğin, bir görev tamamlandığında veya son tarihler değiştiğinde).
-- İlgili fırsatları ve müşterileri hesaba katmak için CRM verilerini kullanın.
+- İlgili işlemleri ve müşterileri hesaba katmak için CRM verilerini kullanın.

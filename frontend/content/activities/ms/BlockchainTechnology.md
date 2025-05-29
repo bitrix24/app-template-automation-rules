@@ -24,7 +24,7 @@ avatar: '/activities/BlockchainTechnology.webp'
 
 ### 3: Konfigurasi Tindakan
 - Transaksi Selamat:
-  - Tentukan jenis transaksi yang akan direkodkan pada blockchain.
+  - Nyatakan jenis transaksi yang akan direkodkan pada blockchain.
   - Pilih rangkaian blockchain (contohnya, Ethereum, Hyperledger) untuk integrasi.
 - Kontrak Pintar:
   - Muat naik atau cipta templat kontrak pintar untuk proses automatik.
@@ -34,8 +34,8 @@ avatar: '/activities/BlockchainTechnology.webp'
   - Konfigurasi kebenaran akses untuk pengguna yang dibenarkan.
 - Penyimpanan Terdesentralisasi:
   - Kenal pasti fail atau dokumen sensitif yang akan disimpan pada blockchain.
-  - Sediakan enkripsi dan kawalan akses untuk keselamatan tambahan.
+  - Sediakan penyulitan dan kawalan akses untuk keselamatan tambahan.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Teknologi Blockchain aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Teknologi Blockchain hidup dalam aliran kerja anda.

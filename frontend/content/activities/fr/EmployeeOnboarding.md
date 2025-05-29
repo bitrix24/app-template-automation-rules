@@ -14,8 +14,8 @@ avatar: '/activities/EmployeeOnboarding.webp'
 ## **Configuration de l'Action "Intégration des Employés"**
 
 ### 1. Ajout de l'Action à un Processus Métier
-- Accédez à la section **"Processus Métier"** dans votre Bitrix24.
-- Créez un nouveau processus ou ouvrez un processus existant.
+- Allez dans la section **"Processus Métier"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un existant.
 - Trouvez l'action **"Intégration des Employés"** dans la liste des actions disponibles et ajoutez-la au processus.
 
 ### 2. Configuration des Étapes d'Intégration
@@ -28,12 +28,12 @@ avatar: '/activities/EmployeeOnboarding.webp'
 - Configurez la création automatique de tâches pour les responsables.
 - Activez l'**intégration CRM** pour prendre en compte les données des nouveaux employés.
 
-### 4. Suivi des Progrès
-- Utilisez des **tableaux Kanban** ou des **diagrammes de Gantt** pour visualiser les progrès.
+### 4. Suivi de la Progression
+- Utilisez des **tableaux Kanban** ou des **diagrammes de Gantt** pour visualiser la progression.
 - Configurez des notifications pour l'achèvement des étapes pour les responsables.
 - Mettez régulièrement à jour les statuts des tâches pour maintenir les données à jour.
 
 ### 5. Analyse et Optimisation
-- Utilisez les rapports intégrés pour analyser l'efficacité du processus d'intégration (par exemple, temps d'achèvement, niveau de satisfaction).
+- Utilisez les rapports intégrés pour analyser l'efficacité du processus d'intégration (par exemple, temps de réalisation, niveau de satisfaction).
 - Configurez des notifications pour les managers avec les indicateurs clés.
 - Optimisez le processus en fonction des données analytiques.

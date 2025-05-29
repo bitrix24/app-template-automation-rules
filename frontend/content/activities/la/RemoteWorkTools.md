@@ -1,27 +1,27 @@
 ---
 title: Herramientas de Trabajo Remoto
-description: Permite que tu equipo trabaje de manera eficiente desde cualquier parte del mundo.
+description: Permite que tu equipo trabaje eficientemente desde cualquier parte del mundo.
 categories: 
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/RemoteWorkTools.webp'
 ---
-# Instrucciones para Usar y Configurar la Acción "Herramientas de Trabajo Remoto"
+# Instrucción para Usar y Configurar la Acción "Herramientas de Trabajo Remoto"
 
 ## Descripción de la Acción
 
-## **Configuración de la Acción "Herramientas de Trabajo Remoto"**
+## **Configurando la Acción "Herramientas de Trabajo Remoto"**
 
 ### Paso 1: Accede al Diseñador de Flujos de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
 ### Paso 2: Añade la Acción Herramientas de Trabajo Remoto
 - En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Herramientas de Trabajo Remoto** de la lista de acciones disponibles.
-- Coloca la acción donde desees que ocurra en tu flujo de trabajo.
+- Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
 ### Paso 3: Configura la Acción
 - **Gestión de Tareas**:
@@ -30,7 +30,7 @@ avatar: '/activities/RemoteWorkTools.webp'
 - **Herramientas de Comunicación**:
   - Habilita integraciones de chat y videollamadas.
   - Configura recordatorios automáticos para reuniones y actualizaciones.
-- **Compartición de Archivos**:
+- **Compartir Archivos**:
   - Configura permisos de acceso para archivos compartidos.
   - Integra con servicios de almacenamiento en la nube como Google Drive o Dropbox.
 - **Seguimiento de Tiempo**:
@@ -41,5 +41,5 @@ avatar: '/activities/RemoteWorkTools.webp'
   - Automatiza la sincronización de datos entre plataformas.
 
 ### Paso 4: Guarda y Activa
-- Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
+- Revisa tus configuraciones para asegurarte de que todo está configurado correctamente.
 - Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción Herramientas de Trabajo Remoto en tu flujo de trabajo.

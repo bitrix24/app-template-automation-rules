@@ -1,6 +1,6 @@
 ---
 title: Analyse Commerciale
-description: Exploitez des insights basés sur les données pour prendre des décisions éclairées.
+description: Exploitez des informations basées sur les données pour prendre des décisions éclairées.
 categories: 
   - 'category_1'
 badges: 
@@ -13,9 +13,9 @@ avatar: '/activities/BusinessAnalytics.webp'
 
 ## **Configuration de l'Action "Analyse Commerciale"**
 
-### 1. Ajouter l'Action à un Processus Métier
-- Accédez à la section **"Processus Métier"** dans votre Bitrix24.
-- Créez un nouveau processus ou ouvrez un processus existant.
+### 1. Ajout de l'Action à un Processus Commercial
+- Accédez à la section **"Processus Métiers"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un existant.
 - Trouvez l'action **"Analyse Commerciale"** dans la liste des actions disponibles et ajoutez-la au processus.
 
 ### 2. Configuration des Sources de Données
@@ -25,14 +25,14 @@ avatar: '/activities/BusinessAnalytics.webp'
 
 ### 3. Création de Rapports et Tableaux de Bord
 - Utilisez les outils intégrés pour créer des rapports (par exemple, graphiques, tableaux, diagrammes).
-- Configurez des tableaux de bord pour visualiser les indicateurs clés (par exemple, ventes, conversion, fidélisation des clients).
-- Configurez la génération automatique de rapports selon un calendrier.
+- Configurez des tableaux de bord pour visualiser les métriques clés (par exemple, ventes, conversion, rétention client).
+- Paramétrez la génération automatique de rapports selon un planning.
 
 ### 4. Analyse des Données et Prise de Décisions
-- Explorez les données à l'aide de filtres et de segmentation pour identifier les tendances et les modèles.
+- Explorez les données à l'aide de filtres et de segmentation pour identifier des tendances et des modèles.
 - Utilisez des outils analytiques pour la prévision et la modélisation de scénarios.
-- Prenez des décisions basées sur les données pour optimiser les processus métier.
+- Prenez des décisions basées sur les données pour optimiser les processus commerciaux.
 
-### 5. Intégration avec les Processus Métier
-- Configurez des déclencheurs pour lancer automatiquement des tâches analytiques (par exemple, lorsque les données changent ou qu'une étape du processus est terminée).
+### 5. Intégration avec les Processus Métiers
+- Configurez des déclencheurs pour lancer automatiquement des tâches analytiques (par exemple, lors de changements de données ou de l'achèvement d'une étape du processus).
 - Utilisez l'analyse pour automatiser les décisions (par exemple, envoi de notifications, changement de statuts).

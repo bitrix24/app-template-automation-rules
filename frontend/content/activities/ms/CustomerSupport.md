@@ -17,7 +17,7 @@ avatar: '/activities/CustomerSupport.webp'
 
 ### 1. Menambah Tindakan ke Proses Perniagaan
 - Buka proses perniagaan di mana anda ingin menambah tindakan "Sokongan Pelanggan".
-- Dalam palet tindakan, cari bahagian "Sokongan Pelanggan" dan seret tindakan tersebut ke kanvas proses perniagaan.
+- Dalam palet tindakan, cari bahagian "Sokongan Pelanggan" dan seret tindakan ke kanvas proses perniagaan.
 
 ### 2. Menyediakan Integrasi
 - Setelah aplikasi dipasang, akses tetapan aplikasi tersebut.

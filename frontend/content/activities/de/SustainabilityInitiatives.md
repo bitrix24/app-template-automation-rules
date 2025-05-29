@@ -1,6 +1,6 @@
 ---
 title: Nachhaltigkeitsinitiativen
-description: Implementieren Sie umweltfreundliche Praktiken und verfolgen Sie deren Auswirkungen.
+description: Setzen Sie umweltfreundliche Praktiken um und verfolgen Sie deren Auswirkungen.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -19,24 +19,24 @@ avatar: '/activities/SocialMediaManagement.webp'
 ### 1: Zugriff auf den Workflow-Designer
 - Melden Sie sich in Ihrem Bitrix24-Konto an.
 - Navigieren Sie zu **CRM** > **Automatisierung** > **Geschäftsprozesse**.
-- Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen bestehenden Prozess zur Bearbeitung aus.
+- Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen bestehenden aus, um ihn zu bearbeiten.
 
 ### 2: Fügen Sie die Aktion "Nachhaltigkeitsinitiativen" hinzu
-- Ziehen Sie im Workflow-Designer die Aktion **Nachhaltigkeitsinitiativen** aus der Liste der verfügbaren Aktionen.
+- Ziehen Sie im Workflow-Designer die Aktion **Nachhaltigkeitsinitiativen** aus der Liste der verfügbaren Aktionen per Drag & Drop.
 - Positionieren Sie die Aktion an der gewünschten Stelle in Ihrem Workflow.
 
 ### 3: Konfigurieren Sie die Aktion
-- Implementierung umweltfreundlicher Praktiken:
-  - Definieren Sie die zu implementierenden Praktiken (z. B. Abfallreduzierung, Energieeffizienz).
+- Umsetzung umweltfreundlicher Praktiken:
+  - Definieren Sie die Praktiken, die umgesetzt werden sollen (z.B. Abfallvermeidung, Energieeffizienz).
   - Weisen Sie verantwortliche Teammitglieder für jede Praxis zu.
 - Verfolgung der Auswirkungen:
-  - Richten Sie Metriken zur Messung der Umweltauswirkungen ein (z. B. CO2-Fußabdruck, Energieeinsparungen).
-  - Integrieren Sie Datenquellen für die automatische Verfolgung.
+  - Richten Sie Metriken zur Messung der Umweltauswirkungen ein (z.B. CO2-Fußabdruck, Energieeinsparungen).
+  - Integrieren Sie Datenquellen für automatische Verfolgung.
 - Zielüberwachung:
   - Legen Sie klare Nachhaltigkeitsziele und Zeitpläne fest.
-  - Konfigurieren Sie die Fortschrittsverfolgung und Benachrichtigungen für Meilensteine.
+  - Konfigurieren Sie Fortschrittsverfolgung und Benachrichtigungen für Meilensteine.
 - Berichterstattung:
-  - Passen Sie Berichtsvorlagen an, um wichtige Nachhaltigkeitskennzahlen einzubeziehen.
+  - Passen Sie Berichtsvorlagen an, um wichtige Nachhaltigkeitsmetriken einzubeziehen.
   - Planen Sie die automatische Generierung und Verteilung von Berichten.
 
 ### 4: Speichern und Aktivieren

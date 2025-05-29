@@ -19,12 +19,12 @@ avatar: '/activities/TeamCollaboration.webp'
 ### 1. Agregar la Acción a un Proceso de Negocio
 - Ve a la sección **"Procesos de Negocio"** en tu Bitrix24.
 - Crea un nuevo proceso o abre uno existente.
-- Encuentra la acción **"Colaboración en Equipo"** en la lista de acciones disponibles y agrégalo al proceso.
+- Encuentra la acción **"Colaboración en Equipo"** en la lista de acciones disponibles y agrégala al proceso.
 
 ### 2. Configuración de Herramientas de Comunicación
-- Activa el **chat** y las **llamadas de video** para una comunicación instantánea.
+- Activa el **chat** y las **llamadas de video** para comunicación instantánea.
 - Usa **tareas grupales** para distribuir responsabilidades.
-- Configura **documentos compartidos** y **almacenamiento de archivos** para el trabajo colaborativo.
+- Configura **documentos compartidos** y **almacenamiento de archivos** para trabajo colaborativo.
 
 ### 3. Organización de Flujos de Trabajo
 - Crea **proyectos** y **tareas** para cada miembro del equipo.
@@ -32,11 +32,11 @@ avatar: '/activities/TeamCollaboration.webp'
 - Usa **tableros Kanban** para visualizar el progreso.
 
 ### 4. Integración con Otras Herramientas
-- Conecta el **CRM** para llevar un registro de clientes y tratos.
+- Conecta el **CRM** para gestionar clientes y acuerdos.
 - Usa el **calendario** para programar reuniones y plazos.
-- Configura **análisis** para rastrear el rendimiento del equipo.
+- Configura **analíticas** para monitorear el rendimiento del equipo.
 
 ### 5. Análisis y Optimización
-- Usa informes integrados para analizar la finalización de tareas y la colaboración.
+- Usa informes incorporados para analizar la finalización de tareas y la colaboración.
 - Configura notificaciones para gerentes con métricas clave.
-- Optimiza los procesos basándote en los datos de análisis.
+- Optimiza procesos basándote en datos de analíticas.

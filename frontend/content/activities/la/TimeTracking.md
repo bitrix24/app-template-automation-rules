@@ -1,5 +1,5 @@
 ---
-title: Seguimiento del Tiempo
+title: Seguimiento de Tiempo
 description: Planifica y ejecuta eventos con facilidad utilizando herramientas dedicadas.
 categories: 
   - 'category_2'
@@ -16,25 +16,25 @@ avatar: '/activities/AppMarketplace.webp'
 ### 1: Acceder al Diseñador de Flujos de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
-### 2: Añadir la Acción de Seguimiento del Tiempo
-- En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Seguimiento del Tiempo** de la lista de acciones disponibles.
-- Coloca la acción donde desees que ocurra en tu flujo de trabajo.
+### 2: Añadir la Acción de Seguimiento de Tiempo
+- En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Seguimiento de Tiempo** de la lista de acciones disponibles.
+- Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
 ### 3: Configurar la Acción
-- Seguimiento del Tiempo de Tareas:
-  - Asigna tareas a los miembros del equipo y activa el seguimiento del tiempo para cada tarea.
-  - Establece los tiempos esperados para la finalización de las tareas.
+- Seguimiento de Tiempo de Tareas:
+  - Asigna tareas a miembros del equipo y activa el seguimiento de tiempo para cada tarea.
+  - Establece tiempos esperados para la finalización de tareas.
 - Recordatorios Automatizados:
-  - Configura recordatorios para plazos próximos o tareas vencidas.
-  - Elige métodos de notificación (por ejemplo, correo electrónico, alertas en la aplicación).
-- Informes:
-  - Define la frecuencia y el formato de los informes de seguimiento del tiempo.
-  - Selecciona los destinatarios para la distribución automática de informes.
+  - Configura recordatorios para fechas límite próximas o tareas atrasadas.
+  - Elige métodos de notificación (ej. correo electrónico, alertas en la aplicación).
+- Reportes:
+  - Define la frecuencia y formato de los reportes de seguimiento de tiempo.
+  - Selecciona destinatarios para la distribución automática de reportes.
 - Integración:
-  - Vincula la acción de Seguimiento del Tiempo con otras herramientas de Bitrix24 como calendarios, gestores de tareas o módulos de CRM.
+  - Vincula la acción de Seguimiento de Tiempo con otras herramientas de Bitrix24 como calendarios, gestores de tareas o módulos de CRM.
 
 ### 4: Guardar y Activar
-- Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
-- Haz clic en **Guardar** y luego en **Activar** para que la acción de Seguimiento del Tiempo esté activa en tu flujo de trabajo.
+- Revisa tus configuraciones para asegurar que todo esté correctamente configurado.
+- Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de Seguimiento de Tiempo en tu flujo de trabajo.

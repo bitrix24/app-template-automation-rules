@@ -5,12 +5,12 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Video Tutorial
 
-Per una guida visiva sulla configurazione e l'uso dell'azione `AI e Machine Learning`, guarda il video:
+Per una guida visiva su come configurare e utilizzare l'azione `AI e Machine Learning`, guarda il video:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -20,7 +20,7 @@ Per una guida visiva sulla configurazione e l'uso dell'azione `AI e Machine Lear
   allowfullscreen>
 </iframe>
 
-# Istruzioni per l'Uso e la Configurazione dell'Azione "AI e Machine Learning"
+# Istruzioni per l'Utilizzo e la Configurazione dell'Azione "AI e Machine Learning"
 
 ## Descrizione dell'Azione
 
@@ -28,8 +28,8 @@ Per una guida visiva sulla configurazione e l'uso dell'azione `AI e Machine Lear
 
 ### 1: Accedi al Workflow Designer
 - Accedi al tuo account Bitrix24.
-- Vai a **CRM** > **Automazione** > **Processi Aziendali**.
-- Clicca su **Crea Processo Aziendale** o seleziona uno esistente per modificarlo.
+- Vai su **CRM** > **Automazione** > **Processi Aziendali**.
+- Clicca su **Crea Processo Aziendale** o selezionane uno esistente da modificare.
 
 ### 2: Aggiungi l'Azione AI e Machine Learning
 - Nel Workflow Designer, trascina e rilascia l'azione **AI e Machine Learning** dalla lista delle azioni disponibili.
@@ -40,15 +40,15 @@ Per una guida visiva sulla configurazione e l'uso dell'azione `AI e Machine Lear
   - Seleziona le attività o i processi che vuoi automatizzare.
   - Definisci le condizioni e i trigger per l'automazione.
 - Analisi Predittiva:
-  - Scegli le fonti di dati per l'analisi (es. CRM, dati di vendita).
-  - Configura i parametri per generare previsioni e approfondimenti.
+  - Scegli le fonti dei dati da analizzare (es. CRM, dati di vendita).
+  - Imposta i parametri per generare previsioni e insight.
 - Analisi dei Dati:
   - Specifica i dataset da analizzare.
   - Configura le metriche e i KPI da monitorare.
 - Raccomandazioni Intelligenti:
-  - Abilita suggerimenti guidati dall'AI per l'ottimizzazione dei processi.
+  - Abilita i suggerimenti guidati dall'AI per l'ottimizzazione dei processi.
   - Personalizza i tipi di raccomandazioni che vuoi ricevere.
 
 ### 4: Salva e Attiva
 - Rivedi le impostazioni per assicurarti che tutto sia configurato correttamente.
-- Clicca **Salva** e poi **Attiva** per rendere attiva l'azione AI e Machine Learning nel tuo flusso di lavoro.
+- Clicca **Salva** e poi **Attiva** per rendere operativa l'azione AI e Machine Learning nel tuo flusso di lavoro.

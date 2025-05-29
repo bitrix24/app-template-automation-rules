@@ -16,27 +16,27 @@ avatar: '/activities/MobileAppDevelopment.webp'
 
 ### 1 : Accéder au Concepteur de Workflow
 - Connectez-vous à votre compte Bitrix24.
-- Accédez à **CRM** > **Automatisation** > **Processus Métier**.
-- Cliquez sur **Créer un Processus Métier** ou sélectionnez un processus existant à modifier.
+- Accédez à **CRM** > **Automatisation** > **Processus Métiers**.
+- Cliquez sur **Créer un Processus Métier** ou sélectionnez-en un existant à modifier.
 
 ### 2 : Ajouter l'Action Développement d'Applications Mobiles
-- Dans le Concepteur de Workflow, faites glisser et déposez l'action **Développement d'Applications Mobiles** depuis la liste des actions disponibles.
-- Positionnez l'action à l'endroit où vous souhaitez qu'elle se produise dans votre workflow.
+- Dans le Concepteur de Workflow, glissez-déposez l'action **Développement d'Applications Mobiles** depuis la liste des actions disponibles.
+- Positionnez l'action à l'endroit souhaité dans votre workflow.
 
 ### 3 : Configurer l'Action
 - Gestion de Projet :
-  - Définissez des tâches et des jalons pour votre projet de développement d'application mobile.
-  - Assignez des tâches aux membres de l'équipe et fixez des délais.
+  - Définissez les tâches et les jalons pour votre projet de développement d'application mobile.
+  - Attribuez des tâches aux membres de l'équipe et fixez des échéances.
 - Collaboration d'Équipe :
   - Configurez des canaux de communication pour les discussions d'équipe.
-  - Intégrez avec le Chat et les Appels Vidéo de Bitrix24 pour une collaboration en temps réel.
-- Contrôle des Versions :
+  - Intégrez avec Bitrix24 Chat et Appels Vidéo pour une collaboration en temps réel.
+- Contrôle de Version :
   - Spécifiez les conventions de nommage des versions et les calendriers de publication.
-  - Suivez les modifications et les mises à jour de votre application.
-- Intégration des Commentaires Utilisateurs :
-  - Connectez votre application à Bitrix24 pour collecter les commentaires des utilisateurs.
-  - Configurez des workflows automatisés pour analyser et agir sur les commentaires.
+  - Suivez les modifications et mises à jour de votre application.
+- Intégration des Retours Utilisateurs :
+  - Connectez votre application à Bitrix24 pour collecter les retours utilisateurs.
+  - Configurez des workflows automatisés pour analyser et agir sur les retours.
 
-### 4 : Enregistrer et Activer
+### 4 : Sauvegarder et Activer
 - Vérifiez vos paramètres pour vous assurer que tout est configuré correctement.
-- Cliquez sur **Enregistrer** puis sur **Activer** pour mettre en service l'action Développement d'Applications Mobiles dans votre workflow.
+- Cliquez sur **Sauvegarder** puis sur **Activer** pour rendre l'action Développement d'Applications Mobiles active dans votre workflow.

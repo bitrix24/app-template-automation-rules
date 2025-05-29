@@ -1,15 +1,15 @@
 ---
 title: Analisis Data
-description: Analisis data bisnis Anda untuk membuat keputusan yang informatif.
+description: Analisis data bisnis Anda untuk membuat keputusan yang tepat.
 categories: 
   - 'category_2'
-  - 'category_3'
+  - 'category_1'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/DataAnalytics.webp'
 ---
-# Petunjuk Penggunaan dan Konfigurasi Aksi "Analisis Data"
+# Panduan Penggunaan dan Konfigurasi Aksi "Analisis Data"
 
 ## Deskripsi Aksi
 
@@ -17,27 +17,27 @@ avatar: '/activities/DataAnalytics.webp'
 
 ### 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Otomatisasi** > **Proses Bisnis**.
-- Klik **Buat Proses Bisnis** atau pilih yang sudah ada untuk diedit.
+- Navigasi ke **CRM** > **Automation** > **Business Processes**.
+- Klik **Create Business Process** atau pilih yang sudah ada untuk diedit.
 
 ### 2: Tambahkan Aksi Manajemen Penjualan
-- Di Workflow Designer, seret dan lepas aksi **Manajemen Penjualan** dari daftar aksi yang tersedia.
-- Posisikan aksi di tempat yang Anda inginkan dalam alur kerja Anda.
+- Di Workflow Designer, seret dan lepas aksi **Sales Management** dari daftar aksi yang tersedia.
+- Posisikan aksi di tempat yang Anda inginkan dalam alur kerja.
 
 ### 3: Konfigurasi Aksi
 - Pelacakan Lead:
-  - Tentukan tahapan dalam pipeline penjualan Anda.
+  - Tentukan tahapan pipeline penjualan Anda.
   - Atur notifikasi untuk perubahan status lead.
 - Analisis Kinerja:
-  - Pilih metrik yang ingin Anda lacak (misalnya, tingkat konversi, nilai deal).
+  - Pilih metrik yang ingin dilacak (misalnya, tingkat konversi, nilai deal).
   - Atur laporan otomatis untuk tinjauan kinerja rutin.
 - Otomatisasi Tugas:
   - Identifikasi tugas berulang (misalnya, mengirim email tindak lanjut).
   - Buat aturan otomatisasi untuk menangani tugas-tugas ini.
 - Manajemen Deal:
-  - Atur tahapan deal dan kriteria untuk kemajuan.
-  - Tugaskan tugas dan tenggat waktu kepada anggota tim untuk setiap deal.
+  - Atur tahapan deal dan kriteria untuk progres.
+  - Tetapkan tugas dan tenggat waktu untuk anggota tim untuk setiap deal.
 
 ### 4: Simpan dan Aktifkan
 - Tinjau pengaturan Anda untuk memastikan semuanya dikonfigurasi dengan benar.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk membuat aksi Manajemen Penjualan aktif dalam alur kerja Anda.
+- Klik **Save** dan kemudian **Activate** untuk mengaktifkan aksi Manajemen Penjualan dalam alur kerja Anda.

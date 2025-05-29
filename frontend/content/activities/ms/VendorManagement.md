@@ -6,7 +6,7 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/VendorManagement.webp'
 ---
 
@@ -23,7 +23,7 @@ avatar: '/activities/VendorManagement.webp'
 
 ### 2. Menyediakan Data Vendor
 - Import data vendor dari fail CSV atau tambah secara manual.
-- Tentukan ciri-ciri vendor (contohnya, nama, maklumat hubungan, produk/perkhidmatan yang disediakan).
+- Nyatakan ciri-ciri vendor (contohnya, nama, maklumat hubungan, produk/perkhidmatan yang disediakan).
 - Sediakan **peranan** dan **hak akses** untuk setiap vendor.
 
 ### 3. Mengurus Hubungan Vendor
@@ -34,8 +34,8 @@ avatar: '/activities/VendorManagement.webp'
 ### 4. Mengoptimumkan Pembelian
 - Gunakan laporan terbina dalam untuk menganalisis data pembelian (contohnya, jumlah perbelanjaan, prestasi vendor).
 - Sediakan pemberitahuan untuk orang yang bertanggungjawab dengan metrik utama.
-- Optimalkan proses pembelian berdasarkan data analitik.
+- Optimumkan proses pembelian berdasarkan data analitik.
 
-### 5. Mengintegrasikan dengan Proses Perniagaan
-- Sediakan pencetus untuk kemas kini data automatik (contohnya, apabila mengubah syarat kontrak atau jadual pembayaran).
-- Gunakan data CRM untuk mengambil kira urus niaga dan pelanggan yang berkaitan.
+### 5. Berintegrasi dengan Proses Perniagaan
+- Sediakan pencetus untuk kemas kini data automatik (contohnya, apabila menukar syarat kontrak atau jadual pembayaran).
+- Gunakan data CRM untuk mengambil kira urusan dan pelanggan yang berkaitan.

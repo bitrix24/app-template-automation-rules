@@ -5,11 +5,11 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/LegalDocumentManagement.webp'
 
 ---
-# Instrucciones para Usar y Configurar la Acción "Gestión de Documentos Legales"
+# Instrucción para Usar y Configurar la Acción "Gestión de Documentos Legales"
 
 ## Descripción de la Acción
 
@@ -22,25 +22,25 @@ avatar: '/activities/LegalDocumentManagement.webp'
 
 ### 2. Configuración de Plantillas de Documentos
 - Crea **plantillas de documentos** para documentos legales de uso frecuente (por ejemplo, contratos, acuerdos, NDAs).
-- Usa el editor incorporado para personalizar las plantillas con marcadores de posición para datos dinámicos.
+- Usa el editor integrado para personalizar plantillas con marcadores de posición para datos dinámicos.
 - Guarda las plantillas en un repositorio centralizado para un acceso fácil.
 
 ### 3. Automatización de la Generación de Documentos
-- Configura **disparadores** para generar automáticamente documentos basados en eventos específicos (por ejemplo, incorporación de nuevos clientes, renovación de contratos).
-- Usa **datos del CRM** para llenar los documentos con información relevante (por ejemplo, nombres de clientes, fechas, términos).
+- Configura **disparadores** para generar documentos automáticamente basados en eventos específicos (por ejemplo, incorporación de nuevos clientes, renovación de contratos).
+- Usa **datos del CRM** para llenar documentos con información relevante (por ejemplo, nombres de clientes, fechas, términos).
 - Configura **flujos de aprobación** para asegurar que los documentos sean revisados y firmados por personal autorizado.
 
 ### 4. Gestión de Almacenamiento y Acceso a Documentos
-- Organiza los documentos en **carpetas** y **categorías** para una recuperación fácil.
+- Organiza documentos en **carpetas** y **categorías** para una fácil recuperación.
 - Establece **permisos de acceso** para asegurar que solo usuarios autorizados puedan ver o editar documentos sensibles.
-- Habilita el **control de versiones** para rastrear cambios y mantener un historial de revisiones de documentos.
+- Habilita **control de versiones** para rastrear cambios y mantener un historial de revisiones de documentos.
 
 ### 5. Integración con Aplicaciones de Terceros
-- Explora el **Bitrix24 Marketplace** para encontrar aplicaciones de terceros que mejoren la gestión de documentos legales (por ejemplo, herramientas de firma electrónica, verificadores de cumplimiento).
+- Explora el **Bitrix24 Marketplace** para aplicaciones de terceros que mejoren la gestión de documentos legales (por ejemplo, herramientas de firma electrónica, verificadores de cumplimiento).
 - Integra estas aplicaciones para optimizar flujos de trabajo y mejorar la eficiencia.
-- Asegura la sincronización de datos entre Bitrix24 y las aplicaciones de terceros para operaciones sin problemas.
+- Asegura la sincronización de datos entre Bitrix24 y aplicaciones de terceros para operaciones sin problemas.
 
 ### 6. Análisis y Optimización
-- Usa **informes** incorporados para rastrear el uso de documentos, tiempos de aprobación y tasas de cumplimiento.
+- Usa **informes** integrados para rastrear el uso de documentos, tiempos de aprobación y tasas de cumplimiento.
 - Configura **notificaciones** para partes interesadas clave con actualizaciones importantes.
-- Optimiza los procesos basados en datos analíticos para mejorar la eficiencia y reducir errores.
+- Optimiza procesos basados en datos analíticos para mejorar la eficiencia y reducir errores.

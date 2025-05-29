@@ -10,7 +10,7 @@ badges:
 avatar: '/activities/SocialMediaManagement.webp'
 ---
 
-# Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Pengurusan Media Sosial"
+# Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan ""Pengurusan Media Sosial""
 
 ## Penerangan Tindakan
 
@@ -21,21 +21,21 @@ avatar: '/activities/SocialMediaManagement.webp'
 - Cipta proses baru atau buka yang sedia ada.
 - Cari tindakan **"Pengurusan Media Sosial"** dalam senarai tindakan yang tersedia dan tambahkannya ke proses.
 
-### 2. Menyambungkan Akaun Media Sosial
+### 2. Menyambung Akaun Media Sosial
 - Pergi ke bahagian **"Rangkaian Sosial"** dalam tetapan Bitrix24.
 - Sambungkan akaun media sosial anda (contohnya, Facebook, Instagram, LinkedIn).
 - Sahkan dan berikan kebenaran yang diperlukan untuk akses.
 
 ### 3. Menjadualkan Siaran
 - Cipta siaran baru menggunakan editor visual.
-- Tambah teks, gambar, video, atau pautan.
+- Tambah teks, imej, video, atau pautan.
 - Tetapkan tarikh dan masa untuk penerbitan atau gunakan ciri **"Autoposting"**.
 
 ### 4. Memantau Prestasi
-- Gunakan laporan terbina dalam untuk menganalisis prestasi siaran (contohnya, jangkauan, penglibatan, klik).
-- Tetapkan pemberitahuan untuk orang yang bertanggungjawab dengan metrik utama.
-- Optimumkan kandungan berdasarkan data analitik.
+- Gunakan laporan terbina dalam untuk menganalisis prestasi siaran (contohnya, capaian, penglibatan, klik).
+- Sediakan pemberitahuan untuk orang yang bertanggungjawab dengan metrik utama.
+- Optimalkan kandungan berdasarkan data analitik.
 
 ### 5. Mengintegrasikan dengan Proses Perniagaan
-- Tetapkan pencetus untuk siaran automatik (contohnya, apabila kempen baru dilancarkan atau status projek berubah).
-- Gunakan data CRM untuk memperibadikan kandungan.
+- Sediakan pencetus untuk siaran automatik (contohnya, apabila kempen baru dilancarkan atau status projek berubah).
+- Gunakan data CRM untuk menyesuaikan kandungan peribadi.

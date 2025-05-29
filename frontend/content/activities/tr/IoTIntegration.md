@@ -17,26 +17,26 @@ avatar: '/activities/IoTIntegration.webp'
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
 - **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
-- **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir iş sürecini seçin.
+- **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
-### 2: IoT Entegrasyonu Eylemini Ekleme
-- İş Akışı Tasarımcısı'nda, mevcut eylemler listesinden **IoT Entegrasyonu** eylemini sürükleyip bırakın.
+### 2: IoT Entegrasyonu Eylemini Ekleyin
+- İş Akışı Tasarımcısında, mevcut eylemler listesinden **IoT Entegrasyonu** eylemini sürükleyip bırakın.
 - Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
-### 3: Eylemi Yapılandırma
+### 3: Eylemi Yapılandırın
 - Cihaz Bağlantısı:
   - Entegre etmek istediğiniz IoT cihazlarını seçin.
-  - Bağlantı ayarlarını yapılandırın (ör. API anahtarları, uç noktalar).
+  - Bağlantı ayarlarını yapılandırın (örneğin, API anahtarları, uç noktalar).
 - Veri Otomasyonu:
   - Cihazlardan toplanacak veri noktalarını tanımlayın.
-  - Toplanan verilerin işlenmesi ve saklanması için kurallar belirleyin.
+  - Toplanan verileri işlemek ve saklamak için kurallar oluşturun.
 - Gerçek Zamanlı İzleme:
   - Bağlı cihazlar için gerçek zamanlı izlemeyi etkinleştirin.
-  - Anahtar metrikleri ve cihaz durumunu görüntülemek için panoyu özelleştirin.
+  - Anahtar metrikleri ve cihaz durumunu göstermek için panoyu özelleştirin.
 - Uyarılar ve Bildirimler:
-  - Cihaz performansı veya veri anomalileri için eşik değerler belirleyin.
-  - Uyarılar için bildirim kanallarını yapılandırın (ör. e-posta, SMS, Bitrix24 sohbet).
+  - Cihaz performansı veya veri anormallikleri için eşik değerler belirleyin.
+  - Uyarılar için bildirim kanallarını yapılandırın (örneğin, e-posta, SMS, Bitrix24 sohbet).
 
 ### 4: Kaydet ve Etkinleştir
-- Her şeyin doğru yapılandırıldığından emin olmak için ayarlarınızı gözden geçirin.
-- **Kaydet**'e ve ardından **Etkinleştir**'e tıklayarak IoT Entegrasyonu eylemini iş akışınızda etkin hale getirin.
+- Ayarlarınızı doğru yapılandırıldığından emin olmak için gözden geçirin.
+- **Kaydet**'e ve ardından **Etkinleştir**'e tıklayarak IoT Entegrasyonu eylemini iş akışınızda canlı hale getirin.

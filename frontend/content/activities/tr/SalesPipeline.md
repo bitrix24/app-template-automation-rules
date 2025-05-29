@@ -1,12 +1,12 @@
 ---
 title: Satış Süreci
-description: Satış sürecinizi etkili bir şekilde yönetin ve anlaşmaları daha hızlı kapatın.
+description: Satış sürecinizi verimli bir şekilde yönetin ve anlaşmaları daha hızlı kapatın.
 categories:
   - 'category_1'
   - 'category_2'
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesPipeline.webp'
 ---
 ### Video Eğitimi
@@ -23,12 +23,12 @@ avatar: '/activities/SalesPipeline.webp'
 
 ### Eylem Açıklaması
 
-`Satış Süreci` eylemi, Bitrix24'te satış sürecinizi etkili bir şekilde yönetmek ve anlaşmaları hızlandırmak için tasarlanmıştır. Satış yönetimi süreçlerini otomatikleştirmeye ve boru hattı aşamaları arasındaki etkileşimi iyileştirmeye yardımcı olur.
+`Satış Süreci` eylemi, Bitrix24'te satış sürecinizi verimli bir şekilde yönetmek ve anlaşmaları hızlandırmak için tasarlanmıştır. Satış yönetimi süreçlerini otomatikleştirmeye ve süreç aşamaları arasındaki etkileşimi iyileştirmeye yardımcı olur.
 
 ### "Satış Süreci" Eylemini Kullanma
 
 1. **İş Sürecine Eylem Ekleme:**
-  - Bitrix24'ünüzdeki "İş Süreçleri" bölümüne gidin.
+  - Bitrix24'teki "İş Süreçleri" bölümüne gidin.
   - Yeni bir iş süreci oluşturun veya mevcut bir süreci açın.
   - Mevcut eylemler listesinde "Satış Süreci" eylemini bulun ve sürecinize ekleyin.
 
@@ -43,6 +43,6 @@ avatar: '/activities/SalesPipeline.webp'
 
 ### Etkili Kullanım İçin İpuçları
 
-- Satış sürecinizin etkinliğini düzenli olarak analiz edin ve gerektiğinde eylem ayarlarını güncelleyin.
+- Satış sürecinizin etkinliğini düzenli olarak analiz edin ve eylem ayarlarını gerektiği gibi düzenleyin.
 - Ekip üyelerini anlaşma aşaması değişiklikleri hakkında bilgilendirmek için bildirimleri kullanın.
-- Eylemi CRM, görevler ve takvim gibi diğer Bitrix24 araçlarıyla entegre edin.
+- Eylemi, CRM, görevler ve takvim gibi diğer Bitrix24 araçlarıyla entegre edin.

@@ -7,7 +7,7 @@ badges:
   - 'badge_2'
 avatar: '/activities/HRManagement.webp'
 ---
-# Petunjuk Penggunaan dan Konfigurasi Aksi "Manajemen HR"
+# Panduan Penggunaan dan Konfigurasi Aksi "Manajemen HR"
 
 ## Deskripsi Aksi
 
@@ -15,12 +15,12 @@ avatar: '/activities/HRManagement.webp'
 
 ### 1. Menambahkan Aksi ke Proses Bisnis
 - Buka bagian **"Proses Bisnis"** di Bitrix24 Anda.
-- Buat proses baru atau buka proses yang sudah ada.
+- Buat proses baru atau buka yang sudah ada.
 - Temukan aksi **"Manajemen HR"** dalam daftar aksi yang tersedia dan tambahkan ke proses.
 
-### 2. Mengatur Database Karyawan
+### 2. Mengatur Basis Data Karyawan
 - Impor data karyawan dari file CSV atau tambahkan secara manual.
-- Tentukan karakteristik karyawan (misalnya, nama, jabatan, departemen, informasi kontak).
+- Tentukan karakteristik karyawan (misalnya, nama, posisi, departemen, informasi kontak).
 - Atur **peran** dan **hak akses** untuk setiap karyawan.
 
 ### 3. Mengelola Proses HR
@@ -34,5 +34,5 @@ avatar: '/activities/HRManagement.webp'
 - Optimalkan proses HR berdasarkan data analitik.
 
 ### 5. Integrasi dengan Proses Bisnis
-- Atur pemicu untuk pembaruan data otomatis (misalnya, saat mengubah jabatan atau departemen).
-- Gunakan data CRM untuk memperhitungkan penawaran dan klien terkait.
+- Atur pemicu untuk pembaruan data otomatis (misalnya, saat mengubah posisi atau departemen).
+- Gunakan data CRM untuk memperhitungkan deal dan klien terkait.

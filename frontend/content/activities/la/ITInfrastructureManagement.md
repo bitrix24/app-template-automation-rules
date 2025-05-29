@@ -5,38 +5,38 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ITInfrastructureManagement.webp'
 ---
-# Instrucciones para Usar y Configurar la Acción "Gestión de Infraestructura IT"
+# Instrucción para Usar y Configurar la Acción "Gestión de Infraestructura IT"
 
 ## Descripción de la Acción
 
 ## **Configuración de la Acción "Gestión de Infraestructura IT"**
 
-### 1: Accede al Diseñador de Flujos de Trabajo
+### 1: Acceder al Diseñador de Flujo de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
-### 2: Añade la Acción de Gestión de Infraestructura IT
-- En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Gestión de Infraestructura IT** desde la lista de acciones disponibles.
-- Coloca la acción donde desees que ocurra en tu flujo de trabajo.
+### 2: Añadir la Acción de Gestión de Infraestructura IT
+- En el Diseñador de Flujo de Trabajo, arrastra y suelta la acción **Gestión de Infraestructura IT** de la lista de acciones disponibles.
+- Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
-### 3: Configura la Acción
+### 3: Configurar la Acción
 - Monitoreo del Sistema:
-  - Define las métricas a monitorear (por ejemplo, tiempo de actividad del servidor, latencia de la red).
+  - Define las métricas a monitorear (ej. tiempo de actividad del servidor, latencia de red).
   - Establece umbrales para alertas de rendimiento.
 - Alertas Automatizadas:
-  - Especifica las condiciones para activar alertas (por ejemplo, uso de CPU por encima del 90%).
-  - Elige los canales de notificación (por ejemplo, correo electrónico, SMS, chat de Bitrix24).
+  - Especifica las condiciones para activar alertas (ej. uso de CPU por encima del 90%).
+  - Elige los canales de notificación (ej. correo electrónico, SMS, chat de Bitrix24).
 - Programación de Mantenimiento:
-  - Crea un cronograma para tareas de mantenimiento rutinario (por ejemplo, copias de seguridad, actualizaciones).
-  - Asigna miembros responsables del equipo para cada tarea.
+  - Crea un horario para tareas de mantenimiento rutinario (ej. copias de seguridad, actualizaciones).
+  - Asigna miembros del equipo responsables para cada tarea.
 - Gestión de Incidentes:
-  - Configura flujos de trabajo para la notificación y resolución de incidentes.
-  - Define rutas de escalada para problemas no resueltos.
+  - Configura flujos de trabajo para reportar y resolver incidentes.
+  - Define rutas de escalación para problemas no resueltos.
 
-### 4: Guarda y Activa
-- Revisa tu configuración para asegurarte de que todo esté configurado correctamente.
-- Haz clic en **Guardar** y luego en **Activar** para que la acción de Gestión de Infraestructura IT esté activa en tu flujo de trabajo.
+### 4: Guardar y Activar
+- Revisa tus ajustes para asegurar que todo esté configurado correctamente.
+- Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de Gestión de Infraestructura IT en tu flujo de trabajo.

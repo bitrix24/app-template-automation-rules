@@ -1,6 +1,6 @@
 ---
 title: Zeiterfassung
-description: Planen und führen Sie Veranstaltungen mit Leichtigkeit mithilfe spezialisierter Tools durch.
+description: Planen und führen Sie Veranstaltungen mit Leichtigkeit mithilfe dedizierter Tools durch.
 categories: 
   - 'category_2'
 badges: 
@@ -14,24 +14,24 @@ avatar: '/activities/AppMarketplace.webp'
 ## **Konfiguration der "App Marketplace"-Aktion**
 
 ### 1: Zugriff auf den Workflow-Designer
-- Melden Sie sich bei Ihrem Bitrix24-Konto an.
+- Melden Sie sich in Ihrem Bitrix24-Konto an.
 - Navigieren Sie zu **CRM** > **Automatisierung** > **Geschäftsprozesse**.
 - Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen bestehenden aus, um ihn zu bearbeiten.
 
 ### 2: Fügen Sie die Zeiterfassungsaktion hinzu
-- Ziehen Sie im Workflow-Designer die **Zeiterfassungsaktion** aus der Liste der verfügbaren Aktionen per Drag & Drop.
-- Positionieren Sie die Aktion an der Stelle, an der sie in Ihrem Workflow auftreten soll.
+- Ziehen Sie im Workflow-Designer die Aktion **Zeiterfassung** aus der Liste der verfügbaren Aktionen.
+- Positionieren Sie die Aktion an der gewünschten Stelle in Ihrem Workflow.
 
 ### 3: Konfigurieren Sie die Aktion
-- Aufgabenzeiterfassung:
+- Aufgaben-Zeiterfassung:
   - Weisen Sie Aufgaben Teammitgliedern zu und aktivieren Sie die Zeiterfassung für jede Aufgabe.
-  - Legen Sie erwartete Zeitdauern für die Aufgabenerledigung fest.
+  - Legen Sie erwartete Zeitdauern für die Aufgabenbearbeitung fest.
 - Automatisierte Erinnerungen:
   - Konfigurieren Sie Erinnerungen für bevorstehende Fristen oder überfällige Aufgaben.
   - Wählen Sie Benachrichtigungsmethoden (z.B. E-Mail, In-App-Benachrichtigungen).
 - Berichterstattung:
-  - Definieren Sie die Häufigkeit und das Format der Zeiterfassungsberichte.
-  - Wählen Sie Empfänger für die automatische Berichtsverteilung aus.
+  - Definieren Sie Häufigkeit und Format der Zeiterfassungsberichte.
+  - Wählen Sie Empfänger für die automatische Berichtsverteilung.
 - Integration:
   - Verknüpfen Sie die Zeiterfassungsaktion mit anderen Bitrix24-Tools wie Kalendern, Aufgabenmanagern oder CRM-Modulen.
 

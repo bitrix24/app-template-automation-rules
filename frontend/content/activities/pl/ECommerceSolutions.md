@@ -1,11 +1,11 @@
 ---
 title: Rozwiązania dla E-commerce
-description: Zarządzaj swoim sklepem internetowym i optymalizuj doświadczenia klientów.
+description: Zarządzaj swoim sklepem online i optymalizuj doświadczenia klientów.
 categories: 
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ECommerceSolutions.webp'
 ---
 # Instrukcja korzystania i konfiguracji akcji "Rozwiązania dla E-commerce"
@@ -25,18 +25,18 @@ avatar: '/activities/ECommerceSolutions.webp'
 
 ### 3: Skonfiguruj akcję
 - Zarządzanie zamówieniami:
-  - Skonfiguruj zautomatyzowane workflow dla potwierdzania zamówień, przetwarzania płatności i powiadomień o wysyłce.
+  - Skonfiguruj zautomatyzowane workflow dla potwierdzeń zamówień, przetwarzania płatności i powiadomień o wysyłce.
   - Zintegruj się z platformą e-commerce, aby synchronizować zamówienia w czasie rzeczywistym.
 - Zaangażowanie klientów:
-  - Twórz spersonalizowane szablony e-maili dla potwierdzeń zamówień, promocji i follow-upów.
+  - Utwórz spersonalizowane szablony e-maili dla potwierdzeń zamówień, promocji i follow-upów.
   - Skonfiguruj automatyczne odpowiedzi na zapytania i opinie klientów.
 - Zarządzanie zapasami:
   - Zdefiniuj progi poziomów zapasów i zautomatyzuj alerty o niskim stanie magazynowym.
-  - Synchronizuj dane zapasów z platformą e-commerce, aby zapewnić dokładność.
-- Analityka i raportowanie:
+  - Synchronizuj dane magazynowe z platformą e-commerce, aby zapewnić dokładność.
+- Analiza i raportowanie:
   - Skonfiguruj pulpity nawigacyjne do śledzenia kluczowych metryk, takich jak sprzedaż, retencja klientów i wydajność produktów.
-  - Zaplanuj automatyczne raporty, które będą wysyłane do Twojego zespołu.
+  - Zaplanuj automatyczne raporty do wysyłki do swojego zespołu.
 
 ### 4: Zapisz i aktywuj
-- Przejrzyj ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
-- Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję Rozwiązania dla E-commerce do działania w Twoim workflow.
+- Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
+- Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję Rozwiązania dla E-commerce do swojego workflow.

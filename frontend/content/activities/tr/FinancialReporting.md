@@ -1,11 +1,11 @@
 ---
 title: Finansal Raporlama
-description: Daha iyi karar verme için detaylı finansal raporlar oluşturun.
+description: Daha iyi karar vermek için detaylı finansal raporlar oluşturun.
 categories: 
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AppMarketplace.webp'
 ---
 # "Finansal Raporlama" Eylemini Kullanma ve Yapılandırma Talimatı
@@ -14,10 +14,10 @@ avatar: '/activities/AppMarketplace.webp'
 
 ## **"Finansal Raporlama" Eylemini Yapılandırma**
 
-### 1. Eylemi Bir İş Sürecine Ekleme
-- Bitrix24'ünüzdeki **"İş Süreçleri"** bölümüne gidin.
-- Yeni bir süreç oluşturun veya mevcut bir süreci açın.
-- Mevcut eylemler listesinde **"Finansal Raporlama"** eylemini bulun ve sürece ekleyin.
+### 1. Eylemi Bir İş Sürecine Eklemek
+- Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
+- Yeni bir süreç oluşturun veya var olan bir süreci açın.
+- Mevcut eylemler listesinden **"Finansal Raporlama"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Veri Kaynaklarını Ayarlama
 - Gerekli veri kaynaklarını bağlayın (örneğin, CRM, muhasebe sistemleri, banka hesapları).
@@ -30,9 +30,9 @@ avatar: '/activities/AppMarketplace.webp'
 - Gerekirse özel metrikler ekleyin.
 
 ### 4. Verileri Analiz Etme ve Karar Verme
-- Trendleri ve desenleri belirlemek için filtreler ve segmentasyon kullanarak verileri keşfedin.
+- Eğilimleri ve desenleri belirlemek için filtreler ve segmentasyon kullanarak verileri keşfedin.
 - Tahmin ve senaryo modelleme için analitik araçları kullanın.
-- Finansal süreçleri optimize etmek için veriye dayalı kararlar alın.
+- Finansal süreçleri optimize etmek için veri odaklı kararlar alın.
 
 ### 5. İş Süreçleriyle Entegrasyon
 - Raporları otomatik olarak oluşturmak için tetikleyiciler ayarlayın (örneğin, bir ay veya çeyrek sonunda).

@@ -1,6 +1,6 @@
 ---
 title: Penjejakan Masa
-description: Rancang dan laksanakan acara dengan mudah menggunakan alat yang berdedikasi.
+description: Rancang dan laksanakan acara dengan mudah menggunakan alat khas.
 categories: 
   - 'category_2'
 badges: 
@@ -16,16 +16,16 @@ avatar: '/activities/AppMarketplace.webp'
 ### 1: Akses Pereka Aliran Kerja
 - Log masuk ke akaun Bitrix24 anda.
 - Navigasi ke **CRM** > **Automasi** > **Proses Perniagaan**.
-- Klik pada **Cipta Proses Perniagaan** atau pilih yang sedia ada untuk diedit.
+- Klik pada **Cipta Proses Perniagaan** atau pilih yang sedia ada untuk disunting.
 
 ### 2: Tambah Tindakan Penjejakan Masa
 - Dalam Pereka Aliran Kerja, seret dan lepaskan tindakan **Penjejakan Masa** dari senarai tindakan yang tersedia.
 - Letakkan tindakan di mana anda mahu ia berlaku dalam aliran kerja anda.
 
 ### 3: Konfigurasi Tindakan
-- Penjejakan Masa Tugasan:
-  - Tetapkan tugas kepada ahli pasukan dan dayakan penjejakan masa untuk setiap tugas.
-  - Tetapkan jangka masa yang dijangkakan untuk penyelesaian tugas.
+- Penjejakan Masa Tugas:
+  - Berikan tugas kepada ahli pasukan dan dayakan penjejakan masa untuk setiap tugas.
+  - Tetapkan jangka masa yang dijangka untuk penyelesaian tugas.
 - Peringatan Automatik:
   - Konfigurasi peringatan untuk tarikh akhir yang akan datang atau tugas yang terlambat.
   - Pilih kaedah pemberitahuan (contohnya, e-mel, amaran dalam apl).
@@ -33,7 +33,7 @@ avatar: '/activities/AppMarketplace.webp'
   - Tentukan kekerapan dan format laporan penjejakan masa.
   - Pilih penerima untuk pengedaran laporan automatik.
 - Integrasi:
-  - Sambungkan tindakan Penjejakan Masa dengan alat Bitrix24 lain seperti kalendar, pengurus tugas, atau modul CRM.
+  - Hubungkan tindakan Penjejakan Masa dengan alat Bitrix24 lain seperti kalendar, pengurus tugas, atau modul CRM.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.

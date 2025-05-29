@@ -1,6 +1,6 @@
 ---
 title: Pembangunan Aplikasi Mudah Alih
-description: Bina dan urus aplikasi mudah alih untuk mencapai khalayak anda.
+description: Bina dan urus aplikasi mudah alih untuk menjangkau khalayak anda.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -31,11 +31,11 @@ avatar: '/activities/MobileAppDevelopment.webp'
   - Sediakan saluran komunikasi untuk perbincangan pasukan.
   - Integrasikan dengan Bitrix24 Chat dan Panggilan Video untuk kolaborasi masa nyata.
 - Kawalan Versi:
-  - Tentukan konvensyen penamaan versi dan jadual keluaran.
+  - Tentukan konvensi penamaan versi dan jadual keluaran.
   - Jejak perubahan dan kemas kini pada aplikasi anda.
 - Integrasi Maklum Balas Pengguna:
   - Sambungkan aplikasi anda ke Bitrix24 untuk mengumpul maklum balas pengguna.
-  - Sediakan aliran kerja automatik untuk menganalisis dan bertindak berdasarkan maklum balas.
+  - Sediakan aliran kerja automatik untuk menganalisis dan bertindak atas maklum balas.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.

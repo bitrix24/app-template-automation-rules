@@ -5,35 +5,35 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# Instrukcja Użytkowania i Konfiguracji Akcji "Raportowanie Finansowe"
+# Instrukcja korzystania i konfigurowania akcji "Raportowanie Finansowe"
 
-## Opis Akcji
+## Opis akcji
 
-## **Konfiguracja Akcji "Raportowanie Finansowe"**
+## **Konfigurowanie akcji "Raportowanie Finansowe"**
 
-### 1. Dodanie Akcji do Procesu Biznesowego
-- Przejdź do sekcji **"Procesy Biznesowe"** w swoim Bitrix24.
+### 1. Dodanie akcji do procesu biznesowego
+- Przejdź do sekcji **"Procesy biznesowe"** w swoim Bitrix24.
 - Utwórz nowy proces lub otwórz istniejący.
 - Znajdź akcję **"Raportowanie Finansowe"** na liście dostępnych akcji i dodaj ją do procesu.
 
-### 2. Konfiguracja Źródeł Danych
-- Podłącz niezbędne źródła danych (np. CRM, systemy księgowe, konta bankowe).
-- Skonfiguruj synchronizację danych dla automatycznej aktualizacji raportów.
+### 2. Konfiguracja źródeł danych
+- Połącz niezbędne źródła danych (np. CRM, systemy księgowe, konta bankowe).
+- Skonfiguruj synchronizację danych do automatycznej aktualizacji raportów.
 - Upewnij się, że dane są poprawnie zintegrowane i dostępne do analizy.
 
-### 3. Tworzenie Raportów Finansowych
+### 3. Tworzenie raportów finansowych
 - Użyj wbudowanych szablonów raportów (np. rachunek zysków i strat, bilans).
 - Skonfiguruj parametry raportu (np. okres, kategorie przychodów i wydatków).
 - Dodaj niestandardowe metryki, jeśli to konieczne.
 
-### 4. Analiza Danych i Podejmowanie Decyzji
-- Eksploruj dane, używając filtrów i segmentacji, aby zidentyfikować trendy i wzorce.
-- Użyj narzędzi analitycznych do prognozowania i modelowania scenariuszy.
-- Podejmuj decyzje oparte na danych, aby optymalizować procesy finansowe.
+### 4. Analiza danych i podejmowanie decyzji
+- Eksploruj dane za pomocą filtrów i segmentacji, aby zidentyfikować trendy i wzorce.
+- Wykorzystaj narzędzia analityczne do prognozowania i modelowania scenariuszy.
+- Podejmuj decyzje oparte na danych, aby zoptymalizować procesy finansowe.
 
-### 5. Integracja z Procesami Biznesowymi
+### 5. Integracja z procesami biznesowymi
 - Skonfiguruj wyzwalacze do automatycznego generowania raportów (np. na koniec miesiąca lub kwartału).
-- Użyj danych z CRM, aby uwzględnić powiązane transakcje i klientów.
+- Wykorzystaj dane z CRM do uwzględnienia powiązanych transakcji i klientów.

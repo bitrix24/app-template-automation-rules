@@ -18,7 +18,7 @@ avatar: '/activities/SocialMediaManagement.webp'
 
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
-- **CRM** > **Otomasyon** > **İş Süreçleri**'ne gidin.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
 - **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
 ### 2: Sürdürülebilirlik Girişimleri Eylemini Ekleyin
@@ -26,19 +26,19 @@ avatar: '/activities/SocialMediaManagement.webp'
 - Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
 ### 3: Eylemi Yapılandırın
-- Çevre Dostu Uygulama Uygulaması:
+- Çevre Dostu Uygulama Uygulama:
   - Uygulanacak uygulamaları tanımlayın (örneğin, atık azaltma, enerji verimliliği).
   - Her uygulama için sorumlu ekip üyelerini atayın.
 - Etki Takibi:
-  - Çevresel etkiyi ölçmek için metrikler belirleyin (örneğin, karbon ayak izi, enerji tasarrufu).
+  - Çevresel etkiyi ölçmek için metrikleri ayarlayın (örneğin, karbon ayak izi, enerji tasarrufu).
   - Otomatik takip için veri kaynaklarını entegre edin.
 - Hedef İzleme:
   - Net sürdürülebilirlik hedefleri ve zaman çizelgeleri belirleyin.
-  - Kilometre taşları için ilerleme takibi ve uyarıları yapılandırın.
+  - Kilometre taşları için ilerleme takibini ve uyarıları yapılandırın.
 - Raporlama:
   - Temel sürdürülebilirlik metriklerini içerecek şekilde rapor şablonlarını özelleştirin.
-  - Otomatik rapor oluşturma ve dağıtımını programlayın.
+  - Otomatik rapor oluşturma ve dağıtımı planlayın.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı her şeyin doğru yapılandırıldığından emin olmak için gözden geçirin.
-- **Kaydet**'e ve ardından **Etkinleştir**'e tıklayarak Sürdürülebilirlik Girişimleri eylemini iş akışınızda aktif hale getirin.
+- Ayarlarınızı doğru yapılandırıldığından emin olmak için gözden geçirin.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Sürdürülebilirlik Girişimleri eylemini iş akışınızda aktif hale getirin.

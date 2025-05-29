@@ -15,17 +15,17 @@ avatar: '/activities/AppMarketplace.webp'
 
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
-- **CRM** > **Otomasyon** > **İş Süreçleri**'ne gidin.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
 - **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
 ### 2: Zaman Takibi Eylemini Ekleyin
 - İş Akışı Tasarımcısında, mevcut eylemler listesinden **Zaman Takibi** eylemini sürükleyip bırakın.
-- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
+- Eylemi iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
 ### 3: Eylemi Yapılandırın
 - Görev Zaman Takibi:
-  - Görevleri ekip üyelerine atayın ve her görev için zaman takibini etkinleştirin.
-  - Görevlerin tamamlanması için beklenen süreleri ayarlayın.
+  - Görevleri takım üyelerine atayın ve her görev için zaman takibini etkinleştirin.
+  - Görevlerin tamamlanması için beklenen süreleri belirleyin.
 - Otomatik Hatırlatıcılar:
   - Yaklaşan son tarihler veya gecikmiş görevler için hatırlatıcıları yapılandırın.
   - Bildirim yöntemlerini seçin (örneğin, e-posta, uygulama içi uyarılar).
@@ -36,5 +36,5 @@ avatar: '/activities/AppMarketplace.webp'
   - Zaman Takibi eylemini, takvimler, görev yöneticileri veya CRM modülleri gibi diğer Bitrix24 araçlarıyla bağlayın.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızın doğru yapılandırıldığından emin olmak için gözden geçirin.
-- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Zaman Takibi eylemini iş akışınızda canlı hale getirin.
+- Ayarlarınızı doğru yapılandırıldığından emin olmak için gözden geçirin.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Zaman Takibi eylemini iş akışınızda aktif hale getirin.

@@ -5,10 +5,10 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# Instructions pour l'Utilisation et la Configuration de l'Action "Reporting Financier"
+# Instruction pour l'Utilisation et la Configuration de l'Action "Reporting Financier"
 
 ## Description de l'Action
 
@@ -25,15 +25,15 @@ avatar: '/activities/AppMarketplace.webp'
 - Assurez-vous que les données sont correctement intégrées et disponibles pour l'analyse.
 
 ### 3. Création de Rapports Financiers
-- Utilisez les modèles de rapports intégrés (par exemple, état des résultats, bilan).
-- Configurez les paramètres des rapports (par exemple, période, catégories de revenus et de dépenses).
+- Utilisez les modèles de rapports intégrés (par exemple, compte de résultat, bilan).
+- Configurez les paramètres des rapports (par exemple, période, catégories de revenus et dépenses).
 - Ajoutez des métriques personnalisées si nécessaire.
 
 ### 4. Analyse des Données et Prise de Décision
-- Explorez les données à l'aide de filtres et de segmentation pour identifier les tendances et les modèles.
+- Explorez les données à l'aide de filtres et de segmentations pour identifier des tendances et des modèles.
 - Utilisez des outils analytiques pour la prévision et la modélisation de scénarios.
 - Prenez des décisions basées sur les données pour optimiser les processus financiers.
 
 ### 5. Intégration avec les Processus Métier
 - Configurez des déclencheurs pour générer automatiquement des rapports (par exemple, à la fin d'un mois ou d'un trimestre).
-- Utilisez les données du CRM pour prendre en compte les affaires et les clients associés.
+- Utilisez les données du CRM pour tenir compte des transactions et clients associés.

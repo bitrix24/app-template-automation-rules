@@ -1,13 +1,13 @@
 ---
 title: Análisis de Negocios
-description: Aprovecha las ideas basadas en datos para tomar decisiones informadas.
+description: Aprovecha información basada en datos para tomar decisiones informadas.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
 avatar: '/activities/BusinessAnalytics.webp'
 ---
-# Instrucción para Usar y Configurar la Acción "Análisis de Negocios"
+# Instrucciones para Usar y Configurar la Acción "Análisis de Negocios"
 
 ## Descripción de la Acción
 
@@ -19,20 +19,20 @@ avatar: '/activities/BusinessAnalytics.webp'
 - Encuentra la acción **"Análisis de Negocios"** en la lista de acciones disponibles y agrégala al proceso.
 
 ### 2. Configuración de Fuentes de Datos
-- Conecta las fuentes de datos necesarias (por ejemplo, CRM, plataformas de marketing, sistemas de contabilidad).
+- Conecta las fuentes de datos necesarias (ej. CRM, plataformas de marketing, sistemas contables).
 - Configura la sincronización de datos para actualizaciones automáticas de análisis.
-- Asegúrate de que los datos estén correctamente integrados y disponibles para el análisis.
+- Asegúrate de que los datos estén correctamente integrados y disponibles para análisis.
 
 ### 3. Creación de Informes y Paneles
-- Usa herramientas integradas para crear informes (por ejemplo, gráficos, tablas, diagramas).
-- Configura paneles para visualizar métricas clave (por ejemplo, ventas, conversión, retención de clientes).
-- Configura la generación automática de informes en un horario.
+- Utiliza herramientas integradas para crear informes (ej. gráficos, tablas, diagramas).
+- Configura paneles para visualizar métricas clave (ej. ventas, conversión, retención de clientes).
+- Establece la generación automática de informes en un horario programado.
 
 ### 4. Análisis de Datos y Toma de Decisiones
-- Explora los datos usando filtros y segmentación para identificar tendencias y patrones.
-- Usa herramientas analíticas para pronósticos y modelado de escenarios.
-- Toma decisiones basadas en datos para optimizar los procesos de negocio.
+- Explora datos usando filtros y segmentación para identificar tendencias y patrones.
+- Utiliza herramientas analíticas para pronósticos y modelado de escenarios.
+- Toma decisiones basadas en datos para optimizar procesos de negocios.
 
 ### 5. Integración con Procesos de Negocios
-- Configura disparadores para lanzar automáticamente tareas analíticas (por ejemplo, cuando cambian los datos o se completa una etapa del proceso).
-- Usa análisis para automatizar decisiones (por ejemplo, enviar notificaciones, cambiar estados).
+- Configura disparadores para lanzar automáticamente tareas analíticas (ej. cuando cambian los datos o se completa una etapa del proceso).
+- Usa análisis para automatizar decisiones (ej. enviar notificaciones, cambiar estados).

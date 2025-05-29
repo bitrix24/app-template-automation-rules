@@ -1,11 +1,11 @@
 ---
 title: Manajemen Siklus Kontrak
-description: Lacak kontrak dari pembuatan hingga perpanjangan atau pengakhiran.
+description: Lacak kontrak dari pembuatan hingga pembaruan atau pengakhiran.
 categories: 
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 
@@ -17,17 +17,17 @@ avatar: '/activities/ContractLifecycleManagement.webp'
 
 ### 1. Menambahkan Aksi ke Proses Bisnis
 - Buka bagian **"Proses Bisnis"** di Bitrix24 Anda.
-- Buat proses baru atau buka proses yang sudah ada.
+- Buat proses baru atau buka yang sudah ada.
 - Temukan aksi **"Manajemen Siklus Kontrak"** dalam daftar aksi yang tersedia dan tambahkan ke proses.
 
-### 2. Menyiapkan Parameter Kontrak
+### 2. Mengatur Parameter Kontrak
 - Buat **template kontrak** dengan semua bagian yang diperlukan (misalnya, pihak, syarat, ketentuan).
 - Tentukan orang yang bertanggung jawab untuk setiap tahap (misalnya, pengacara, manajer).
 - Tetapkan tenggat waktu untuk setiap tahap.
 
 ### 3. Melacak Siklus Kontrak
-- Gunakan **notifikasi otomatis** untuk mengingatkan tentang acara yang akan datang (misalnya, perpanjangan, pengakhiran).
-- Siapkan **survei** dan **kuesioner** untuk mengumpulkan umpan balik dari pihak-pihak terkait.
+- Gunakan **notifikasi otomatis** untuk mengingatkan tentang acara mendatang (misalnya, pembaruan, pengakhiran).
+- Siapkan **survei** dan **kuesioner** untuk mengumpulkan umpan balik dari pihak terkait.
 - Aktifkan **integrasi CRM** untuk memperhitungkan data kontrak.
 
 ### 4. Analisis dan Pelaporan
@@ -35,6 +35,6 @@ avatar: '/activities/ContractLifecycleManagement.webp'
 - Siapkan notifikasi untuk orang yang bertanggung jawab dengan metrik kunci.
 - Optimalkan proses manajemen kontrak berdasarkan data analitik.
 
-### 5. Mengintegrasikan dengan Proses Bisnis
+### 5. Integrasi dengan Proses Bisnis
 - Siapkan pemicu untuk pembaruan data otomatis (misalnya, saat mengubah syarat atau ketentuan).
-- Gunakan data CRM untuk memperhitungkan transaksi dan klien terkait.
+- Gunakan data CRM untuk memperhitungkan kesepakatan dan klien terkait.

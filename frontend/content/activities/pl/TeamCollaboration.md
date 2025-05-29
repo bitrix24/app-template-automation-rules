@@ -1,6 +1,6 @@
 ---
 title: Współpraca zespołowa
-description: Ułatwiaj płynną komunikację i współpracę w swoim zespole.
+description: Ułatwia płynną komunikację i współpracę w zespole.
 categories: 
   - 'category_1'
   - 'category_3'
@@ -10,33 +10,33 @@ badges:
 avatar: '/activities/TeamCollaboration.webp'
 
 ---
-# Instrukcja korzystania i konfigurowania akcji "Współpraca zespołowa"
+# Instrukcja korzystania i konfiguracji akcji "Współpraca zespołowa"
 
 ## Opis akcji
 
-## **Konfigurowanie akcji "Współpraca zespołowa"**
+## **Konfiguracja akcji "Współpraca zespołowa"**
 
-### 1. Dodawanie akcji do procesu biznesowego
+### 1. Dodanie akcji do procesu biznesowego
 - Przejdź do sekcji **"Procesy biznesowe"** w swoim Bitrix24.
 - Utwórz nowy proces lub otwórz istniejący.
 - Znajdź akcję **"Współpraca zespołowa"** na liście dostępnych akcji i dodaj ją do procesu.
 
-### 2. Konfigurowanie narzędzi komunikacyjnych
+### 2. Konfiguracja narzędzi komunikacji
 - Włącz **czat** i **połączenia wideo** do natychmiastowej komunikacji.
-- Użyj **zadań grupowych** do rozdzielania obowiązków.
-- Skonfiguruj **wspólne dokumenty** i **przechowywanie plików** do pracy zespołowej.
+- Wykorzystuj **zadania grupowe** do rozdzielania obowiązków.
+- Skonfiguruj **współdzielone dokumenty** i **magazyn plików** do pracy zespołowej.
 
-### 3. Organizowanie przepływów pracy
+### 3. Organizacja przepływów pracy
 - Twórz **projekty** i **zadania** dla każdego członka zespołu.
 - Skonfiguruj **automatyczne powiadomienia** o nowych zadaniach i zmianach statusu.
-- Użyj **tablic Kanban** do wizualizacji postępów.
+- Używaj **tablic Kanban** do wizualizacji postępów.
 
 ### 4. Integracja z innymi narzędziami
-- Połącz **CRM**, aby uwzględniać klientów i transakcje.
-- Użyj **kalendarza** do planowania spotkań i terminów.
-- Skonfiguruj **analizy** do śledzenia wydajności zespołu.
+- Połącz **CRM** do zarządzania klientami i transakcjami.
+- Wykorzystuj **kalendarz** do planowania spotkań i terminów.
+- Skonfiguruj **analitykę** do śledzenia wydajności zespołu.
 
 ### 5. Analiza i optymalizacja
-- Korzystaj z wbudowanych raportów do analizy wykonania zadań i współpracy.
+- Korzystaj z wbudowanych raportów do analizy realizacji zadań i współpracy.
 - Skonfiguruj powiadomienia dla menedżerów z kluczowymi metrykami.
 - Optymalizuj procesy na podstawie danych analitycznych.

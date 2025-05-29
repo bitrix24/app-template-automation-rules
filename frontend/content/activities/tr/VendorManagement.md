@@ -6,7 +6,7 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/VendorManagement.webp'
 ---
 
@@ -17,14 +17,14 @@ avatar: '/activities/VendorManagement.webp'
 ## **"Tedarikçi Yönetimi" Eylemini Yapılandırma**
 
 ### 1. Eylemi Bir İş Sürecine Ekleme
-- Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
-- Yeni bir süreç oluşturun veya mevcut bir süreci açın.
+- Bitrix24'te **"İş Süreçleri"** bölümüne gidin.
+- Yeni bir süreç oluşturun veya var olan bir süreci açın.
 - Mevcut eylemler listesinden **"Tedarikçi Yönetimi"** eylemini bulun ve sürece ekleyin.
 
 ### 2. Tedarikçi Verilerini Ayarlama
 - Tedarikçi verilerini bir CSV dosyasından içe aktarın veya manuel olarak ekleyin.
 - Tedarikçi özelliklerini belirtin (örneğin, ad, iletişim bilgileri, sağlanan ürünler/hizmetler).
-- Her tedarikçi için **roller** ve **erişim hakları** ayarlayın.
+- Her tedarikçi için **roller** ve **erişim haklarını** ayarlayın.
 
 ### 3. Tedarikçi İlişkilerini Yönetme
 - Tedarikçi durumu değiştiğinde (örneğin, yeni sözleşme, sonlandırma) **otomatik veri güncellemelerini** kullanın.
@@ -33,9 +33,9 @@ avatar: '/activities/VendorManagement.webp'
 
 ### 4. Tedarik Sürecini Optimize Etme
 - Yerleşik raporları kullanarak tedarik verilerini analiz edin (örneğin, toplam harcama, tedarikçi performansı).
-- Sorumlu kişilere temel metriklerle ilgili bildirimler ayarlayın.
+- Sorumlu kişilere temel metriklerle bildirimler ayarlayın.
 - Analiz verilerine dayanarak tedarik sürecini optimize edin.
 
 ### 5. İş Süreçleriyle Entegrasyon
 - Otomatik veri güncellemeleri için tetikleyiciler ayarlayın (örneğin, sözleşme koşulları veya ödeme planları değiştiğinde).
-- İlgili anlaşmaları ve müşterileri hesaba katmak için CRM verilerini kullanın.
+- İlgili işlemleri ve müşterileri hesaba katmak için CRM verilerini kullanın.

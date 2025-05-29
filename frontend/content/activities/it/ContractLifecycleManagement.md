@@ -5,7 +5,7 @@ categories:
   - 'category_1'
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 
@@ -20,21 +20,21 @@ avatar: '/activities/ContractLifecycleManagement.webp'
 - Crea un nuovo processo o apri uno esistente.
 - Trova l'azione **"Gestione del Ciclo di Vita dei Contratti"** nell'elenco delle azioni disponibili e aggiungila al processo.
 
-### 2. Configurazione dei Parametri del Contratto
-- Crea un **modello di contratto** con tutte le sezioni necessarie (ad esempio, parti, termini, condizioni).
-- Assegna persone responsabili per ogni fase (ad esempio, avvocato, manager).
+### 2. Impostazione dei Parametri del Contratto
+- Crea un **modello di contratto** con tutte le sezioni necessarie (es. parti, termini, condizioni).
+- Assegna persone responsabili per ogni fase (es. avvocato, manager).
 - Imposta scadenze per ogni fase.
 
 ### 3. Monitoraggio del Ciclo di Vita del Contratto
-- Usa **notifiche automatiche** per ricordare eventi imminenti (ad esempio, rinnovo, risoluzione).
+- Usa **notifiche automatiche** per ricordare eventi imminenti (es. rinnovo, risoluzione).
 - Configura **sondaggi** e **questionari** per raccogliere feedback dalle parti.
-- Abilita l'**integrazione con il CRM** per tenere conto dei dati del contratto.
+- Abilita **integrazione CRM** per tenere conto dei dati del contratto.
 
 ### 4. Analisi e Reporting
-- Usa i report integrati per analizzare i dati dei contratti (ad esempio, numero di contratti attivi, date di completamento).
-- Configura notifiche per le persone responsabili con metriche chiave.
+- Utilizza i report integrati per analizzare i dati dei contratti (es. numero di contratti attivi, date di completamento).
+- Configura notifiche per i responsabili con metriche chiave.
 - Ottimizza il processo di gestione dei contratti basandoti sui dati analitici.
 
 ### 5. Integrazione con i Processi Aziendali
-- Configura trigger per aggiornamenti automatici dei dati (ad esempio, quando si modificano termini o condizioni).
+- Configura trigger per aggiornamenti automatici dei dati (es. quando si modificano termini o condizioni).
 - Usa i dati del CRM per tenere conto di affari e clienti correlati.

@@ -5,7 +5,7 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Video Tutorial
@@ -24,31 +24,31 @@ Para una guía visual sobre cómo configurar y usar la acción `IA y Aprendizaje
 
 ## Descripción de la Acción
 
-## **Configuración de la Acción "IA y Aprendizaje Automático"**
+## **Configurando la Acción "IA y Aprendizaje Automático"**
 
 ### 1: Accede al Diseñador de Flujos de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
 ### 2: Añade la Acción de IA y Aprendizaje Automático
 - En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **IA y Aprendizaje Automático** de la lista de acciones disponibles.
-- Coloca la acción donde desees que ocurra en tu flujo de trabajo.
+- Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
 ### 3: Configura la Acción
 - Automatización de Procesos:
   - Selecciona las tareas o procesos que deseas automatizar.
-  - Define las condiciones y disparadores para la automatización.
+  - Define las condiciones y activadores para la automatización.
 - Análisis Predictivo:
-  - Elige las fuentes de datos para el análisis (por ejemplo, CRM, datos de ventas).
-  - Configura los parámetros para generar pronósticos y conocimientos.
+  - Elige las fuentes de datos para el análisis (ej. CRM, datos de ventas).
+  - Configura los parámetros para generar pronósticos e insights.
 - Análisis de Datos:
   - Especifica los conjuntos de datos a analizar.
-  - Configura las métricas y KPIs a seguir.
+  - Configura las métricas y KPIs a rastrear.
 - Recomendaciones Inteligentes:
   - Habilita sugerencias impulsadas por IA para la optimización de procesos.
   - Personaliza los tipos de recomendaciones que deseas recibir.
 
 ### 4: Guarda y Activa
-- Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
+- Revisa tus ajustes para asegurarte de que todo está configurado correctamente.
 - Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de IA y Aprendizaje Automático en tu flujo de trabajo.

@@ -6,12 +6,12 @@ categories:
   - 'category_2'
 badges:
   - 'badge_2'
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/SalesPipeline.webp'
 ---
 ### Tutorial Video
 
-Untuk panduan visual mengenai cara menyediakan dan menggunakan tindakan "Saluran Jualan", tonton video:
+Untuk panduan visual tentang menyediakan dan menggunakan tindakan "Saluran Jualan", tonton video:
 
 <iframe
   class="aspect-video w-full mb-2 "
@@ -27,22 +27,22 @@ Tindakan `Saluran Jualan` direka untuk mengurus saluran jualan anda dengan cekap
 
 ### Cara Menggunakan Tindakan "Saluran Jualan"
 
-1. **Menambah Tindakan ke Proses Perniagaan:**
+1. **Menambahkan Tindakan ke Proses Perniagaan:**
   - Pergi ke bahagian "Proses Perniagaan" dalam Bitrix24 anda.
-  - Cipta proses perniagaan baharu atau buka yang sedia ada.
+  - Cipta proses perniagaan baru atau buka yang sedia ada.
   - Cari tindakan "Saluran Jualan" dalam senarai tindakan yang tersedia dan tambahkannya ke proses anda.
 
 2. **Mengkonfigurasi Tindakan:**
   - Tentukan peringkat saluran jualan yang akan terlibat dalam proses.
   - Sediakan syarat peralihan antara peringkat (contohnya, apabila status tawaran berubah).
-  - Tetapkan orang yang bertanggungjawab untuk setiap peringkat dan konfigurasi pemberitahuan.
+  - Tetapkan orang yang bertanggungjawab untuk setiap peringkat dan konfigurasikan pemberitahuan.
 
 3. **Melancarkan dan Menguji:**
   - Simpan tetapan dan lancarkan proses perniagaan.
-  - Uji bagaimana tindakan berfungsi dengan data sampel dan buat penyesuaian jika perlu.
+  - Uji bagaimana tindakan berfungsi dengan data sampel dan buat pelarasan jika perlu.
 
-### Petua untuk Penggunaan Berkesan
+### Tips untuk Penggunaan Berkesan
 
-- Analisis keberkesanan saluran jualan anda secara berkala dan sesuaikan tetapan tindakan seperti yang diperlukan.
+- Analisis keberkesanan saluran jualan anda secara berkala dan laraskan tetapan tindakan seperti yang diperlukan.
 - Gunakan pemberitahuan untuk memaklumkan ahli pasukan tentang perubahan peringkat tawaran.
 - Integrasikan tindakan dengan alat Bitrix24 lain, seperti CRM, tugas, dan kalendar.

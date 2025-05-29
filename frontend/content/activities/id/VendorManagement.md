@@ -6,11 +6,11 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/VendorManagement.webp'
 ---
 
-# Petunjuk Penggunaan dan Konfigurasi Aksi "Manajemen Vendor"
+# Panduan Penggunaan dan Konfigurasi Aksi "Manajemen Vendor"
 
 ## Deskripsi Aksi
 
@@ -18,16 +18,16 @@ avatar: '/activities/VendorManagement.webp'
 
 ### 1. Menambahkan Aksi ke Proses Bisnis
 - Buka bagian **"Proses Bisnis"** di Bitrix24 Anda.
-- Buat proses baru atau buka proses yang sudah ada.
+- Buat proses baru atau buka yang sudah ada.
 - Temukan aksi **"Manajemen Vendor"** dalam daftar aksi yang tersedia dan tambahkan ke proses.
 
-### 2. Mengatur Data Vendor
+### 2. Pengaturan Data Vendor
 - Impor data vendor dari file CSV atau tambahkan secara manual.
 - Tentukan karakteristik vendor (misalnya, nama, informasi kontak, produk/layanan yang disediakan).
 - Atur **peran** dan **hak akses** untuk setiap vendor.
 
 ### 3. Mengelola Hubungan dengan Vendor
-- Gunakan **pembaruan otomatis** data saat status vendor berubah (misalnya, kontrak baru, pemutusan).
+- Gunakan **pembaruan otomatis** data saat status vendor berubah (misalnya, kontrak baru, terminasi).
 - Atur notifikasi untuk peristiwa penting (misalnya, perpanjangan kontrak, tenggat pembayaran).
 - Aktifkan **integrasi dengan sistem akuntansi** untuk pemrosesan pembayaran otomatis.
 

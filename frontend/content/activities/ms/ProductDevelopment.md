@@ -22,15 +22,15 @@ avatar: '/activities/ProductDevelopment.webp'
 1. **Namakan Tindakan**: Berikan nama yang jelas untuk tindakan, seperti "Pembangunan Produk Baru."
 2. **Tentukan Peringkat**: Sediakan peringkat proses pembangunan produk anda (contohnya, Idea, Penyelidikan, Reka Bentuk, Ujian, Pelancaran).
 3. **Tetapkan Peranan**: Tentukan ahli pasukan yang bertanggungjawab untuk setiap peringkat.
-4. **Tetapkan Tarikh Akhir**: Tentukan jangka masa untuk setiap peringkat untuk memastikan kemajuan yang tepat pada masanya.
+4. **Tetapkan Tarikh Akhir**: Tentukan garis masa untuk setiap peringkat untuk memastikan kemajuan yang tepat pada masanya.
 
 ### Langkah 3: Sesuaikan Pemberitahuan
-1. Dayakan pemberitahuan untuk memastikan ahli pasukan dimaklumkan tentang tugasan dan tarikh akhir.
+1. Dayakan pemberitahuan untuk memaklumkan ahli pasukan tentang tugasan dan tarikh akhir.
 2. Sesuaikan templat pemberitahuan untuk memasukkan butiran relevan tentang proses pembangunan produk.
 
-### Langkah 4: Integrasi dengan Alat Lain
-1. Sambungkan tindakan dengan alat Bitrix24 lain, seperti CRM, Tugas, dan Kalendar, untuk fungsi yang lebih baik.
-2. Gunakan peraturan automasi untuk mencetuskan tindakan berdasarkan pencapaian tertentu (contohnya, secara automatik beralih ke peringkat seterusnya apabila ujian selesai).
+### Langkah 4: Integrasikan dengan Alat Lain
+1. Sambungkan tindakan dengan alat Bitrix24 lain, seperti CRM, Tugasan, dan Kalendar, untuk fungsi yang lebih baik.
+2. Gunakan peraturan automasi untuk mencetuskan tindakan berdasarkan pencapaian tertentu (contohnya, automatik beralih ke peringkat seterusnya apabila ujian selesai).
 
 ### Langkah 5: Pantau dan Optimumkan
 1. Gunakan tab **Analitik** untuk menjejaki kemajuan pembangunan produk anda.

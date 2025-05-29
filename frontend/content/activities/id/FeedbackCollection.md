@@ -5,7 +5,7 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/FeedbackCollection.webp'
 ---
 
@@ -13,11 +13,11 @@ avatar: '/activities/FeedbackCollection.webp'
 
 ## Deskripsi Aksi
 
-## **Konfigurasi Aksi "Pengumpulan Umpan Balik"**
+## Konfigurasi Aksi "Pengumpulan Umpan Balik"
 
 ### Langkah 1: Akses Business Process Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke bagian **CRM**.
+- Navigasi ke bagian **CRM**.
 - Pilih **Business Processes** dari menu sebelah kiri.
 - Klik **Create a Business Process** atau pilih yang sudah ada untuk diedit.
 
@@ -28,17 +28,17 @@ avatar: '/activities/FeedbackCollection.webp'
 ### Langkah 3: Konfigurasi Aksi Pengumpulan Umpan Balik
 - **Nama Aksi**: Pastikan aksi diberi label yang sesuai (misalnya, "Kumpulkan Umpan Balik Pelanggan").
 - **Saluran Umpan Balik**: Tentukan saluran yang akan digunakan untuk mengumpulkan umpan balik (misalnya, email, formulir web, survei).
-- **Pertanyaan Umpan Balik**: Tentukan pertanyaan atau prompt yang akan digunakan untuk mengumpulkan umpan balik. Anda dapat menggunakan templat yang sudah ada atau membuat pertanyaan kustom.
-- **Penanganan Tanggapan**: Atur cara tanggapan akan ditangani:
-- **Pengaturan Notifikasi**: Konfigurasi notifikasi untuk memberi tahu anggota tim yang relevan ketika umpan balik baru diterima.
+- **Pertanyaan Umpan Balik**: Definisikan pertanyaan atau prompt yang akan digunakan untuk mengumpulkan umpan balik. Anda dapat menggunakan templat yang sudah ada atau membuat pertanyaan kustom.
+- **Penanganan Respons**: Atur bagaimana respons akan ditangani:
+- **Pengaturan Notifikasi**: Konfigurasikan notifikasi untuk memberi tahu anggota tim terkait ketika umpan balik baru diterima.
 
 ### Langkah 4: Integrasi dengan CRM
-- **Tautkan ke Entitas CRM**: Pastikan umpan balik ditautkan ke entitas CRM yang relevan (misalnya, kesepakatan, kontak, atau perusahaan) untuk referensi yang mudah.
+- **Tautkan ke Entitas CRM**: Pastikan umpan balik ditautkan ke entitas CRM yang relevan (misalnya, deal, kontak, atau perusahaan) untuk referensi mudah.
 - **Aksi Otomatis**: Siapkan aksi otomatis berdasarkan analisis umpan balik (misalnya, email tindak lanjut untuk umpan balik negatif, penawaran hadiah untuk umpan balik positif).
 
 ### Langkah 5: Uji Alur Kerja
 - **Simulasikan Pengumpulan Umpan Balik**: Jalankan uji coba untuk memastikan umpan balik dikumpulkan dan diproses dengan benar.
-- **Tinjau Analisis**: Periksa apakah analisis umpan balik akurat dan notifikasi dikirim sesuai konfigurasi.
+- **Tinjau Analisis**: Periksa bahwa analisis umpan balik akurat dan notifikasi dikirim sesuai konfigurasi.
 
 ### Langkah 6: Luncurkan dan Pantau
 - **Aktifkan Business Process**: Setelah pengujian selesai, aktifkan business process.

@@ -21,19 +21,19 @@ avatar: '/activities/MarketingCampaigns.webp'
 
 ## 2. Ustawienie parametrów kampanii
 - Określ **nazwę kampanii** dla łatwej identyfikacji.
-- Wybierz **typ kampanii** (np. kampania e-mailowa, oferta promocyjna, kampania SMS).
-- Zdefiniuj **docelową grupę odbiorców** za pomocą segmentów klientów lub filtrów.
+- Wybierz **typ kampanii** (np. kampania emailowa, oferta promocyjna, kampania SMS).
+- Zdefiniuj **grupę docelową** za pomocą segmentów klientów lub filtrów.
 
 ## 3. Planowanie i uruchamianie
 - Ustaw **datę i godzinę rozpoczęcia** kampanii.
-- Skonfiguruj **wyzwalacze** do automatycznego uruchomienia (np. gdy zostanie dodany nowy lead lub zmieni się status transakcji).
+- Skonfiguruj **wyzwalacze** do automatycznego uruchomienia (np. gdy nowy lead zostanie dodany lub zmieni się status deala).
 - Sprawdź wszystkie parametry i uruchom kampanię.
 
 ## 4. Analiza wyników
-- Po zakończeniu kampanii automatycznie zbierz dane dotyczące wyników (np. liczba zaangażowanych klientów, wskaźnik konwersji, ROI).
-- Użyj wbudowanych **raportów** do analizy skuteczności kampanii.
+- Po zakończeniu kampanii automatycznie zbierz dane o wynikach (np. liczba zaangażowanych klientów, współczynnik konwersji, ROI).
+- Wykorzystaj wbudowane **raporty** do analizy skuteczności kampanii.
 - Skonfiguruj **powiadomienia** dla odpowiedzialnych osób z wynikami kampanii.
 
 ## 5. Optymalizacja procesów
-- Na podstawie uzyskanych danych wprowadź poprawki do swojej strategii kampanii marketingowych.
+- Na podstawie uzyskanych danych wprowadź korekty w strategii kampanii marketingowych.
 - Automatyzuj powtarzalne zadania, aby zwiększyć efektywność.

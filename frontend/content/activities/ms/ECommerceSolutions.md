@@ -5,7 +5,7 @@ categories:
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/ECommerceSolutions.webp'
 ---
 # Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Penyelesaian E-dagang"
@@ -28,7 +28,7 @@ avatar: '/activities/ECommerceSolutions.webp'
   - Sediakan aliran kerja automatik untuk pengesahan pesanan, pemprosesan pembayaran, dan notifikasi penghantaran.
   - Integrasikan dengan platform e-dagang anda untuk menyegerakkan pesanan secara masa nyata.
 - Penglibatan Pelanggan:
-  - Cipta templat emel yang diperibadikan untuk pengesahan pesanan, promosi, dan tindak lanjut.
+  - Cipta templat emel peribadi untuk pengesahan pesanan, promosi, dan tindak lanjut.
   - Sediakan respons automatik kepada pertanyaan dan maklum balas pelanggan.
 - Pengurusan Inventori:
   - Tentukan ambang tahap stok dan automasikan amaran untuk stok rendah.

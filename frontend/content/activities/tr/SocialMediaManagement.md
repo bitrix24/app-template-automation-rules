@@ -1,6 +1,6 @@
 ---
 title: Sosyal Medya Yönetimi
-description: Gönderileri planlayın ve sosyal platformlarda performansı takip edin.
+description: Gönderileri planlayın ve sosyal platformlardaki performansı takip edin.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -16,7 +16,7 @@ avatar: '/activities/SocialMediaManagement.webp'
 
 ## **"Sosyal Medya Yönetimi" Eylemini Yapılandırma**
 
-### 1. İş Sürecine Eylem Ekleme
+### 1. Eylemi Bir İş Sürecine Eklemek
 - Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
 - Mevcut eylemler listesinden **"Sosyal Medya Yönetimi"** eylemini bulun ve sürece ekleyin.
@@ -26,15 +26,15 @@ avatar: '/activities/SocialMediaManagement.webp'
 - Sosyal medya hesaplarınızı bağlayın (örneğin, Facebook, Instagram, LinkedIn).
 - Gerekli izinleri vererek yetkilendirme yapın.
 
-### 3. Gönderi Planlama
-- Görsel editörü kullanarak yeni bir gönderi oluşturun.
+### 3. Gönderileri Planlama
+- Görsel düzenleyiciyi kullanarak yeni bir gönderi oluşturun.
 - Metin, resim, video veya bağlantılar ekleyin.
-- Yayınlanma tarihini ve saatini belirleyin veya **"Otomatik Gönderim"** özelliğini kullanın.
+- Yayınlanma tarih ve saatini ayarlayın veya **"Otomatik Gönderim"** özelliğini kullanın.
 
 ### 4. Performansı Takip Etme
 - Yerleşik raporları kullanarak gönderi performansını analiz edin (örneğin, erişim, etkileşim, tıklamalar).
-- Sorumlu kişilere ana metriklerle ilgili bildirimler ayarlayın.
-- Analiz verilerine dayanarak içeriği optimize edin.
+- Sorumlu kişiler için temel metriklerle bildirimler ayarlayın.
+- Analiz verilerine göre içeriği optimize edin.
 
 ### 5. İş Süreçleriyle Entegrasyon
 - Otomatik gönderim için tetikleyiciler ayarlayın (örneğin, yeni bir kampanya başlatıldığında veya bir proje durumu değiştiğinde).

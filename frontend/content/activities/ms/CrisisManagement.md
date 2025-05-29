@@ -27,10 +27,10 @@ avatar: '/activities/CrisisManagement.webp'
 ### 3: Konfigurasi Tindakan
 - Penciptaan Pelan Krisis:
   - Tentukan langkah-langkah yang perlu diambil semasa krisis.
-  - Sertakan maklumat hubungan untuk kakitangan utama dan rakan kongsi luar.
+  - Masukkan maklumat hubungan untuk kakitangan utama dan rakan kongsi luar.
 - Amaran Automatik:
   - Sediakan pencetus untuk pengesanan krisis (contohnya, sentimen negatif, kegagalan sistem).
-  - Tentukan ahli pasukan atau jabatan yang perlu diberitahu.
+  - Nyatakan ahli pasukan atau jabatan yang perlu dimaklumkan.
 - Templat Komunikasi:
   - Cipta templat untuk komunikasi dalaman dan luaran.
   - Sesuaikan mesej untuk pelbagai jenis krisis.

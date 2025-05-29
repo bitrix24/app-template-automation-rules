@@ -4,7 +4,8 @@ description: Descubra e integre aplicativos de terceiros para aprimorar seu neg�
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_3'
+  - 'badge_1'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Tutorial em Vídeo
@@ -43,11 +44,11 @@ Para um guia visual sobre como configurar e usar a ação `IA e Aprendizado de M
   - Configure os parâmetros para gerar previsões e insights.
 - Análise de Dados:
   - Especifique os conjuntos de dados a serem analisados.
-  - Configure as métricas e KPIs para acompanhar.
+  - Configure as métricas e KPIs a serem rastreados.
 - Recomendações Inteligentes:
   - Ative sugestões baseadas em IA para otimização de processos.
   - Personalize os tipos de recomendações que deseja receber.
 
 ### 4: Salve e Ative
-- Revise suas configurações para garantir que tudo está configurado corretamente.
+- Revise suas configurações para garantir que tudo está corretamente configurado.
 - Clique em **Salvar** e depois em **Ativar** para colocar a ação IA e Aprendizado de Máquina em funcionamento no seu fluxo de trabalho.

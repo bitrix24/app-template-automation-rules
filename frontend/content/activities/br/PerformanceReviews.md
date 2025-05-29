@@ -5,7 +5,7 @@ categories:
   - 'category_2'
   - 'category_3'
 badges: 
-  - 'badge_3'
+  - 'badge_1'
 avatar: '/activities/PerformanceReviews.webp'
 ---
 
@@ -21,21 +21,21 @@ avatar: '/activities/PerformanceReviews.webp'
 - Encontre a ação **"Avaliações de Desempenho"** na lista de ações disponíveis e adicione-a ao processo.
 
 ### 2. Configurando Parâmetros de Avaliação
-- Crie um **modelo de avaliação** com critérios especificados (por exemplo, qualidade do trabalho, alcance de metas, habilidades).
-- Designe responsáveis pela realização das avaliações (por exemplo, gerente, RH).
-- Defina a frequência das avaliações (por exemplo, trimestral, anual).
+- Crie um **modelo de avaliação** com critérios especificados (ex.: qualidade do trabalho, alcance de metas, habilidades).
+- Atribua responsáveis pela condução das avaliações (ex.: gestor, RH).
+- Defina a frequência das avaliações (ex.: trimestral, anual).
 
 ### 3. Realizando Avaliações
-- Use **notificações automáticas** para lembrar sobre avaliações futuras.
-- Configure **pesquisas** e **questionários** para coletar feedback de funcionários e gerentes.
-- Ative a **integração com CRM** para considerar dados dos funcionários.
+- Use **notificações automáticas** para lembrar sobre avaliações pendentes.
+- Configure **pesquisas** e **questionários** para coletar feedback de colaboradores e gestores.
+- Ative a **integração com CRM** para considerar dados dos colaboradores.
 
 ### 4. Definindo Metas
-- Com base nos resultados das avaliações, defina **metas individuais** para cada funcionário.
+- Com base nos resultados das avaliações, defina **metas individuais** para cada colaborador.
 - Configure **lembretes automáticos** para prazos de metas.
 - Use **quadros Kanban** ou **gráficos de Gantt** para visualizar o progresso.
 
 ### 5. Análise e Otimização
-- Use relatórios integrados para analisar os resultados das avaliações (por exemplo, nível de desempenho, alcance de metas).
-- Configure notificações para gerentes com métricas-chave.
+- Utilize relatórios integrados para analisar os resultados das avaliações (ex.: nível de desempenho, alcance de metas).
+- Configure notificações para gestores com métricas-chave.
 - Otimize o processo de avaliação com base em dados analíticos.

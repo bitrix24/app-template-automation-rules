@@ -3,7 +3,10 @@ title: Perhubungan Awam
 description: Urus imej awam dan interaksi media anda dengan berkesan.
 categories: 
   - 'category_2'
-  - 'badge_3'
+  - 'category_3'
+badges: 
+  - 'badge_1'
+  - 'badge_2'
 avatar: '/activities/PublicRelations.webp'
 ---
 # Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Perhubungan Awam"
@@ -29,12 +32,12 @@ avatar: '/activities/PublicRelations.webp'
   - Muat naik templat siaran akhbar anda.
   - Pilih saluran media atau senarai kenalan untuk pengedaran.
 - Pengurusan Krisis:
-  - Tentukan pencetus untuk mod krisis (contohnya, ambang sentimen negatif).
+  - Takrifkan pencetus untuk mod krisis (contohnya, ambang sentimen negatif).
   - Sediakan respons atau amaran automatik untuk pasukan PR anda.
-- Komunikasi Pemegang Kepentingan:
+- Komunikasi Pihak Berkepentingan:
   - Cipta templat untuk kemas kini atau laporan berkala.
-  - Jadualkan kemas kini automatik untuk dihantar kepada pemegang kepentingan.
+  - Jadualkan kemas kini automatik untuk dihantar kepada pihak berkepentingan.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Perhubungan Awam aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Perhubungan Awam berfungsi dalam aliran kerja anda.

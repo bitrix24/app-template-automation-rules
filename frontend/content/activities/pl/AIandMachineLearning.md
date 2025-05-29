@@ -5,12 +5,12 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
-### Poradnik wideo
+### Instrukcja wideo
 
-Aby uzyskać wizualny przewodnik dotyczący konfiguracji i korzystania z akcji `AI i Uczenie Maszynowe`, obejrzyj film:
+Aby uzyskać wizualny przewodnik dotyczący konfiguracji i używania akcji `AI i Uczenie Maszynowe`, obejrzyj film:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -20,7 +20,7 @@ Aby uzyskać wizualny przewodnik dotyczący konfiguracji i korzystania z akcji `
   allowfullscreen>
 </iframe>
 
-# Instrukcja korzystania i konfiguracji akcji "AI i Uczenie Maszynowe"
+# Instrukcja korzystania i konfigurowania akcji "AI i Uczenie Maszynowe"
 
 ## Opis akcji
 
@@ -28,27 +28,27 @@ Aby uzyskać wizualny przewodnik dotyczący konfiguracji i korzystania z akcji `
 
 ### 1: Dostęp do Projektanta Procesów
 - Zaloguj się do swojego konta Bitrix24.
-- Przejdź do **CRM** > **Automatyzacja** > **Procesy Biznesowe**.
-- Kliknij **Utwórz Proces Biznesowy** lub wybierz istniejący, aby go edytować.
+- Przejdź do **CRM** > **Automatyzacja** > **Procesy biznesowe**.
+- Kliknij **Utwórz proces biznesowy** lub wybierz istniejący do edycji.
 
 ### 2: Dodaj akcję AI i Uczenie Maszynowe
 - W Projektancie Procesów przeciągnij i upuść akcję **AI i Uczenie Maszynowe** z listy dostępnych akcji.
 - Umieść akcję w miejscu, w którym ma wystąpić w Twoim procesie.
 
 ### 3: Skonfiguruj akcję
-- Automatyzacja Procesów:
+- Automatyzacja procesów:
   - Wybierz zadania lub procesy, które chcesz zautomatyzować.
   - Zdefiniuj warunki i wyzwalacze automatyzacji.
-- Analityka Predykcyjna:
-  - Wybierz źródła danych do analizy (np. CRM, dane sprzedażowe).
+- Analityka predykcyjna:
+  - Wybierz źródła danych do analizy (np. CRM, dane sprzedaży).
   - Skonfiguruj parametry generowania prognoz i wniosków.
-- Analiza Danych:
+- Analiza danych:
   - Określ zestawy danych do analizy.
   - Skonfiguruj metryki i KPI do śledzenia.
-- Inteligentne Rekomendacje:
-  - Włącz sugestie oparte na AI dotyczące optymalizacji procesów.
+- Inteligentne rekomendacje:
+  - Włącz sugestie oparte na AI dla optymalizacji procesów.
   - Dostosuj typy rekomendacji, które chcesz otrzymywać.
 
 ### 4: Zapisz i aktywuj
-- Przejrzyj swoje ustawienia, aby upewnić się, że wszystko jest prawidłowo skonfigurowane.
+- Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
 - Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję AI i Uczenie Maszynowe do swojego procesu.

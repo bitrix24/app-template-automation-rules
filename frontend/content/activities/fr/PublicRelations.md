@@ -6,38 +6,38 @@ categories:
   - 'category_3'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/PublicRelations.webp'
 ---
-# Instructions pour l'utilisation et la configuration de l'action "Relations Publiques"
+# Instructions pour l'Utilisation et la Configuration de l'Action "Relations Publiques"
 
-## Description de l'action
+## Description de l'Action
 
-## **Configuration de l'action "Relations Publiques"**
+## **Configuration de l'Action "Relations Publiques"**
 
-### 1 : Accédez au Concepteur de Workflow
+### 1 : Accéder au Concepteur de Workflow
 - Connectez-vous à votre compte Bitrix24.
-- Accédez à **CRM** > **Automatisation** > **Processus Métier**.
+- Accédez à **CRM** > **Automatisation** > **Processus Métiers**.
 - Cliquez sur **Créer un Processus Métier** ou sélectionnez-en un existant à modifier.
 
-### 2 : Ajoutez l'action Relations Publiques
-- Dans le Concepteur de Workflow, faites glisser et déposez l'action **Relations Publiques** depuis la liste des actions disponibles.
-- Positionnez l'action à l'endroit où vous souhaitez qu'elle se produise dans votre workflow.
+### 2 : Ajouter l'Action Relations Publiques
+- Dans le Concepteur de Workflow, glissez-déposez l'action **Relations Publiques** depuis la liste des actions disponibles.
+- Positionnez l'action à l'endroit souhaité dans votre workflow.
 
-### 3 : Configurez l'action
-- Surveillance des médias :
+### 3 : Configurer l'Action
+- Surveillance des Médias :
   - Spécifiez les mots-clés ou phrases à surveiller.
-  - Choisissez les canaux médiatiques (par exemple, réseaux sociaux, médias d'information) à suivre.
-- Distribution de communiqués de presse :
+  - Choisissez les canaux médiatiques (ex. réseaux sociaux, médias) à suivre.
+- Distribution de Communiqués de Presse :
   - Téléchargez votre modèle de communiqué de presse.
   - Sélectionnez les médias ou listes de contacts pour la distribution.
-- Gestion de crise :
-  - Définissez les déclencheurs pour le mode crise (par exemple, seuil de sentiment négatif).
-  - Configurez des réponses ou alertes automatiques pour votre équipe RP.
-- Communication avec les parties prenantes :
-  - Créez des modèles pour des mises à jour ou des rapports réguliers.
+- Gestion de Crise :
+  - Définissez les déclencheurs du mode crise (ex. seuil de sentiment négatif).
+  - Configurez des réponses automatiques ou alertes pour votre équipe RP.
+- Communication avec les Parties Prenantes :
+  - Créez des modèles pour des mises à jour ou rapports réguliers.
   - Planifiez l'envoi automatique de mises à jour aux parties prenantes.
 
-### 4 : Enregistrez et activez
+### 4 : Enregistrer et Activer
 - Vérifiez vos paramètres pour vous assurer que tout est configuré correctement.
 - Cliquez sur **Enregistrer** puis sur **Activer** pour rendre l'action Relations Publiques active dans votre workflow.

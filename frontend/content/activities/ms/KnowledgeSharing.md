@@ -4,7 +4,7 @@ description: Cipta pangkalan pengetahuan berpusat untuk organisasi anda.
 categories: 
   - 'category_2'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/KnowledgeSharing.webp'
 ---
 # Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Perkongsian Pengetahuan"
@@ -28,10 +28,10 @@ avatar: '/activities/KnowledgeSharing.webp'
   - Muat naik dokumen dan sumber sedia ada ke pangkalan pengetahuan.
 - Akses Mudah:
   - Tetapkan kebenaran untuk mengawal siapa yang boleh melihat dan mengedit sumber pengetahuan.
-  - Cipta pintasan atau pautan ke maklumat yang sering diakses.
+  - Cipta pintasan atau pautan kepada maklumat yang sering diakses.
 - Kolaborasi:
   - Dayakan komen dan maklum balas pada artikel pengetahuan.
-  - Tetapkan pemberitahuan untuk kemas kini dan perubahan pada pangkalan pengetahuan.
+  - Sediakan pemberitahuan untuk kemas kini dan perubahan kepada pangkalan pengetahuan.
 - Fungsi Carian:
   - Konfigurasi tetapan carian untuk memasukkan tag dan kata kunci yang relevan.
   - Pastikan semua dokumen diindeks untuk pengambilan pantas.

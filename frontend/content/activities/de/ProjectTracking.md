@@ -10,7 +10,7 @@ avatar: '/activities/ProjectTracking.webp'
 ---
 # Anleitung zur Verwendung und Konfiguration der Aktion "Projektverfolgung"
 
-## Beschreibung der Aktion
+## Aktionsbeschreibung
 
 ## **Konfiguration der Aktion "Projektverfolgung"**
 
@@ -26,14 +26,14 @@ avatar: '/activities/ProjectTracking.webp'
 
 ### 3. Fortschrittsverfolgung
 - Verwenden Sie **Kanban-Boards** oder **Gantt-Diagramme**, um den Fortschritt zu visualisieren.
-- Richten Sie automatische Benachrichtigungen für anstehende Fristen ein.
+- Richten Sie automatische Benachrichtigungen für bevorstehende Fristen ein.
 - Aktualisieren Sie regelmäßig den Status der Aufgaben, um die Daten aktuell zu halten.
 
 ### 4. Analyse und Berichterstattung
-- Verwenden Sie integrierte Berichte, um die Aufgabenabschlussrate zu analysieren (z.B. Prozentsatz der abgeschlossenen Aufgaben, Verzögerungen).
+- Nutzen Sie integrierte Berichte, um die Aufgabenabwicklung zu analysieren (z.B. Prozentsatz der erledigten Aufgaben, Verzögerungen).
 - Richten Sie Benachrichtigungen für Manager mit wichtigen Kennzahlen ein.
 - Optimieren Sie Prozesse basierend auf Analysedaten.
 
 ### 5. Integration mit Geschäftsprozessen
-- Richten Sie Trigger für automatische Statusaktualisierungen ein (z.B. wenn eine Aufgabe abgeschlossen ist oder sich Fristen ändern).
-- Verwenden Sie CRM-Daten, um verbundene Geschäfte und Kunden zu berücksichtigen.
+- Richten Sie Trigger für automatische Statusaktualisierungen ein (z.B. wenn eine Aufgabe abgeschlossen ist oder Fristen sich ändern).
+- Verwenden Sie CRM-Daten, um verwandte Deals und Kunden zu berücksichtigen.

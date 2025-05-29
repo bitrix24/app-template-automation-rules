@@ -8,28 +8,28 @@ badges:
   - 'badge_2' 
 avatar: '/activities/MobileAppDevelopment.webp'
 ---
-# Instruksi untuk Menggunakan dan Mengonfigurasi Aksi "Pengembangan Aplikasi Mobile"
+# Petunjuk Penggunaan dan Konfigurasi Aksi "Pengembangan Aplikasi Mobile"
 
 ## Deskripsi Aksi
 
-## **Mengonfigurasi Aksi "Pengembangan Aplikasi Mobile"**
+## **Konfigurasi Aksi "Pengembangan Aplikasi Mobile"**
 
 ### 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Automation** > **Business Processes**.
+- Navigasi ke **CRM** > **Automation** > **Business Processes**.
 - Klik **Create Business Process** atau pilih yang sudah ada untuk diedit.
 
 ### 2: Tambahkan Aksi Pengembangan Aplikasi Mobile
 - Di Workflow Designer, seret dan lepas aksi **Pengembangan Aplikasi Mobile** dari daftar aksi yang tersedia.
-- Posisikan aksi di tempat yang Anda inginkan dalam alur kerja Anda.
+- Posisikan aksi di tempat yang Anda inginkan dalam alur kerja.
 
 ### 3: Konfigurasi Aksi
 - Manajemen Proyek:
-  - Tentukan tugas dan tonggak untuk proyek pengembangan aplikasi mobile Anda.
+  - Tentukan tugas dan milestone untuk proyek pengembangan aplikasi mobile Anda.
   - Tetapkan tugas kepada anggota tim dan atur tenggat waktu.
 - Kolaborasi Tim:
   - Siapkan saluran komunikasi untuk diskusi tim.
-  - Integrasikan dengan Bitrix24 Chat dan Video Calls untuk kolaborasi waktu nyata.
+  - Integrasikan dengan Bitrix24 Chat dan Video Calls untuk kolaborasi real-time.
 - Kontrol Versi:
   - Tentukan konvensi penamaan versi dan jadwal rilis.
   - Lacak perubahan dan pembaruan pada aplikasi Anda.
@@ -39,4 +39,4 @@ avatar: '/activities/MobileAppDevelopment.webp'
 
 ### 4: Simpan dan Aktifkan
 - Tinjau pengaturan Anda untuk memastikan semuanya dikonfigurasi dengan benar.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk membuat aksi Pengembangan Aplikasi Mobile aktif dalam alur kerja Anda.
+- Klik **Save** dan kemudian **Activate** untuk mengaktifkan aksi Pengembangan Aplikasi Mobile dalam alur kerja Anda.

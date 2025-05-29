@@ -1,38 +1,38 @@
 ---
-title: Analiza Biznesowa
-description: Wykorzystaj oparte na danych wnioski, aby podejmować świadome decyzje.
+title: Analityka Biznesowa
+description: Wykorzystaj dane do podejmowania świadomych decyzji.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
 avatar: '/activities/BusinessAnalytics.webp'
 ---
-# Instrukcja korzystania i konfiguracji akcji "Analiza Biznesowa"
+# Instrukcja korzystania i konfiguracji akcji "Analityka Biznesowa"
 
 ## Opis akcji
 
-## **Konfiguracja akcji "Analiza Biznesowa"**
+## **Konfiguracja akcji "Analityka Biznesowa"**
 
 ### 1. Dodawanie akcji do procesu biznesowego
-- Przejdź do sekcji **"Procesy Biznesowe"** w swoim Bitrix24.
-- Utwórz nowy proces lub otwórz istniejący.
-- Znajdź akcję **"Analiza Biznesowa"** na liście dostępnych akcji i dodaj ją do procesu.
+- Przejdź do sekcji **"Procesy biznesowe"** w Twoim Bitrix24.
+- Utwórz nowy proces lub otwórz istnejący.
+- Znajdź akcję **"Analityka Biznesowa"** na liście dostępnych akcji i dodaj ją do procesu.
 
 ### 2. Konfiguracja źródeł danych
 - Połącz niezbędne źródła danych (np. CRM, platformy marketingowe, systemy księgowe).
-- Skonfiguruj synchronizację danych w celu automatycznej aktualizacji analiz.
+- Skonfiguruj synchronizację danych dla automatycznych aktualizacji analityki.
 - Upewnij się, że dane są poprawnie zintegrowane i dostępne do analizy.
 
 ### 3. Tworzenie raportów i pulpitów nawigacyjnych
 - Użyj wbudowanych narzędzi do tworzenia raportów (np. wykresy, tabele, diagramy).
-- Skonfiguruj pulpity nawigacyjne, aby wizualizować kluczowe metryki (np. sprzedaż, konwersja, retencja klientów).
-- Skonfiguruj automatyczne generowanie raportów zgodnie z harmonogramem.
+- Skonfiguruj pulpity nawigacyjne do wizualizacji kluczowych metryk (np. sprzedaż, konwersja, retencja klientów).
+- Ustaw automatyczne generowanie raportów według harmonogramu.
 
 ### 4. Analiza danych i podejmowanie decyzji
 - Eksploruj dane za pomocą filtrów i segmentacji, aby identyfikować trendy i wzorce.
-- Użyj narzędzi analitycznych do prognozowania i modelowania scenariuszy.
+- Korzystaj z narzędzi analitycznych do prognozowania i modelowania scenariuszy.
 - Podejmuj decyzje oparte na danych, aby optymalizować procesy biznesowe.
 
 ### 5. Integracja z procesami biznesowymi
-- Skonfiguruj wyzwalacze, aby automatycznie uruchamiać zadania analityczne (np. gdy dane się zmienią lub etap procesu zostanie zakończony).
-- Użyj analiz do automatyzacji decyzji (np. wysyłanie powiadomień, zmiana statusów).
+- Skonfiguruj wyzwalacze do automatycznego uruchamiania zadań analitycznych (np. przy zmianie danych lub zakończeniu etapu procesu).
+- Wykorzystuj analitykę do automatyzacji decyzji (np. wysyłanie powiadomień, zmiana statusów).

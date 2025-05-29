@@ -5,7 +5,7 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Tutorial Video
@@ -37,18 +37,18 @@ Untuk panduan visual mengenai penyediaan dan penggunaan tindakan `AI dan Pembela
 
 ### 3: Konfigurasi Tindakan
 - Automasi Proses:
-  - Pilih tugas atau proses yang anda ingin automasikan.
+  - Pilih tugas atau proses yang anda mahu automasikan.
   - Tentukan syarat dan pencetus untuk automasi.
 - Analitik Ramalan:
   - Pilih sumber data untuk analisis (contohnya, CRM, data jualan).
   - Sediakan parameter untuk menjana ramalan dan pandangan.
 - Analisis Data:
   - Tentukan set data untuk dianalisis.
-  - Konfigurasi metrik dan KPI untuk dikesan.
+  - Konfigurasi metrik dan KPI untuk ditjejaki.
 - Cadangan Pintar:
   - Dayakan cadangan berasaskan AI untuk pengoptimuman proses.
-  - Sesuaikan jenis cadangan yang anda ingin terima.
+  - Sesuaikan jenis cadangan yang anda mahu terima.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan AI dan Pembelajaran Mesin hidup dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan AI dan Pembelajaran Mesin aktif dalam aliran kerja anda.

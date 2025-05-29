@@ -1,6 +1,6 @@
 ---
 title: Tworzenie Aplikacji Mobilnych
-description: Twórz i zarządzaj aplikacjami mobilnymi, aby dotrzeć do swojej publiczności.
+description: Buduj i zarządzaj aplikacjami mobilnymi, aby dotrzeć do swojej publiczności.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -8,7 +8,7 @@ badges:
   - 'badge_2' 
 avatar: '/activities/MobileAppDevelopment.webp'
 ---
-# Instrukcja Użycia i Konfiguracji Akcji "Tworzenie Aplikacji Mobilnych"
+# Instrukcja Używania i Konfiguracji Akcji "Tworzenie Aplikacji Mobilnych"
 
 ## Opis Akcji
 
@@ -17,26 +17,26 @@ avatar: '/activities/MobileAppDevelopment.webp'
 ### 1: Dostęp do Projektanta Procesów
 - Zaloguj się do swojego konta Bitrix24.
 - Przejdź do **CRM** > **Automatyzacja** > **Procesy Biznesowe**.
-- Kliknij **Utwórz Proces Biznesowy** lub wybierz istniejący, aby go edytować.
+- Kliknij **Utwórz Proces Biznesowy** lub wybierz istniejący do edycji.
 
-### 2: Dodaj Akcję Tworzenia Aplikacji Mobilnych
+### 2: Dodanie Akcji Tworzenia Aplikacji Mobilnych
 - W Projektancie Procesów przeciągnij i upuść akcję **Tworzenie Aplikacji Mobilnych** z listy dostępnych akcji.
-- Umieść akcję w miejscu, w którym ma wystąpić w Twoim procesie.
+- Umieść akcję w miejscu, gdzie ma wystąpić w Twoim procesie.
 
-### 3: Skonfiguruj Akcję
+### 3: Konfiguracja Akcji
 - Zarządzanie Projektem:
-  - Zdefiniuj zadania i kamienie milowe dla swojego projektu tworzenia aplikacji mobilnej.
-  - Przydziel zadania członkom zespołu i ustaw terminy.
+  - Zdefiniuj zadania i kamienie milowe dla projektu tworzenia aplikacji mobilnej.
+  - Przypisz zadania członkom zespołu i ustaw terminy.
 - Współpraca Zespołu:
-  - Skonfiguruj kanały komunikacji do dyskusji zespołowych.
-  - Zintegruj z Bitrix24 Chat i Połączenia Wideo w celu współpracy w czasie rzeczywistym.
+  - Skonfiguruj kanały komunikacji dla dyskusji zespołowych.
+  - Zintegruj z Czatem i Połączeniami Wideo Bitrix24 dla współpracy w czasie rzeczywistym.
 - Kontrola Wersji:
   - Określ konwencje nazewnictwa wersji i harmonogramy wydań.
   - Śledź zmiany i aktualizacje w swojej aplikacji.
 - Integracja Opinii Użytkowników:
-  - Podłącz swoją aplikację do Bitrix24, aby zbierać opinie użytkowników.
-  - Skonfiguruj zautomatyzowane procesy do analizy i reagowania na opinie.
+  - Połącz swoją aplikację z Bitrix24, aby zbierać opinie użytkowników.
+  - Skonfiguruj zautomatyzowane procesy do analizy i działania na podstawie opinii.
 
 ### 4: Zapisz i Aktywuj
-- Sprawdź swoje ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
-- Kliknij **Zapisz**, a następnie **Aktywuj**, aby wprowadzić akcję Tworzenie Aplikacji Mobilnych do życia w Twoim procesie.
+- Sprawdź ustawienia, aby upewnić się, że wszystko jest poprawnie skonfigurowane.
+- Kliknij **Zapisz**, a następnie **Aktywuj**, aby akcja Tworzenie Aplikacji Mobilnych stała się aktywna w Twoim procesie.

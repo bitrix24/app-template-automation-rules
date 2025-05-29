@@ -1,41 +1,41 @@
 ---
-title: Pengautomasian Pemasaran
-description: Automasikan kempen pemasaran anda dan jejak prestasi mereka.
+title: Automasi Pemasaran
+description: Automasikan kempen pemasaran anda dan jejak prestasinya.
 categories: 
   - 'category_1'
 badges: 
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/MarketingAutomation.webp'
 ---
-# Arahan untuk Menggunakan dan Mengkonfigurasi Tindakan "Pengautomasian Pemasaran"
+# Panduan Menggunakan dan Mengkonfigurasi Tindakan "Automasi Pemasaran"
 
 ## Penerangan Tindakan
 
-## **Mengkonfigurasi Tindakan "Pengautomasian Pemasaran"**
+## **Mengkonfigurasi Tindakan "Automasi Pemasaran"**
 
 ### 1: Akses Pereka Aliran Kerja
 - Log masuk ke akaun Bitrix24 anda.
 - Navigasi ke **CRM** > **Automasi** > **Proses Perniagaan**.
 - Klik pada **Cipta Proses Perniagaan** atau pilih yang sedia ada untuk diedit.
 
-### 2: Tambah Tindakan Pengautomasian Pemasaran
-- Dalam Pereka Aliran Kerja, seret dan lepaskan tindakan **Pengautomasian Pemasaran** dari senarai tindakan yang tersedia.
+### 2: Tambah Tindakan Automasi Pemasaran
+- Dalam Pereka Aliran Kerja, seret dan lepaskan tindakan **Automasi Pemasaran** dari senarai tindakan yang tersedia.
 - Letakkan tindakan di mana anda mahu ia berlaku dalam aliran kerja anda.
 
 ### 3: Konfigurasi Tindakan
 - Automasi Kempen:
-  - Tentukan pencetus untuk memulakan kempen (cth., prospek baru, tarikh tertentu).
-  - Sediakan tugas automatik seperti penghantaran e-mel, siaran media sosial, atau pengurusan iklan.
-- Jejak Prestasi:
-  - Pilih penunjuk prestasi utama (KPI) untuk dijejak (cth., kadar buka, kadar klik).
+  - Tentukan pencetus untuk memulakan kempen (contohnya, prospek baru, tarikh tertentu).
+  - Sediakan tugas automatik seperti penghantaran e-mel, penyiaran media sosial, atau pengurusan iklan.
+- Jejakan Prestasi:
+  - Pilih penunjuk prestasi utama (KPI) untuk dijejak (contohnya, kadar bukaan, kadar klik).
   - Konfigurasi papan pemuka untuk memvisualisasikan prestasi kempen.
 - Pemeliharaan Prospek:
-  - Cipta urutan tindak lanjut automatik berdasarkan tingkah laku prospek.
-  - Sediakan peringatan dan pemberitahuan untuk pasukan jualan anda.
+  - Cipta urutan susulan automatik berdasarkan tingkah laku prospek.
+  - Sediakan peringatan dan notifikasi untuk pasukan jualan anda.
 - Penyesuaian:
-  - Tentukan segmen khalayak berdasarkan data CRM.
+  - Tentukan segmen audiens berdasarkan data CRM.
   - Sesuaikan kandungan dan mesej untuk setiap segmen.
 
 ### 4: Simpan dan Aktifkan
 - Semak tetapan anda untuk memastikan semuanya dikonfigurasi dengan betul.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Pengautomasian Pemasaran aktif dalam aliran kerja anda.
+- Klik **Simpan** dan kemudian **Aktifkan** untuk menjadikan tindakan Automasi Pemasaran aktif dalam aliran kerja anda.

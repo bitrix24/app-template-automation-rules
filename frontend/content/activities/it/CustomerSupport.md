@@ -21,12 +21,12 @@ avatar: '/activities/CustomerSupport.webp'
 
 ### 2. Configurazione dell'Integrazione
 - Una volta installata l'applicazione, accedi alle sue impostazioni.
-- Configura l'integrazione con Bitrix24 secondo le istruzioni dell'applicazione.
+- Configura l'integrazione con Bitrix24 seguendo le istruzioni dell'applicazione.
 
 ### 3. Mappatura dei Campi
 - Durante la configurazione dell'azione "Assistenza Clienti", mappa i campi di Bitrix24 ai campi dell'applicazione selezionata.
 - Ciò consente il trasferimento dei dati tra Bitrix24 e l'applicazione di terze parti.
 
 ### 4. Impostazione delle Condizioni
-- Stabilisci le condizioni in cui l'azione "Assistenza Clienti" dovrebbe essere eseguita.
-- Ciò consente l'automazione dell'azione in base a eventi o criteri specifici.
+- Definisci le condizioni in cui l'azione "Assistenza Clienti" dovrebbe essere eseguita.
+- Ciò permette di automatizzare l'azione in base a eventi o criteri specifici.

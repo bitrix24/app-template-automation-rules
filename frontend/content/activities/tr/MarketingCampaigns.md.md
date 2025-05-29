@@ -14,10 +14,10 @@ avatar: '/activities/MarketingCampaigns.webp'
 
 ## **"Pazarlama Kampanyaları" Eylemini Yapılandırma**
 
-## 1. Eylemi Bir İş Sürecine Ekleme
-- Bitrix24'ünüzdeki **"İş Süreçleri"** bölümüne gidin.
+## 1. Eylemi Bir İş Sürecine Eklemek
+- Bitrix24'teki **"İş Süreçleri"** bölümüne gidin.
 - Yeni bir süreç oluşturun veya mevcut bir süreci açın.
-- Mevcut eylemler listesinde **"Pazarlama Kampanyaları"** eylemini bulun ve sürece ekleyin.
+- Mevcut eylemler listesinden **"Pazarlama Kampanyaları"** eylemini bulun ve sürece ekleyin.
 
 ## 2. Kampanya Parametrelerini Ayarlama
 - Kolay tanımlama için **kampanya adını** belirtin.
@@ -30,10 +30,10 @@ avatar: '/activities/MarketingCampaigns.webp'
 - Tüm parametreleri doğrulayın ve kampanyayı başlatın.
 
 ## 4. Sonuçları Analiz Etme
-- Kampanya bittikten sonra, sonuçlarla ilgili verileri otomatik olarak toplayın (örneğin, ilgilenen müşteri sayısı, dönüşüm oranı, ROI).
+- Kampanya bittikten sonra, sonuçlarla ilgili verileri otomatik olarak toplayın (örneğin, katılım sağlayan müşteri sayısı, dönüşüm oranı, ROI).
 - Kampanya etkinliğini analiz etmek için yerleşik **raporları** kullanın.
 - Kampanya sonuçlarıyla ilgili sorumlu kişilere **bildirimler** ayarlayın.
 
 ## 5. Süreçleri Optimize Etme
-- Elde edilen verilere dayanarak, pazarlama kampanyası stratejinizde ayarlamalar yapın.
+- Elde edilen verilere dayanarak, pazarlama kampanya stratejinizde düzenlemeler yapın.
 - Verimliliği artırmak için tekrarlayan görevleri otomatikleştirin.

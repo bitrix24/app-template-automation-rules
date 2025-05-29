@@ -9,18 +9,18 @@ avatar: '/activities/BlockchainTechnology.webp'
 ---
 # Anleitung zur Verwendung und Konfiguration der "Blockchain-Technologie"-Aktion
 
-## Aktionsbeschreibung
+## Beschreibung der Aktion
 
 ## **Konfiguration der "App Marketplace"-Aktion**
 
 ### 1: Zugriff auf den Workflow-Designer
-- Melden Sie sich bei Ihrem Bitrix24-Konto an.
+- Melden Sie sich in Ihrem Bitrix24-Konto an.
 - Navigieren Sie zu **CRM** > **Automatisierung** > **Geschäftsprozesse**.
-- Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen vorhandenen aus, um ihn zu bearbeiten.
+- Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen bestehenden aus, um ihn zu bearbeiten.
 
 ### 2: Fügen Sie die Blockchain-Technologie-Aktion hinzu
-- Ziehen Sie im Workflow-Designer die **Blockchain-Technologie**-Aktion aus der Liste der verfügbaren Aktionen per Drag & Drop.
-- Positionieren Sie die Aktion an der Stelle, an der sie in Ihrem Workflow auftreten soll.
+- Ziehen Sie im Workflow-Designer die **Blockchain-Technologie**-Aktion aus der Liste der verfügbaren Aktionen.
+- Positionieren Sie die Aktion an der gewünschten Stelle in Ihrem Workflow.
 
 ### 3: Konfigurieren Sie die Aktion
 - Sichere Transaktionen:
@@ -28,7 +28,7 @@ avatar: '/activities/BlockchainTechnology.webp'
   - Wählen Sie das Blockchain-Netzwerk (z.B. Ethereum, Hyperledger) für die Integration aus.
 - Smart Contracts:
   - Laden Sie Smart Contract-Vorlagen hoch oder erstellen Sie sie für automatisierte Prozesse.
-  - Definieren Sie Auslöser und Bedingungen für die Vertragsausführung.
+  - Definieren Sie Trigger und Bedingungen für die Vertragsausführung.
 - Datenintegrität:
   - Wählen Sie die Datenfelder oder Datensätze aus, die auf der Blockchain gespeichert werden sollen.
   - Konfigurieren Sie Zugriffsberechtigungen für autorisierte Benutzer.
@@ -38,4 +38,4 @@ avatar: '/activities/BlockchainTechnology.webp'
 
 ### 4: Speichern und Aktivieren
 - Überprüfen Sie Ihre Einstellungen, um sicherzustellen, dass alles korrekt konfiguriert ist.
-- Klicken Sie auf **Speichern** und dann auf **Aktivieren**, um die Blockchain-Technologie-Aktion in Ihrem Workflow zu aktivieren.
+- Klicken Sie auf **Speichern** und dann auf **Aktivieren**, um die Blockchain-Technologie-Aktion in Ihrem Workflow live zu schalten.

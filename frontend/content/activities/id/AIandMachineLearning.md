@@ -5,12 +5,12 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
-### Video Tutorial
+### Tutorial Video
 
-Untuk panduan visual tentang cara menyiapkan dan menggunakan aksi `AI dan Pembelajaran Mesin`, tonton video berikut:
+Untuk panduan visual tentang menyiapkan dan menggunakan aksi `AI dan Pembelajaran Mesin`, tonton video berikut:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -20,16 +20,16 @@ Untuk panduan visual tentang cara menyiapkan dan menggunakan aksi `AI dan Pembel
   allowfullscreen>
 </iframe>
 
-# Petunjuk Penggunaan dan Konfigurasi Aksi "AI dan Pembelajaran Mesin"
+# Panduan Penggunaan dan Konfigurasi Aksi "AI dan Pembelajaran Mesin"
 
 ## Deskripsi Aksi
 
-## **Mengkonfigurasi Aksi "AI dan Pembelajaran Mesin"**
+## **Konfigurasi Aksi "AI dan Pembelajaran Mesin"**
 
 ### 1: Akses Workflow Designer
 - Masuk ke akun Bitrix24 Anda.
-- Navigasikan ke **CRM** > **Otomatisasi** > **Proses Bisnis**.
-- Klik **Buat Proses Bisnis** atau pilih yang sudah ada untuk diedit.
+- Navigasi ke **CRM** > **Automation** > **Business Processes**.
+- Klik **Create Business Process** atau pilih yang sudah ada untuk diedit.
 
 ### 2: Tambahkan Aksi AI dan Pembelajaran Mesin
 - Di Workflow Designer, seret dan lepas aksi **AI dan Pembelajaran Mesin** dari daftar aksi yang tersedia.
@@ -37,11 +37,11 @@ Untuk panduan visual tentang cara menyiapkan dan menggunakan aksi `AI dan Pembel
 
 ### 3: Konfigurasi Aksi
 - Otomatisasi Proses:
-  - Pilih tugas atau proses yang ingin Anda otomatisasi.
+  - Pilih tugas atau proses yang ingin diotomatisasi.
   - Tentukan kondisi dan pemicu untuk otomatisasi.
 - Analitik Prediktif:
   - Pilih sumber data untuk analisis (misalnya, CRM, data penjualan).
-  - Atur parameter untuk menghasilkan ramalan dan wawasan.
+  - Atur parameter untuk menghasilkan prediksi dan wawasan.
 - Analisis Data:
   - Tentukan dataset yang akan dianalisis.
   - Konfigurasi metrik dan KPI yang akan dilacak.
@@ -51,4 +51,4 @@ Untuk panduan visual tentang cara menyiapkan dan menggunakan aksi `AI dan Pembel
 
 ### 4: Simpan dan Aktifkan
 - Tinjau pengaturan Anda untuk memastikan semuanya dikonfigurasi dengan benar.
-- Klik **Simpan** dan kemudian **Aktifkan** untuk membuat aksi AI dan Pembelajaran Mesin aktif dalam alur kerja Anda.
+- Klik **Save** lalu **Activate** untuk mengaktifkan aksi AI dan Pembelajaran Mesin dalam alur kerja Anda.

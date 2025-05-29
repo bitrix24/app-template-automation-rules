@@ -1,6 +1,6 @@
 ---
 title: Gestión de Redes Sociales
-description: Programa publicaciones y realiza un seguimiento del rendimiento en las plataformas sociales.
+description: Programa publicaciones y monitorea el rendimiento en plataformas sociales.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -10,7 +10,7 @@ badges:
 avatar: '/activities/SocialMediaManagement.webp'
 ---
 
-# Instrucción para Usar y Configurar la Acción "Gestión de Redes Sociales"
+# Instrucción para Usar y Configurar la Acción ""Gestión de Redes Sociales""
 
 ## Descripción de la Acción
 
@@ -19,23 +19,23 @@ avatar: '/activities/SocialMediaManagement.webp'
 ### 1. Agregar la Acción a un Proceso de Negocio
 - Ve a la sección **"Procesos de Negocio"** en tu Bitrix24.
 - Crea un nuevo proceso o abre uno existente.
-- Busca la acción **"Gestión de Redes Sociales"** en la lista de acciones disponibles y agrégala al proceso.
+- Encuentra la acción **"Gestión de Redes Sociales"** en la lista de acciones disponibles y agrégala al proceso.
 
 ### 2. Conectar Cuentas de Redes Sociales
 - Ve a la sección **"Redes Sociales"** en la configuración de Bitrix24.
-- Conecta tus cuentas de redes sociales (por ejemplo, Facebook, Instagram, LinkedIn).
+- Conecta tus cuentas de redes sociales (ej. Facebook, Instagram, LinkedIn).
 - Autoriza y otorga los permisos necesarios para el acceso.
 
 ### 3. Programar Publicaciones
-- Crea una nueva publicación utilizando el editor visual.
+- Crea una nueva publicación usando el editor visual.
 - Añade texto, imágenes, videos o enlaces.
-- Establece la fecha y hora de publicación o utiliza la función **"Autopublicación"**.
+- Establece la fecha y hora de publicación o usa la función **"Autopublicación"**.
 
-### 4. Seguimiento del Rendimiento
-- Utiliza informes integrados para analizar el rendimiento de las publicaciones (por ejemplo, alcance, interacción, clics).
-- Configura notificaciones para las personas responsables con métricas clave.
-- Optimiza el contenido basado en los datos de análisis.
+### 4. Monitorear el Rendimiento
+- Usa informes integrados para analizar el rendimiento de las publicaciones (ej. alcance, interacción, clics).
+- Configura notificaciones para los responsables con métricas clave.
+- Optimiza el contenido basado en datos analíticos.
 
-### 5. Integración con Procesos de Negocio
-- Configura disparadores para publicaciones automáticas (por ejemplo, cuando se lanza una nueva campaña o cambia el estado de un proyecto).
-- Utiliza datos del CRM para personalizar el contenido.
+### 5. Integrar con Procesos de Negocio
+- Configura disparadores para publicaciones automáticas (ej. cuando se lanza una nueva campaña o cambia el estado de un proyecto).
+- Usa datos del CRM para personalizar el contenido.

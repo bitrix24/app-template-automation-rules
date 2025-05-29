@@ -5,12 +5,12 @@ categories:
   - 'category_1'
 badges: 
   - 'badge_1'
-  - 'badge_3'
+  - 'badge_2'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
 ### Video-Tutorial
 
-Für eine visuelle Anleitung zur Einrichtung und Verwendung der Aktion `KI und maschinelles Lernen` sehen Sie sich das Video an:
+Für eine visuelle Anleitung zur Einrichtung und Verwendung der Aktion `KI und maschinelles Lernen` schauen Sie sich das Video an:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -27,13 +27,13 @@ Für eine visuelle Anleitung zur Einrichtung und Verwendung der Aktion `KI und m
 ## **Konfiguration der Aktion "KI und maschinelles Lernen"**
 
 ### 1: Zugriff auf den Workflow-Designer
-- Melden Sie sich bei Ihrem Bitrix24-Konto an.
+- Melden Sie sich in Ihrem Bitrix24-Konto an.
 - Navigieren Sie zu **CRM** > **Automatisierung** > **Geschäftsprozesse**.
 - Klicken Sie auf **Geschäftsprozess erstellen** oder wählen Sie einen bestehenden aus, um ihn zu bearbeiten.
 
 ### 2: Fügen Sie die Aktion "KI und maschinelles Lernen" hinzu
 - Ziehen Sie im Workflow-Designer die Aktion **KI und maschinelles Lernen** aus der Liste der verfügbaren Aktionen.
-- Positionieren Sie die Aktion an der Stelle, an der sie in Ihrem Workflow auftreten soll.
+- Positionieren Sie die Aktion an der gewünschten Stelle in Ihrem Workflow.
 
 ### 3: Konfigurieren Sie die Aktion
 - Prozessautomatisierung:
@@ -44,11 +44,11 @@ Für eine visuelle Anleitung zur Einrichtung und Verwendung der Aktion `KI und m
   - Richten Sie die Parameter für die Generierung von Prognosen und Erkenntnissen ein.
 - Datenanalyse:
   - Geben Sie die zu analysierenden Datensätze an.
-  - Konfigurieren Sie die Metriken und KPIs, die Sie verfolgen möchten.
+  - Konfigurieren Sie die Metriken und KPIs, die verfolgt werden sollen.
 - Intelligente Empfehlungen:
   - Aktivieren Sie KI-gestützte Vorschläge zur Prozessoptimierung.
-  - Passen Sie die Arten von Empfehlungen an, die Sie erhalten möchten.
+  - Passen Sie die Arten der Empfehlungen an, die Sie erhalten möchten.
 
 ### 4: Speichern und aktivieren
 - Überprüfen Sie Ihre Einstellungen, um sicherzustellen, dass alles korrekt konfiguriert ist.
-- Klicken Sie auf **Speichern** und dann auf **Aktivieren**, um die Aktion "KI und maschinelles Lernen" in Ihrem Workflow zu aktivieren.
+- Klicken Sie auf **Speichern** und dann auf **Aktivieren**, um die Aktion "KI und maschinelles Lernen" in Ihrem Workflow live zu schalten.

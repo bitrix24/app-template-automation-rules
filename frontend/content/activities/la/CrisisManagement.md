@@ -13,31 +13,31 @@ avatar: '/activities/CrisisManagement.webp'
 
 ## Descripción de la Acción
 
-## **Configuración de la Acción "Gestión de Crisis"**
+## **Configurando la Acción "Gestión de Crisis"**
 
-### 1: Acceder al Diseñador de Flujos de Trabajo
+### 1: Acceder al Diseñador de Flujo de Trabajo
 - Inicia sesión en tu cuenta de Bitrix24.
 - Navega a **CRM** > **Automatización** > **Procesos de Negocio**.
-- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editarlo.
+- Haz clic en **Crear Proceso de Negocio** o selecciona uno existente para editar.
 
 ### 2: Añadir la Acción de Gestión de Crisis
-- En el Diseñador de Flujos de Trabajo, arrastra y suelta la acción **Gestión de Crisis** de la lista de acciones disponibles.
-- Coloca la acción donde desees que ocurra en tu flujo de trabajo.
+- En el Diseñador de Flujo de Trabajo, arrastra y suelta la acción **Gestión de Crisis** de la lista de acciones disponibles.
+- Coloca la acción donde deseas que ocurra en tu flujo de trabajo.
 
 ### 3: Configurar la Acción
 - Creación del Plan de Crisis:
   - Define los pasos a seguir durante una crisis.
-  - Incluye información de contacto para el personal clave y socios externos.
+  - Incluye información de contacto para personal clave y socios externos.
 - Alertas Automatizadas:
-  - Configura los disparadores para la detección de crisis (por ejemplo, sentimiento negativo, fallos del sistema).
+  - Configura triggers para la detección de crisis (ej. sentimiento negativo, fallos del sistema).
   - Especifica los miembros del equipo o departamentos a notificar.
 - Plantillas de Comunicación:
-  - Crea plantillas para la comunicación interna y externa.
-  - Personaliza los mensajes para diferentes tipos de crisis.
+  - Crea plantillas para comunicación interna y externa.
+  - Personaliza mensajes para diferentes tipos de crisis.
 - Asignación de Tareas:
-  - Asigna tareas específicas a los miembros del equipo.
+  - Asigna tareas específicas a miembros del equipo.
   - Establece plazos y prioridades para cada tarea.
 
 ### 4: Guardar y Activar
-- Revisa tus configuraciones para asegurarte de que todo esté configurado correctamente.
+- Revisa tus ajustes para asegurar que todo está configurado correctamente.
 - Haz clic en **Guardar** y luego en **Activar** para poner en marcha la acción de Gestión de Crisis en tu flujo de trabajo.

@@ -5,7 +5,6 @@ categories:
   - 'category_2'
 badges: 
   - 'badge_1'
-  - 'badge_3'
 avatar: '/activities/CustomerRelationshipManagement.webp'
 ---
 
@@ -28,7 +27,7 @@ avatar: '/activities/CustomerRelationshipManagement.webp'
 ### 3. Meningkatkan Strategi Pengekalan
 - Sediakan pencetus automatik untuk melancarkan kempen pengekalan (contohnya, selepas perjanjian ditutup atau apabila aktiviti menurun).
 - Gunakan mesej peribadi untuk meningkatkan penglibatan.
-- Analisis hasil kempen dan sesuaikan strategi anda dengan sewajarnya.
+- Analisis hasil kempen dan sesuaikan strategi anda sewajarnya.
 
 ### 4. Analisis dan Pelaporan
 - Selepas kempen tamat, kumpulkan data mengenai hasil secara automatik (contohnya, kadar pengekalan, ROI).

@@ -17,12 +17,12 @@ avatar: '/activities/InnovationManagement.webp'
 ### 1. Dodanie Akcji do Procesu Biznesowego
 - Przejdź do sekcji **"Procesy Biznesowe"** w swoim Bitrix24.
 - Utwórz nowy proces lub otwórz istniejący.
-- Znajdź akcję **"Sklep z Aplikacjami"** na liście dostępnych akcji i dodaj ją do procesu.
+- Znajdź akcję **"App Marketplace"** na liście dostępnych akcji i dodaj ją do procesu.
 
 ### 2. Wyszukiwanie i Wybór Aplikacji
-- Otwórz **Sklep z Aplikacjami** przez interfejs Bitrix24.
-- Użyj filtrów i kategorii, aby znaleźć aplikacje odpowiadające potrzebom Twojej firmy (np. marketing, analityka, zarządzanie projektami).
-- Przejrzyj opisy aplikacji, oceny i opinie użytkowników.
+- Otwórz **App Marketplace** przez interfejs Bitrix24.
+- Użyj filtrów i kategorii, aby znaleźć aplikacje odpowiadające Twoim potrzebom biznesowym (np. marketing, analityka, zarządzanie projektami).
+- Zapoznaj się z opisami aplikacji, ocenami i opiniami użytkowników.
 
 ### 3. Instalacja i Konfiguracja Aplikacji
 - Kliknij **"Zainstaluj"** dla wybranej aplikacji.

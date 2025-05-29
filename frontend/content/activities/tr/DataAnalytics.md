@@ -1,40 +1,43 @@
 ---
-title: Veri Analizi
+title: Veri Analitiği
 description: İş verilerinizi analiz ederek bilinçli kararlar alın.
 categories: 
   - 'category_2'
-  - 'badge_3'
+  - 'category_1'
+badges: 
+  - 'badge_2'
+  - 'badge_1'
 avatar: '/activities/DataAnalytics.webp'
 ---
-# "Veri Analizi" Eylemini Kullanma ve Yapılandırma Talimatları
+# "Veri Analitiği" Eylemini Kullanma ve Yapılandırma Talimatı
 
 ## Eylem Açıklaması
 
-## **"Veri Analizi" Eylemini Yapılandırma**
+## **"Veri Analitiği" Eylemini Yapılandırma**
 
 ### 1: İş Akışı Tasarımcısına Erişim
 - Bitrix24 hesabınıza giriş yapın.
-- **CRM** > **Otomasyon** > **İş Süreçleri**'ne gidin.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
 - **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
 
 ### 2: Satış Yönetimi Eylemini Ekleyin
-- İş Akışı Tasarımcısı'nda, mevcut eylemler listesinden **Satış Yönetimi** eylemini sürükleyip bırakın.
-- Eylemi iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
+- İş Akışı Tasarımcısında, mevcut eylemler listesinden **Satış Yönetimi** eylemini sürükleyip bırakın.
+- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
 
 ### 3: Eylemi Yapılandırın
-- Potansiyel Müşteri Takibi:
-  - Satış hattınızın aşamalarını tanımlayın.
-  - Potansiyel müşteri durum değişiklikleri için bildirimler ayarlayın.
-- Performans Analizi:
-  - İzlemek istediğiniz metrikleri seçin (örneğin, dönüşüm oranları, anlaşma değerleri).
-  - Düzenli performans incelemeleri için otomatik raporlar oluşturun.
+- Lead Takibi:
+  - Satış pipeline'ınızın aşamalarını tanımlayın.
+  - Lead durum değişiklikleri için bildirimler ayarlayın.
+- Performans Analitiği:
+  - İzlemek istediğiniz metrikleri seçin (örneğin, dönüşüm oranları, işlem değerleri).
+  - Düzenli performans incelemeleri için otomatik raporlar ayarlayın.
 - Görev Otomasyonu:
-  - Tekrarlayan görevleri belirleyin (örneğin, takip e-postaları gönderme).
-  - Bu görevleri otomatik olarak yönetmek için otomasyon kuralları oluşturun.
-- Anlaşma Yönetimi:
-  - Anlaşma aşamalarını ve ilerleme kriterlerini ayarlayın.
-  - Her anlaşma için ekip üyelerine görevler ve son tarihler atayın.
+  - Tekrarlayan görevleri tanımlayın (örneğin, takip e-postaları gönderme).
+  - Bu görevleri yönetmek için otomasyon kuralları oluşturun.
+- İşlem Yönetimi:
+  - İşlem aşamalarını ve ilerleme kriterlerini ayarlayın.
+  - Her işlem için takım üyelerine görevler ve son tarihler atayın.
 
 ### 4: Kaydet ve Etkinleştir
-- Ayarlarınızı gözden geçirerek her şeyin doğru yapılandırıldığından emin olun.
-- İş Akışı Tasarımcısı'nda **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Satış Yönetimi eylemini iş akışınızda canlı hale getirin.
+- Ayarlarınızı kontrol ederek her şeyin doğru yapılandırıldığından emin olun.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Satış Yönetimi eylemini iş akışınızda aktif hale getirin.

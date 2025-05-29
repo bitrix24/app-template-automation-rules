@@ -14,25 +14,25 @@ avatar: '/activities/HRManagement.webp'
 ## **Konfiguration der Aktion "Personalmanagement"**
 
 ### 1. Hinzufügen der Aktion zu einem Geschäftsprozess
-- Gehen Sie zum Abschnitt **"Geschäftsprozesse"** in Ihrem Bitrix24.
-- Erstellen Sie einen neuen Prozess oder öffnen Sie einen bestehenden.
+- Gehen Sie zum Bereich **"Geschäftsprozesse"** in Ihrem Bitrix24.
+- Erstellen Sie einen neuen Prozess oder öffnen Sie einen vorhandenen.
 - Suchen Sie die Aktion **"Personalmanagement"** in der Liste der verfügbaren Aktionen und fügen Sie sie dem Prozess hinzu.
 
 ### 2. Einrichten der Mitarbeiterdatenbank
 - Importieren Sie Mitarbeiterdaten aus einer CSV-Datei oder fügen Sie sie manuell hinzu.
-- Geben Sie Mitarbeiterattribute an (z. B. Name, Position, Abteilung, Kontaktinformationen).
+- Geben Sie Mitarbeiterattribute an (z.B. Name, Position, Abteilung, Kontaktinformationen).
 - Richten Sie **Rollen** und **Zugriffsrechte** für jeden Mitarbeiter ein.
 
 ### 3. Verwalten von Personalprozessen
-- Verwenden Sie **automatische Aktualisierungen** der Daten, wenn sich der Status eines Mitarbeiters ändert (z. B. Einstellung, Kündigung).
-- Richten Sie Benachrichtigungen für wichtige Ereignisse ein (z. B. Ende der Probezeit, Geburtstag).
+- Nutzen Sie **automatische Aktualisierungen** der Daten bei Statusänderungen eines Mitarbeiters (z.B. Einstellung, Kündigung).
+- Richten Sie Benachrichtigungen für wichtige Ereignisse ein (z.B. Ende der Probezeit, Geburtstag).
 - Aktivieren Sie **Onboarding** und **Offboarding**, um Anpassungs- und Kündigungsprozesse zu automatisieren.
 
 ### 4. Analyse und Optimierung
-- Verwenden Sie integrierte Berichte, um Personalmetriken zu analysieren (z. B. Fluktuation, Zufriedenheitsniveau).
+- Verwenden Sie integrierte Berichte zur Analyse von Personalmetriken (z.B. Fluktuation, Zufriedenheitsniveau).
 - Richten Sie Benachrichtigungen für verantwortliche Personen mit wichtigen Metriken ein.
 - Optimieren Sie Personalprozesse basierend auf Analysedaten.
 
 ### 5. Integration mit Geschäftsprozessen
-- Richten Sie Trigger für automatische Datenaktualisierungen ein (z. B. bei Änderung der Position oder Abteilung).
-- Verwenden Sie CRM-Daten, um damit verbundene Geschäfte und Kunden zu berücksichtigen.
+- Richten Sie Trigger für automatische Datenaktualisierungen ein (z.B. bei Änderung der Position oder Abteilung).
+- Nutzen Sie CRM-Daten, um damit verbundene Deals und Kunden zu berücksichtigen.
