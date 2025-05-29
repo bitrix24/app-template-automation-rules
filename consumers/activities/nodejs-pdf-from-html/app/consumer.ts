@@ -120,9 +120,9 @@ async function processMessage(
   // endregion ////
 
   // region Generate JWT token ////
-  // @todo add params
   const token = await new SignJWT({
-    auth: msg.auth
+    auth: msg.auth,
+    additionalData: msg.additionalData
   })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -161,7 +161,7 @@ async function processMessage(
           entityTypeId: msg?.entityTypeId || EnumCrmEntityTypeId.undefined,
           entityId: msg?.entityId || 0,
           title: [msg?.additionalData['code'], msg?.entityTypeId, msg?.entityId].join(':'),
-          // @todo get from activity.params
+          // @need get this from activity params -> see msg.additionalData
           region: 'ru',
           number: Text.getUuidRfc4122(),
           refresh_token: msg.auth.refreshToken,
