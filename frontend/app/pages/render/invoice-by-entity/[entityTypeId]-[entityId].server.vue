@@ -58,7 +58,7 @@ if (!entityId.value) {
 }
 
 /**
- * @todo get from activity.params
+ * @need get this from activity params -> see requestDataServerRender.value.additionalData
  */
 const currentLang = computed(() => {
   return B24LangList.en
