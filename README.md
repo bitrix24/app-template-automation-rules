@@ -1,27 +1,43 @@
 # @bitrix24/app-template-automation-rules
 
-An application for creating robots (actions) for Bitrix24 business processes using RabbitMQ.
+This project is a fully deployable application template featuring a library of Bitrix24 automation rules. It’s designed to work both as a local solution and as a scalable application for the Bitrix24 Marketplace.
+
+You’re getting a complete package here: the frontend is built with the [Bitrix24 UI Kit](https://bitrix24.github.io/b24ui/) and [B24JsSDK](https://bitrix24.github.io/b24jssdk/), while the backend is set up so you can simply add your own automation rule implementations without having to dig into architectural complexities. No need to reinvent the wheel — just take the foundation and customize it to fit your needs.
+
+You can implement your automation rules either on server-side Node.js using the B24JsSDK, or on PHP with the B24PHPSDK — there are examples for both approaches included in the project. In essence, all you need to do is develop a handler and provide a user-facing description for your automation rule. Everything else — both the user interface and the system logic — is already handled for you.
+
+**What does your end user get?**
+
+- An intuitive interface displaying a catalog of automation rules, organized by topic.
+- Fast search and filtering to find the right rule in seconds.
+- In-depth descriptions of each automation rule, accessible right in the app.
+- One-click installation or removal of automation rules from their Bitrix24 account.
+- Seamless use of installed automation rules in CRM pipelines and Smart Scenarios.
+
+The architecture is built for scale and high load: the app uses an inbound queue powered by RabbitMQ to process requests from Bitrix24. All handler calls go into the queue, so the app responds instantly and won’t drop a single request—even under heavy traffic. Dedicated worker-consumers asynchronously process the queue and execute your business logic. Each worker-consumer essentially is an automation rule: it doesn’t respond to direct Bitrix24 calls, but instead picks up data from the queue. Want to speed up processing? Just increase the number of consumers in the settings—no rocket science required.
 
 ## Core Components
+
 - **Consumers**:
   - `nodejs-pdf-from-html`: Generates PDF invoices from HTML using deal/lead data
   - `php-crm-entity-task-calc`: Calculates task durations for deals/leads
 - **Required scopes**: `crm,catalog,bizproc,placement,user_brief,task,documentgenerator`
 
 ## 📁 Project Structure
+
 ```plaintext
 /frontend
   /app          # Application pages (Nuxt3)
   /server       # API and event handlers
   /prisma       # Database models (PostgreSQL)
-  /content      # Markdown action descriptions
+  /content      # Markdown descriptions of automation rules
   /i18n         # Localization
   /tools        # Translation scripts
 /consumers
   /activities   # Action consumers
     /nodejs-pdf-from-html        # PDF generator
     /php-crm-entity-task-calc    # Task calculator
-/chrome         # Chrome configuration for rendering
+/chrome         # Chrome configuration for rendering (used by NodeJS example consumer)
 ```
 
 ## 🐳 Docker Installation
@@ -32,148 +48,149 @@ An application for creating robots (actions) for Bitrix24 business processes usi
 ```shell
 # 1. Install Docker and Docker Compose
 # 2. Create network
-docker network create proxy-net
+
+make network
 
 # 3. Launch core services
-docker compose -f docker-compose.server.yml -p server__global up -d
+
+make server-up
 ```
 
 ### 🔧 Development (Dev)
+
 ![Docker Dev](./.github/assets/docker__dev.jpg)
 
 Configure environment variables:
+
 ```shell
 cp .env.dev.example .env.dev
 ```
 
 ```shell
 # Start
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
+make dev-up
 
 # DB migration
-docker exec -it dev-frontend sh -c "pnpm run prisma:migrate-deploy"
+make dev-migrate
 
 # Stop
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down
+make dev-down
 ```
 
 **Container management:**
+
 ```shell
 # Logs
-docker logs -f dev-frontend
-docker logs -f dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
-docker logs -f dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
-docker logs -f dev-db
+make dev-logs
+make dev-logs-pdf
+make dev-logs-php
 
 # Consumer scaling
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-php-crm-entity-task-calc=2
- 
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build --scale consumer-nodejs-pdf-from-html=2
+make dev-scale-php
+make dev-scale-pdf
 
 # Restart
-docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules down && \
- docker compose -f docker-compose.dev.yml --env-file .env.dev -p dev__app-template-automation-rules up -d --build
- 
+make dev-down && make dev-up
+
 # Container debugging
-docker exec -it dev-frontend sh
-docker exec -it dev-frontend sh -c "ls .la"
-docker exec -it dev__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh
-docker exec -it dev__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh
+make dev-bash
+make dev-debug-pdf
+make dev-debug-php
+
 # @memo dbuser && dbapp see in .env.xxx
-docker exec -it dev-db psql -U dbuser -d dbapp
-dbapp# select "memberId", "userId", "domain" from "B24App";
+make dev-psql
+# For psql:
+# dbapp# select "memberId", "userId", "domain" from "B24App";
 ```
 
 ### 🚀 Production (Prod)
+
 ![Docker Prod](./.github/assets/docker__prod.jpg)
 
 Configure environment variables:
+
 ```shell
 cp .env.prod.example .env.prod
 ```
 
 ```shell
 # Start
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules build
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d
+make prod-up
 
 # DB migration
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up migrator
+make prod-migrate
 
 # Stop
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down
+make prod-down
 ```
 
 **Container management:**
+
 ```shell
 # Logs
-docker logs -f prod-frontend
-docker logs -f prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1
-docker logs -f prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1
-docker logs -f prod-db
+make prod-logs
+make prod-logs-pdf
+make prod-logs-php
+make prod-logs-db
 
 ## Rebuild migration
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate down migrator && \
-  docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules --profile migrate up --build migrator
+make prod-migrate-rebuild
 
 # Consumer scaling
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-php-crm-entity-task-calc && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-php-crm-entity-task-calc=2
- 
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules down consumer-nodejs-pdf-from-html && \
- docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod__app-template-automation-rules up -d --scale consumer-nodejs-pdf-from-html=2
+make prod-scale-php
+make prod-scale-pdf
 
 # Container debugging
-docker exec -it prod-frontend sh
-docker exec -it prod__app-template-automation-rules-consumer-nodejs-pdf-from-html-1 sh
-docker exec -it prod__app-template-automation-rules-consumer-php-crm-entity-task-calc-1 sh
+make prod-bash
+make prod-debug-pdf
+make prod-debug-php
 # @memo dbuser && dbapp see in .env.xxx
-docker exec -it prod-db psql -U dbuser -d dbapp
-dbapp# select "memberId", "userId", "domain" from "B24App";
+make prod-psql
+# For psql:
+# dbapp# select "memberId", "userId", "domain" from "B24App";
 ```
 
 ### 🔍 Monitoring
+
 ```shell
-docker stats
-docker ps
-docker ps -a | grep chrome
-watch -n 2 docker ps
+make prod-stats
+make prod-ps
+make prod-ps-chrome
+make prod-watch-ps
+make prod-watch-stats
 
 sudo systemctl status docker
 sudo ss -tuln | grep 2376
 
-watch -n 5 "docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}'"
-
-docker compose -f docker-compose.dev.yml -p dev__app-template-automation-rules top
-docker compose -f docker-compose.prod.yml -p prod__app-template-automation-rules top
+make prod-top
+make dev-top
 ```
 
 ### 🧹 Cleanup
+
 ```shell
 # Delete all stopped containers
-docker container prune
+make docker-prune-containers
 
 # Remove all unused images
-docker image prune -a
+make docker-prune-images
 
 # Delete unused volumes
-docker volume prune
+make docker-prune-volumes
 
-docker volume ls
-docker volume rm xxx1 xxx2 xxx3
-
-docker volume prune -a
+make docker-list-volumes
+make docker-rm-volumes
 
 # Delete EVERYTHING unused (including volumes and images)
-docker system prune -a --volumes
+make docker-prune-all
 ```
 
 ## Application
+
 ![Frontend public](./.github/assets/frontend__app.jpg)
 
 Application pages in `frontend/app/pages`:
+
 - `install.client.vue` - installation handler
 - `index.client.vue` - main page redirects to `activity-list.client.vue`
 - `activity-list.client.vue` - shows actions list and app settings
@@ -184,24 +201,30 @@ Special page `render/invoice-by-entity/[entityTypeId]-[entityId].server.vue` gen
 ![Frontend server](./.github/assets/frontend__server.jpg)
 
 Server scripts in `frontend/server`:
+
 - `rabbitmq.config.ts` configures RabbitMQ connections
 
 Event handlers:
+
 - `api/event/onAppInstall.post.ts` - app installation (stores tokens in DB)
 - `api/event/onAppUninstall.post.ts` - app removal (deletes tokens)
 
 Business process action handlers:
+
 - `api/activities/[code].post.ts` - receives calls, finds `memberId`, publishes to 'activities.v1' exchange [`producer`].
 
-## Business Process Action (Robot)
+## Automation Rule
 
-Action settings in `frontend/app/activity.config.ts`. Descriptions in `frontend/content/activities/xx/yyyy.md`.
+Automation rule settings are in `frontend/app/activity.config.ts`. Descriptions are in `frontend/content/activities/xx/yyyy.md`.
 
-### Creating New Action
+### How to create new Automation Rule using NodeJS
+
 Example code: `NewDemoActivity`
 
 Steps:
+
 1. Configure in `frontend/app/activity.config.ts`:
+
 ```typescript
 export const activitiesConfig: ActivityOrRobotConfig[] = [
   // ...
@@ -214,7 +237,9 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
   }
 ]
 ```
+
 2. Add description: `frontend/content/activities/en/NewDemoActivity.md`
+
 ```markdown
 ---
 title: Title for new activity
@@ -228,19 +253,23 @@ badges:
 avatar: '/activities/NewDemoActivity.webp'
 ---
 ```
+
 3. Add icon: `frontend/public/activities/NewDemoActivity.webp`
-4. Install action via Bitrix24
+4. Install the automation rule into Bitrix24 account
 5. Create consumer in `consumers/activities/new-demo-activity` handling queue `activity.NewDemoActivity.v1`
 6. Configure in `docker-compose.*.yml` files
 
 ### `PdfFromHtml` Example
+
 ![Consumer NodeJs PdfFromHtml](./.github/assets/consumer__nodejs-pdf-from-html.jpg)
+
 - NodeJS-based (`consumers/activities/nodejs-pdf-from-html`)
 - Main file: `app/consumer.ts` (`processMessage()` logic)
 - Renders page: `frontend/app/pages/render/invoice-by-entity/[entityTypeId]-[entityId].server.vue`
 - RabbitMQ config: `app.config.ts`
 
 Workflow:
+
 1. Gets auth data from message → verifies in DB
 2. Creates JWT token (5min TTL) with oAuth params
 3. Calls Chrome-rendered page `render/invoice-by-entity/[entityTypeId]-[entityId]`
@@ -249,22 +278,27 @@ Workflow:
 6. Sends PDF to Bitrix24
 
 ### `CrmEntityTaskCalc` Example
+
 ![Consumer php CrmEntityTaskCalc](./.github/assets/consumer__php-crm-entity-task-calc.jpg)
+
 - PHP-based (`consumers/activities/php-crm-entity-task-calc`)
 - Main file: `consumer.php` (logic in `src/Processor.php`)
 - RabbitMQ config: `src/ConfigRabbitMQ.php`
 
 Workflow:
+
 1. Fetches/renews auth from DB via `memberId`
 2. Retrieves all entity tasks from Bitrix24 (admin rights)
 3. Calculates task durations
 4. Returns results to waiting Bitrix24 business process
 
 ## 🔌 RabbitMQ Architecture
+
 ![RabbitMq theory](./.github/assets/rabbitmq__theory.jpg)
 > `v1` = version tag for routing organization
 
 Implementation:
+
 - **producer** → **exchange** `activities.v1`
 - Service **exchange** `activities.service.v1`
 - Dead-letter **queue** `activities.failed.v1`
@@ -277,7 +311,9 @@ Implementation:
     - 5th attempt → `failed.v1` (manual handling required)
 
 ## 🛠 Development Tools
+
 AI-powered translation via DeepSeek (scripts in `frontend/tools`):
+
 ```shell
 # Translate action descriptions
 pnpm run translate-content
@@ -287,6 +323,7 @@ pnpm run translate-ui
 ```
 
 ## 🔮 Roadmap
+
 - [OpenTelemetry](https://opentelemetry.io/) integration
 - Dead-letter queue (`activities.failed.v1`) processing system
 - RabbitMQ optimizations for NodeJS/PHP
