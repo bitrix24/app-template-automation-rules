@@ -234,18 +234,29 @@ const getActivityCodeFromPath = (path: string) => {
 }
 
 const mapProperties = (properties: Record<string, ActivityProperty>) => {
-  return Object.entries(properties).reduce((acc, [key, config]) => ({
-    ...acc,
-    [key]: {
-      Name: config.Name,
-      Description: config.Description,
-      Type: config.Type,
-      Options: config.Options,
-      Required: config.Required,
-      Multiple: config.Multiple,
-      Default: config.Default
+  return Object.entries(properties).reduce((acc, [key, config]) => {
+    let type = config.Type
+    /**
+     * If the type is `select` and the options are empty, the type must be `string`.
+     * We will load the options into PLACEMENT_HANDLER = pages/setting/[code].client.vue
+     */
+    if (type === 'select' && Object.keys(config.Options || {}).length < 1) {
+      type = 'string' as const
     }
-  }), {})
+
+    return {
+      ... acc,
+      [key]: {
+        Name: config.Name,
+        Description: config.Description,
+        Type: type,
+        Options: config.Options,
+        Required: config.Required,
+        Multiple: config.Multiple,
+        Default: config.Default
+      }
+    }
+  }, {})
 }
 
 function processError(error: unknown | string | Error) {
