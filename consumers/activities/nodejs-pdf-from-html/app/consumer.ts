@@ -112,7 +112,7 @@ async function processMessage(
     }
   })
 
-  console.log('DB AUTH', appRow)
+  console.log('check memberId', {id: appRow?.id, memberId: appRow?.memberId})
 
   if (!appRow) {
     throw new Error('Not find memberId in DB')
@@ -154,23 +154,46 @@ async function processMessage(
   const $b24 = new B24OAuth(authOptions, oAuthSecret)
   $b24.setLogger(LoggerBrowser.build('Consumer [B24]', false))
 
-  const response = await $b24.callMethod(
-      `crm.documentgenerator.document.upload`,
-      {
-        fields: {
-          entityTypeId: msg?.entityTypeId || EnumCrmEntityTypeId.undefined,
-          entityId: msg?.entityId || 0,
-          title: [msg?.additionalData['code'], msg?.entityTypeId, msg?.entityId].join(':'),
-          // @need get this from activity params -> see msg.additionalData
-          region: 'ru',
-          number: Text.getUuidRfc4122(),
-          refresh_token: msg.auth.refreshToken,
-          auth: msg.auth.accessToken,
-          pdfContent: Buffer.from(pdfBuffer).toString('base64'),
-          fileContent: fileDocxBuffer.toString('base64')
-        }
+  // region Init Document region ////
+  let region = msg.additionalData['properties']['documentRegionList'] || null
+  /**
+   * @memo If region empty -> get first from documentgenerator.region.list
+   */
+  if (!region) {
+    try {
+      const regionResponse = await $b24.callMethod(
+        'documentgenerator.region.list'
+      )
+
+      const list: Record<string, { code: string  }> = regionResponse.getData().result.regions
+
+      for (const key in list) {
+        region = list[key].code
+        consola.log('set default region:', region)
+        break
       }
-    )
+    } catch (error) {
+      consola.log('Error get def region:', error)
+    }
+  }
+  // endregion ////
+
+  const response = await $b24.callMethod(
+    `crm.documentgenerator.document.upload`,
+    {
+      fields: {
+        entityTypeId: msg?.entityTypeId || EnumCrmEntityTypeId.undefined,
+        entityId: msg?.entityId || 0,
+        title: [msg?.additionalData['code'], msg?.entityTypeId, msg?.entityId].join(':'),
+        region,
+        number: Text.getUuidRfc4122(),
+        refresh_token: msg.auth.refreshToken,
+        auth: msg.auth.accessToken,
+        pdfContent: Buffer.from(pdfBuffer).toString('base64'),
+        fileContent: fileDocxBuffer.toString('base64')
+      }
+    }
+  )
 
   documentId = Number.parseInt(response.getData().result?.document.id || '0')
   consola.log('stop send to b24 >> documentId:', documentId)

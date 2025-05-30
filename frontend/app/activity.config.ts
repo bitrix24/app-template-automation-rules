@@ -36,6 +36,12 @@ export const activitiesConfig: ActivityOrRobotConfig[] = [
         Required: 'Y',
         Name: 'Entity Id',
         Type: 'int'
+      },
+      documentRegionList: {
+        Required: 'Y',
+        Name: 'Document region',
+        Type: 'select',
+        // @memo Options load in pages/setting/[code].client.vue ////
       }
     },
     RETURN_PROPERTIES: {
