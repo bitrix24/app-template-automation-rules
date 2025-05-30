@@ -6,7 +6,7 @@ An application for creating robots (actions) for Bitrix24 business processes usi
 - **Consumers**:
   - `nodejs-pdf-from-html`: Generates PDF invoices from HTML using deal/lead data
   - `php-crm-entity-task-calc`: Calculates task durations for deals/leads
-- **Required scopes**: `crm, catalog, bizproc, placement, user_brief, task`
+- **Required scopes**: `crm,catalog,bizproc,placement,user_brief,task,documentgenerator`
 
 ## 📁 Project Structure
 ```plaintext
