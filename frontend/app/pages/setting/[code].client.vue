@@ -45,13 +45,9 @@ onMounted(async () => {
       const initialValues: Record<string, any> = {}
 
       for (const [key, prop] of Object.entries(activityConfig.value.PROPERTIES || {})) {
-        // if (prop.Type === 'select' && prop.Options?.length < 1) {
-        //   // const options = await bx.loadOptions(getMethodByKey(key))
-        //   const options = [
-        //     { value: '???', label: '???' }
-        //   ]
-        //   prop.Options = options
-        // }
+        if (prop.Type === 'select' && Object.keys(prop?.Options || {}).length < 1) {
+          activityConfig.value!.PROPERTIES![key]!.Options = await loadOptions(key)
+        }
 
         initialValues[key] = prop.Default || getEmptyValue(prop.Type)
         if (formValues.value[key] !== undefined) {
@@ -100,32 +96,30 @@ const handleValuesUpdate = async (newValues: Record<string, any>) => {
 // endregion /////
 
 // region Tools ////
-// const getMethodByKey = (key: string) => {
-//   const methods: Record<string, string> = {
-//     entityTypeId: 'crm.type.list',
-//     users: 'user.get'
-//   }
-//   return methods[key] || 'crm.status.list'
-// }
-//
-// const loadOptions = async (propertyKey: string) => {
-//   const optionLoaders: Record<string, () => Promise<Record<string | number, string>>> = {
-//     categoryId: async () => {
-//       // const res = await bx.callMethod('crm.category.list', {
-//       //   entityTypeId: values.value.typeSP
-//       // });
-//       // return res.data?.categories.reduce((acc, cat) => ({
-//       //   ...acc,
-//       //   [cat.id]: cat.name
-//       // }), {});
-//       return {}
-//     }
-//   }
-//   if (optionLoaders[propertyKey]) {
-//     return await optionLoaders[propertyKey]()
-//   }
-//   return {}
-// }
+const loadOptions = async (propertyKey: string) => {
+  const optionLoaders: Record<string, () => Promise<Record<string | number, string>>> = {
+    documentRegionList: async () => {
+      const response = await $b24.callMethod('documentgenerator.region.list')
+
+      const list: Record<string, { code: string, title: string }> = response.getData().result.regions
+
+      const result: Record<string, string> = {}
+
+      for (const key in list) {
+        const keyRecord = list[key]?.code || '?'
+        result[keyRecord] = list[key]?.title || '?'
+      }
+
+      return result
+    }
+  }
+  if (optionLoaders[propertyKey]) {
+    return await optionLoaders[propertyKey]()
+  } else {
+    $logger.error('Not support autoload options method for property', propertyKey)
+  }
+  return {}
+}
 
 const makeFitWindow = async () => {
   window.setTimeout(() => {
