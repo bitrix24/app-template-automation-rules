@@ -1,7 +1,7 @@
 {
   "name": "@bitrix24/app-template-automation-rules",
   "description": "Example of Bitrix24 application for working with Business Process actions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "packageManager": "pnpm@10.11.0",
   "repository": {
