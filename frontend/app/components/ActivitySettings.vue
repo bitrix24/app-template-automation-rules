@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ActivityOrRobotConfig } from '~/activity.config'
+import type { ActivityOrRobotConfig } from '@bitrix24/b24jssdk'
 
 const props = defineProps<{
   activityConfig: ActivityOrRobotConfig
@@ -35,45 +35,46 @@ const localized = (obj: string | Record<string, string> = {}) => {
 <template>
   <div>
     <div
-      v-for="[key, prop] in Object.entries(activityConfig?.PROPERTIES || {})"
+      v-for="[key, property] in Object.entries(activityConfig?.PROPERTIES || {})"
       :key="key"
       class="flex flex-col items-stretch justify-between gap-2 pb-3"
     >
-      <label>{{ localized(prop.Name) }}</label>
+      <label>{{ localized(property.Name) }}</label>
 
-      <template v-if="prop.Type === 'select'">
+      <template v-if="property.Type === 'select'">
         <B24Select
           class="w-full"
           :model-value="currentValues[key]"
-          :multiple="prop.Multiple === 'Y'"
-          :required="prop.Required === 'Y'"
-          :items="Object.entries(prop.Options || {}).map(([value, label]) => {
+          :multiple="property.Multiple === 'Y'"
+          :required="property.Required === 'Y'"
+          :items="Object.entries(property.Options || {}).map(([value, label]) => {
             return {
               label,
               value
             }
           })"
+          :b24ui="{ content: 'max-h-40' }"
           @update:model-value="val => updateField(key, val)"
         />
       </template>
 
-      <template v-else-if="prop.Type === 'datetime'">
+      <template v-else-if="property.Type === 'datetime'">
         @todo datetime
       </template>
 
-      <template v-else-if="prop.Type === 'bool'">
+      <template v-else-if="property.Type === 'bool'">
         @todo bool
       </template>
 
-      <template v-else-if="prop.Type === 'user'">
+      <template v-else-if="property.Type === 'user'">
         @todo user
       </template>
 
       <template v-else>
         <B24Input
           :model-value="currentValues[key]"
-          :type="inputTypeMap[prop.Type] as string"
-          :required="prop.Required === 'Y'"
+          :type="inputTypeMap[property.Type] as string"
+          :required="property.Required === 'Y'"
           @update:model-value="val => updateField(key, val)"
         />
         <div>
@@ -87,8 +88,8 @@ const localized = (obj: string | Record<string, string> = {}) => {
         </div>
       </template>
 
-      <div v-if="prop.Description" class="description">
-        {{ localized(prop.Description) }}
+      <div v-if="property.Description" class="description">
+        {{ localized(property.Description) }}
       </div>
     </div>
   </div>
